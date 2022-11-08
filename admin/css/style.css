@@ -1,0 +1,257 @@
+/* bootstrap */
+@import url("./libs/bootstrap/css/bootstrap.min.css");
+/* font */
+@import url("./libs/fontawesome/css/all.min.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "MS Mincho";
+}
+a,
+a:hover {
+  text-decoration: none;
+  transition: all 0.3s ease-in-out 0s;
+  -moz-transition: all 0.3s ease-in-out 0s;
+  -o-transition: all 0.3s ease-in-out 0s;
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -ms-transition: all 0.3s ease-in-out 0s;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1194px !important;
+  }
+}
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+body {
+  /* background-color: #f5f5f5; */
+}
+/* ==================================== */
+/* header */
+#header {
+  height: 50px;
+  background: #237269;
+}
+.header-title {
+  float: left;
+  line-height: 50px;
+  margin-left: 25px;
+}
+.header-title p {
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 700;
+}
+.account {
+  position: relative;
+  display: flex;
+  margin: 16px;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.account-right {
+  float: right;
+  margin: 5px 110px 5px 0;
+}
+.account-avt {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  margin-right: 15px;
+}
+
+.account-avt i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+  color: #cccccc;
+}
+.sidebar .account-avt i {
+  font-size: 2.5em;
+}
+.infor-detail__avt .account-avt i {
+  font-size: 4.5em;
+}
+
+.account-avt img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+}
+
+.account-name {
+  position: relative;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+.account-name .down {
+  position: absolute;
+  top: 4px;
+  right: -25px;
+}
+
+.account-menu {
+  border: #fff;
+  border-radius: 5px;
+  background: #ccc;
+  position: absolute;
+  top: 37px;
+  left: -15px;
+  width: 150px;
+  display: none;
+}
+
+.account-menu.hide {
+  display: block;
+  z-index: 100;
+}
+
+.account-menu::after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 10px solid transparent;
+  border-bottom: 10px solid #cccccc;
+}
+
+.account-menu ul {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.account-menu li {
+  border-radius: 5px;
+  padding: 12px 0 12px 12px;
+}
+
+.account-menu li:hover {
+  background-color: #ffd43b;
+}
+
+.account-menu li a {
+  color: #000;
+  font-size: 18px;
+}
+
+/* sidebar */
+#sidebar {
+  background: #eaecef;
+  width: 250px;
+  float: left;
+  transition: max-height 0.3s;
+  overflow: hidden;
+  position: fixed;
+  z-index: 2;
+  max-height: 100%;
+  bottom: 0;
+  top: 50px;
+  overflow-y: auto;
+  border-right: 1px solid #ccc;
+}
+.sidebar-title {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sidebar-title h1 {
+  font-size: 23px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.sidebar-menu > .menu-item.active {
+  background-color: #ffd43b;
+}
+
+.sidebar-menu > .menu-item > a {
+  color: #000;
+}
+.sidebar-menu > .menu-item a {
+  text-decoration: none;
+  font-size: 18px;
+  padding: 12px 15px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  position: relative;
+}
+.sidebar-menu .menu-item .icon {
+  margin-right: 8px;
+}
+.sidebar-menu .menu-item .down {
+  position: absolute;
+  right: 15px;
+  transition: transform 0.5s;
+}
+.sidebar-menu-mini {
+  background-color: #fff;
+}
+
+#sidebar .menu-item-mini a {
+  color: #001c40;
+  padding: 12px 15px 12px 35px;
+}
+#sidebar .menu-item-mini:hover a {
+  background-color: #efeded;
+  padding-left: 45px;
+}
+.sidebar-menu-mini {
+  display: none;
+}
+.menu-item.active .down {
+  transform: rotate(180deg);
+}
+/* footer */
+#footer {
+  background-color: #237269;
+  height: 40px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  position: fixed;
+}
+.copyright {
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  font-size: 18px;
+}
