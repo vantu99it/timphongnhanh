@@ -24,8 +24,7 @@ $(document).ready(function () {
       $("#city").html("");
       for (i = 0; i < data.length; i++) {
         var city = data[i];
-        var str = `<option value="${city["id"]}">
-        ${city["name"]}</option>`;
+        var str = `<option value="${city["id"]}">${city["name"]}</option>`;
         $("#city").append(str);
       }
 
@@ -50,9 +49,7 @@ function getDistrict() {
       for (i = 0; i < data.length; i++) {
         var district = data[i];
         var str = ` 
-          <option value="${district["id"]}">
-              ${district["name"]} 
-          </option>`;
+          <option value="${district["id"]}">${district["name"]}</option>`;
         $("#district").append(str);
       }
       $("#district").on("change", function (e) {
@@ -75,9 +72,7 @@ function getWard() {
       for (i = 0; i < data.length; i++) {
         var ward = data[i];
         var str = ` 
-          <option value="${ward["id"]}">
-              ${ward["name"]} 
-          </option>`;
+          <option value="${ward["id"]}">${ward["name"]}</option>`;
         $("#ward").append(str);
       }
     },

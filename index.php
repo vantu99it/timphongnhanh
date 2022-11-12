@@ -11,22 +11,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <!-- link-css -->
+    <?php include('./include/link-css.php');?>
+    <!-- /link-css -->
     
-    <!-- bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <!-- slick slider -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
-    />
-    <link rel="stylesheet" href="./libs/fontawesome/css/all.min.css" />
-    <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
     <!-- header -->
@@ -39,45 +27,15 @@
 
     <div id="main">
       <div class="container">
-        <div id="search">
-          <div class="search">
-            <form action="" method="post">
-              <div class="search-item">
-                <i class="fa-solid fa-house"></i>
-                <select class="autobox" id="categories">
-                  <option value="0">Chọn loại phòng</option>
-                </select>
-              </div>
-              <div class="search-item">
-                <i class="fa-solid fa-location-dot"></i>
-                <select  class="autobox autobox-city " id="city">
-                  <option value="0">Chọn tỉnh</option>
-                </select>
-              </div>
-              <div class="search-item">
-                <i class="fa-solid fa-thumbtack"></i>
-                <select  class="autobox autobox-district" id="district">
-                  <option value="0">Chọn huyện</option>
-                </select>
-              </div>
-              <div class="search-item">
-                <i class="fa-solid fa-location-arrow"></i>
-                <select  class="autobox" id="ward">
-                  <option value="0">Chọn xã</option>
-                </select>
-              </div>
-              <div class="search-item ">
-                <input type="submit" value="Tìm kiếm">
-              </div>
-            </form>
-          </div>
-        </div>
+        <!-- search -->
+        <?php include('./include/search.php');?>
+        <!-- /search -->
         <div id="post">
           <div class="row">
             <div class="col-8">
               <section class="section">
                 <div class="section-header">
-                  <h1 class="post_title">Danh sách tin đăng</h1>
+                  <h2 class="post_title">Danh sách tin đăng</h2>
                 </div>
                 <ul class="post-listing">
                   <li class = "post-item post-vip vip-hot">
@@ -112,8 +70,8 @@
                           <span class="author-name">hieuthanh2006</span>
                           <i class="fa-regular fa-circle-check check"></i>
                         </div>
-                        <a href="tel:0932379943" class="btn-quick-call" target="_blank" target="_blank"><i class="fa-solid fa-phone"></i>0932379943</a>
-                        <a href="http://zalo.me/0927441096" class="btn-quick-zalo" target="_blank" target="_blank">Nhắn zalo</a>
+                        <a href="tel:0932379943" class="btn-quick-call" target="_blank" ><i class="fa-solid fa-phone"></i>0932379943</a>
+                        <a href="http://zalo.me/0927441096" class="btn-quick-zalo"  target="_blank">Nhắn zalo</a>
                       </div>
                     </div>
                   </li>
@@ -259,7 +217,7 @@
             <div class="col-4">
               <section class="section">
                 <div class="section-header">
-                  <h1 class="post_title" style = "font-size:20px">Danh mục cho thuê</h1>
+                  <h2 class="post_title" style = "font-size:20px">Danh mục cho thuê</h2>
                 </div>
                 <ul  class = "category" id = "category">
                   <?php 
@@ -279,7 +237,7 @@
               </section>
               <section class="section new-post">
                 <div class="section-header new-post-header ">
-                  <h1 class="post_title" style = "font-size:20px">Bài đăng gần nhất</h1>
+                  <h2 class="post_title" style = "font-size:20px">Bài đăng gần nhất</h2>
                 </div>
                 <ul class="post-listing new-post-listing">
                   <li class = "post-item new-post-item post-vip vip-hot">

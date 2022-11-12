@@ -22,7 +22,7 @@
             </ul>
             <div class="account-btn">
                 <a href="http://" class="btn btn-recharge">Nạp tiền</a>
-                <a href="http://" class="btn btn-post">Đăng bài</a>
+                <a href="http://" class="btn btn-post">Đăng tin</a>
             </div>
             
         </div>
@@ -41,43 +41,43 @@
                     <iconify-icon class="down" icon="bx:chevron-down" width="18" height="18"></iconify-icon>
                 </a>
                 <ul class="sidebar-menu-mini">
-                    <li class="menu-item-mini"><a href="">Thêm mới</a></li>
-                    <li class="menu-item-mini"><a href="">Tin đã đăng</a></li>
+                    <li class="menu-item-mini"><a href="./create-post.php">Thêm mới</a></li>
+                    <li class="menu-item-mini"><a href="./post-manage.php">Tin đã đăng</a></li>
                 </ul>
             </li>
             <li class="menu-item">
                 <a href="javascrip:void(0)">
-                    <iconify-icon class="icon" icon="icon-park-solid:system" width="24" height="24"></iconify-icon> 
+                    <iconify-icon class="icon" icon="fluent:money-hand-20-filled" width="24" height="24"></iconify-icon> 
                     Nạp tiền vào tài khoản         
                 </a>
             </li>
             <li class="menu-item">
                 <a href="javascrip:void(0)">
-                    <iconify-icon class="icon" icon="icon-park-solid:system" width="24" height="24"></iconify-icon> 
+                    <iconify-icon class="icon" icon="fluent:receipt-money-24-filled" width="24" height="24"></iconify-icon>
                     Lịch sử nạp tiền         
                 </a>
             </li>
             <li class="menu-item">
                 <a href="">
-                    <iconify-icon class="icon" icon="emojione-monotone:newspaper" width="24" height="24"></iconify-icon>
+                    <iconify-icon class="icon" icon="la:money-check-alt" width="24" height="24"></iconify-icon>
                     Lịch sử thanh toán
                 </a>
             </li>
             <li class="menu-item">
                 <a href="">
-                    <iconify-icon class="icon" icon="flat-color-icons:feedback" width="24" height="24"></iconify-icon>
+                <iconify-icon class="icon" icon="ri:price-tag-2-fill" width="24" height="24"></iconify-icon>
                     Bảng giá dịch vụ
                 </a>
             </li>
             <li class="menu-item">
                 <a href="">
-                    <iconify-icon class="icon" icon="flat-color-icons:feedback" width="24" height="24"></iconify-icon>
+                    <iconify-icon class="icon" icon="ic:round-contact-mail" width="24" height="24"></iconify-icon>
                     Liên hệ
                 </a>
             </li>
             <li class="menu-item">
                 <a href="">
-                    <iconify-icon class="icon" icon="flat-color-icons:feedback" width="24" height="24"></iconify-icon>
+                    <iconify-icon class="icon" icon="octicon:sign-out-16" width="24" height="24"></iconify-icon>
                     Thoát
                 </a>
             </li>
