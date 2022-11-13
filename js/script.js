@@ -1,3 +1,15 @@
+// active menu
+const currentLocation = location.href;
+const menuItem = document.querySelectorAll(".navlist");
+const menuLength = menuItem.length;
+for (let i = 0; i < menuLength; i++) {
+  if (menuItem[i].href === currentLocation) {
+    menuItem[i].className = "active";
+  } else {
+    menuItem[i].className = "";
+  }
+}
+
 // sick slider
 $(document).ready(function () {
   $(".image-slider").slick({

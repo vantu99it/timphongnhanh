@@ -30,7 +30,41 @@
         <!-- search -->
         <?php include('./include/search.php');?>
         <!-- /search -->
+        <!--main-content -->
         <div id="post">
+          <div class="post-header">
+              <h1 class="page-title">Cho thông tin phòng trọ, nhà ở, căn hộ, homestay số 1 Việt Nam</h1>
+              <p class="page-description">Kênh thông tin Phòng Trọ số 1 Việt Nam - Website đăng tin cho thuê phòng trọ, nhà nguyên căn, căn hộ, ở ghép nhanh, hiệu quả với 100.000+ tin đăng và 2.500.000 lượt xem mỗi tháng.</p>
+          </div>
+          <section class="section location-city">
+              <a href="" class="location-item city-1">
+                  <div class="location-bg">
+                      <img src="./image/anh1.jpg" alt="">
+                  </div>
+                  <span class="location-cat">
+                      Phòng trọ
+                      <span class="location-name">Hà Nội</span>
+                  </span>
+              </a>
+              <a href="" class="location-item city-2">
+                  <div class="location-bg">
+                      <img src="./image/anh2.jpg" alt="">
+                  </div>
+                  <span class="location-cat">
+                      Phòng trọ
+                      <span class="location-name">Nghệ An</span>
+                  </span>
+              </a>
+              <a href="" class="location-item city-3">
+                  <div class="location-bg">
+                      <img src="./image/anh5.jpg" alt="">
+                  </div>
+                  <span class="location-cat">
+                      Phòng trọ
+                      <span class="location-name">Hồ Chí Minh</span>
+                  </span>
+              </a>
+          </section>
           <div class="row">
             <div class="col-8">
               <section class="section">
@@ -232,7 +266,7 @@
                               </li>';
                       }
                     }
-                   ?>
+                    ?>
                 </ul>
               </section>
               <section class="section new-post">
@@ -373,10 +407,84 @@
                   
                 </ul>
               </section>
-              
+              <section class="section">
+                <div class="section-header">
+                    <h2 class="post_title" style = "font-size:20px">Bài viết mới</h2>
+                </div>
+                <ul class = "category" id = "category">
+                    <li>
+                        <h2>
+                            <i class="fa-solid fa-angle-right"></i>
+                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <i class="fa-solid fa-angle-right"></i>
+                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <i class="fa-solid fa-angle-right"></i>
+                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <i class="fa-solid fa-angle-right"></i>
+                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <i class="fa-solid fa-angle-right"></i>
+                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <i class="fa-solid fa-angle-right"></i>
+                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <i class="fa-solid fa-angle-right"></i>
+                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
+                        </h2>
+                    </li>
+                </ul>
+              </section>
+              <section class="section">
+                <div class="section-header">
+                    <h2 class="post_title" style = "font-size:20px">Có thể bạn quan tâm</h2>
+                </div>
+                <ul class = "category" >
+                    <li>
+                        <h2>
+                            <i class="fa-solid fa-angle-right"></i>
+                            <a href="">Mẫu hợp đồng cho thuê phòng trọ mới nhất</a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <i class="fa-solid fa-angle-right"></i>
+                            <a href="">Kinh nghiệm thuê phòng trọ Sinh Viên</a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <i class="fa-solid fa-angle-right"></i>
+                            <a href="">Cẩn thận các kiểu lừa đảo khi thuê phòng trọ</a>
+                        </h2>
+                    </li>
+                </ul>
+              </section>
             </div>
           </div>
         </div>
+        <!-- main-content -->
         <!-- why-support -->
         <?php include('./include/why-support.php');?>
         <!-- /why-support -->

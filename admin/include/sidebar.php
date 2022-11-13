@@ -39,10 +39,15 @@
             </ul>
         </li>
         <li class="menu-item">
-            <a href="">
+            <a href="javascrip:void(0)">
                 <iconify-icon class="icon" icon="emojione-monotone:newspaper" width="24" height="24"></iconify-icon>
                 Quản lý tin tức
+                <iconify-icon class="down" icon="bx:chevron-down" width="18" height="18"></iconify-icon>
             </a>
+            <ul class="sidebar-menu-mini">
+                <li class="menu-item-mini"><a href="">Thêm tin mới</a></li>
+                <li class="menu-item-mini"><a href="">Tin đã đăng</a></li>
+            </ul>
         </li>
         <li class="menu-item">
             <a href="">

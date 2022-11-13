@@ -31,6 +31,6 @@
     <p>Bạn đang gặp vấn đề về việc tìm nhà cần được hỗ trợ?</p>
     <p>Bạn đang khó khăn trong việc đăng bài cần hỗ trợ?</p>
     <p>Bạn đang gặp khó khăn trong thanh toán cần giúp đỡ?</p>
-    <a href="http://" class="btn">Gửi liên hệ</a>
+    <a href="/timphongnhanh/contact.php" class="btn">Gửi liên hệ</a>
     </div>
 </section>
