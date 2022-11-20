@@ -265,10 +265,7 @@ li {
 
 /* main-right */
 #main-right {
-  padding-top: 60px;
-  padding-left: 290px;
-  padding-right: 45px;
-  padding-bottom: 60px;
+  padding: 60px 24px 60px 268px;
 }
 #main-right .breadcrumb {
   background-color: #eaecef;

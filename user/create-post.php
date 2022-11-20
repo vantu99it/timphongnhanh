@@ -2,6 +2,19 @@
   include '../include/connect.php';
   include '../include/data.php';
 
+//   if(isset($_POST['submit'])&&($_POST['submit'])){
+//     $city = $_POST['city'];
+//     $district = $_POST['district'];
+//     $ward = $_POST['ward'];
+//     $street = $_POST['street'];
+//     $number = $_POST['number'];
+//     $title = $_POST['title'];
+//     $content = $_POST['content'];
+//     $district = $_POST['district'];
+//     $district = $_POST['district'];
+//     $district = $_POST['district'];
+//   }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -119,10 +132,10 @@
                 <div class="full-address form-input">
                     <div class="item-name">Giá cho thuê</div>
                     <div class="input-detail boder-ra-5">
-                        <input type="number" name="fullAdress" class="input-content boder-ra-5" id=""  pattern="[0-9.]+" r data-msg-required="Bạn chưa nhập giá phòng" data-msg-min="Giá phòng chưa đúng" required>
+                        <input type="number" name="fullAdress" class="input-content boder-ra-5 mask" id=""  pattern="[0-9,]+" r data-msg-required="Bạn chưa nhập giá phòng" data-msg-min="Giá phòng chưa đúng" required>
                         <span class="input-disabled">Đồng</span>
                     </div>  
-                    <p style="margin-top: 8px; color: #ff9900;">Vui lòng nhập đủ số tiền. Ví dụ 2 triệu: 2000000</p>                 
+                    <p style="margin-top: 8px; color: #ff9900;" >Vui lòng nhập đủ số tiền. Ví dụ 2 triệu: 2000000</p>                 
                 </div>
                 <div class="full-address form-input">
                     <div class="item-name">Diện tích</div>
@@ -151,7 +164,7 @@
                     </div>
                 </div>
                 <div class="submit-form">
-                    <input type="submit" class="btn btn-submit"  value="Tiếp tục" style = "width: 50%;height: 45px;font-size: 18px;">
+                    <input type="submit" name="submit" class="btn btn-submit"  value="Tiếp tục" style = "width: 50%;height: 45px;font-size: 18px;">
                 </div>
             </form>
         </div>

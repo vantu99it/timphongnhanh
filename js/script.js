@@ -41,3 +41,10 @@ $(function () {
     $("body,html").animate({ scrollTop: 0 }, duration);
   });
 });
+// menu logged
+const manage = document.querySelector(".manage");
+const manage_menu = document.querySelector(".manage-menu");
+
+manage.onclick = function () {
+  manage_menu.classList.toggle("up");
+};

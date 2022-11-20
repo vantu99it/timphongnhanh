@@ -1,3 +1,27 @@
+<?php
+$name = (isset($_SESSION['login']['username']))? $_SESSION['login']['username']:[];
+    if(isset($_SESSION['login']['username'])){
+        $sql = "SELECT * FROM tbl_user";
+        $query= $conn -> prepare($sql);
+        $query-> execute();
+		$results = $query->fetchAll(PDO::FETCH_OBJ);
+        if($query->rowCount() > 0)
+		{
+            foreach($results as $row){
+                $id = $row->id;
+                $username= $row->username;
+                $password= $row->password;
+                $fullname= $row->fullname;
+                $email= $row->email;
+                $phone= $row->phone;
+                $address= $row->address;
+                $avata = $row->avatar;
+                $balance = $row->balance;
+            }
+        }
+    }
+?>
+
 <div id="sidebar">
         <div class="account">
             <div class="account-avt">
@@ -6,18 +30,18 @@
             </div>
             <div class="account-name">
                 <div class="name">
-                    <p class="account-fullname">Nguyến Tuấn Tú</p>
-                    <p class="account-phone">0932379943</p>
+                    <p class="account-fullname"><?php echo  $fullname ?></p>
+                    <p class="account-phone"><?php echo  $phone ?></p>
                 </div>
             </div>
             <ul>
                 <li>
                     <span>Mã thành viên:</span>
-                    <span  style = "font-weight: 700">12345678</span>
+                    <span  style = "font-weight: 700">#<?php echo  $id ?></span>
                 </li>
                 <li>
                     <span>Số dư TK:</span>
-                    <span style = "font-weight: 700">0 đ</span>
+                    <span style = "font-weight: 700"><?php echo  number_format($balance,0,",",".")  ?> VNĐ</span>
                 </li>
             </ul>
             <div class="account-btn">
