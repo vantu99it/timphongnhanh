@@ -18,6 +18,9 @@ a:hover {
   -webkit-transition: all 0.3s ease-in-out 0s;
   -ms-transition: all 0.3s ease-in-out 0s;
 }
+a:hover {
+  color: #f60;
+}
 h1,
 h2,
 h3,
@@ -254,4 +257,90 @@ body {
   text-align: center;
   line-height: 40px;
   font-size: 18px;
+}
+
+/* ---- login ----- */
+.body-login {
+  background: url(../image/login-bg.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  -webkit-background-size: cover;
+  position: relative;
+  height: 625px;
+  color: #fff;
+  text-align: center;
+}
+.login-form {
+  width: 440px;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.login-title {
+  font-size: 35px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  color: #fff;
+  text-transform: uppercase;
+}
+.login-form .errors {
+  margin-bottom: 10px;
+  color: red;
+}
+.login {
+  position: relative;
+}
+.login .login-input {
+  width: 80%;
+  padding: 10px 8px 10px;
+  font-size: 14px;
+  background: transparent;
+  border: 2px solid #537b35;
+  outline: none;
+  margin-bottom: 26px;
+  color: #fff;
+}
+.login label {
+  position: absolute;
+  top: 31%;
+  left: 50px;
+  transform: translateY(-50%);
+  transition: all 0.25s;
+}
+.login-input:not(:placeholder-shown) + label,
+.login-input:focus + label {
+  top: 0;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0 5px;
+}
+.forgot-pass {
+  float: right;
+  margin-right: 10%;
+  margin-bottom: 10px;
+}
+.login-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-btn input {
+  font-size: 16px;
+  padding: 10px 50px;
+  background-color: #537b35;
+  color: #fff;
+  border: none;
+  outline: none;
+  float: none;
+  text-transform: uppercase;
+}
+.login-btn input:hover {
+  background-color: #fff;
+  color: #537b35;
 }

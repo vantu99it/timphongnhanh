@@ -74,4 +74,5 @@
     src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
 ></script>
 <script src="./js/getdata.js"></script>
+<script src="./js/validator.js"></script>
 <script src="./js/script.js"></script>

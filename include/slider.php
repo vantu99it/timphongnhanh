@@ -2,7 +2,7 @@
     <div class="image-slider">
         <div class="image-item">
             <div class="image">
-            <img src="./image/slider-2.jpg" alt="slider1" />
+                <img src="./image/slider-2.jpg" alt="slider1" />
             </div>
             <div class="slider-title">
             <h3 class="title-image">

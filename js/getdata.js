@@ -83,26 +83,3 @@ function getWard() {
     },
   });
 }
-
-// category
-// $(document).ready(function () {
-//   $.ajax({
-//     url: "http://localhost:8081/phongtro/include/get_categories_data.php",
-//     dataType: "json",
-//     success: function (data) {
-//       $("#category").html("");
-//       for (i = 0; i < data.length; i++) {
-//         var category = data[i];
-//         var str = `
-//           <li>
-//             <h2>
-//             <i class="fa-solid fa-check"></i>
-//               <a href="#" >${category["name"]}</a>
-//             </h2>
-//             <span class="count">(1200)</span>
-//           </li>`;
-//         $("#category").append(str);
-//       }
-//     },
-//   });
-// });

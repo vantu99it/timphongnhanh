@@ -50,6 +50,15 @@ body {
 .mg-t90 {
   margin-top: 90px;
 }
+.form-group.invalid input {
+  border: 1px solid red;
+}
+.form-group input {
+  margin-bottom: 5px;
+}
+.form-group .form-message {
+  color: red;
+}
 /* ==================================== */
 /* header */
 #header {
