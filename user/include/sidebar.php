@@ -1,25 +1,25 @@
 <?php
-$name = (isset($_SESSION['login']['username']))? $_SESSION['login']['username']:[];
-    if(isset($_SESSION['login']['username'])){
-        $sql = "SELECT * FROM tbl_user";
-        $query= $conn -> prepare($sql);
-        $query-> execute();
-		$results = $query->fetchAll(PDO::FETCH_OBJ);
-        if($query->rowCount() > 0)
-		{
-            foreach($results as $row){
-                $id = $row->id;
-                $username= $row->username;
-                $password= $row->password;
-                $fullname= $row->fullname;
-                $email= $row->email;
-                $phone= $row->phone;
-                $address= $row->address;
-                $avata = $row->avatar;
-                $balance = $row->balance;
-            }
-        }
+$name = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
+if(isset($_SESSION['login']['id'])){
+    $sql = "SELECT * FROM tbl_user WHERE id = :id";
+    $query= $conn -> prepare($sql);
+    $query-> bindParam(':id', $_SESSION['login']['id'], PDO::PARAM_STR);
+    $query-> execute();
+    $results = $query->fetch(PDO::FETCH_OBJ);
+    if($query->rowCount() > 0)
+    {
+        $id = $results->id;
+        $username= $results->username;
+        $password= $results->password;
+        $fullname= $results->fullname;
+        $email= $results->email;
+        $phone= $results->phone;
+        $address= $results->address;
+        $avata = $results->avatar;
+        $balance = $results->balance;
+        
     }
+}
 ?>
 
 <div id="sidebar">

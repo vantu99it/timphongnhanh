@@ -2,32 +2,39 @@
   include './include/connect.php';
   include './include/data.php';
   $err = "";
-  if(isset($_POST['submit'])&&($_POST['submit'])){
+  if($_SERVER["REQUEST_METHOD"] == "POST"){
         $user = $_POST['username'];
         $pass = $_POST['password'];
 
-        $sql ="SELECT * FROM tbl_user WHERE UserName=:username and Password=:password";
+        $sql ="SELECT * FROM tbl_user WHERE username=:username";
 		$query= $conn -> prepare($sql);
 		$query-> bindParam(':username', $user, PDO::PARAM_STR);
-		$query-> bindParam(':password', $pass, PDO::PARAM_STR);
 		$query-> execute();
-		$results = $query->fetchAll(PDO::FETCH_OBJ);
+		$results = $query->fetch(PDO::FETCH_OBJ);
+        // var_dump($query->rowCount());
+        // die();
 		if($query->rowCount() > 0)
 		{
-            foreach($results as $row){
-            $_SESSION['login']['username']= $row->username;
-            $_SESSION['login']['password']= $row->password;
-            $_SESSION['login']['fullname']= $row->fullname;
-            $_SESSION['login']['email']= $row->email;
-            $_SESSION['login']['phone']= $row->phone;
-            $_SESSION['login']['address']= $row->address;
+            $checkPass = password_verify($pass, $results->password);
+            // var_dump($checkPass);
+            // die();
+            if($checkPass){
+                $_SESSION['login']['id']= $results->id;
+                $_SESSION['login']['username']= $results->username;
+                $_SESSION['login']['password']= $results->password;
+                $_SESSION['login']['fullname']= $results->fullname;
+                $_SESSION['login']['email']= $results->email;
+                $_SESSION['login']['phone']= $results->phone;
+                $_SESSION['login']['address']= $results->address;
+                 header('location: index.php');
+            }else {
+                $err = "1";
             }
-			header('location: index.php');
+            
 		} else{
 			$err = "1";
 		}
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -68,17 +75,19 @@
                         </div>
                     <?php } ?>
                 <div class="section-content">
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
-                        <div class="form-contact">
-                            <p class="contact-title">Tên đăng nhập</p>
-                            <input type="text" name="username" id="">
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post" id = "frm-user-login">
+                        <div class="form-contact form-validator">
+                            <lable  class="contact-title form-validator">Tên đăng nhập</lable>
+                            <input type="text" name="username" id="username">
+                            <span class="form-message"></span>
                         </div>
-                        <div class="form-contact">
-                            <p class="contact-title">Mật khẩu</p>
-                            <input type="password" name="password" id="">
+                        <div class="form-contact form-validator">
+                            <lable class="contact-title form-validator">Mật khẩu</lable>
+                            <input type="password" name="password" id="password">
+                            <span class="form-message"></span>
                         </div>
-                        <div class="form-contact">
-                            <input type="submit" name = "submit" value="Đăng nhập" class="btn btn-login">
+                        <div class="form-contact form-validator">
+                            <input type="submit" name = "submit-form" value="Đăng nhập" class="btn btn-login">
                         </div>
                     </form>
                     <div class="form-footer">
@@ -99,6 +108,22 @@
     <!-- footer + js-->
     <?php include('./include/footer.php');?>
     <!-- /footer + js -->
-    
+
+    <script>
+        Validator({
+            form: '#frm-user-login',
+            formGroupSelector: '.form-validator',
+            errorSelector: ".form-message",
+            rules: [
+                Validator.isRequired('#username'), 
+
+                Validator.isRequired('#password'),
+
+                
+            ],
+        });
+        
+
+    </script>
   </body>
 </html>

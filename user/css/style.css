@@ -48,12 +48,11 @@ li {
 .input-disabled {
   background-color: #e9ecef;
 }
-.form-focus:focus {
+.form-focus:focus,
+.input-content:focus {
   color: #495057;
   background-color: #fff;
-  border-color: #80bdff;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+  outline-color: #41ff00;
 }
 .btn {
   height: 40px;
@@ -77,6 +76,34 @@ li {
 .btn-submit:hover {
   text-decoration: none;
   background-color: #5572df;
+}
+.form-validator.invalid input,
+.form-validator.invalid select {
+  border: 1px solid red;
+}
+.form-validator input,
+.form-validator select {
+  margin-bottom: 5px;
+}
+.form-validator .form-message {
+  color: red;
+  margin-bottom: 10px;
+}
+.errors {
+  color: red;
+  font-size: 16px;
+  margin: 15px 0;
+  text-align: center;
+  background: #f3dac9;
+  padding: 10px;
+}
+.successful {
+  color: #1266dd;
+  font-size: 18px;
+  margin: 8px 15px;
+  text-align: center;
+  background: #edffe1;
+  padding: 10px;
 }
 /* ==================================== */
 /* header */
@@ -307,7 +334,7 @@ li {
 .form-address {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .search-item .item-name,
@@ -335,6 +362,7 @@ li {
   font-size: 16px;
   height: 38px;
   padding-left: 8px;
+  outline-color: #41ff00;
 }
 .form-input {
   margin: 15px 0 25px;
@@ -343,14 +371,9 @@ li {
   width: 100%;
   font-size: 16px;
   padding: 15px;
+  outline-color: #41ff00;
 }
-.input-content:focus {
-  color: #495057;
-  background-color: #fff;
-  border-color: #80bdff;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
-}
+
 .error {
   display: none;
   margin-bottom: 15px;

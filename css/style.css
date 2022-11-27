@@ -50,14 +50,31 @@ body {
 .mg-t90 {
   margin-top: 90px;
 }
-.form-group.invalid input {
+.form-validator.invalid input {
   border: 1px solid red;
 }
-.form-group input {
+.form-validator input {
   margin-bottom: 5px;
 }
-.form-group .form-message {
+.form-validator .form-message {
   color: red;
+  margin-bottom: 10px;
+}
+.errors {
+  color: red;
+  font-size: 16px;
+  margin: 15px 0;
+  text-align: center;
+  background: #f3dac9;
+  padding: 10px;
+}
+.successful {
+  color: #1266dd;
+  font-size: 18px;
+  margin: 8px 15px;
+  text-align: center;
+  background: #edffe1;
+  padding: 10px;
 }
 /* ==================================== */
 /* header */
@@ -1131,6 +1148,9 @@ tr:nth-child(even) {
   font-weight: 700;
   text-transform: uppercase;
 }
+.form-contact {
+  margin-top: 15px;
+}
 .form-contact .contact-title {
   font-size: 16px;
   text-transform: uppercase;
@@ -1144,6 +1164,7 @@ tr:nth-child(even) {
   padding: 0 10px;
   border: 1px solid #ccc;
   outline-color: #41ff00;
+  margin: 8px 0 5px;
 }
 .form-contact select {
   width: 50%;
@@ -1211,14 +1232,7 @@ tr:nth-child(even) {
 .section-login .form-footer a {
   font-size: 16px;
 }
-.section-login .errors {
-  color: red;
-  font-size: 16px;
-  margin: 15px 0;
-  text-align: center;
-  background: #ffc399;
-  padding: 10px;
-}
+
 .section-login .form-footer a:hover {
   color: #f60;
   text-decoration: underline;
