@@ -35,6 +35,24 @@ function ImageFileAsUrl() {
     }
   }
 }
+//hiện nhiều ảnh
+function ImageFileAsUrls() {
+  var fileSelected = document.getElementById("upload-imgs").files;
+  // console.log(fileSelected.length);
+  if (fileSelected.length > 0) {
+    for (var i = 0; i < fileSelected.length; i++) {
+      var fileToLoad = fileSelected[i];
+      var fileReader = new FileReader();
+      fileReader.onload = function (fileLoaderEvent) {
+        var srcData = fileLoaderEvent.target.result;
+        var newImage = document.createElement("img");
+        newImage.src = srcData;
+        document.getElementById("display-imgs").innerHTML += newImage.outerHTML;
+      };
+      fileReader.readAsDataURL(fileToLoad);
+    }
+  }
+}
 // phân trang
 $(document).ready(function () {
   $("#table-manage").DataTable({

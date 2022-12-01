@@ -2,6 +2,12 @@
   include './include/connect.php';
   include './include/data.php';
 
+  $sql = "SELECT * FROM 
+  tbl_rooms r join tbl_rooms_image rm on rm.id_rooms = r.id 
+  join tbl_city city on city.id = r.city_id 
+  join tbl_district dis on dis.id =  r.district_id 
+  ORDER BY r.id DESC"
+
 ?>
 
 <!DOCTYPE html>

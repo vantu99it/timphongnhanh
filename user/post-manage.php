@@ -1,3 +1,8 @@
+<?php 
+  include '../include/connect.php';
+  include '../include/data.php';
+  include '../include/func-slug.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,9 +44,9 @@
                 <table class="table table-bordered table-post-list" id = "table-manage">
                     <thead>
                         <tr>
-                            <th style="width: 10%;" >Mã tin</th>
-                            <th style="width: 15%;" >Ảnh đại diện</th>
-                            <th style="width: 35%;" >Tiêu đề</th>
+                            <th style="width: 8%;" >Mã tin</th>
+                            <th style="width: 10%;" >Ảnh đại diện</th>
+                            <th style="width: 42%;" >Tiêu đề</th>
                             <th style="width: 10%;" >Giá</th>
                             <th style="width: 10%;" >Ngày bắt đầu</th>
                             <th style="width: 10%;" >Ngày hết hạn</th>
@@ -54,27 +59,31 @@
                             <td>#12245</td>
                             <td>
                                 <div class="post_thumb">
-                                    <img src="./image/author.png" alt="">
+                                    <img class="thumb-img" src="./image/author.png" alt="" style=" object-fit: contain; width: 100%; height: 100%;">
                                 </div>
                             </td>
                             <td style="text-align: left; ">
                                 <span class="category">Phòng trọ</span>
                                 <span class="title">Cho thuê phòng trọ khép kín cách Đại Học vinh 500m </span>
                                 <p class="address"><strong>Địa chỉ:</strong> 182 Lê Duẩn, Bến Thủy, Thành phố Vinh, Nghệ An Cho thuê phòng trọ khép kín cách Đại Học vinh</p>
-                                <div class="btn-toolbar">
-                                    <!-- <a href="" class="btn btn-td btn-post">
-                                        <i class="fa-solid fa-money-check-dollar"></i>
-                                        Thanh toán tin
-                                    </a> -->
-                                    <p class="btn btn-td btn-tick ">
-                                        <i class="fa-solid fa-check "></i>
-                                        <span>VIP 1</span>
-                                    </p>
-                                    <a href="" class="btn btn-td">
-                                        <i class="fa-regular fa-pen-to-square"></i>
-                                        Chỉnh sửa
-                                    </a>
-                                </div>
+                                <div class="btn-tool">
+                                        <a href="" class="btn-pay" style = "color: red;">
+                                            <i class="fa-solid fa-money-check-dollar"></i>
+                                            Thanh toán tin
+                                        </a>
+                                        <a href="" class="btn-fix" style = "color: #1266dd;">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                            Chỉnh sửa
+                                        </a>
+                                        <a href="" class="btn-hide" style = "color: #000;">
+                                        <i class="fa-regular fa-eye-slash"></i>
+                                            Ẩn tin
+                                        </a>
+                                        <p class="btn-type " style = "color: #37a344;">
+                                            <i class="fa-solid fa-check "></i>
+                                            <span>VIP 1</span>
+                                        </p>
+                                    </div>
                             </td>
                             <td>
                                 <div class="post_price">1.2 triệu/tháng</div>
@@ -93,23 +102,31 @@
                             <td>#12246</td>
                             <td>
                                 <div class="post_thumb">
-                                    <img src="./image/author.png" alt="">
+                                    <img class="thumb-img" src="./image/author.png" alt="" style=" object-fit: contain; width: 100%; height: 100%;">
                                 </div>
                             </td>
                             <td style="text-align: left; ">
                                 <span class="category">Phòng trọ</span>
                                 <span class="title">Cho thuê phòng trọ khép kín cách Đại Học vinh 500m </span>
                                 <p class="address"><strong>Địa chỉ:</strong> 182 Lê Duẩn, Bến Thủy, Thành phố Vinh, Nghệ An Cho thuê phòng trọ khép kín cách Đại Học vinh</p>
-                                <div class="btn-toolbar">
-                                    <a href="" class="btn btn-td btn-post">
-                                        <i class="fa-solid fa-money-check-dollar"></i>
-                                        Thanh toán tin
-                                    </a>
-                                    <a href="" class="btn btn-td">
-                                        <i class="fa-regular fa-pen-to-square"></i>
-                                        Chỉnh sửa
-                                    </a>
-                                </div>
+                                    <div class="btn-tool">
+                                        <a href="" class="btn-pay" style = "color: red;">
+                                            <i class="fa-solid fa-money-check-dollar"></i>
+                                            Thanh toán tin
+                                        </a>
+                                        <a href="" class="btn-fix" style = "color: #1266dd;">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                            Chỉnh sửa
+                                        </a>
+                                        <a href="" class="btn-hide" style = "color: #000;">
+                                        <i class="fa-regular fa-eye-slash"></i>
+                                            Ẩn tin
+                                        </a>
+                                        <p class="btn-type " style = "color: #37a344;">
+                                            <i class="fa-solid fa-check "></i>
+                                            <span>VIP 1</span>
+                                        </p>
+                                    </div>
                             </td>
                             <td>
                                 <div class="post_price">1.2 triệu/tháng</div>

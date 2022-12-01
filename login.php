@@ -55,7 +55,7 @@
     <!-- /header -->
 
     <div id="main"  class="mg-t90">
-      <div class="container">
+    <div class="container">
         <!--main-content -->
         <div id="post">
             <div class="post-header">
@@ -102,7 +102,7 @@
         <!-- why-support -->
         <?php include('./include/why-support.php');?>
         <!-- /why-support -->
-      </div>
+    </div>
     </div>
 
     <!-- footer + js-->
@@ -116,14 +116,9 @@
             errorSelector: ".form-message",
             rules: [
                 Validator.isRequired('#username'), 
-
-                Validator.isRequired('#password'),
-
-                
+                Validator.isRequired('#password'),    
             ],
         });
-        
-
     </script>
-  </body>
+</body>
 </html>

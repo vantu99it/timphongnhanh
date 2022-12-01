@@ -1,5 +1,6 @@
 <?php
 $name = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
+
 if(isset($_SESSION['login']['id'])){
     $sql = "SELECT * FROM tbl_user WHERE id = :id";
     $query= $conn -> prepare($sql);

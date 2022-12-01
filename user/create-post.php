@@ -1,19 +1,75 @@
 <?php
   include '../include/connect.php';
   include '../include/data.php';
+  include '../include/func-slug.php';
 
-//   if(isset($_POST['submit'])&&($_POST['submit'])){
-//     $city = $_POST['city'];
-//     $district = $_POST['district'];
-//     $ward = $_POST['ward'];
-//     $street = $_POST['street'];
-//     $number = $_POST['number'];
-//     $title = $_POST['title'];
-//     $content = $_POST['content'];
-//     $district = $_POST['district'];
-//     $district = $_POST['district'];
-//     $district = $_POST['district'];
-//   }
+  $err = "";
+  $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
+
+  if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $city = $_POST['city'];
+    $district = $_POST['district'];
+    $ward = $_POST['ward'];
+    $street = $_POST['street'];
+    $apartment = $_POST['apartment'];
+    $category = $_POST['category'];
+    $title = $_POST['title'];
+    $slug = vn2en($title);
+    $post_content = $_POST['post_content'];
+    $price = $_POST['price'];
+    $area = $_POST['area'];
+    $subject = $_POST['subject'];
+
+    if(isset($_FILES["upload-img"])){
+        $imagePNG = $_FILES["upload-img"]["name"];
+        $imageName = vn2en($imagePNG);  
+        $target_dir = "./image/upload/";
+        $target_file = $target_dir.$imageName;
+        move_uploaded_file($_FILES["upload-img"]["tmp_name"],'../image/upload/'.$imageName);       
+    } 
+    if(isset($_FILES["upload-imgs"])){
+        $imagePNGs = $_FILES["upload-imgs"]["name"];
+        $imageNames = vn2en($imagePNGs);
+        foreach ($imageNames as $key => $value) {
+            move_uploaded_file($_FILES["upload-imgs"]["tmp_name"][$key],'../image/upload/'.$value);       
+        }
+    }
+    $sql = "INSERT INTO tbl_rooms(name,slug,city_id,district_id,ward_id,street,apartment_number,price,area,contents,image_logo,subject,user_id,category_id) VALUE (
+    :name,:slug,:city_id,:district_id,:ward_id,:street,:apartment_number,:price,:area,:contents,:image_logo,:subject,:user_id,:category_id)";
+    $query= $conn -> prepare($sql);
+    $query->bindParam(':name',$title,PDO::PARAM_STR);
+    $query->bindParam(':slug',$slug,PDO::PARAM_STR);
+    $query->bindParam(':city_id',$city,PDO::PARAM_STR);
+    $query->bindParam(':district_id',$district,PDO::PARAM_STR);
+    $query->bindParam(':ward_id',$ward,PDO::PARAM_STR);
+    $query->bindParam(':street',$street,PDO::PARAM_STR);
+    $query->bindParam(':apartment_number',$apartment,PDO::PARAM_STR);
+    $query->bindParam(':price',$price,PDO::PARAM_STR);
+    $query->bindParam(':area',$area,PDO::PARAM_STR);
+    $query->bindParam(':contents',$post_content,PDO::PARAM_STR);
+    $query->bindParam(':image_logo',$target_file,PDO::PARAM_STR);
+    $query->bindParam(':subject',$subject,PDO::PARAM_STR);
+    $query->bindParam(':user_id',$id_user ,PDO::PARAM_STR);
+    $query->bindParam(':category_id',$category,PDO::PARAM_STR);
+    $query->execute();
+    $lastInsertId = $conn->lastInsertId();
+    if($lastInsertId){
+        foreach ($imageNames as $key => $value) {
+            $target_dirs = "./image/upload/";
+            $target_files = $target_dirs.$value;
+            $sqlImg = "INSERT INTO tbl_rooms_image (id_rooms,image) VALUE (:id_rooms,:image)";
+            $queryImg= $conn -> prepare($sqlImg);
+            $queryImg->bindParam(':id_rooms',$lastInsertId,PDO::PARAM_STR);
+            $queryImg->bindParam(':image',$target_files,PDO::PARAM_STR);
+            $queryImg->execute();
+        }
+    }
+    else 
+    {
+        $err = 1;
+        $error = "Đã có lỗi xảy ra vui lòng kiểm tra lại!";
+    }
+  }
 
 ?>
 <!DOCTYPE html>
@@ -129,11 +185,11 @@
                 </div>
                 <div class="form-input " >
                     <p class="item-name">Thông tin liên hệ</p>
-                    <input type="text" name="full-name" class=" boder-ra-5 input-disabled " id="" style="width: 340px;" disabled>
+                    <input type="text" name="full-name" class=" boder-ra-5 input-disabled " id="" value = "<?php echo $fullname ?>" style="width: 340px;" disabled>
                 </div>
                 <div class="form-input ">
                     <p class="item-name">Điện thoại</p>
-                    <input type="text" name="phone" class=" boder-ra-5 input-disabled" id="" style="width: 340px;" disabled>
+                    <input type="text" name="phone" class=" boder-ra-5 input-disabled" id="" value = "<?php echo $phone ?>" style="width: 340px;" disabled>
                 </div>
                 <div class="form-input form-validator">
                     <p class="item-name">Giá cho thuê</p>
@@ -165,10 +221,21 @@
                     <p class="item-name">Tải hình ảnh</p>
                     <div class="input-img">
                         <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                        Tải hình ảnh lên
-                        <input type="file" class="upload-img" name="upload" id="upload-img" onchange = "ImageFileAsUrl()" multiple>
+                        Tải hình ảnh đại diện
+                        <input type="file" class="upload-img" name="upload-img" id="upload-img" onchange = "ImageFileAsUrl()">
                     </div>
                     <div id="display-img">
+                    </div>
+                    <span class="form-message"></span>
+                </div>
+                <div class="input-file form-validator">
+                    <p class="item-name">Tải hình ảnh</p>
+                    <div class="input-img">
+                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                        Tải hình ảnh chi tiết
+                        <input type="file" class="upload-img" name="upload-imgs[]" id="upload-imgs" onchange = "ImageFileAsUrls()" multiple = "multiple">
+                    </div>
+                    <div id="display-imgs">
                     </div>
                     <span class="form-message"></span>
                 </div>
@@ -197,13 +264,11 @@
                 Validator.isRequired('#post_title', 'Vui lòng nhập tiêu đề bài viết'),
                 Validator.minMaxLength('#post_title',30,120, 'Tiêu đề tối thiểu 30 và tối đa 120 ký tự'),
 
-                Validator.isRequired('#post_content', 'Vui lòng nhập mô tả chi tiết vài viết'),
-                Validator.minLength('#post_content',120, 'Mô tả phải nhập ít nhất 120 ký tự'),
-
                 Validator.isRequired('#price', 'Vui lòng nhập giá cho thuê'),
                 Validator.isRequired('#area', 'Vui lòng nhập diện tích'),
                 Validator.numberMin('#area', 10, 'Diện tích phải >= 10'),
-                Validator.isRequired('#upload-img', 'Vui lòng tải lên ít nhất 1 hình ảnh'),
+                Validator.isRequired('#upload-img', 'Vui lòng tải lên 1 hình ảnh'),
+                Validator.isRequired('#upload-imgs', 'Vui lòng tải lên ít nhất 1 hình ảnh'),
                 
             ],
         });

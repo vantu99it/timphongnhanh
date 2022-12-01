@@ -44,7 +44,7 @@
         $lastInsertId = $conn->lastInsertId();
         if($lastInsertId){
             $ok = 1;
-            $successful = "Tạo thài khoản thành công! Đăng nhập ngay nhé!";
+            $successful = "Tạo tài khoản thành công! Đăng nhập ngay nhé!";
         }
         else 
         {
