@@ -2,6 +2,11 @@
   include '../include/connect.php';
   include '../include/data.php';
   include '../include/func-slug.php';
+  date_default_timezone_set("Asia/Ho_Chi_Minh");
+
+    $queryType = $conn->prepare("SELECT * FROM tbl_new_type WHERE status = 1");
+    $queryType->execute();
+    $resultsType = $queryType->fetchAll(PDO::FETCH_OBJ);
 
   $err = "";
   $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
@@ -16,9 +21,13 @@
     $title = $_POST['title'];
     $slug = vn2en($title);
     $post_content = $_POST['post_content'];
-    $price = $_POST['price'];
+    $price = (int) $_POST['price'];
     $area = $_POST['area'];
     $subject = $_POST['subject'];
+    $new_type = $_POST['new-type'];
+    $time_start= $_POST['time-start'];
+    $time_stop = $_POST['time-end'];
+    $date = (strtotime($time_stop) - strtotime($time_start))/60/60/24;
 
     if(isset($_FILES["upload-img"])){
         $imagePNG = $_FILES["upload-img"]["name"];
@@ -34,8 +43,8 @@
             move_uploaded_file($_FILES["upload-imgs"]["tmp_name"][$key],'../image/upload/'.$value);       
         }
     }
-    $sql = "INSERT INTO tbl_rooms(name,slug,city_id,district_id,ward_id,street,apartment_number,price,area,contents,image_logo,subject,user_id,category_id) VALUE (
-    :name,:slug,:city_id,:district_id,:ward_id,:street,:apartment_number,:price,:area,:contents,:image_logo,:subject,:user_id,:category_id)";
+    $sql = "INSERT INTO tbl_rooms(name,slug,city_id,district_id,ward_id,street,apartment_number,price,area,contents,image_logo,subject,user_id,category_id,news_type_id, time_start, time_stop) VALUE (
+    :name,:slug,:city_id,:district_id,:ward_id,:street,:apartment_number,:price,:area,:contents,:image_logo,:subject,:user_id,:category_id, :news_type_id, :time_start, :time_stop)";
     $query= $conn -> prepare($sql);
     $query->bindParam(':name',$title,PDO::PARAM_STR);
     $query->bindParam(':slug',$slug,PDO::PARAM_STR);
@@ -51,9 +60,13 @@
     $query->bindParam(':subject',$subject,PDO::PARAM_STR);
     $query->bindParam(':user_id',$id_user ,PDO::PARAM_STR);
     $query->bindParam(':category_id',$category,PDO::PARAM_STR);
+    $query->bindParam(':news_type_id',$new_type,PDO::PARAM_STR);
+    $query->bindParam(':time_start',$time_start,PDO::PARAM_STR);
+    $query->bindParam(':time_stop',$time_stop,PDO::PARAM_STR);
     $query->execute();
     $lastInsertId = $conn->lastInsertId();
     if($lastInsertId){
+        //insert ảnh bài viết vào bảng lưu ảnh
         foreach ($imageNames as $key => $value) {
             $target_dirs = "./image/upload/";
             $target_files = $target_dirs.$value;
@@ -63,6 +76,20 @@
             $queryImg->bindParam(':image',$target_files,PDO::PARAM_STR);
             $queryImg->execute();
         }
+        // insert id vào bảng thanh toán
+        $sqlPayment = "INSERT INTO tbl_payment_history(id_rooms,user_id,news_type_id ) VALUE (:id_rooms,:user_id,:news_type_id )";
+        $queryPayment= $conn -> prepare($sqlPayment);
+        $queryPayment->bindParam(':id_rooms',$lastInsertId,PDO::PARAM_STR);
+        $queryPayment->bindParam(':user_id',$id_user,PDO::PARAM_STR);
+        $queryPayment->bindParam(':news_type_id',$new_type,PDO::PARAM_STR);
+        $queryPayment->execute();
+        $lastInsertIdPay = $conn->lastInsertId();
+
+        $_SESSION['payment_history']['id'] = $lastInsertIdPay;
+
+        $_SESSION['time-day']['date'] = $date;
+        $_SESSION['time-day']['type'] = $new_type;
+        header('location: post-payment.php?id='.$lastInsertId);
     }
     else 
     {
@@ -152,10 +179,6 @@
                         <p class="form-message"></p>
                     </div>
                 </div>
-                <!-- <div class="full-address form-input">
-                    <p class="item-name">Địa chỉ đầy đủ</p>
-                    <input type="text" name="fullAdress" class=" boder-ra-5 input-disabled" id="fullAdress" style="width: 100% " required data-msg-required="Chưa chọn khu vực đăng tin" >
-                </div> -->
                 <div class="form-content">
                     <h3>Thông tin mô tả</h3>
                 </div>
@@ -238,6 +261,32 @@
                     <div id="display-imgs">
                     </div>
                     <span class="form-message"></span>
+                </div>
+                <div class="form-times form-validator" >
+                    <div class=" form-input search-item form-validator" style = "margin-left: 0;">
+                        <p class="item-name">Chọn loại tin đăng</p>
+                        <select class="autobox form-focus autobox-city boder-ra-5 "  name="new-type" id="new-type" style = "width: 300px;">
+                            <option value="0">Chọn loại tin</option>
+                            <?php foreach ($resultsType as $key => $value) {?>
+                                <option value="<?php echo $value->id ?>"><?php echo $value->name_type ?> (<?php
+                                    $bien = number_format((int) $value -> price,0,",",".");
+                                    echo $bien." đồng/ngày";
+                                    ?>) </option>
+                            <?php }?>
+                        </select>
+                        <span class="form-message"></span>
+
+                    </div>
+                    <div class="form-input search-item form-validator">
+                        <p class="item-name">Chọn thời gian bắt đầu</p>
+                        <input type="date" name="time-start" id="time-start" class=" form-focus boder-ra-5">
+                        <span class="form-message"></span><span class="form-message"></span>
+                    </div>
+                    <div class="form-input search-item form-validator">
+                        <p class="item-name">Chọn thời gian kết thúc</p>
+                        <input type="date" name="time-end" id="time-end" class=" form-focus boder-ra-5">
+                        <span class="form-message"></span><span class="form-message"></span>
+                    </div>
                 </div>
                 <div class="submit-form">
                     <input type="submit" name="submit-form" class="btn btn-submit"  value="Tiếp tục" style = "width: 50%;height: 45px;font-size: 18px;">

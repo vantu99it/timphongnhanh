@@ -188,8 +188,6 @@
                 Validator.isEmail('#email'),
             ],
         });
-        
-
     </script>
   </body>
 </html>

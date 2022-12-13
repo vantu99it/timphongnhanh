@@ -1,7 +1,7 @@
 <?php
   include './include/connect.php';
   include './include/data.php';
-
+  include './include/breadcrumb.php';
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +32,7 @@
         <!-- /search -->
         <!--main-content -->
         
+        <p><?= breadcrumbs(' > ') ?></p>
         <!-- main-content -->
         <!-- why-support -->
         <?php include('./include/why-support.php');?>

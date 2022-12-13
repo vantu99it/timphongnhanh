@@ -1,10 +1,10 @@
 <?php
 include 'connect.php';
-$name = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
-    if(isset($_SESSION['login']['id'])){
+$id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
+    if(isset($id)){
         $sql = "SELECT * FROM tbl_user WHERE id = :id";
         $query= $conn -> prepare($sql);
-		$query-> bindParam(':id', $_SESSION['login']['id'], PDO::PARAM_STR);
+		$query-> bindParam(':id',$id, PDO::PARAM_STR);
         $query-> execute();
 		$results = $query->fetch(PDO::FETCH_OBJ);
         if($query->rowCount() > 0)

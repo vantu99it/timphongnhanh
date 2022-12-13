@@ -1,31 +1,39 @@
 <?php 
     include './include/connect.php';
     $err = "";
-    // if(isset($_POST['login'])&&($_POST['login'])){
-    //     $user = $_POST['username'];
-    //     $pass = $_POST['password'];
+  if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $user = $_POST['username'];
+        $pass = $_POST['password'];
 
-    //     $sql ="SELECT * FROM tbl_admin WHERE UserName=:username and Password=:password";
-    //     $query= $conn -> prepare($sql);
-    //     $query-> bindParam(':username', $user, PDO::PARAM_STR);
-    //     $query-> bindParam(':password', $pass, PDO::PARAM_STR);
-    //     $query-> execute();
-    //     $results = $query->fetchAll(PDO::FETCH_OBJ);
-    //     if($query->rowCount() > 0)
-    //     {
-    //         foreach($results as $row){
-    //         $_SESSION['login']['username']= $row->username;
-    //         $_SESSION['login']['password']= $row->password;
-    //         $_SESSION['login']['fullname']= $row->fullname;
-    //         $_SESSION['login']['email']= $row->email;
-    //         $_SESSION['login']['phone']= $row->phone;
-    //         $_SESSION['login']['address']= $row->address;
-    //         }
-    //         header('location: dashboard.php');
-    //     } else{
-    //         $err = "1";
-    //     }
-    // }
+        $sql ="SELECT * FROM tbl_admin WHERE username=:username";
+		$query= $conn -> prepare($sql);
+		$query-> bindParam(':username', $user, PDO::PARAM_STR);
+		$query-> execute();
+		$results = $query->fetch(PDO::FETCH_OBJ);
+        // var_dump($query->rowCount());
+        // die();
+		if($query->rowCount() > 0)
+		{
+            $checkPass = password_verify($pass, $results->password);
+            // var_dump($checkPass);
+            // die();
+            if($checkPass){
+                $_SESSION['loginAdmin']['id']= $results->id;
+                $_SESSION['loginAdmin']['username']= $results->username;
+                $_SESSION['loginAdmin']['password']= $results->password;
+                $_SESSION['loginAdmin']['fullname']= $results->fullname;
+                $_SESSION['loginAdmin']['email']= $results->email;
+                $_SESSION['loginAdmin']['phone']= $results->phone;
+                $_SESSION['loginAdmin']['address']= $results->address;
+                header('location: dashboard.php');
+            }else {
+                $err = "1";
+            }
+            
+		} else{
+			$err = "1";
+		}
+    }
 
 ?>
 
@@ -56,15 +64,14 @@
                 <form action="#" method="post" id = "fm-login-admin">
                     <div class="form-login">
                         <div class="login form-group">
-                            <input type="text" name="username" rules ="required" id="username" class ="login-input" placeholder=" ">
                             <label for="">Tên đăng nhập</label>
+                            <input type="text" name="username" rules ="required" id="username" class ="login-input" placeholder=" ">
                             <p class="form-message"></p>
                         </div>
                         <div class="login form-group">
-                            <input type="password" name="password" rules ="required" id="password" class ="login-input" placeholder=" ">
                             <label for="">Mật khẩu</label>
+                            <input type="password" name="password" rules ="required" id="password" class ="login-input" placeholder=" ">
                             <p class="form-message"></p>
-
                         </div>
                         <a href="" class = "forgot-pass">Quên mật khẩu</a>
                         <div class = "login-btn">

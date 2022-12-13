@@ -10,10 +10,16 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="#">
-                <iconify-icon class="icon" icon="ic:twotone-post-add" width="24" height="24"></iconify-icon>
+            <a href="javascrip:void(0)">
+            <iconify-icon class="icon" icon="ic:twotone-post-add" width="24" height="24"></iconify-icon>
                 Quản lý tin đăng
+                <iconify-icon class="down" icon="bx:chevron-down" width="18" height="18"></iconify-icon>
             </a>
+            <ul class="sidebar-menu-mini">
+                <li class="menu-item-mini"><a href="./post-unpaid.php">Chưa thanh toán</a></li>
+                <li class="menu-item-mini"><a href="./post-pending.php">Chờ duyệt</a></li>
+                <li class="menu-item-mini"><a href="./post-approved.php">Đã duyệt</a></li>
+            </ul>
         </li>
         <li class="menu-item">
             <a href="javascrip:void(0)">
@@ -22,9 +28,9 @@
                 <iconify-icon class="down" icon="bx:chevron-down" width="18" height="18"></iconify-icon>
             </a>
             <ul class="sidebar-menu-mini">
-                <li class="menu-item-mini"><a href="">Quản lý menu</a></li>
-                <li class="menu-item-mini"><a href="">Quản lý danh mục</a></li>
-                <li class="menu-item-mini"><a href="">Quản lý bảng giá</a></li>
+                <li class="menu-item-mini"><a href="./sliders.php">Quản lý slider</a></li>
+                <li class="menu-item-mini"><a href="./categories.php">Quản lý danh mục</a></li>
+                <li class="menu-item-mini"><a href="./new-type.php">Quản lý loại tin</a></li>
             </ul>
         </li>
         <li class="menu-item">
@@ -34,8 +40,8 @@
                 <iconify-icon class="down" icon="bx:chevron-down" width="18" height="18"></iconify-icon>
             </a>
             <ul class="sidebar-menu-mini">
-                <li class="menu-item-mini"><a href="">Quản lý user</a></li>
-                <li class="menu-item-mini"><a href="">Quản lý admin</a></li>
+                <li class="menu-item-mini"><a href="./user-manager.php">Quản lý user</a></li>
+                <li class="menu-item-mini"><a href="./admin-manager.php">Quản lý admin</a></li>
             </ul>
         </li>
         <li class="menu-item">
@@ -48,6 +54,12 @@
                 <li class="menu-item-mini"><a href="">Thêm tin mới</a></li>
                 <li class="menu-item-mini"><a href="">Tin đã đăng</a></li>
             </ul>
+        </li>
+        <li class="menu-item">
+            <a href="">
+                <iconify-icon class="icon" icon="material-symbols:payments-sharp" width="24" height="24"></iconify-icon>
+                Quản lý thanh toán
+            </a>
         </li>
         <li class="menu-item">
             <a href="">

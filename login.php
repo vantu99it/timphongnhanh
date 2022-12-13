@@ -6,7 +6,7 @@
         $user = $_POST['username'];
         $pass = $_POST['password'];
 
-        $sql ="SELECT * FROM tbl_user WHERE username=:username";
+        $sql ="SELECT * FROM tbl_user WHERE username=:username and status = 1";
 		$query= $conn -> prepare($sql);
 		$query-> bindParam(':username', $user, PDO::PARAM_STR);
 		$query-> execute();
@@ -25,8 +25,9 @@
                 $_SESSION['login']['fullname']= $results->fullname;
                 $_SESSION['login']['email']= $results->email;
                 $_SESSION['login']['phone']= $results->phone;
-                $_SESSION['login']['address']= $results->address;
-                 header('location: index.php');
+                $_SESSION['login']['avatar']= $results->avatar;
+                $_SESSION['login']['status']= $results->status;
+                header('location: index.php');
             }else {
                 $err = "1";
             }

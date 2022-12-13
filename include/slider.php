@@ -1,17 +1,24 @@
+<?php 
+    $querySlider = $conn->prepare("SELECT * FROM tbl_slider WHERE status = 1");
+    $querySlider->execute();
+    $resultsSlider = $querySlider->fetchAll(PDO::FETCH_OBJ);
+?>
 <div id="slider">
     <div class="image-slider">
-        <div class="image-item">
-            <div class="image">
-                <img src="./image/slider-2.jpg" alt="slider1" />
+        <?php foreach ($resultsSlider as $key => $value) {?>
+            <div class="image-item">
+                <div class="image">
+                    <img src="<?php echo $value -> image ?>" alt="slider" />
+                </div>
+                <div class="slider-title">
+                <h3 class="title-image">
+                    <?php echo $value -> title ?>
+                </h3>
+                <p class="content-image"><?php echo $value -> description ?></p>
+                </div>
             </div>
-            <div class="slider-title">
-            <h3 class="title-image">
-                Bạn đang có phòng trọ cho thuê / đang muốn thuê trọ
-            </h3>
-            <p class="content-image">Đăng ngay phòng trọ / tìm trọ ngay</p>
-            </div>
-        </div>
-        <div class="image-item">
+        <?php } ?>
+        <!-- <div class="image-item">
             <div class="image">
             <img src="./image/slider-1.jpg" alt="slider1" />
             </div>
@@ -51,6 +58,6 @@
                 đi
             </p>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>

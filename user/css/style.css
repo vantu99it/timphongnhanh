@@ -297,6 +297,7 @@ li {
 #main-right .breadcrumb {
   background-color: #eaecef;
   padding: 10px 20px;
+  margin-bottom: 0;
 }
 #main-right li,
 #main-right a {
@@ -494,8 +495,11 @@ li {
 }
 .table-post-list .btn-tool {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
+}
+.table-post-list .btn-tool a {
+  margin-left: 15px;
 }
 .table-post-list .btn-tool .btn-td {
   font-size: 16px !important;
@@ -511,4 +515,43 @@ li {
 }
 .table-post-list .post-price {
   color: #37a344;
+}
+/*post-payment */
+.form-content h4 {
+  margin-top: 15px;
+}
+
+.form-list h3 {
+  margin-bottom: 15px;
+}
+.form-radio {
+  line-height: 30px;
+  font-size: 16px;
+}
+.form-radio img {
+  width: 40px;
+  height: 40px;
+  display: block;
+  margin: 5px 0 10px 20px;
+}
+.text-copy {
+  font-size: 20px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  width: 350px;
+}
+.text-copy input {
+  width: 80%;
+  border: none;
+  color: red;
+  background: none;
+  font-weight: 700;
+  margin-left: 15px;
+  outline: none;
+}
+.text-copy button {
+  border: none;
+  background: none;
+  padding: 0 14px;
+  border-left: 1px solid #ccc;
 }

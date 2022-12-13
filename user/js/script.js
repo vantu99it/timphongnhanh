@@ -64,27 +64,27 @@ $(document).ready(function () {
   });
 });
 
-// dấu phẩy số
-$("input.mask").each((i, ele) => {
-  let clone = $(ele).clone(false);
-  clone.attr("type", "text");
-  let ele1 = $(ele);
-  clone.val(Number(ele1.val()).toLocaleString("en"));
-  $(ele).after(clone);
-  $(ele).hide();
-  clone.mouseenter(() => {
-    ele1.show();
-    clone.hide();
-  });
-  setInterval(() => {
-    let newv = Number(ele1.val()).toLocaleString("en");
-    if (clone.val() != newv) {
-      clone.val(newv);
-    }
-  }, 10);
+// // dấu phẩy số
+// $("input.mask").each((i, ele) => {
+//   let clone = $(ele).clone(false);
+//   clone.attr("type", "text");
+//   let ele1 = $(ele);
+//   clone.val(Number(ele1.val()).toLocaleString("en"));
+//   $(ele).after(clone);
+//   $(ele).hide();
+//   clone.mouseenter(() => {
+//     ele1.show();
+//     clone.hide();
+//   });
+//   setInterval(() => {
+//     let newv = Number(ele1.val()).toLocaleString("en");
+//     if (clone.val() != newv) {
+//       clone.val(newv);
+//     }
+//   }, 10);
 
-  $(ele).mouseleave(() => {
-    $(clone).show();
-    $(ele1).hide();
-  });
-});
+//   $(ele).mouseleave(() => {
+//     $(clone).show();
+//     $(ele1).hide();
+//   });
+// });
