@@ -6,7 +6,7 @@
   $ok= "";
 
     $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
-    $queryRoom = $conn->prepare("SELECT r.*, ca.classify, pay.pay_status, ci.fullname as city, dis.fullname as district, wa.fullname as ward FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id WHERE r.user_id = :user_id");
+    $queryRoom = $conn->prepare("SELECT r.*, ca.classify, pay.pay_status, ci.fullname as city, dis.fullname as district, wa.fullname as ward FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id WHERE r.user_id = :user_id ORDER BY r.id DESC");
     $queryRoom-> bindParam(':user_id', $id_user, PDO::PARAM_STR);
     $queryRoom->execute();
     $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
@@ -62,7 +62,7 @@
                     <h1>Quản lý tin đã đăng</h1>
                 </div>
                 <div class="account-btn">
-                <a href="http://" class="btn btn-post">Đăng tin mới </a>
+                <a href="./create-post.php" class="btn btn-post">Đăng tin mới </a>
                 </div>
             </section>
             <div class="main-right-table">

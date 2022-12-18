@@ -28,6 +28,10 @@
     $time_start= $_POST['time-start'];
     $time_stop = $_POST['time-end'];
     $date = (strtotime($time_stop) - strtotime($time_start))/60/60/24;
+    $getdate = date('H:i:s');
+    $start = date_format(date_create($getdate.$time_start),"Y-m-d H:i:s");
+    $stop = date_format(date_create($getdate.$time_stop),"Y-m-d H:i:s");
+    
 
     if(isset($_FILES["upload-img"])){
         $imagePNG = $_FILES["upload-img"]["name"];
@@ -61,8 +65,8 @@
     $query->bindParam(':user_id',$id_user ,PDO::PARAM_STR);
     $query->bindParam(':category_id',$category,PDO::PARAM_STR);
     $query->bindParam(':news_type_id',$new_type,PDO::PARAM_STR);
-    $query->bindParam(':time_start',$time_start,PDO::PARAM_STR);
-    $query->bindParam(':time_stop',$time_stop,PDO::PARAM_STR);
+    $query->bindParam(':time_start',$start,PDO::PARAM_STR);
+    $query->bindParam(':time_stop',$stop,PDO::PARAM_STR);
     $query->execute();
     $lastInsertId = $conn->lastInsertId();
     if($lastInsertId){

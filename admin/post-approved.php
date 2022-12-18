@@ -67,9 +67,7 @@
                 <div class="form-title">
                     <h1>Quản lý tin đã đăng</h1>
                 </div>
-                <div class="account-btn">
-                <a href="http://" class="btn btn-post">Đăng tin mới </a>
-                </div>
+                
             </section>
             <div class="main-right-table">
                 <table class="table table-bordered table-post-list" id = "table-manage">
@@ -126,9 +124,7 @@
                                     <?php if($value->pay_status == 1 && $value->status == 2){?>
                                         <p style = "color: #37a344;">Hoạt động</p>
                                     <?php }?>
-                                    <?php if($value->pay_status == 1 && $value->status == 2){?>
-                                        <p style = "color: #37a344;">Hoạt động</p>
-                                    <?php }?>
+                                    
                                 </td>
                             </tr>
                         <?php } ?>

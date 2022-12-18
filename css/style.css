@@ -562,9 +562,8 @@ body {
 .detail .area {
   font-weight: 700;
 }
-.detail .area,
-.detail .post-location {
-  margin-left: 14px;
+.detail .area {
+  margin-left: 20px;
   color: #333;
 }
 
@@ -586,10 +585,10 @@ body {
 }
 .post-meta .content {
   margin-bottom: 15px;
-  height: 90px;
-  min-height: 90px;
+  height: 60px;
+  min-height: 60px;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

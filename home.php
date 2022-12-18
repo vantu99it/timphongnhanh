@@ -1,12 +1,59 @@
 <?php
   include './include/connect.php';
   include './include/data.php';
+  date_default_timezone_set("Asia/Ho_Chi_Minh");
 
-  $sql = "SELECT * FROM 
-  tbl_rooms r join tbl_rooms_image rm on rm.id_rooms = r.id 
-  join tbl_city city on city.id = r.city_id 
-  join tbl_district dis on dis.id =  r.district_id 
-  ORDER BY r.id DESC"
+  $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, CURDATE() AS today
+  FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+  JOIN tbl_city ci ON ci.id = r.city_id
+  JOIN tbl_district dis ON dis.id = r.district_id
+  JOIN tbl_ward wa ON wa.id = r.ward_id
+  JOIN tbl_new_type typ ON typ.id = r.news_type_id
+  JOIN tbl_categories ca ON ca.id = r.category_id
+  WHERE r.status = 2 AND r.time_start <= CURDATE() AND r.news_type_id = 1
+  ORDER BY r.id DESC LIMIT 10)
+  UNION ALL
+  (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, CURDATE() AS today
+  FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+  JOIN tbl_city ci ON ci.id = r.city_id
+  JOIN tbl_district dis ON dis.id = r.district_id
+  JOIN tbl_ward wa ON wa.id = r.ward_id
+  JOIN tbl_new_type typ ON typ.id = r.news_type_id
+  JOIN tbl_categories ca ON ca.id = r.category_id
+  WHERE r.status = 2 AND r.time_start <= CURDATE() AND r.news_type_id = 2
+  ORDER BY r.id DESC LIMIT 10)
+  UNION ALL
+  (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, CURDATE() AS today
+  FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+  JOIN tbl_city ci ON ci.id = r.city_id
+  JOIN tbl_district dis ON dis.id = r.district_id
+  JOIN tbl_ward wa ON wa.id = r.ward_id
+  JOIN tbl_new_type typ ON typ.id = r.news_type_id
+  JOIN tbl_categories ca ON ca.id = r.category_id
+  WHERE r.status = 2 AND r.time_start <= CURDATE() AND r.news_type_id = 3
+  ORDER BY r.id DESC LIMIT 10)
+  UNION ALL
+  (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, CURDATE() AS today
+  FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+  JOIN tbl_city ci ON ci.id = r.city_id
+  JOIN tbl_district dis ON dis.id = r.district_id
+  JOIN tbl_ward wa ON wa.id = r.ward_id
+  JOIN tbl_new_type typ ON typ.id = r.news_type_id
+  JOIN tbl_categories ca ON ca.id = r.category_id
+  WHERE r.status = 2 AND r.time_start <= CURDATE() AND r.news_type_id = 4
+  ORDER BY r.id DESC LIMIT 10)
+  UNION ALL
+  (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, CURDATE() AS today
+  FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+  JOIN tbl_city ci ON ci.id = r.city_id
+  JOIN tbl_district dis ON dis.id = r.district_id
+  JOIN tbl_ward wa ON wa.id = r.ward_id
+  JOIN tbl_new_type typ ON typ.id = r.news_type_id
+  JOIN tbl_categories ca ON ca.id = r.category_id
+  WHERE r.status = 2 AND r.time_start <= CURDATE() AND r.news_type_id = 5
+  ORDER BY r.id DESC LIMIT 10)");
+ $queryRoom->execute();
+ $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
 
 ?>
 
@@ -78,179 +125,326 @@
                   <h2 class="post_title">Danh sách tin đăng</h2>
                 </div>
                 <ul class="post-listing">
-                  <li class = "post-item post-vip vip-hot">
-                    <figure class="post-thumb">
-                      <a href="#" class="clearfix">
-                        <img src="./image/anh1.jpg" alt="">
-                        <span class="bookmark"></span>
-                      </a>
-                    </figure>
-                    <div class="post-meta">
-                      <h3 class="title">
-                        <a href="#"><span class="star star-5"></span> Cho thuê phòng trọ - 27 bạch liêu gần đại học Vinh - thanhf phố vinh nghệ an</a>
-                      </h3>
-                      <div class="detail">
-                        <span class="price"><i class="fa-solid fa-circle-dollar-to-slot"></i>2.5 triệu/tháng</span>
-                        <span class="area"><i class="fa-solid fa-expand"></i>14m&#178;</span>
-                        <span class="post-location">
-                          <a href="#"><i class="fa-solid fa-location-dot"></i>Thành phố Vinh, Nghệ An</a>
-                        </span>
-                        <span class="post-time">Hôm nay</span>
-                      </div>
-                      <div class="content"> 
-                        <p class="post-summary">
-                          Phòng trọ đẹp nằm ngay trung tâm quận Phú Nhuận (xem hình thật). View trước là đối diện Khách Sạn 3* Tân Sơn Nhất, View sau là đường Nguyễn Văn…</p>
+                  <?php foreach ($resultsRoom as $key => $value) {
+                    if($value-> news_type_id == 1){?>
+                    <!-- Tin VIP nổi bật -->
+                    <li class = "post-item post-vip vip-hot">
+                      <figure class="post-thumb">
+                        <a href="./article-details.php?id=<?php echo $value -> id ?>" class="clearfix">
+                          <img src="<?php echo $value -> image_logo ?>" alt="">
+                          <span class="bookmark"></span>
+                        </a>
+                      </figure>
+                      <div class="post-meta">
+                        <h3 class="title">
+                          <a href="./article-details.php?id=<?php echo $value -> id ?>"><span class="star star-5"></span><?php echo $value -> name ?></a>
+                        </h3>
+                        <div class="detail">
+                          <span class="price"><i class="fa-solid fa-circle-dollar-to-slot"></i>
+                            <?php
+                              $tien = (int) $value->price;
+                              $bien =0;
+                              if(strlen($tien)>=7){
+                                $bien =  $tien/1000000;
+                                echo $bien.(($value -> category_slug == "Cho-thue-Homestay")?" triệu/ngày":" triệu/tháng");
+                              }else {
+                                $bien = number_format($tien,0,",",".");
+                                echo $bien.(($value -> category_slug == "Cho-thue-Homestay")?" đ/ngày":" đ/tháng");
+                              }
+                            ?>
+                          </span>
+                          <span class="area"><i class="fa-solid fa-expand"></i><?php echo $value -> area ?>m&#178;</span>
+                          <span class="post-time">
+                            <?php 
+                              $time = time() - strtotime($value->created_ad);
+                              if(floor($time/60/60/24)==0){
+                                if(floor($time/60/60)==0){
+                                  echo(ceil($time/60)." phút trước");
+                                }else{
+                                  echo(floor($time/60/60)." tiếng trước");
+                                }
+                              }else{
+                                echo(floor($time/60/60/24)." ngày trước");
+                              }
+                            ?>
+                          </span>
                         </div>
-                      <div class="contact">
-                        <div class="avatar">
-                          <div class="avata-img">
-                            <img src="./image/author.png" alt="">
-                            <!-- <i class="fa-solid fa-user"></i> -->
-                          </div>
-                          <span class="author-name">hieuthanh2006</span>
-                          <i class="fa-regular fa-circle-check check"></i>
-                        </div>
-                        <a href="tel:0932379943" class="btn-quick-call" target="_blank" ><i class="fa-solid fa-phone"></i>0932379943</a>
-                        <a href="http://zalo.me/0927441096" class="btn-quick-zalo"  target="_blank">Nhắn zalo</a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class = "post-item post-vip vip-1">
-                    <figure class="post-thumb">
-                      <a href="#" class="clearfix">
-                        <img src="./image/anh1.jpg" alt="">
-                      </a>
-                    </figure>
-                    <div class="post-meta">
-                      <h3 class="title">
-                        <a href="#"><span class="star star-4"></span> Cho thuê phòng trọ - 27 bạch liêu gần đại học Vinh - thanhf phố vinh nghệ an</a>
-                      </h3>
-                      <div class="detail">
-                        <span class="price"><i class="fa-solid fa-circle-dollar-to-slot"></i>2.5 triệu/tháng</span>
-                        <span class="area"><i class="fa-solid fa-expand"></i>14m&#178;</span>
-                        <span class="post-location">
-                          <a href="#"><i class="fa-solid fa-location-dot"></i>Thành phố Vinh, Nghệ An</a>
-                        </span>
-                        <span class="post-time">Hôm nay</span>
-                      </div>
-                      <div class="content"> 
-                        <p class="post-summary">
-                          Phòng trọ đẹp nằm ngay trung tâm quận Phú Nhuận (xem hình thật). View trước là đối diện Khách Sạn 3* Tân Sơn Nhất, View sau là đường Nguyễn Văn…</p>
-                        </div>
-                      <div class="contact">
-                        <div class="avatar">
-                          <div class="avata-img">
-                            <img src="./image/author.png" alt="">
-                            <!-- <i class="fa-solid fa-user"></i> -->
-                          </div>
-                          <span class="author-name">hieuthanh2006</span>
-                          <i class="fa-regular fa-circle-check check"></i>
-                        </div>
-                        <a href="tel:0932379943" class="btn-quick-call" target="_blank" target="_blank"><i class="fa-solid fa-phone"></i>0932379943</a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class = "post-item post-vip vip-2">
-                    <figure class="post-thumb">
-                      <a href="#" class="clearfix">
-                        <img src="./image/anh1.jpg" alt="">
-                      </a>
-                    </figure>
-                    <div class="post-meta">
-                      <h3 class="title">
-                        <a href="#"><span class="star star-3"></span> Cho thuê phòng trọ - 27 bạch liêu gần đại học Vinh - thanhf phố vinh nghệ an</a>
-                      </h3>
-                      <div class="detail">
-                        <span class="price"><i class="fa-solid fa-circle-dollar-to-slot"></i>2.5 triệu/tháng</span>
-                        <span class="area"><i class="fa-solid fa-expand"></i>14m&#178;</span>
-                        <span class="post-location">
-                          <a href="#"><i class="fa-solid fa-location-dot"></i>Thành phố Vinh, Nghệ An</a>
-                        </span>
-                        <span class="post-time">Hôm nay</span>
-                      </div>
-                      <div class="content"> 
-                        <p class="post-summary">
-                          Phòng trọ đẹp nằm ngay trung tâm quận Phú Nhuận (xem hình thật). View trước là đối diện Khách Sạn 3* Tân Sơn Nhất, View sau là đường Nguyễn Văn…</p>
-                        </div>
-                      <div class="contact">
-                        <div class="avatar">
-                          <div class="avata-img">
-                            <img src="./image/author.png" alt="">
-                            <!-- <i class="fa-solid fa-user"></i> -->
-                          </div>
+                        <div class="detail">
+                          <span class="post-location">
+                            <p><i class="fa-solid fa-location-dot"></i><?php echo $value -> ward.', '.$value -> district.', '.$value -> city ?></p>
+                          </span>
                           
-                          <span class="author-name">hieuthanh2006</span>
                         </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class = "post-item post-vip vip-3">
-                    <figure class="post-thumb">
-                      <a href="#" class="clearfix">
-                        <img src="./image/anh1.jpg" alt="">
-                      </a>
-                    </figure>
-                    <div class="post-meta">
-                      <h3 class="title">
-                        <a href="#"><span class="star star-2"></span> Cho thuê phòng trọ - 27 bạch liêu gần đại học Vinh - thanhf phố vinh nghệ an</a>
-                      </h3>
-                      <div class="detail">
-                        <span class="price"><i class="fa-solid fa-circle-dollar-to-slot"></i>2.5 triệu/tháng</span>
-                        <span class="area"><i class="fa-solid fa-expand"></i>14m&#178;</span>
-                        <span class="post-location">
-                          <a href="#"><i class="fa-solid fa-location-dot"></i>Thành phố Vinh, Nghệ An</a>
-                        </span>
-                        <span class="post-time">Hôm nay</span>
-                      </div>
-                      <div class="content"> 
-                        <p class="post-summary">
-                          Phòng trọ đẹp nằm ngay trung tâm quận Phú Nhuận (xem hình thật). View trước là đối diện Khách Sạn 3* Tân Sơn Nhất, View sau là đường Nguyễn Văn…</p>
-                        </div>
-                      <div class="contact">
-                        <div class="avatar">
-                          <div class="avata-img">
-                            <img src="./image/author.png" alt="">
-                            <!-- <i class="fa-solid fa-user"></i> -->
+                        <div class="content"> 
+                          <p class="post-summary">
+                            <?php echo strip_tags($value -> contents) ?>
+                          </p>
                           </div>
-                          <span class="author-name">hieuthanh2006</span>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class = "post-item post-normal">
-                    <figure class="post-thumb">
-                      <a href="#" class="clearfix">
-                        <img src="./image/anh1.jpg" alt="">
-                      </a>
-                    </figure>
-                    <div class="post-meta">
-                      <h3 class="title">
-                        <a href="#">Cho thuê phòng trọ - 27 bạch liêu gần đại học Vinh - thanhf phố vinh nghệ an</a>
-                      </h3>
-                      <div class="detail">
-                        <span class="price"><i class="fa-solid fa-circle-dollar-to-slot"></i>2.5 triệu/tháng</span>
-                        <span class="area"><i class="fa-solid fa-expand"></i>14m&#178;</span>
-                        <span class="post-location">
-                          <a href="#"><i class="fa-solid fa-location-dot"></i>Thành phố Vinh, Nghệ An</a>
-                        </span>
-                        <span class="post-time">Hôm nay</span>
-                      </div>
-                      <div class="content"> 
-                        <p class="post-summary">
-                          Phòng trọ đẹp nằm ngay trung tâm quận Phú Nhuận (xem hình thật). View trước là đối diện Khách Sạn 3* Tân Sơn Nhất, View sau là đường Nguyễn Văn…</p>
-                        </div>
-                      <div class="contact">
-                        <div class="avatar">
-                          <div class="avata-img">
-                            <img src="./image/author.png" alt="">
-                            <!-- <i class="fa-solid fa-user"></i> -->
+                        <div class="contact">
+                          <div class="avatar">
+                            <div class="avata-img">
+                              <img src="<?php echo $value -> avatar ?>" alt="">
+                              <!-- <i class="fa-solid fa-user"></i> -->
+                            </div>
+                            <span class="author-name"><?php echo $value -> name_user ?></span>
+                            <i class="fa-regular fa-circle-check check"></i>
                           </div>
-                          
-                          <span class="author-name">hieuthanh2006</span>
+                          <a href="tel:<?php echo $value -> phone_user ?>" class="btn-quick-call" target="_blank" ><i class="fa-solid fa-phone"></i><?php echo $value -> phone_user ?></a>
+                          <a href="http://zalo.me/<?php echo $value -> phone_user ?>" class="btn-quick-zalo"  target="_blank">Nhắn zalo</a>
                         </div>
                       </div>
-                    </div>
-                  </li>
+                    </li>
+                    <?php ;
+                    }if($value-> news_type_id == 2){?>
+                    <!-- Tin VIP 1 -->
+                    <li class = "post-item post-vip vip-1">
+                      <figure class="post-thumb">
+                        <a href="./article-details.php?id=<?php echo $value -> id ?>" class="clearfix">
+                          <img src="<?php echo $value -> image_logo ?>" alt="">
+                        </a>
+                      </figure>
+                      <div class="post-meta">
+                        <h3 class="title">
+                          <a href="./article-details.php?id=<?php echo $value -> id ?>"><span class="star star-4"></span><?php echo $value -> name ?></a>
+                        </h3>
+                        <div class="detail">
+                          <span class="price"><i class="fa-solid fa-circle-dollar-to-slot"></i>
+                            <?php
+                              $tien = (int) $value->price;
+                              $bien =0;
+                              if(strlen($tien)>=7){
+                                $bien =  $tien/1000000;
+                                echo $bien.(($value -> category_slug == "Cho-thue-Homestay")?" triệu/ngày":" triệu/tháng");
+                              }else {
+                                $bien = number_format($tien,0,",",".");
+                                echo $bien.(($value -> category_slug == "Cho-thue-Homestay")?" đ/ngày":" đ/tháng");
+                              }
+                            ?>
+                          </span>
+                          <span class="area"><i class="fa-solid fa-expand"></i><?php echo $value -> area ?>m&#178;</span>
+                          <span class="post-time"><?php 
+                            $time = time() - strtotime($value->created_ad);
+                            if(floor($time/60/60/24)==0){
+                              if(floor($time/60/60)==0){
+                                echo(ceil($time/60)." phút trước");
+                              }else{
+                                echo(floor($time/60/60)." tiếng trước");
+                              }
+                            }else{
+                              echo(floor($time/60/60/24)." ngày trước");
+                            }
+                          ?></span>
+                        </div>
+                        <div class="detail">
+                          <span class="post-location">
+                            <p><i class="fa-solid fa-location-dot"></i><?php echo $value -> ward.', '.$value -> district.', '.$value -> city ?></p>
+                          </span>
+                        </div>
+                        <div class="content"> 
+                          <p class="post-summary">
+                            <?php echo strip_tags($value -> contents) ?>
+                          </p>
+                          </div>
+                        <div class="contact">
+                          <div class="avatar">
+                            <div class="avata-img">
+                              <img src="<?php echo $value -> avatar ?>" alt="">
+                              <!-- <i class="fa-solid fa-user"></i> -->
+                            </div>
+                            <span class="author-name"><?php echo $value -> name_user ?></span>
+                            <i class="fa-regular fa-circle-check check"></i>
+                          </div>
+                          <a href="tel:<?php echo $value -> phone_user ?>" class="btn-quick-call" target="_blank" ><i class="fa-solid fa-phone"></i><?php echo $value -> phone_user ?></a>
+                        </div>
+                      </div>
+                    </li>
+                    <?php ;
+                    }if($value-> news_type_id == 3){?>
+                    <!-- Tin VIP 2 -->
+                    <li class = "post-item post-vip vip-2">
+                      <figure class="post-thumb">
+                        <a href="./article-details.php?id=<?php echo $value -> id ?>" class="clearfix">
+                          <img src="<?php echo $value -> image_logo ?>" alt="">
+                        </a>
+                      </figure>
+                      <div class="post-meta">
+                        <h3 class="title">
+                          <a href="./article-details.php?id=<?php echo $value -> id ?>"><span class="star star-3"></span><?php echo $value -> name ?></a>
+                        </h3>
+                        <div class="detail">
+                          <span class="price"><i class="fa-solid fa-circle-dollar-to-slot"></i>
+                            <?php
+                              $tien = (int) $value->price;
+                              $bien =0;
+                              if(strlen($tien)>=7){
+                                $bien =  $tien/1000000;
+                                echo $bien.(($value -> category_slug == "Cho-thue-Homestay")?" triệu/ngày":" triệu/tháng");
+                              }else {
+                                $bien = number_format($tien,0,",",".");
+                                echo $bien.(($value -> category_slug == "Cho-thue-Homestay")?" đ/ngày":" đ/tháng");
+                              }
+                            ?>
+                          </span>
+                          <span class="area"><i class="fa-solid fa-expand"></i><?php echo $value -> area ?>m&#178;</span>
+                          <span class="post-time"><?php 
+                            $time = time() - strtotime($value->created_ad);
+                            if(floor($time/60/60/24)==0){
+                              if(floor($time/60/60)==0){
+                                echo(ceil($time/60)." phút trước");
+                              }else{
+                                echo(floor($time/60/60)." tiếng trước");
+                              }
+                            }else{
+                              echo(floor($time/60/60/24)." ngày trước");
+                            }
+                          ?></span>
+                        </div>
+                        <div class="detail">
+                          <span class="post-location">
+                            <p><i class="fa-solid fa-location-dot"></i><?php echo $value -> ward.', '.$value -> district.', '.$value -> city ?></p>
+                          </span>
+                        </div>
+                        <div class="content"> 
+                          <p class="post-summary">
+                            <?php echo strip_tags($value -> contents) ?>
+                          </p>
+                          </div>
+                        <div class="contact">
+                          <div class="avatar">
+                            <div class="avata-img">
+                              <img src="<?php echo $value -> avatar ?>" alt="">
+                              <!-- <i class="fa-solid fa-user"></i> -->
+                            </div>
+                            <span class="author-name"><?php echo $value -> name_user ?></span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <?php ;
+                    }if($value-> news_type_id == 4){?>
+                    <!-- Tin VIP 3 -->
+                    <li class = "post-item post-vip vip-3">
+                      <figure class="post-thumb">
+                        <a href="./article-details.php?id=<?php echo $value -> id ?>" class="clearfix">
+                          <img src="<?php echo $value -> image_logo ?>" alt="">
+                        </a>
+                      </figure>
+                      <div class="post-meta">
+                        <h3 class="title">
+                          <a href="./article-details.php?id=<?php echo $value -> id ?>"><span class="star star-2"></span><?php echo $value -> name ?></a>
+                        </h3>
+                        <div class="detail">
+                          <span class="price"><i class="fa-solid fa-circle-dollar-to-slot"></i>
+                            <?php
+                              $tien = (int) $value->price;
+                              $bien =0;
+                              if(strlen($tien)>=7){
+                                $bien =  $tien/1000000;
+                                echo $bien.(($value -> category_slug == "Cho-thue-Homestay")?" triệu/ngày":" triệu/tháng");
+                              }else {
+                                $bien = number_format($tien,0,",",".");
+                                echo $bien.(($value -> category_slug == "Cho-thue-Homestay")?" đ/ngày":" đ/tháng");
+                              }
+                            ?>
+                          </span>
+                          <span class="area"><i class="fa-solid fa-expand"></i><?php echo $value -> area ?>m&#178;</span>
+                          <span class="post-time"><?php 
+                            $time = time() - strtotime($value->created_ad);
+                            if(floor($time/60/60/24)==0){
+                              if(floor($time/60/60)==0){
+                                echo(ceil($time/60)." phút trước");
+                              }else{
+                                echo(floor($time/60/60)." tiếng trước");
+                              }
+                            }else{
+                              echo(floor($time/60/60/24)." ngày trước");
+                            }
+                          ?></span>
+                        </div>
+                        <div class="detail">
+                          <span class="post-location">
+                            <p><i class="fa-solid fa-location-dot"></i><?php echo $value -> ward.', '.$value -> district.', '.$value -> city ?></p>
+                          </span>
+                        </div>
+                        <div class="content"> 
+                          <p class="post-summary">
+                            <?php echo strip_tags($value -> contents) ?>
+                          </p>
+                          </div>
+                        <div class="contact">
+                          <div class="avatar">
+                            <div class="avata-img">
+                              <img src="<?php echo $value -> avatar ?>" alt="">
+                              <!-- <i class="fa-solid fa-user"></i> -->
+                            </div>
+                            <span class="author-name"><?php echo $value -> name_user ?></span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <?php ;
+                    }if($value-> news_type_id == 5){?>
+                    <!-- Tin thường -->
+                    <li class = "post-item post-normal">
+                      <figure class="post-thumb">
+                        <a href="./article-details.php?id=<?php echo $value -> id ?>" class="clearfix">
+                          <img src="<?php echo $value -> image_logo ?>" alt="">
+                        </a>
+                      </figure>
+                      <div class="post-meta">
+                        <h3 class="title">
+                          <a href="./article-details.php?id=<?php echo $value -> id ?>"><?php echo $value -> name ?></a>
+                        </h3>
+                        <div class="detail">
+                          <span class="price"><i class="fa-solid fa-circle-dollar-to-slot"></i>
+                            <?php
+                              $tien = (int) $value->price;
+                              $bien =0;
+                              if(strlen($tien)>=7){
+                                $bien =  $tien/1000000;
+                                echo $bien.(($value -> category_slug == "Cho-thue-Homestay")?" triệu/ngày":" triệu/tháng");
+                              }else {
+                                $bien = number_format($tien,0,",",".");
+                                echo $bien.(($value -> category_slug == "Cho-thue-Homestay")?" đ/ngày":" đ/tháng");
+                              }
+                            ?>
+                          </span>
+                          <span class="area"><i class="fa-solid fa-expand"></i><?php echo $value -> area ?>m&#178;</span>
+                          <span class="post-time"><?php 
+                            $time = time() - strtotime($value->created_ad);
+                            if(floor($time/60/60/24)==0){
+                              if(floor($time/60/60)==0){
+                                echo(ceil($time/60)." phút trước");
+                              }else{
+                                echo(floor($time/60/60)." tiếng trước");
+                              }
+                            }else{
+                              echo(floor($time/60/60/24)." ngày trước");
+                            }
+                          ?></span>
+                        </div>
+                        <div class="detail">
+                          <span class="post-location">
+                            <p><i class="fa-solid fa-location-dot"></i><?php echo $value -> ward.', '.$value -> district.', '.$value -> city ?></p>
+                          </span>
+                        </div>
+                        <div class="content"> 
+                          <p class="post-summary">
+                            <?php echo strip_tags($value -> contents) ?>
+                          </p>
+                          </div>
+                        <div class="contact">
+                          <div class="avatar">
+                            <div class="avata-img">
+                              <img src="<?php echo $value -> avatar ?>" alt="">
+                              <!-- <i class="fa-solid fa-user"></i> -->
+                            </div>
+                            <span class="author-name"><?php echo $value -> name_user ?></span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  <?php }} ?>
                 </ul>
               </section> 
             </div>

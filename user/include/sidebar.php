@@ -47,7 +47,7 @@ if(isset($_SESSION['login']['id'])){
             </ul>
             <div class="account-btn">
                 <a href="http://" class="btn btn-recharge">Nạp tiền</a>
-                <a href="http://" class="btn btn-post">Đăng tin</a>
+                <a href="./create-post.php" class="btn btn-post">Đăng tin</a>
             </div>
             
         </div>

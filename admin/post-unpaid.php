@@ -74,9 +74,7 @@
                 <div class="form-title">
                     <h1>Quản lý tin đã đăng</h1>
                 </div>
-                <div class="account-btn">
-                <a href="http://" class="btn btn-post">Đăng tin mới </a>
-                </div>
+                
             </section>
             <div class="main-right-table">
                 <table class="table table-bordered table-post-list" id = "table-manage">
