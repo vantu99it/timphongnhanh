@@ -238,14 +238,14 @@
                         <span class="form-message"></span>
                     </div>
                     <div class="status" style = "margin-top: 10px;">
-                            <label style = "margin-right: 15px;">
-                                <input type="radio" name="status" id="" value ="1" <?php if($resultsUpdate->status == 1) echo  "checked = 'Checked'" ?>> Hiện
+                        <label style = "margin-right: 15px;">
+                            <input type="radio" name="status" id="" value ="1" <?php if($resultsUpdate->status == 1) echo  "checked = 'Checked'" ?>> Hiện
 
-                            </label>
-                            <label>
-                                <input type="radio" name="status" value ="0" <?php if($resultsUpdate->status == 0) echo  "checked = 'Checked'" ?> id="" > Ẩn
-                            </label>
-                        </div>
+                        </label>
+                        <label>
+                            <input type="radio" name="status" value ="0" <?php if($resultsUpdate->status == 0) echo  "checked = 'Checked'" ?> id="" > Ẩn
+                        </label>
+                    </div>
                     <div class="form-contact form-validator" id = "btn-submit">
                         <input type="submit" name ="update-form" value="Cập nhật" class="btn update-form " id = "update-form">
                     </div>

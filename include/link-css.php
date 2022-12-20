@@ -12,4 +12,5 @@
       href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
     />
     <link rel="stylesheet" href="./libs/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="./css/style-notification.css">
     <link rel="stylesheet" href="./css/style.css" />

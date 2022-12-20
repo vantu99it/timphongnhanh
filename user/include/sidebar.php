@@ -46,7 +46,7 @@ if(isset($_SESSION['login']['id'])){
                 </li>
             </ul>
             <div class="account-btn">
-                <a href="http://" class="btn btn-recharge">Nạp tiền</a>
+                <a href="./deposit-money.php" class="btn btn-recharge">Nạp tiền</a>
                 <a href="./create-post.php" class="btn btn-post">Đăng tin</a>
             </div>
             
@@ -71,7 +71,7 @@ if(isset($_SESSION['login']['id'])){
                 </ul>
             </li>
             <li class="menu-item">
-                <a href="javascrip:void(0)">
+                <a href="./deposit-money.php">
                     <iconify-icon class="icon" icon="fluent:money-hand-20-filled" width="24" height="24"></iconify-icon> 
                     Nạp tiền vào tài khoản         
                 </a>
@@ -83,25 +83,25 @@ if(isset($_SESSION['login']['id'])){
                 </a>
             </li>
             <li class="menu-item">
-                <a href="">
+                <a href="./payment-history.php">
                     <iconify-icon class="icon" icon="la:money-check-alt" width="24" height="24"></iconify-icon>
                     Lịch sử thanh toán
                 </a>
             </li>
             <li class="menu-item">
-                <a href="">
+                <a href="../price-list.php">
                 <iconify-icon class="icon" icon="ri:price-tag-2-fill" width="24" height="24"></iconify-icon>
                     Bảng giá dịch vụ
                 </a>
             </li>
             <li class="menu-item">
-                <a href="">
+                <a href="../contact.php">
                     <iconify-icon class="icon" icon="ic:round-contact-mail" width="24" height="24"></iconify-icon>
                     Liên hệ
                 </a>
             </li>
             <li class="menu-item">
-                <a href="">
+                <a href="../logout.php">
                     <iconify-icon class="icon" icon="octicon:sign-out-16" width="24" height="24"></iconify-icon>
                     Thoát
                 </a>

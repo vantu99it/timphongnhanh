@@ -66,6 +66,43 @@ $(document).ready(function () {
   });
 });
 
+// coppy code
+function copyCode() {
+  var copyText = document.getElementById("code-pay");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); //Thiết bị di động
+  navigator.clipboard.writeText(copyText.value);
+  alert("Đã sao chép: " + copyText.value);
+}
+function copyCodeVCB() {
+  var copyText = document.getElementById("code-payVCB");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); //Thiết bị di động
+  navigator.clipboard.writeText(copyText.value);
+  alert("Đã sao chép: " + copyText.value);
+}
+function copyCodeMB() {
+  var copyText = document.getElementById("code-payMB");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); //Thiết bị di động
+  navigator.clipboard.writeText(copyText.value);
+  alert("Đã sao chép: " + copyText.value);
+}
+function copyCodeVTin() {
+  var copyText = document.getElementById("code-payVTin");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); //Thiết bị di động
+  navigator.clipboard.writeText(copyText.value);
+  alert("Đã sao chép: " + copyText.value);
+}
+function copyCodeND() {
+  var copyText = document.getElementById("code-payND");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); //Thiết bị di động
+  navigator.clipboard.writeText(copyText.value);
+  alert("Đã sao chép: " + copyText.value);
+}
+
 // // dấu phẩy số
 // $("input.mask").each((i, ele) => {
 //   let clone = $(ele).clone(false);

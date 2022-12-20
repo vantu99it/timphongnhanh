@@ -3,54 +3,54 @@
   include './include/data.php';
   date_default_timezone_set("Asia/Ho_Chi_Minh");
 
-  $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, CURDATE() AS today
+  $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
   JOIN tbl_city ci ON ci.id = r.city_id
   JOIN tbl_district dis ON dis.id = r.district_id
   JOIN tbl_ward wa ON wa.id = r.ward_id
   JOIN tbl_new_type typ ON typ.id = r.news_type_id
   JOIN tbl_categories ca ON ca.id = r.category_id
-  WHERE r.status = 2 AND r.time_start <= CURDATE() AND r.news_type_id = 1
+  WHERE r.status = 2 AND r.time_start <= NOW() AND r.news_type_id = 1
   ORDER BY r.id DESC LIMIT 10)
   UNION ALL
-  (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, CURDATE() AS today
+  (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
   JOIN tbl_city ci ON ci.id = r.city_id
   JOIN tbl_district dis ON dis.id = r.district_id
   JOIN tbl_ward wa ON wa.id = r.ward_id
   JOIN tbl_new_type typ ON typ.id = r.news_type_id
   JOIN tbl_categories ca ON ca.id = r.category_id
-  WHERE r.status = 2 AND r.time_start <= CURDATE() AND r.news_type_id = 2
+  WHERE r.status = 2 AND r.time_start <= NOW() AND r.news_type_id = 2
   ORDER BY r.id DESC LIMIT 10)
   UNION ALL
-  (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, CURDATE() AS today
+  (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
   JOIN tbl_city ci ON ci.id = r.city_id
   JOIN tbl_district dis ON dis.id = r.district_id
   JOIN tbl_ward wa ON wa.id = r.ward_id
   JOIN tbl_new_type typ ON typ.id = r.news_type_id
   JOIN tbl_categories ca ON ca.id = r.category_id
-  WHERE r.status = 2 AND r.time_start <= CURDATE() AND r.news_type_id = 3
+  WHERE r.status = 2 AND r.time_start <= NOW() AND r.news_type_id = 3
   ORDER BY r.id DESC LIMIT 10)
   UNION ALL
-  (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, CURDATE() AS today
+  (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
   JOIN tbl_city ci ON ci.id = r.city_id
   JOIN tbl_district dis ON dis.id = r.district_id
   JOIN tbl_ward wa ON wa.id = r.ward_id
   JOIN tbl_new_type typ ON typ.id = r.news_type_id
   JOIN tbl_categories ca ON ca.id = r.category_id
-  WHERE r.status = 2 AND r.time_start <= CURDATE() AND r.news_type_id = 4
+  WHERE r.status = 2 AND r.time_start <= NOW() AND r.news_type_id = 4
   ORDER BY r.id DESC LIMIT 10)
   UNION ALL
-  (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, CURDATE() AS today
+  (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
   JOIN tbl_city ci ON ci.id = r.city_id
   JOIN tbl_district dis ON dis.id = r.district_id
   JOIN tbl_ward wa ON wa.id = r.ward_id
   JOIN tbl_new_type typ ON typ.id = r.news_type_id
   JOIN tbl_categories ca ON ca.id = r.category_id
-  WHERE r.status = 2 AND r.time_start <= CURDATE() AND r.news_type_id = 5
+  WHERE r.status = 2 AND r.time_start <= NOW() AND r.news_type_id = 5
   ORDER BY r.id DESC LIMIT 10)");
  $queryRoom->execute();
  $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);

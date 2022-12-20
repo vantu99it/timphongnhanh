@@ -142,10 +142,11 @@
                 <div class="form-note">
                     <h4>Lưu ý khi đăng tin</h4>
                     <ul>
-                        <li style="list-style-type: square; margin-left: 15px;">Nội dung phải viết bằng tiếng Việt có dấu</li>
-                        <li style="list-style-type: square; margin-left: 15px;">Tiêu đề tin không dài quá 100 kí tự</li>
-                        <li style="list-style-type: square; margin-left: 15px;">Các bạn nên điền đầy đủ thông tin vào các mục để tin đăng có hiệu quả hơn.</li>
-                        <li style="list-style-type: square; margin-left: 15px;">Tin đăng có hình ảnh rõ ràng sẽ được xem và gọi gấp nhiều lần so với tin rao không có ảnh. Hãy đăng ảnh để được giao dịch nhanh chóng!</li>
+                    <li>Nội dung phải viết bằng tiếng Việt có dấu</li>
+                        <li>Tiêu đề tin không dài quá 100 kí tự</li>
+                        <li>Các bạn nên điền đầy đủ thông tin vào các mục để tin đăng có hiệu quả hơn.</li>
+                        <li>Tin đăng có hình ảnh rõ ràng sẽ được xem và gọi gấp nhiều lần so với tin rao không có ảnh. Hãy đăng ảnh để được giao dịch nhanh chóng!</li>
+                        <li>Hãy chọn loại tin hiển thị, ngày bắt đầu và ngày kết thúc hiển thị bài viết trước khi gửi và thanh toán nhé!</li>
                     </ul>
                 </div>
                 <div class="form-content">

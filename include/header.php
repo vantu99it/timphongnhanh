@@ -69,7 +69,7 @@ $id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
                     <ul class="manage-menu">
                         <li ><a href="./user/create-post.php" class="manage-menu-item add-post"><i></i> Đăng tin mới</a></li>
                         <li ><a href="./user/post-manage.php" class="manage-menu-item manage-post"><i></i> Quản lý bài đăng</a></li>
-                        <li ><a href="" class="manage-menu-item payment"><i></i> Nạp tiền</a></li>
+                        <li ><a href="./user/deposit-money.php" class="manage-menu-item payment"><i></i> Nạp tiền</a></li>
                         <li ><a href="" class="manage-menu-item payment-history"><i></i>Lịch sử nạp tiền</a></li>
                         <li ><a href="" class="manage-menu-item manage-user"><i></i> Thông tin cá nhân</a></li>
                         <li ><a href="./logout.php" class="manage-menu-item manage-logout" style = "border-bottom: none"><i></i> Thoát</a></li>
@@ -95,7 +95,11 @@ $id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
                 <li class="navbar-item"><a href="./news.php" class="navlist" >Tin tức</a></li>
                 <li class="navbar-item"><a href="./guide.php" class="navlist" >Hướng dẫn</a></li>
                 <li class="navbar-item"><a href="./price-list.php" class="navlist" >Bảng giá</a></li>
-                <li class="navbar-item"><a href="./loading-money.php" class="navlist" >Nạp tiền</a></li>
+                <?php if(!isset($_SESSION['login']['username'])){?>
+                    <li class="navbar-item"><a href="./login.php" class="navlist" >Nạp tiền</a></li>
+                <?php }else{?>
+                    <li class="navbar-item"><a href="./user/deposit-money.php" class="navlist" >Nạp tiền</a></li>
+                <?php }?>
             </ul>
         </div>
     </nav>

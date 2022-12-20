@@ -56,16 +56,26 @@
             </ul>
         </li>
         <li class="menu-item">
-            <a href="">
+            <a href="javascrip:void(0)">
                 <iconify-icon class="icon" icon="material-symbols:payments-sharp" width="24" height="24"></iconify-icon>
                 Quản lý thanh toán
+                <iconify-icon class="down" icon="bx:chevron-down" width="18" height="18"></iconify-icon>
             </a>
+            <ul class="sidebar-menu-mini">
+                <li class="menu-item-mini"><a href="./deposit-money-manager.php">Nạp tiền</a></li>
+                <li class="menu-item-mini"><a href="./payment-history-manager.php">Thanh toán</a></li>
+            </ul>
         </li>
         <li class="menu-item">
-            <a href="">
+            <a href="javascrip:void(0)">
                 <iconify-icon class="icon" icon="flat-color-icons:feedback" width="24" height="24"></iconify-icon>
                 Quản lý phản hồi
+                <iconify-icon class="down" icon="bx:chevron-down" width="18" height="18"></iconify-icon>
             </a>
+            <ul class="sidebar-menu-mini">
+                <li class="menu-item-mini"><a href="./contact-manager-new.php">Chưa giải quyết</a></li>
+                <li class="menu-item-mini"><a href="./contact-manager.php">Đã giải quyết</a></li>
+            </ul>
         </li>
     </ul>
 </div>

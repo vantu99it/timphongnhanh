@@ -3,9 +3,22 @@
   include '../include/data.php';
   include '../include/func-slug.php';
   date_default_timezone_set("Asia/Ho_Chi_Minh");
+    // Lấy thông tin bài viết
+    if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    $queryRoom= $conn -> prepare("SELECT * FROM tbl_rooms WHERE id = :id");
+    $queryRoom-> bindParam(':id', $id, PDO::PARAM_STR);
+    $queryRoom-> execute();
+    $resultsRoom = $queryRoom->fetch(PDO::FETCH_OBJ);
+    $nameRooms = $resultsRoom -> name;
+    $time_start = $resultsRoom -> time_start;
+    $time_stop = $resultsRoom -> time_stop;
+    $date = (strtotime($time_stop) - strtotime($time_start))/60/60/24;
+    $typeId = $resultsRoom -> news_type_id;
+    }
     
-    $date = (int) $_SESSION['time-day']['date'];
-    $typeId = $_SESSION['time-day']['type'];
+    // $date = (int) $_SESSION['time-day']['date'];
+    // $typeId = $_SESSION['time-day']['type'];
 
     // lấy thông tin user
     $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
@@ -25,16 +38,8 @@
     $total = $price * $date;
 
     $checkPrice = (int)($balance - $total);
-    // Lấy thông tin bài viết
-    $id = $_GET['id'];
-    $queryRoom= $conn -> prepare("SELECT * FROM tbl_rooms WHERE id = :id");
-    $queryRoom-> bindParam(':id', $id, PDO::PARAM_STR);
-    $queryRoom-> execute();
-    $resultsRoom = $queryRoom->fetch(PDO::FETCH_OBJ);
-    $nameRooms = $resultsRoom -> name;
-    $time_start = $resultsRoom -> time_start;
-    $time_stop = $resultsRoom -> time_stop;
 
+ 
     // Lấy id payment 
     $queryPaymentHis = $conn -> prepare("SELECT * FROM tbl_payment_history WHERE id_rooms = :id");
     $queryPaymentHis-> bindParam(':id', $id, PDO::PARAM_STR);
@@ -49,7 +54,7 @@
     $message = "";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $pay = $_POST['pay'];
-
+        // Thanh toán qua tài khoản
         if($pay == 'account'){
             $balanceHis = $balance - $total;
             if($balanceHis > 0){
@@ -78,6 +83,19 @@
                 $err = 1;
                 $message = "Tài khoản không đủ, vui lòng nạp thêm tiền vào tài khoản";
             }
+        }
+        if($pay == 'vnpay'){
+            header('location: post-payment-vnpay.php?id='.$id);
+            $_SESSION['pay']['pay-code'] =  $pay_code;
+            $_SESSION['pay']['id-post'] =  $id;
+            $_SESSION['pay']['id-user'] =  $id_user;
+            $_SESSION['pay']['slug'] =  $resultsType ->slug;
+            $_SESSION['pay']['name-room'] = $nameRooms;
+            $_SESSION['pay']['time-start'] =   $time_start;
+            $_SESSION['pay']['time-stop'] =  $time_stop;
+            $_SESSION['pay']['total'] =  $total;
+            $_SESSION['pay']['name-type'] = $resultsType -> name_type;
+            $_SESSION['pay']['idPaymentHis'] = $idPaymentHis;
         }
         
     }
@@ -120,23 +138,23 @@
                 <div class="form-note">
                     <h4>Lưu ý</h4>
                     <ul>
-                        <li style="list-style-type: square; margin-left: 15px;">Chọn hình thức thanh toán và tiến hành thanh toán.</li>
-                        <li style="list-style-type: square; margin-left: 15px;">Với phương thức chuyển khoản qua nhân hàng nhớ ghi đúng nội dung chuyển khoản hiện thị.</li>
-                        <li style="list-style-type: square; margin-left: 15px;">Nếu có thắc mắc hoặc cần giúp đỡ hãy liên hệ với chúng tôi ngay</li>
+                        <li>Chọn hình thức thanh toán và tiến hành thanh toán.</li>
+                        <li>Với phương thức chuyển khoản qua nhân hàng nhớ ghi đúng nội dung chuyển khoản hiện thị.</li>
+                        <li>Nếu có thắc mắc hoặc cần giúp đỡ hãy liên hệ với chúng tôi ngay</li>
                     </ul>
                 </div>
                 <div class="form-content">
                     <h3><?php echo $nameRooms ?></h3>
-                    <h4>Thời gian đăng bài: <b><?php echo $date ?> ngày </b> (<?php echo $time_start?> đến <?php  echo $time_stop?>)</h4>
+                    <h4>Thời gian đăng bài: <b><?php echo $date ?> ngày </b> (<?php echo date_format(date_create($time_start),"H:i:s d-m-Y")?> đến <?php  echo  date_format(date_create($time_stop),"H:i:s d-m-Y")?>)</h4>
                     <h4>Loại tin đăng: <b><?php echo $resultsType -> name_type?></b></h4>
                     <h4>Tổng tiền thanh toán: <b>
                         <?php  $totals = number_format((int) $total,0,",",".");
                         echo $totals." đồng";?> </b>
                     </h4>
                     <h4>Mã thanh toán: </h4>
-                    <div class="text-copy"> 
-                        <input type="text" name="" id="code-pay" value = "<?php echo $pay_code ?>">
-                        <button onclick="copyCode()"><i class="fa-regular fa-copy"></i></button>
+                    <div class="text-copy" style = "width: 500px;border: 1px solid #ccc; margin-left: 15px;"> 
+                        <input type="text" name="" id="code-pay" value = "<?php echo $pay_code ?>" disabled>
+                        <button onclick="copyCode()" style = "border-left: 1px solid #ccc;"><i class="fa-regular fa-copy"></i></button>
                     </div>
                 </div>
                 <form action="" method="post" id = "frm-post">
@@ -213,12 +231,5 @@
      <!-- script -->
      <?php include('include/script.php');?>
     <!-- /script -->
-    <script>
-        function copyCode() {
-        var copyText = document.getElementById("code-pay");
-        copyText.select();
-        document.execCommand("copy");
-        }
-    </script>
 </body>
 </html>

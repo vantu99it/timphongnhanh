@@ -2,6 +2,35 @@
   include './include/connect.php';
   include './include/data.php';
 
+  if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $name = $_POST['name'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $problem = $_POST['problem'];
+    $content = $_POST['content'];
+
+    $err = "";
+    $ok = "";
+    $message = "";
+    
+    $sqlContact = "INSERT INTO tbl_contact(name,phone,email,problem,content) VALUE (:name,:phone,:email,:problem,:content)" ;
+    $queryContact= $conn -> prepare($sqlContact);
+    $queryContact->bindParam(':name',$name,PDO::PARAM_STR);
+    $queryContact->bindParam(':phone',$phone,PDO::PARAM_STR);
+    $queryContact->bindParam(':email',$email,PDO::PARAM_STR);
+    $queryContact->bindParam(':problem',$problem,PDO::PARAM_STR);
+    $queryContact->bindParam(':content',$content,PDO::PARAM_STR);
+    $queryContact->execute();
+    $lastInsertId = $conn->lastInsertId();
+    if($lastInsertId){
+        $ok = "1";
+        $message = "Đã gửi thành công! Chúng tôi sẽ liên hệ lại với bạn sớm nhất!";
+    }
+    else{
+        $err = "1";
+        $message = "Có lỗi xảy ra, vui lòng thử lại!";
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -114,7 +143,44 @@
         <!-- /why-support -->
       </div>
     </div>
-
+<!-- Thông báo thành công -->
+<?php if($ok == 1){ ?>
+    <div class="noti">
+        <div class="success-checkmark">
+            <div class="check-icon">
+                <span class="icon-line line-tip"></span>
+                <span class="icon-line line-long"></span>
+                <div class="icon-circle"></div>
+                <div class="icon-fix"></div>
+            </div>
+            <div class="notification">
+                <p>
+                    <?php echo $message ?>
+                </p>
+            </div>
+            <a href="" class="btn">OK</a>
+        </div>
+    </div>
+    <?php }?>
+    <!-- Thông báo thất bại -->
+    <?php if($err == 1){ ?>
+    <div class="noti">
+        <div class="error-banmark">
+            <div class="ban-icon">
+                <span class="icon-line line-long-invert"></span>
+                <span class="icon-line line-long"></span>
+                <div class="icon-circle"></div>
+                <div class="icon-fix"></div>
+            </div>
+            <div class="notification">
+                <p>
+                    <?php echo $message ?>
+                </p>
+            </div>
+            <a href="" class="btn">OK</a>
+        </div>
+    </div>
+    <?php }?>
     <!-- footer + js-->
     <?php include('./include/footer.php');?>
     <!-- /footer + js -->
@@ -128,20 +194,18 @@
                 Validator.isRequired('#phone', 'Vui lòng nhập số điện thoại'),
                 Validator.isPhone('#phone', 'Số điện thoại gồm 10 số và bắt đầu từ số 0'),
 
-
                 Validator.isRequired('#email', 'Vui lòng nhập email'),
                 Validator.isEmail('#email', 'Email không hợp lệ'),
 
                 Validator.isRequired('#problem', 'Vui lòng lựa chọn vấn đề bạn muốn hỗ trợ'),
 
                 Validator.isRequired('#content', 'Vui lòng nhập mô tả chi tiết vài viết'),
-                Validator.minLength('#post_content',80, 'Mô tả phải nhập ít nhất 80 ký tự'),
+                Validator.minLength('#content',80, 'Mô tả phải nhập ít nhất 80 ký tự'),
                 
             ],
         });
         
 
-    </script>
     </script>
   </body>
 </html>

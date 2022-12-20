@@ -20,7 +20,7 @@
         $queryHide->execute();
         if($queryHide){
             $ok = 1;
-            $message = "Thanh toán thành công";
+            $message = "Duyệt bài thành công!";
         }else{
             $err = 1;
             $message = "Có lỗi xảy ra, vui lòng thử lại";

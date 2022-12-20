@@ -139,10 +139,11 @@
                 <div class="form-note">
                     <h4>Lưu ý khi đăng tin</h4>
                     <ul>
-                        <li style="list-style-type: square; margin-left: 15px;">Nội dung phải viết bằng tiếng Việt có dấu</li>
-                        <li style="list-style-type: square; margin-left: 15px;">Tiêu đề tin không dài quá 100 kí tự</li>
-                        <li style="list-style-type: square; margin-left: 15px;">Các bạn nên điền đầy đủ thông tin vào các mục để tin đăng có hiệu quả hơn.</li>
-                        <li style="list-style-type: square; margin-left: 15px;">Tin đăng có hình ảnh rõ ràng sẽ được xem và gọi gấp nhiều lần so với tin rao không có ảnh. Hãy đăng ảnh để được giao dịch nhanh chóng!</li>
+                        <li>Nội dung phải viết bằng tiếng Việt có dấu</li>
+                        <li>Tiêu đề tin không dài quá 100 kí tự</li>
+                        <li>Các bạn nên điền đầy đủ thông tin vào các mục để tin đăng có hiệu quả hơn.</li>
+                        <li>Tin đăng có hình ảnh rõ ràng sẽ được xem và gọi gấp nhiều lần so với tin rao không có ảnh. Hãy đăng ảnh để được giao dịch nhanh chóng!</li>
+                        <li>Hãy chọn loại tin hiển thị, ngày bắt đầu và ngày kết thúc hiển thị bài viết trước khi gửi và thanh toán nhé!</li>
                     </ul>
                 </div>
                 <div class="form-content">
@@ -160,17 +161,17 @@
                     <div class="search-item form-validator">
                         <p class="item-name">Quận/Huyện</p>
                         <select  class="autobox form-focus autobox-district boder-ra-5" name = "district" id="district">
-                            <option value="0">Chọn huyện</option>
+                            <option value="">Chọn huyện</option>
                         </select>
-                        <span class="form-message"></span><span class="form-message"></span>
+                        <p class="form-message"></p>
 
                     </div>
                     <div class="search-item form-validator">
                         <p class="item-name">Phường/Xã</p>
                         <select  class="autobox form-focus boder-ra-5" name ="ward" id="ward">
-                            <option value="0">Chọn xã</option>
+                            <option value="">Chọn xã</option>
                         </select>
-                        <span class="form-message"></span>
+                        <p class="form-message"></p>
                     </div>
                     <div class="street-number form-validator">
                         <p class="item-name">Tên đường</p>
@@ -210,13 +211,15 @@
                     <textarea type="text" name="post_content" id="post_content" class="input-content form-focus boder-ra-5" rows="20" ></textarea>
                     <span class="form-message"></span>
                 </div>
-                <div class="form-input " >
-                    <p class="item-name">Thông tin liên hệ</p>
-                    <input type="text" name="full-name" class=" boder-ra-5 input-disabled " id="" value = "<?php echo $fullname ?>" style="width: 340px;" disabled>
-                </div>
-                <div class="form-input ">
-                    <p class="item-name">Điện thoại</p>
-                    <input type="text" name="phone" class=" boder-ra-5 input-disabled" id="" value = "<?php echo $phone ?>" style="width: 340px;" disabled>
+                <div class="form-times" >
+                    <div class="form-input " >
+                        <p class="item-name">Thông tin liên hệ</p>
+                        <input type="text" name="full-name" class=" boder-ra-5 input-disabled " id="" value = "<?php echo $fullname ?>" style="width: 340px;" disabled>
+                    </div>
+                    <div class="form-input ">
+                        <p class="item-name">Điện thoại</p>
+                        <input type="text" name="phone" class=" boder-ra-5 input-disabled" id="" value = "<?php echo $phone ?>" style="width: 340px;" disabled>
+                    </div>
                 </div>
                 <div class="form-input form-validator">
                     <p class="item-name">Giá cho thuê</p>
@@ -266,11 +269,11 @@
                     </div>
                     <span class="form-message"></span>
                 </div>
-                <div class="form-times form-validator" >
+                <div class="form-times" >
                     <div class=" form-input search-item form-validator" style = "margin-left: 0;">
                         <p class="item-name">Chọn loại tin đăng</p>
-                        <select class="autobox form-focus autobox-city boder-ra-5 "  name="new-type" id="new-type" style = "width: 300px;">
-                            <option value="0">Chọn loại tin</option>
+                        <select class="autobox form-focus autobox-city boder-ra-5 "  name="new-type" id="newType" style = "width: 300px;">
+                            <option value="">Chọn loại tin</option>
                             <?php foreach ($resultsType as $key => $value) {?>
                                 <option value="<?php echo $value->id ?>"><?php echo $value->name_type ?> (<?php
                                     $bien = number_format((int) $value -> price,0,",",".");
@@ -278,22 +281,21 @@
                                     ?>) </option>
                             <?php }?>
                         </select>
-                        <span class="form-message"></span>
-
+                        <p class="form-message"></p>
                     </div>
                     <div class="form-input search-item form-validator">
                         <p class="item-name">Chọn thời gian bắt đầu</p>
-                        <input type="date" name="time-start" id="time-start" class=" form-focus boder-ra-5">
-                        <span class="form-message"></span><span class="form-message"></span>
+                        <input type="date" name="time-start" id="timeStart" class=" form-focus boder-ra-5" style = "width: 185px;">
+                        <p class="form-message"></p>
                     </div>
                     <div class="form-input search-item form-validator">
                         <p class="item-name">Chọn thời gian kết thúc</p>
-                        <input type="date" name="time-end" id="time-end" class=" form-focus boder-ra-5">
-                        <span class="form-message"></span><span class="form-message"></span>
+                        <input type="date" name="time-end" id="timeEnd" class=" form-focus boder-ra-5" style = "width: 185px;">
+                        <p class="form-message"></p>
                     </div>
                 </div>
                 <div class="submit-form">
-                    <input type="submit" name="submit-form" class="btn btn-submit"  value="Tiếp tục" style = "width: 50%;height: 45px;font-size: 18px;">
+                    <input type="submit" name="submit-form" class="btn btn-submit"  value="Tiếp tục" style = "width: 100%;height: 45px;font-size: 18px;">
                 </div>
             </form>
         </div>
@@ -310,6 +312,8 @@
             formGroupSelector: '.form-validator',
             errorSelector: ".form-message",
             rules: [
+                Validator.isRequired('#district'), 
+                Validator.isRequired('#ward'), 
                 Validator.isRequired('#street-names', 'Vui lòng nhập tên đường'), 
                 Validator.isRequired('#apartment', 'Vui lòng nhập số nhà'),
                 Validator.isRequired('#category', 'Vui lòng lựa chọn chuyên mục'),
@@ -322,6 +326,9 @@
                 Validator.numberMin('#area', 10, 'Diện tích phải >= 10'),
                 Validator.isRequired('#upload-img', 'Vui lòng tải lên 1 hình ảnh'),
                 Validator.isRequired('#upload-imgs', 'Vui lòng tải lên ít nhất 1 hình ảnh'),
+                Validator.isRequired('#newType', 'Vui lòng lựa chọn loại tin'),
+                Validator.isRequired('#timeStart', 'Vui lòng chọn ngày bắt đầu'),
+                Validator.isRequired('#timeEnd', 'Vui lòng chọn ngày kết thúc'),
                 
             ],
         });
@@ -330,6 +337,15 @@
     </script>
     <script>
         CKEDITOR.replace('post_content');
+    </script>
+    <script>
+        $(document).ready(function () {
+            timeStart.min = new Date().toISOString().split("T")[0];
+
+            const today = new Date();
+            today.setDate(today.getDate() +5);
+            timeEnd.min= today.toLocaleDateString('en-ca');
+        });
     </script>
 </body>
 </html>
