@@ -59,10 +59,10 @@ $(document).ready(function () {
     language: {
       url: "https://cdn.datatables.net/plug-ins/1.12.1/i18n/vi.json",
     },
-    pageLength: 5,
+    pageLength: 10,
     lengthMenu: [1, 2, 3, 4, 5, 10, 15, 20, 30, 50, 100],
     // ordering: false,
-    order: [[0, "desc"]],
+    // order: [[0, "desc"]],
   });
 });
 

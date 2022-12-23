@@ -22,7 +22,12 @@
         </div>
         <h4 class="section-title">Bạn đang có phòng trọ / căn hộ cho thuê?</h4>
         <p>Không phải lo tìm người cho thuê, phòng trống kéo dài</p>
-        <a href="http://" class="btn">Đăng tin ngay</a>
+        <?php if(isset($_SESSION['login']['id'])){?>
+            <a href="./user/create-post.php" class="btn">Đăng tin ngay</a>
+        <?php }else{?>
+            <a href="./login.php" class="btn">Đăng tin ngay</a>
+        <?php }?>
+
     </div>
 </section>
 <section class="section section-support">

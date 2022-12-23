@@ -130,7 +130,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin | Quản lý tài khoản Admin</title>
     <!-- link-css -->
     <?php include('include/link-css.php');?>
     <!-- /link-css -->
@@ -155,12 +155,12 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Trang quản trị</a></li>
                     <li class="breadcrumb-item"><a href="#">Quản lý người dùng</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Quản lý user</li>
+                    <li class="breadcrumb-item active" aria-current="page">Quản lý tài khoản Admin</li>
                 </ol>
             </nav>
             <section class="main-right-title">
                 <div class="form-title">
-                    <h1>Quản lý user</h1>
+                    <h1>Quản lý tài khoản Admin</h1>
                 </div>
                 <div class="account-btn">
                 <button class="btn btn-post btn-add">Tạo tài khoản admin</button>

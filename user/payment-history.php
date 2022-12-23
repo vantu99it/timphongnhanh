@@ -35,7 +35,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lịch sử thanh toán</title>
     <!-- link-css -->
     <?php include('include/link-css.php');?>
     <!-- /link-css -->
@@ -46,7 +46,7 @@
     <!-- /header -->
     <div id="main">
         <!-- sidebar -->
-        <?php include('include/sidebar.php');?>
+        <?php include('include/sidebar.php')?>
         <!-- /sidebar -->
         
         <!-- main-right -->
@@ -55,15 +55,12 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Tìm trọ nhanh</a></li>
                     <li class="breadcrumb-item"><a href="#">Quản lý</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Danh sách tin đăng</li>
+                    <li class="breadcrumb-item active" aria-current="page">Lịch sử thanh toán</li>
                 </ol>
             </nav>
             <section class="main-right-title">
                 <div class="form-title">
-                    <h1>Quản lý tin đã đăng</h1>
-                </div>
-                <div class="account-btn">
-                <a href="./create-post.php" class="btn btn-post">Đăng tin mới </a>
+                    <h1>Lịch sử thanh toán</h1>
                 </div>
             </section>
             <div class="main-right-table">

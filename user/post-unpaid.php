@@ -2,33 +2,41 @@
   include '../include/connect.php';
   include '../include/data.php';
   include '../include/func-slug.php';
-  date_default_timezone_set("Asia/Ho_Chi_Minh");
   $err = "";
   $ok= "";
 
     $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
-    $queryRoom = $conn->prepare("SELECT r.*, ca.classify, pay.pay_status, ci.fullname as city, dis.fullname as district, wa.fullname as ward FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id WHERE pay.pay_status = 1 and  r.status = 2 or r.status = 3");
+    $queryRoom = $conn->prepare("SELECT r.*, ca.classify, pay.pay_status, ci.fullname as city, dis.fullname as district, wa.fullname as ward, us.fullname as fullname, us.phone FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id join tbl_user us on us.id = r.user_id WHERE pay.pay_status = 0 and  r.status = 1");
+    $queryRoom-> bindParam(':user_id', $id_user, PDO::PARAM_STR);
     $queryRoom->execute();
     $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
     // var_dump($resultsRoom); die();
 
-    
-    $time_1 = time();
-    $date = date('Y-m-d H:i:s', $time_1); 
+    if(isset($_GET['del'])&&$_GET['del']){
+        $id_room = $_GET['del'];
 
-    if(isset($_GET['date'])){
-        $id_room = $_GET['date'];
-        $queryDate = "UPDATE tbl_rooms SET 	time_stop = :time_stop, status = 3 WHERE id = :id";
-        $queryDate= $conn -> prepare($queryDate);
-        $queryDate->bindParam(':time_stop',$date,PDO::PARAM_STR);
-        $queryDate->bindParam(':id',$id_room,PDO::PARAM_STR);
-        $queryDate->execute();
-        if($queryDate){
-            $ok = 1;
-            $message = "Đã dừng hiển thị bài viết";
-        }else{
-            $err = 1;
-            $message = "Có lỗi xảy ra, vui lòng thử lại";
+        $queryImage = "DELETE FROM tbl_rooms_image WHERE id_rooms = :id";
+        $queryImage= $conn -> prepare($queryImage);
+        $queryImage->bindParam(':id',$id_room,PDO::PARAM_STR);
+        $queryImage->execute();
+        
+        $queryPay = "DELETE FROM tbl_payment_history WHERE id_rooms = :id";
+        $queryPay= $conn -> prepare($queryPay);
+        $queryPay->bindParam(':id',$id_room,PDO::PARAM_STR);
+        $queryPay->execute();
+
+        if( $queryImage && $queryPay){
+            $queryRoom = "DELETE FROM tbl_rooms WHERE id = :id";
+            $queryRoom= $conn -> prepare($queryRoom);
+            $queryRoom->bindParam(':id',$id_room,PDO::PARAM_STR);
+            $queryRoom->execute();
+            if($queryRoom){
+                $ok = 1;
+                $message = "Đã xóa bài viết";
+            }else{
+                $err = 1;
+                $message = "Có lỗi xảy ra, vui lòng thử lại";
+            }
         }
     }
 ?>
@@ -38,11 +46,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Quản lý tin đã đăng</title>
+    <title>Bài đăng chưa thanh toán</title>
     <!-- link-css -->
     <?php include('include/link-css.php');?>
     <!-- /link-css -->
-    
 </head>
 <body>
     <!-- header -->
@@ -52,21 +59,23 @@
         <!-- sidebar -->
         <?php include('include/sidebar.php');?>
         <!-- /sidebar -->
-
+        
         <!-- main-right -->
         <div id="main-right">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Tìm trọ nhanh</a></li>
                     <li class="breadcrumb-item"><a href="#">Quản lý</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Danh sách tin đăng</li>
+                    <li class="breadcrumb-item active" aria-current="page">Bài đăng chưa thanh toán</li>
                 </ol>
             </nav>
             <section class="main-right-title">
                 <div class="form-title">
-                    <h1>Quản lý tin đã đăng</h1>
+                    <h1>Bài đăng chưa thanh toán</h1>
                 </div>
-                
+                <div class="account-btn">
+                <a href="./create-post.php" class="btn btn-post">Đăng tin mới </a>
+                </div>
             </section>
             <div class="main-right-table">
                 <table class="table table-bordered table-post-list" id = "table-manage">
@@ -95,11 +104,23 @@
                                     <span class="title"><?php echo $value-> name?></span>
                                     <p class="address"><strong>Địa chỉ: </strong><?php echo $value-> apartment_number.", Đường  ".$value-> street.", ".$value-> ward.", ".$value->district.", ".$value->city ?> </p>
                                     <div class="btn-tool">
-                                        <a href="./post-approved.php?date=<?php echo $value-> id?>" class="btn-fix" style = "color: #000000;">
-                                            <i class="fa-regular fa-calendar-xmark"></i>
-                                            Hết hạn
-                                        </a>
-                                    </div>
+                                        <?php if($value->pay_status == 0){?>
+                                            <a href="post-payment.php?id=<?php echo $value-> id?>" class="btn-pay" style = "color: red;">
+                                                <i class="fa-solid fa-money-check-dollar"></i>
+                                                Thanh toán tin
+                                            </a>
+                                        <?php }?>
+                                            <a href="" class="btn-fix" style = "color: #1266dd;">
+                                                <i class="fa-regular fa-pen-to-square"></i>
+                                                Chỉnh sửa
+                                            </a>
+                                        <?php if($value->status == 1){?>
+                                            <a href="./post-unpaid.php?del=<?php echo $value-> id?>" class="btn-hide" style = "color: red;" onclick="return confirm('Bạn chắc chắn muốn xóa bài đăng này này?');">
+                                            <i class="fa-solid fa-trash-arrow-up"></i>
+                                                Xóa tin
+                                            </a>
+                                        <?php }?>
+                                        </div>
                                 </td>
                                 <td>
                                     <div class="post_price">
@@ -120,13 +141,21 @@
                                     <div class="post_date">Kết thúc: <?php echo $value-> time_stop?></div>
                                 </td>
                                 <td>
+                                    <?php if($value->pay_status == 0){?>
+                                        <p style = "color: #000;">Khởi tạo</p>
+                                    <?php }?>
+                                    <?php if($value->pay_status == 1 && $value->status == 1){?>
+                                        <p style = "color: #1266dd;">Chờ duyệt</p>
+                                    <?php }?>
+                                    <?php if($value->pay_status == 1 && $value->status == 0){?>
+                                        <p style = "color: red;">Không hoạt động</p>
+                                    <?php }?>
                                     <?php if($value->pay_status == 1 && $value->status == 2){?>
                                         <p style = "color: #37a344;">Hoạt động</p>
                                     <?php }?>
                                     <?php if($value->pay_status == 1 && $value->status == 3){?>
-                                        <p>Hết hạn</p>
+                                        <p style = "color: #000;">Hết hạn</p>
                                     <?php }?>
-                                    
                                 </td>
                             </tr>
                         <?php } ?>
@@ -136,9 +165,12 @@
         </div>
         <!-- /main-right -->
     </div>
-    <!-- footer + js -->
-    <?php include('include/footer.php');?>
-    <!-- /footer + js -->
+    
+
+    <!-- script -->
+    <?php include('include/script.php');?>
+    <!-- /script -->
+    
     <!-- Thông báo thành công -->
     <?php if($ok == 1){ ?>
     <div class="noti">
@@ -154,7 +186,7 @@
                     <?php echo $message ?>
                 </p>
             </div>
-            <a href="./post-approved.php" class="btn">OK</a>
+            <a href="./post-unpaid.php" class="btn">OK</a>
         </div>
     </div>
     <?php }?>
@@ -173,7 +205,7 @@
                     <?php echo $message ?>
                 </p>
             </div>
-            <a href="./post-approved.php" class="btn">OK</a>
+            <a href="./post-unpaid.php" class="btn">OK</a>
         </div>
     </div>
     <?php }?>

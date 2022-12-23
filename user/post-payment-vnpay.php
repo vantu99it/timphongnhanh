@@ -4,8 +4,18 @@
   include '../include/func-slug.php';
   date_default_timezone_set("Asia/Ho_Chi_Minh");
 
-    $typeId = $_SESSION['time-day']['type'];
-    $date = (int) $_SESSION['time-day']['date'];
+  if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    $queryRoom= $conn -> prepare("SELECT * FROM tbl_rooms WHERE id = :id");
+    $queryRoom-> bindParam(':id', $id, PDO::PARAM_STR);
+    $queryRoom-> execute();
+    $resultsRoom = $queryRoom->fetch(PDO::FETCH_OBJ);
+    $nameRooms = $resultsRoom -> name;
+    $time_start = $resultsRoom -> time_start;
+    $time_stop = $resultsRoom -> time_stop;
+    $date = (strtotime($time_stop) - strtotime($time_start))/60/60/24;
+    $typeId = $resultsRoom -> news_type_id;
+    }
 
     // Lấy các thông tin cần thiết từ session
     $pay_code = $_SESSION['pay']['pay-code'] ;
@@ -15,6 +25,7 @@
     $nameRooms = $_SESSION['pay']['name-room'];
     $time_start = $_SESSION['pay']['time-start'];
     $time_stop = $_SESSION['pay']['time-stop'];
+    $date = (strtotime($time_stop) - strtotime($time_start))/60/60/24;
     $total = $_SESSION['pay']['total'] ;
     $name_type = $_SESSION['pay']['name-type'] ;
     $idPaymentHis = $_SESSION['pay']['idPaymentHis'];
@@ -78,7 +89,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanh toán bài đăng</title>
+    <title>Thanh toán bài đăng qua VNPAY</title>
 
     <!-- link-css -->
     <?php include('include/link-css.php');?>

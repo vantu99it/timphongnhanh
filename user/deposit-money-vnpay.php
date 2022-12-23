@@ -66,7 +66,6 @@
                 $queryUser->bindParam(':id',$id_user,PDO::PARAM_STR);
                 $queryUser->execute();
 
-
                 $ok = 1;
                 $message = "Thanh toán thành công";
             } else {
@@ -85,7 +84,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanh toán bài đăng</title>
+    <title>Nạp tiền qua VNPAY</title>
 
     <!-- link-css -->
     <?php include('include/link-css.php');?>

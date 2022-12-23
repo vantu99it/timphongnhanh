@@ -26,8 +26,11 @@ if(isset($_SESSION['login']['id'])){
 <div id="sidebar">
         <div class="account">
             <div class="account-avt">
-                <img src="./image/author.png" alt="avata" />
-                <!-- <i class="fa-solid fa-user"></i> -->
+                <?php if(strlen($avata) != 0){?>
+                    <img src=".<?php echo $avata?>" alt="Avata">
+                <?php } else { ?>
+                    <img src="../image/default-user.png" alt="Avata">
+                <?php } ?>
             </div>
             <div class="account-name">
                 <div class="name">
@@ -67,7 +70,8 @@ if(isset($_SESSION['login']['id'])){
                 </a>
                 <ul class="sidebar-menu-mini">
                     <li class="menu-item-mini"><a href="./create-post.php">Thêm mới</a></li>
-                    <li class="menu-item-mini"><a href="./post-manage.php">Tin đã đăng</a></li>
+                    <li class="menu-item-mini"><a href="./post-unpaid.php">Tin chưa thanh toán</a></li>
+                    <li class="menu-item-mini"><a href="./post-manage.php">Tin đã thanh toán</a></li>
                 </ul>
             </li>
             <li class="menu-item">
@@ -77,7 +81,7 @@ if(isset($_SESSION['login']['id'])){
                 </a>
             </li>
             <li class="menu-item">
-                <a href="javascrip:void(0)">
+                <a href="./deposit-money-history.php">
                     <iconify-icon class="icon" icon="fluent:receipt-money-24-filled" width="24" height="24"></iconify-icon>
                     Lịch sử nạp tiền         
                 </a>

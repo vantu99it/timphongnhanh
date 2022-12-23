@@ -57,7 +57,6 @@
                 $target_file = $target_dir.$imageName;
                 move_uploaded_file($_FILES["upload-img"]["tmp_name"],'../image/slider/'.$imageName); 
             }
-                  
         }
         
         $sql = "UPDATE tbl_slider SET image = :image, title = :title,description = :description, status = :status WHERE id = $updateId ";
@@ -100,7 +99,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin | Quản lý slider</title>
     <!-- link-css -->
     <?php include('include/link-css.php');?>
     <!-- /link-css -->

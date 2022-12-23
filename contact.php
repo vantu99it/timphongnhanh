@@ -1,7 +1,9 @@
 <?php
   include './include/connect.php';
   include './include/data.php';
-
+  $err = "";
+  $ok = "";
+  $message = "";
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     $name = $_POST['name'];
     $phone = $_POST['phone'];
@@ -9,10 +11,6 @@
     $problem = $_POST['problem'];
     $content = $_POST['content'];
 
-    $err = "";
-    $ok = "";
-    $message = "";
-    
     $sqlContact = "INSERT INTO tbl_contact(name,phone,email,problem,content) VALUE (:name,:phone,:email,:problem,:content)" ;
     $queryContact= $conn -> prepare($sqlContact);
     $queryContact->bindParam(':name',$name,PDO::PARAM_STR);

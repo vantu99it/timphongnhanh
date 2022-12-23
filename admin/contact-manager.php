@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin | Quản lý phản hồi</title>
     <!-- link-css -->
     <?php include('include/link-css.php');?>
     <!-- /link-css -->
@@ -38,7 +38,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Trang quản trị</a></li>
                     <li class="breadcrumb-item"><a href="#">Quản lý hệ thống</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Quản lý chuyên mục</li>
+                    <li class="breadcrumb-item active" aria-current="page">Quản lý phản hồi</li>
                 </ol>
             </nav>
             <section class="main-right-title">

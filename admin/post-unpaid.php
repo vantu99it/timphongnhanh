@@ -46,7 +46,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin | Quản lý tin chưa thanh toán</title>
     <!-- link-css -->
     <?php include('include/link-css.php');?>
     <!-- /link-css -->
@@ -67,12 +67,12 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Tìm trọ nhanh</a></li>
                     <li class="breadcrumb-item"><a href="#">Quản lý</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Danh sách tin đăng</li>
+                    <li class="breadcrumb-item active" aria-current="page">Bài đăng chưa thanh toán</li>
                 </ol>
             </nav>
             <section class="main-right-title">
                 <div class="form-title">
-                    <h1>Quản lý tin đã đăng</h1>
+                    <h1>Quản lý tin chưa thanh toán</h1>
                 </div>
                 
             </section>

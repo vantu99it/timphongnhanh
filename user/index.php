@@ -22,8 +22,6 @@
         
         <!-- /main-right -->
     </div>
-    
-
     <!-- script -->
     <?php include('include/script.php');?>
     <!-- /script -->

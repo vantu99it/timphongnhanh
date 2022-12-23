@@ -108,7 +108,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin | Quản lý nạp tiền</title>
     <!-- link-css -->
     <?php include('include/link-css.php');?>
     <!-- /link-css -->
@@ -133,7 +133,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Trang quản trị</a></li>
                     <li class="breadcrumb-item"><a href="#">Quản lý hệ thống</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Quản lý chuyên mục</li>
+                    <li class="breadcrumb-item active" aria-current="page">Quản lý nạp tiền</li>
                 </ol>
             </nav>
             <section class="main-right-title">
@@ -192,11 +192,14 @@
                                     <?php } ?>
                                 </td>
                                 <td>
-                                    <a href="./deposit-money-manager.php?id=<?php echo $value -> id ?>" class="btn-setting btn-edit" style = "color: #1266dd;"><i class="fa-regular fa-pen-to-square"></i></a>
-                                    </a>
                                     <?php if( $value -> status == 0){ ?>
+                                        <a href="./deposit-money-manager.php?id=<?php echo $value -> id ?>" class="btn-setting btn-edit" style = "color: #1266dd;"><i class="fa-regular fa-pen-to-square"></i></a>
+                                        </a>
                                         <a href="./deposit-money-manager.php?del=<?php echo $value -> id ?>" class="btn-setting" style = "color: red;" onclick="return confirm('Bạn chắc chắn muốn xóa?');" ><i class="fa-solid fa-trash"></i>
                                         </a>
+                                    <?php } ?>
+                                    <?php if( $value -> status == 1){ ?>
+                                        <p class="btn-setting btn-edit" style = "color: #37a344;"><i class="fa-solid fa-check"></i></p>
                                     <?php } ?>
                                 </td>
                             </tr>

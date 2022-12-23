@@ -6,26 +6,58 @@
   $ok= "";
 
     $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
-    $queryRoom = $conn->prepare("SELECT r.*, ca.classify, pay.pay_status, ci.fullname as city, dis.fullname as district, wa.fullname as ward FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id WHERE r.user_id = :user_id ORDER BY r.id DESC");
+    $queryRoom = $conn->prepare("SELECT r.*, ca.classify, pay.pay_status, ci.fullname as city, dis.fullname as district, wa.fullname as ward FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id WHERE r.user_id = :user_id AND pay.pay_status = 1 ORDER BY r.status ASC");
     $queryRoom-> bindParam(':user_id', $id_user, PDO::PARAM_STR);
     $queryRoom->execute();
     $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
     // var_dump($resultsRoom); die();
 
-    if(isset($_GET['hide'])){
-        $id_room = $_GET['hide'];
-        $queryHide = "UPDATE tbl_rooms SET status = 0 WHERE id = :id";
-        $queryHide= $conn -> prepare($queryHide);
-        $queryHide->bindParam(':id',$id_room,PDO::PARAM_STR);
-        $queryHide->execute();
-        if($queryHide){
+    // Nút đã cho thuê
+    $time_1 = time();
+    $date = date('Y-m-d H:i:s', $time_1); 
+    if(isset($_GET['date'])){
+        $id_room = $_GET['date'];
+        $queryDate = "UPDATE tbl_rooms SET 	time_stop = :time_stop, status = 3 WHERE id = :id";
+        $queryDate= $conn -> prepare($queryDate);
+        $queryDate->bindParam(':time_stop',$date,PDO::PARAM_STR);
+        $queryDate->bindParam(':id',$id_room,PDO::PARAM_STR);
+        $queryDate->execute();
+        if($queryDate){
             $ok = 1;
-            $message = "Đã ẩn bài viết";
+            $message = "Đã dừng hiển thị bài viết";
         }else{
             $err = 1;
             $message = "Có lỗi xảy ra, vui lòng thử lại";
         }
+    }
 
+    // Nút hủy
+    if(isset($_GET['del'])&&$_GET['del']){
+        $id_room = $_GET['del'];
+
+        $queryImage = "DELETE FROM tbl_rooms_image WHERE id_rooms = :id";
+        $queryImage= $conn -> prepare($queryImage);
+        $queryImage->bindParam(':id',$id_room,PDO::PARAM_STR);
+        $queryImage->execute();
+        
+        $queryPay = "DELETE FROM tbl_payment_history WHERE id_rooms = :id";
+        $queryPay= $conn -> prepare($queryPay);
+        $queryPay->bindParam(':id',$id_room,PDO::PARAM_STR);
+        $queryPay->execute();
+
+        if( $queryImage && $queryPay){
+            $queryRoom = "DELETE FROM tbl_rooms WHERE id = :id";
+            $queryRoom= $conn -> prepare($queryRoom);
+            $queryRoom->bindParam(':id',$id_room,PDO::PARAM_STR);
+            $queryRoom->execute();
+            if($queryRoom){
+                $ok = 1;
+                $message = "Đã ẩn bài viết";
+            }else{
+                $err = 1;
+                $message = "Có lỗi xảy ra, vui lòng thử lại";
+            }
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -34,7 +66,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quản lý bài đăng</title>
     <!-- link-css -->
     <?php include('include/link-css.php');?>
     <!-- /link-css -->
@@ -98,20 +130,22 @@
                                                 Thanh toán tin
                                             </a>
                                         <?php }?>
-                                            <a href="" class="btn-fix" style = "color: #1266dd;">
-                                                <i class="fa-regular fa-pen-to-square"></i>
-                                                Chỉnh sửa
-                                            </a>
-                                        <?php if($value->status == 1){?>
-                                            <a href="post-manage.php?hide=<?php echo $value-> id?>" class="btn-hide" style = "color: #000;">
-                                            <i class="fa-regular fa-eye-slash"></i>
-                                                Ẩn tin
+                                        <?php if($value->status == 3){?>
+                                            <a href="edit-post.php?id=<?php echo $value-> id?>" class="btn-hide" style = "color: #37a344;">
+                                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                                Gia hạn
                                             </a>
                                         <?php }?>
-                                        <?php if($value->status == 0){?>
-                                            <a href="edit-post.php?id=<?php echo $value-> id?>" class="btn-hide" style = "color: #37a344;">
-                                            <i class="fa-solid fa-cloud-arrow-up"></i>
-                                            Gia hạn
+                                        <?php if($value->status == 2){?>
+                                            <a href="./post-approved.php?date=<?php echo $value-> id?>" class="btn-fix" style = "color: #000000;">
+                                                <i class="fa-regular fa-calendar-xmark"></i>
+                                                Đã cho thuê
+                                            </a>
+                                        <?php }?>
+                                        <?php if($value->pay_status == 1 && $value->status == 1){?>
+                                            <a href="./post-unpaid.php?del=<?php echo $value-> id?>" class="btn-hide" style = "color: red;" onclick="return confirm('Bạn chắc chắn muốn hủy bài này? Số tiền bạn thanh toán sẽ được hoàn lại!');">
+                                                <i class="fa-solid fa-trash-arrow-up"></i>
+                                                Hủy
                                             </a>
                                         <?php }?>
                                         </div>
@@ -146,6 +180,9 @@
                                     <?php }?>
                                     <?php if($value->pay_status == 1 && $value->status == 2){?>
                                         <p style = "color: #37a344;">Hoạt động</p>
+                                    <?php }?>
+                                    <?php if($value->pay_status == 1 && $value->status == 3){?>
+                                        <p style = "color: #000;">Hết hạn</p>
                                     <?php }?>
                                 </td>
                             </tr>

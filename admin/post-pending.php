@@ -87,7 +87,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin | Quản lý bài viết chờ duyệt</title>
     <!-- link-css -->
     <?php include('include/link-css.php');?>
     <!-- /link-css -->
@@ -108,12 +108,12 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Tìm trọ nhanh</a></li>
                     <li class="breadcrumb-item"><a href="#">Quản lý</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Danh sách tin đăng</li>
+                    <li class="breadcrumb-item active" aria-current="page">Danh sách tin đăng chờ duyệt</li>
                 </ol>
             </nav>
             <section class="main-right-title">
                 <div class="form-title">
-                    <h1>Quản lý tin đã đăng</h1>
+                    <h1>Quản lý tin đã đăng chờ duyệt</h1>
                 </div>
                 
             </section>

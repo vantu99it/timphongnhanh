@@ -1,14 +1,13 @@
 <?php
 include 'connect.php';
 $id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
-    if(isset($id)){
-        $sql = "SELECT * FROM tbl_user WHERE id = :id";
-        $query= $conn -> prepare($sql);
+    if(isset($_SESSION['login']['id'])){
+        $id = $_SESSION['login']['id'];
+        $query= $conn -> prepare("SELECT * FROM tbl_user WHERE id = :id");
 		$query-> bindParam(':id',$id, PDO::PARAM_STR);
         $query-> execute();
 		$results = $query->fetch(PDO::FETCH_OBJ);
-        if($query->rowCount() > 0)
-		{
+        if($query->rowCount() > 0){
             $id = $results->id;
             $username= $results->username;
             $password= $results->password;
@@ -42,8 +41,11 @@ $id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
             <?php  } else {?>
             <div class="logged account">
                 <div class="account-avt">
-                    <img src="./image/author.png" alt="avata" />
-                    <!-- <i class="fa-solid fa-user"></i> -->
+                    <?php if(strlen($avata) != 0){?>
+                        <img src="<?php echo $avata?>" alt="Avata">
+                    <?php } else { ?>
+                        <img src="./image/default-user.png" alt="Avata">
+                    <?php } ?>
                 </div>
                 <div class="account-name">
                     <div class="name">
@@ -88,18 +90,13 @@ $id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
         <div class="container">
             <ul class="navbar-menu">
                 <li class="navbar-item"><a href="./home.php" class="navlist active">Trang chủ</a></li>
-                <li class="navbar-item"><a href="./motel-rooms.php" class="navlist">Cho thuê phòng trọ</a></li>
-                <li class="navbar-item"><a href="./house.php" class="navlist" >Nhà cho thuê</a></li>
-                <li class="navbar-item"><a href="./apartment.php" class="navlist" >Cho thuê căn hộ</a></li>
-                <li class="navbar-item"><a href="./homestay.php" class="navlist" >Cho thuê homestay</a></li>
+                <li class="navbar-item"><a href="./rooms.php?ca=Cho-thue-phong-tro" class="navlist">Cho thuê phòng trọ</a></li>
+                <li class="navbar-item"><a href="./rooms.php?ca=Nha-cho-thue" class="navlist" >Nhà cho thuê</a></li>
+                <li class="navbar-item"><a href="./rooms.php?ca=Cho-thue-can-ho" class="navlist" >Cho thuê căn hộ</a></li>
+                <li class="navbar-item"><a href="./rooms.php?ca=Cho-thue-Homestay" class="navlist" >Cho thuê homestay</a></li>
+                <li class="navbar-item"><a href="./rooms.php?ca=Tim-nguoi-o-ghep" class="navlist" >Tìm người ở ghép</a></li>
                 <li class="navbar-item"><a href="./news.php" class="navlist" >Tin tức</a></li>
-                <li class="navbar-item"><a href="./guide.php" class="navlist" >Hướng dẫn</a></li>
                 <li class="navbar-item"><a href="./price-list.php" class="navlist" >Bảng giá</a></li>
-                <?php if(!isset($_SESSION['login']['username'])){?>
-                    <li class="navbar-item"><a href="./login.php" class="navlist" >Nạp tiền</a></li>
-                <?php }else{?>
-                    <li class="navbar-item"><a href="./user/deposit-money.php" class="navlist" >Nạp tiền</a></li>
-                <?php }?>
             </ul>
         </div>
     </nav>
