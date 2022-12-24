@@ -338,8 +338,6 @@
                 
             ],
         });
-        
-
     </script>
     <script>
         CKEDITOR.replace('post_content');

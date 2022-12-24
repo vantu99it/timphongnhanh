@@ -3,6 +3,10 @@
   include './include/data.php';
   date_default_timezone_set("Asia/Ho_Chi_Minh");
 
+  // Chuyển đổi trạng thái của các bài đăng đã hết hạn về 3 (hết hạn)
+  $unpaid = $conn->prepare("UPDATE tbl_rooms SET status = 3 WHERE status = 2 and time_stop < now()");
+  $unpaid->execute();
+  
   // Gọi ra các bài viết theo từng loại tin 
   $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
@@ -55,6 +59,12 @@
   ORDER BY r.id DESC LIMIT 10)");
  $queryRoom->execute();
  $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
+ $totalPages = $queryRoom ->rowCount();
+
+  // Tính phân trang
+  $item_per_page = 12;
+  $current_page = !empty($_GET['page'])?$_GET['page']:1 ;
+  $totalPages = ceil($totalPages/$item_per_page);
 
   // Gọi ra các bài viết mới nhất
   $queryRoomNew = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
@@ -155,7 +165,8 @@
                   <h2 class="post_title">Danh sách tin đăng</h2>
                 </div>
                 <ul class="post-listing">
-                  <?php foreach ($resultsRoom as $key => $value) { ?>
+                  <?php foreach ($resultsRoom as $key => $value) { 
+                    if($key >= ($item_per_page*($current_page-1)) && $key <= ($item_per_page*$current_page-1)){?>
                     <li 
                       <?php if($value->news_type_id == 1){?>
                         class = "post-item post-vip vip-hot"
@@ -254,9 +265,12 @@
                         </div>
                       </div>
                     </li>
-                    <?php }?>
+                    <?php } }?>
                 </ul>
               </section> 
+              <!-- phân trang -->
+              <?php include './include/page-division.php'; ?>
+              <!-- /Phân trang -->
             </div>
             <div class="col-4">
               <!-- Các danh mục cho thuê -->
@@ -297,20 +311,20 @@
                       <?php } ?>
                     >
                       <figure class="post-thumb new-post-thumb">
-                        <a href="#" class="clearfix">
+                        <a href="./article-details.php?id=<?php echo $value -> id ?>" class="clearfix">
                           <img src="<?php echo $value -> image_logo?>" alt="">
                         </a>
                       </figure>
                       <div class="post-meta new-post-meta">
                         <h3 class="title">
-                          <a href="#">
+                          <a href="./article-details.php?id=<?php echo $value -> id ?>">
                           <span 
                             <?php if($value->news_type_id == 1){?>
                               class="star star-5"
                             <?php } if($value->news_type_id == 2){?>
                               class="star star-4"
                             <?php } if($value->news_type_id == 3){?>
-                             class="star star-3"
+                            class="star star-3"
                             <?php } if($value->news_type_id == 4){?>
                               class="star star-2"
                             <?php } ?>
@@ -355,7 +369,6 @@
                           </span>
                         </div>
                       </div>
-                    </li>
                   <?php } ?>
                 </ul>
               </section>

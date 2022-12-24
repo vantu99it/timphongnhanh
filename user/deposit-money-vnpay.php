@@ -52,7 +52,7 @@
                 $balanceHis = $balance + $total;
                 // Cập nhật thông tin đã thanh toán
                 $sqlDeposit = "INSERT INTO tbl_deposit_money (pay_code,pay_price,payments,user_id,status) VALUE (:pay_code,:pay_price, :payments,:user_id, 1)" ;
-                $queryPayment= $conn -> prepare($sqlDeposit);
+                $queryDeposit= $conn -> prepare($sqlDeposit);
                 $queryDeposit->bindParam(':pay_code',$pay_code,PDO::PARAM_STR);
                 $queryDeposit->bindParam(':pay_price',$total,PDO::PARAM_STR);
                 $queryDeposit->bindParam(':payments',$pay,PDO::PARAM_STR);

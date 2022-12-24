@@ -33,12 +33,13 @@
         
     }else{
         $passHash = password_hash($pass,PASSWORD_DEFAULT);
-        $sql = "INSERT INTO tbl_user(username, password, fullname, email,phone) VALUE (:username, :password, :fullname, :email, :phone)";
+        $sql = "INSERT INTO tbl_user(username, password, fullname, email,phone,zalo) VALUE (:username, :password, :fullname, :email, :phone, :zalo)";
         $query= $conn -> prepare($sql);
         $query->bindParam(':username',$user,PDO::PARAM_STR);
         $query->bindParam(':password',$passHash,PDO::PARAM_STR);
         $query->bindParam(':fullname',$fullName,PDO::PARAM_STR);
         $query->bindParam(':phone',$phone,PDO::PARAM_STR);
+        $query->bindParam(':zalo',$phone,PDO::PARAM_STR);
         $query->bindParam(':email',$email,PDO::PARAM_STR);
         $query->execute();
         $lastInsertId = $conn->lastInsertId();

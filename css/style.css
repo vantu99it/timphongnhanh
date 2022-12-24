@@ -740,8 +740,8 @@ body {
   background-color: #fff !important;
 }
 .new-post-item .new-post-thumb {
-  width: 70px;
-  height: 90px;
+  width: 90px;
+  height: 110px;
 }
 .new-post-meta {
   margin-left: 10px;
@@ -762,7 +762,6 @@ body {
 }
 .new-post-meta .detail .area {
   float: right;
-  margin-right: 26px;
 }
 .new-post-meta .detail .post-location {
   float: left;
@@ -946,7 +945,7 @@ body {
   display: none !important;
 }
 .slider-detail .image-item-detail .image-detail {
-  height: 320px;
+  height: 370px;
 }
 .image-item .image-detail img {
   border-top-left-radius: 5px;
@@ -1079,6 +1078,12 @@ tr:nth-child(even) {
   padding: 10px;
   background-color: #f3d8ca;
 }
+.btn-handling {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
 /* section contact-info */
 .contact-info {
 }
@@ -1087,7 +1092,7 @@ tr:nth-child(even) {
   padding: 15px;
   border-radius: 5px;
   background-color: #febb02;
-  height: 320px;
+  height: 370px;
 }
 .author-avata {
   width: 120px;
@@ -1296,4 +1301,20 @@ tr:nth-child(even) {
 }
 .content-item .minimum {
   font-size: 14px;
+}
+/* Phân trang */
+.page-division {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.page-division .page-item {
+  padding: 10px 16px;
+  border: 1px solid #ccc;
+  color: #000;
+  margin-right: 5px;
+}
+.page-division .page-item.current_page {
+  color: #fff;
+  background-color: #1266dd;
 }

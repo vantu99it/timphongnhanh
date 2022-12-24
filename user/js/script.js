@@ -123,27 +123,14 @@ function copyCodeND() {
   alert("Đã sao chép: " + copyText.value);
 }
 
-// // dấu phẩy số
-// $("input.mask").each((i, ele) => {
-//   let clone = $(ele).clone(false);
-//   clone.attr("type", "text");
-//   let ele1 = $(ele);
-//   clone.val(Number(ele1.val()).toLocaleString("en"));
-//   $(ele).after(clone);
-//   $(ele).hide();
-//   clone.mouseenter(() => {
-//     ele1.show();
-//     clone.hide();
-//   });
-//   setInterval(() => {
-//     let newv = Number(ele1.val()).toLocaleString("en");
-//     if (clone.val() != newv) {
-//       clone.val(newv);
-//     }
-//   }, 10);
-
-//   $(ele).mouseleave(() => {
-//     $(clone).show();
-//     $(ele1).hide();
-//   });
-// });
+// form-act
+$(document).ready(function () {
+  // Nhấn nút thêm mới
+  $(".btn-add").click(function () {
+    $(".form-act").fadeIn(500);
+  });
+  // Nhấn dấu x tắt form
+  $(".form-close").click(function () {
+    $(".form-act").fadeOut(500);
+  });
+});

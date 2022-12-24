@@ -406,7 +406,25 @@ body {
   border-color: #dc3545;
   margin-left: 6px;
 }
-
+/* dashboard */
+.card {
+  font-size: 18px;
+}
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.count-number {
+  width: 35px;
+  height: 35px;
+  background: #fff;
+  color: red;
+  text-align: center;
+  font-weight: 700;
+  line-height: 35px;
+  border-radius: 50%;
+}
 /* post-manage  */
 .main-right-title {
   display: flex;

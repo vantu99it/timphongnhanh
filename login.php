@@ -93,7 +93,7 @@
                     </form>
                     <div class="form-footer">
                         <a style="float: left;" href="./">Bạn quên mật khẩu?</a>
-                        <a style="float: right;" href="http://">Tạo tài khoản</a>
+                        <a style="float: right;" href="./register.php">Tạo tài khoản</a>
                     </div>
                 </div>
                 </div>

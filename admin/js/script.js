@@ -39,7 +39,7 @@ $(document).ready(function () {
   });
 });
 
-// phân trang
+// phân trang danh sách
 $(document).ready(function () {
   $("#table-manage").DataTable({
     language: {
@@ -47,7 +47,7 @@ $(document).ready(function () {
     },
     pageLength: 5,
     lengthMenu: [1, 2, 3, 4, 5, 10, 15, 20, 30, 50, 100],
-    order: [[0, "desc"]],
+    // order: [[0, "desc"]],
   });
 });
 // Hiện ảnh

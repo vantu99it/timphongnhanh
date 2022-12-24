@@ -137,7 +137,7 @@
                                             </a>
                                         <?php }?>
                                         <?php if($value->status == 2){?>
-                                            <a href="./post-approved.php?date=<?php echo $value-> id?>" class="btn-fix" style = "color: #000000;">
+                                            <a href="./post-approved.php?date=<?php echo $value-> id?>" class="btn-fix" style = "color: #37a344;">
                                                 <i class="fa-regular fa-calendar-xmark"></i>
                                                 Đã cho thuê
                                             </a>

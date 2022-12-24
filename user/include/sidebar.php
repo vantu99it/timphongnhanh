@@ -55,8 +55,8 @@ if(isset($_SESSION['login']['id'])){
             
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-item active">
-                <a href="./personal-page.php">
+            <li class="menu-item">
+                <a href="./personal-page.php" class="navlist">
                     <iconify-icon class="icon" icon="fa:dashboard" width="24" height="24"></iconify-icon>
                     Thông tin cá nhân
                 </a>
@@ -69,43 +69,43 @@ if(isset($_SESSION['login']['id'])){
                     <iconify-icon class="down" icon="bx:chevron-down" width="18" height="18"></iconify-icon>
                 </a>
                 <ul class="sidebar-menu-mini">
-                    <li class="menu-item-mini"><a href="./create-post.php">Thêm mới</a></li>
-                    <li class="menu-item-mini"><a href="./post-unpaid.php">Tin chưa thanh toán</a></li>
-                    <li class="menu-item-mini"><a href="./post-manage.php">Tin đã thanh toán</a></li>
+                    <li class="menu-item-mini"><a href="./create-post.php" class="navlist">Thêm mới</a></li>
+                    <li class="menu-item-mini"><a href="./post-unpaid.php" class="navlist">Tin chưa thanh toán</a></li>
+                    <li class="menu-item-mini"><a href="./post-manage.php" class="navlist">Tin đã thanh toán</a></li>
                 </ul>
             </li>
             <li class="menu-item">
-                <a href="./deposit-money.php">
+                <a href="./deposit-money.php" class="navlist">
                     <iconify-icon class="icon" icon="fluent:money-hand-20-filled" width="24" height="24"></iconify-icon> 
                     Nạp tiền vào tài khoản         
                 </a>
             </li>
             <li class="menu-item">
-                <a href="./deposit-money-history.php">
+                <a href="./deposit-money-history.php" class="navlist">
                     <iconify-icon class="icon" icon="fluent:receipt-money-24-filled" width="24" height="24"></iconify-icon>
                     Lịch sử nạp tiền         
                 </a>
             </li>
             <li class="menu-item">
-                <a href="./payment-history.php">
+                <a href="./payment-history.php" class="navlist">
                     <iconify-icon class="icon" icon="la:money-check-alt" width="24" height="24"></iconify-icon>
                     Lịch sử thanh toán
                 </a>
             </li>
             <li class="menu-item">
-                <a href="../price-list.php">
+                <a href="../price-list.php" class="navlist">
                 <iconify-icon class="icon" icon="ri:price-tag-2-fill" width="24" height="24"></iconify-icon>
                     Bảng giá dịch vụ
                 </a>
             </li>
             <li class="menu-item">
-                <a href="../contact.php">
+                <a href="../contact.php" class="navlist">
                     <iconify-icon class="icon" icon="ic:round-contact-mail" width="24" height="24"></iconify-icon>
                     Liên hệ
                 </a>
             </li>
             <li class="menu-item">
-                <a href="../logout.php">
+                <a href="../logout.php" class="navlist">
                     <iconify-icon class="icon" icon="octicon:sign-out-16" width="24" height="24"></iconify-icon>
                     Thoát
                 </a>

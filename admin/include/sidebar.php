@@ -3,8 +3,8 @@
         <h1>menu quản trị</h1>
     </div>
     <ul class="sidebar-menu">
-        <li class="menu-item active">
-            <a href="">
+        <li class="menu-item">
+            <a href="dashboard.php">
                 <iconify-icon class="icon" icon="fa:dashboard" width="24" height="24"></iconify-icon>
                 Bảng điều khiển
             </a>
@@ -51,8 +51,8 @@
                 <iconify-icon class="down" icon="bx:chevron-down" width="18" height="18"></iconify-icon>
             </a>
             <ul class="sidebar-menu-mini">
-                <li class="menu-item-mini"><a href="">Thêm tin mới</a></li>
-                <li class="menu-item-mini"><a href="">Tin đã đăng</a></li>
+                <li class="menu-item-mini"><a href="./make-news.php">Thêm tin mới</a></li>
+                <li class="menu-item-mini"><a href="./posted-news.php">Tin đã đăng</a></li>
             </ul>
         </li>
         <li class="menu-item">

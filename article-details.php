@@ -5,7 +5,7 @@
 
   $id = isset($_GET['id'])?$_GET['id']:'';
   // Gọi ra thông tin bài viết
-  $queryRoom = $conn->prepare("SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug,ca.classify AS category_classify,typ.name_type, CURDATE() AS today
+  $queryRoom = $conn->prepare("SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,us.facebook,ca.slug AS category_slug,ca.classify AS category_classify,typ.name_type, CURDATE() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
   JOIN tbl_city ci ON ci.id = r.city_id
   JOIN tbl_district dis ON dis.id = r.district_id
@@ -49,7 +49,7 @@
   JOIN tbl_new_type typ ON typ.id = r.news_type_id
   JOIN tbl_categories ca ON ca.id = r.category_id
   WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.news_type_id != 1 AND ci.name = :cityName AND r.id != :id AND r.category_id = :category_id
-  ORDER BY r.created_ad DESC LIMIT 4)");
+  ORDER BY r.news_type_id ASC, r.created_ad DESC LIMIT 4)");
   $queryRoomSame-> bindParam(':cityName', $cityName, PDO::PARAM_STR);
   $queryRoomSame-> bindParam(':id', $id, PDO::PARAM_STR);
   $queryRoomSame-> bindParam(':category_id', $category_id, PDO::PARAM_STR);
@@ -314,7 +314,7 @@
                             <td><?php echo $resultsRoom-> phone_user?></td>
                           </tr>
                           <tr>
-                            <td class="name">Mã tin:</td>
+                            <td class="name">Zalo:</td>
                             <td><?php echo $resultsRoom-> phone_user?></td>
                           </tr>
                         </tbody>
@@ -323,7 +323,14 @@
                   </section>
                   <section class="section-note mg-0-15" style = "margin-bottom: 20px;">
                     <p>Bạn đang xem nội dung tin đăng: <i style= "color: red;">"<?php echo $resultsRoom -> name ?> - Mã tin: #<?php echo $resultsRoom -> id ?>"</i> . Mọi thông tin liên quan đến tin đăng này chỉ mang tính chất tham khảo. Nếu bạn có phản hồi với tin đăng này (báo xấu, tin đã cho thuê, không liên lạc được,...), vui lòng thông báo để cho chúng tôi để có thể xử lý.</p>
-                    <a href="./contact.php" class="btn btn-feedback">Gửi phản hồi</a>
+                    <div class = "btn-handling">
+                      <a href="./contact.php" class="btn btn-feedback">Gửi phản hồi</a>
+                      <?php $id_user = isset($_SESSION['login']['id'])?$_SESSION['login']['id']:"";
+                       if($resultsRoom-> user_id == $id_user){?>
+                        <a href="./user/edit-post.php?id=<?php echo $resultsRoom -> id?>" class="btn btn-feedback">Sửa bài viết</a>
+                      <?php } ?>
+                    </div>
+
                   </section>
               </div>
               <!-- Tin có liên quan theo tỉnh -->
@@ -456,6 +463,9 @@
                   </a>
                   <a href="http://zalo.me/<?php echo $resultsRoom -> phone_user?>" class="btn author-zalo" target="_blank">
                     Liên hệ qua zalo
+                  </a>
+                  <a href="<?php echo $resultsRoom -> facebook?>" class="btn author-zalo" target="_blank">
+                    Liên hệ qua facebook
                   </a>
                 </div>
               </section>

@@ -7,7 +7,7 @@
   $ok= "";
 
     $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
-    $queryRoom = $conn->prepare("SELECT r.*, ca.classify, pay.pay_status, ci.fullname as city, dis.fullname as district, wa.fullname as ward FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id WHERE pay.pay_status = 1 and  r.status = 2 or r.status = 3");
+    $queryRoom = $conn->prepare("SELECT r.*, ca.classify, pay.pay_status, ci.fullname as city, dis.fullname as district, wa.fullname as ward FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id WHERE pay.pay_status = 1 and  r.status = 2 or r.status = 3 ORDER BY  r.id DESC, r.status ASC");
     $queryRoom->execute();
     $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
     // var_dump($resultsRoom); die();
