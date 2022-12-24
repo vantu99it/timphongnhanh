@@ -56,7 +56,7 @@ if(isset($_SESSION['login']['id'])){
         </div>
         <ul class="sidebar-menu">
             <li class="menu-item active">
-                <a href="">
+                <a href="./personal-page.php">
                     <iconify-icon class="icon" icon="fa:dashboard" width="24" height="24"></iconify-icon>
                     Thông tin cá nhân
                 </a>

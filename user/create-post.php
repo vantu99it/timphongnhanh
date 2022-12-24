@@ -256,6 +256,9 @@
                     </div>
                     <div id="display-img">
                     </div>
+                    <div id = "remove" style = "margin-left: 55px;">
+                        <!-- <a onclick="removeImg()" class = "btn">Xóa ảnh</a> -->
+                    </div>
                     <span class="form-message"></span>
                 </div>
                 <div class="input-file form-validator">
@@ -266,6 +269,9 @@
                         <input type="file" class="upload-img" name="upload-imgs[]" id="upload-imgs" onchange = "ImageFileAsUrls()" multiple = "multiple">
                     </div>
                     <div id="display-imgs">
+                    </div>
+                    <div id = "removes" style = "margin-left: 55px;">
+                        <!-- <a onclick="removeImg()" class = "btn">Xóa ảnh</a> -->
                     </div>
                     <span class="form-message"></span>
                 </div>

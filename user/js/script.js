@@ -29,11 +29,21 @@ function ImageFileAsUrl() {
         var srcData = fileLoaderEvent.target.result;
         var newImage = document.createElement("img");
         newImage.src = srcData;
-        document.getElementById("display-img").innerHTML += newImage.outerHTML;
+        newImage.id = "js-remove-img";
+        document.getElementById("display-img").appendChild(newImage);
+        document.getElementById(
+          "remove"
+        ).innerHTML = `<a onclick="removeImg()" class="btn" id ="delete-btn">Xóa ảnh</a>`;
       };
       fileReader.readAsDataURL(fileToLoad);
     }
   }
+}
+function removeImg() {
+  const element = document.getElementById("js-remove-img");
+  const delete_btn = document.getElementById("delete-btn");
+  element.remove();
+  delete_btn.remove();
 }
 //hiện nhiều ảnh
 function ImageFileAsUrls() {
@@ -47,11 +57,21 @@ function ImageFileAsUrls() {
         var srcData = fileLoaderEvent.target.result;
         var newImage = document.createElement("img");
         newImage.src = srcData;
-        document.getElementById("display-imgs").innerHTML += newImage.outerHTML;
+        newImage.id = "js-remove-imgs";
+        document.getElementById("display-imgs").appendChild(newImage);
       };
       fileReader.readAsDataURL(fileToLoad);
     }
+    document.getElementById(
+      "removes"
+    ).innerHTML = `<a onclick="removeImgs()" class="btn" id ="delete-btns">Xóa tất cả</a>`;
   }
+}
+function removeImgs() {
+  const element = document.getElementsByClassName("js-remove-imgs");
+  const delete_btn = document.getElementById("delete-btns");
+  element.remove();
+  delete_btn.remove();
 }
 // phân trang
 $(document).ready(function () {
