@@ -41,7 +41,7 @@
 
  
     // Lấy id payment 
-    $queryPaymentHis = $conn -> prepare("SELECT * FROM tbl_payment_history WHERE id_rooms = :id");
+    $queryPaymentHis = $conn -> prepare("SELECT * FROM tbl_payment_history WHERE id_rooms = :id AND expired = 0");
     $queryPaymentHis-> bindParam(':id', $id, PDO::PARAM_STR);
     $queryPaymentHis-> execute();
     $resultsPaymentHis = $queryPaymentHis->fetch(PDO::FETCH_OBJ);
@@ -58,7 +58,7 @@
         if($pay == 'account'){
             $balanceHis = $balance - $total;
             if($balanceHis > 0){
-                $sqlPayment = "UPDATE tbl_payment_history SET pay_code = :pay_code, pay_price = :pay_price, payments = :payments, pay_status = 1 WHERE id = :id";
+                $sqlPayment = "UPDATE tbl_payment_history SET pay_code = :pay_code, pay_price = :pay_price, payments = :payments, pay_status = 1 WHERE id = :id AND expired = 0";
                 $queryPayment= $conn -> prepare($sqlPayment);
                 $queryPayment->bindParam(':pay_code',$pay_code,PDO::PARAM_STR);
                 $queryPayment->bindParam(':pay_price',$total,PDO::PARAM_STR);

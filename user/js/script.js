@@ -57,7 +57,7 @@ function ImageFileAsUrls() {
         var srcData = fileLoaderEvent.target.result;
         var newImage = document.createElement("img");
         newImage.src = srcData;
-        newImage.id = "js-remove-imgs";
+        newImage.id = "js-remove-imgs" + i--;
         document.getElementById("display-imgs").appendChild(newImage);
       };
       fileReader.readAsDataURL(fileToLoad);
@@ -67,10 +67,16 @@ function ImageFileAsUrls() {
     ).innerHTML = `<a onclick="removeImgs()" class="btn" id ="delete-btns">Xóa tất cả</a>`;
   }
 }
+
 function removeImgs() {
-  const element = document.getElementsByClassName("js-remove-imgs");
+  count = document.getElementById("display-imgs").childElementCount;
+  for (var i = 1; i <= count; i++) {
+    const id = "js-remove-imgs" + i;
+    // console.log(id);
+    const element = document.getElementById(id);
+    element.remove();
+  }
   const delete_btn = document.getElementById("delete-btns");
-  element.remove();
   delete_btn.remove();
 }
 // phân trang

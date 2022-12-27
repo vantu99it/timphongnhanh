@@ -6,7 +6,7 @@
   $ok= "";
 
     $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
-    $queryRoom = $conn->prepare("SELECT r.*, ca.classify, pay.pay_status, ci.fullname as city, dis.fullname as district, wa.fullname as ward FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id WHERE r.user_id = :user_id AND pay.pay_status = 1 ORDER BY r.status ASC");
+    $queryRoom = $conn->prepare("SELECT DISTINCT pay.pay_status, r.*, ca.classify,  ci.fullname as city, dis.fullname as district, wa.fullname as ward FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id WHERE r.user_id = :user_id AND pay.pay_status = 1 ORDER BY r.status ASC");
     $queryRoom-> bindParam(':user_id', $id_user, PDO::PARAM_STR);
     $queryRoom->execute();
     $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
@@ -22,7 +22,13 @@
         $queryDate->bindParam(':time_stop',$date,PDO::PARAM_STR);
         $queryDate->bindParam(':id',$id_room,PDO::PARAM_STR);
         $queryDate->execute();
-        if($queryDate){
+
+        // Chuyển trạng thái của thanh toán về đã hết hạn
+        $unpaidPay = $conn->prepare("UPDATE tbl_payment_history SET expired = 1 WHERE id_rooms = :id AND expired = 0");
+        $unpaidPay->bindParam(':id',$id_room,PDO::PARAM_STR);
+        $unpaidPay->execute();
+
+        if($queryDate && $unpaidPay){
             $ok = 1;
             $message = "Đã dừng hiển thị bài viết";
         }else{
@@ -131,13 +137,13 @@
                                             </a>
                                         <?php }?>
                                         <?php if($value->status == 3){?>
-                                            <a href="edit-post.php?id=<?php echo $value-> id?>" class="btn-hide" style = "color: #37a344;">
+                                            <a href="edit-post.php?id=<?php echo $value-> id?>&giahan=1" class="btn-hide" style = "color: #37a344;">
                                                 <i class="fa-solid fa-cloud-arrow-up"></i>
                                                 Gia hạn
                                             </a>
                                         <?php }?>
                                         <?php if($value->status == 2){?>
-                                            <a href="./post-approved.php?date=<?php echo $value-> id?>" class="btn-fix" style = "color: #37a344;">
+                                            <a href="./post-manage.php?date=<?php echo $value-> id?>" class="btn-fix" style = "color: #37a344;" onclick="return confirm('Bạn có chắc chắn dừng hiển thị bài viết này?');">
                                                 <i class="fa-regular fa-calendar-xmark"></i>
                                                 Đã cho thuê
                                             </a>

@@ -110,7 +110,7 @@
                                                 Thanh toán tin
                                             </a>
                                         <?php }?>
-                                            <a href="" class="btn-fix" style = "color: #1266dd;">
+                                            <a href="./edit-post.php?id=<?php echo $value-> id?>&edit=1" class="btn-fix" style = "color: #1266dd;">
                                                 <i class="fa-regular fa-pen-to-square"></i>
                                                 Chỉnh sửa
                                             </a>

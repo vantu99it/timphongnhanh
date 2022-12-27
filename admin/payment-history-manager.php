@@ -2,7 +2,7 @@
     include './include/connect.php';
     include '../include/func-slug.php';
 
-    $queryPayHis = $conn->prepare("SELECT his.*, r.name as name_post, us.username, typ.name_type FROM tbl_payment_history his JOIN tbl_rooms r on r.id = his.id_rooms JOIN tbl_user us on us.id = his.user_id JOIN tbl_new_type typ on typ.id = his.news_type_id WHERE his.pay_status = 1");
+    $queryPayHis = $conn->prepare("SELECT his.*, r.name as name_post, us.username, typ.name_type FROM tbl_payment_history his JOIN tbl_rooms r on r.id = his.id_rooms JOIN tbl_user us on us.id = his.user_id JOIN tbl_new_type typ on typ.id = his.news_type_id WHERE his.pay_status = 1 ORDER BY his.created_at DESC");
     $queryPayHis->execute();
     $resultsPayHis = $queryPayHis->fetchAll(PDO::FETCH_OBJ);
 

@@ -7,7 +7,7 @@
   $ok= "";
 
     $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
-    $queryRoom = $conn->prepare("SELECT r.*, ca.classify, pay.pay_status, ci.fullname as city, dis.fullname as district, wa.fullname as ward FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id WHERE pay.pay_status = 1 and  r.status = 2 or r.status = 3 ORDER BY  r.id DESC, r.status ASC");
+    $queryRoom = $conn->prepare("SELECT DISTINCT pay.pay_status, r.*, ca.classify, ci.fullname as city, dis.fullname as district, wa.fullname as ward FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id WHERE pay.pay_status = 1 and  r.status = 2 or r.status = 3 ORDER BY  r.id DESC, r.status ASC");
     $queryRoom->execute();
     $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
     // var_dump($resultsRoom); die();
@@ -15,15 +15,22 @@
     
     $time_1 = time();
     $date = date('Y-m-d H:i:s', $time_1); 
-
+    // Hết hạn tin
     if(isset($_GET['date'])){
         $id_room = $_GET['date'];
+        // Chuyển trạng thái bài viết
         $queryDate = "UPDATE tbl_rooms SET 	time_stop = :time_stop, status = 3 WHERE id = :id";
         $queryDate= $conn -> prepare($queryDate);
         $queryDate->bindParam(':time_stop',$date,PDO::PARAM_STR);
         $queryDate->bindParam(':id',$id_room,PDO::PARAM_STR);
         $queryDate->execute();
-        if($queryDate){
+
+        // Chuyển trạng thái của thanh toán về đã hết hạn
+        $unpaidPay = $conn->prepare("UPDATE tbl_payment_history SET expired = 1 WHERE id_rooms = :id AND expired = 0");
+        $queryDate->bindParam(':id',$id_room,PDO::PARAM_STR);
+        $unpaidPay->execute();
+
+        if($queryDate && $unpaidPay){
             $ok = 1;
             $message = "Đã dừng hiển thị bài viết";
         }else{
@@ -95,10 +102,12 @@
                                     <span class="title"><?php echo $value-> name?></span>
                                     <p class="address"><strong>Địa chỉ: </strong><?php echo $value-> apartment_number.", Đường  ".$value-> street.", ".$value-> ward.", ".$value->district.", ".$value->city ?> </p>
                                     <div class="btn-tool">
-                                        <a href="./post-approved.php?date=<?php echo $value-> id?>" class="btn-fix" style = "color: #000000;">
-                                            <i class="fa-regular fa-calendar-xmark"></i>
-                                            Hết hạn
-                                        </a>
+                                        <?php if($value->pay_status == 1 && $value->status == 2){?>
+                                            <a href="./post-approved.php?date=<?php echo $value-> id?>" class="btn-fix" style = "color: #000000;" onclick="return confirm('Bạn có chắc chắn dừng hiển thị bài viết này?');">
+                                                <i class="fa-regular fa-calendar-xmark"></i>
+                                                Hết hạn
+                                            </a>
+                                        <?php }?>
                                     </div>
                                 </td>
                                 <td>

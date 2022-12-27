@@ -90,9 +90,9 @@
         $lastInsertIdPay = $conn->lastInsertId();
 
         $_SESSION['payment_history']['id'] = $lastInsertIdPay;
-
         $_SESSION['time-day']['date'] = $date;
         $_SESSION['time-day']['type'] = $new_type;
+        
         header('location: post-payment.php?id='.$lastInsertId);
     }
     else 
@@ -248,11 +248,13 @@
                     <span class="form-message"></span>
                 </div>
                 <div class="input-file form-validator">
-                    <p class="item-name">Tải hình ảnh</p>
-                    <div class="input-img">
-                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                        Tải hình ảnh đại diện
-                        <input type="file" class="upload-img" name="upload-img" id="upload-img" onchange = "ImageFileAsUrl()">
+                    <p class="item-name">Hình ảnh đại diện</p>
+                    <div style = "height: 70px;">
+                        <div class="input-img">
+                            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                            Tải hình đại diện
+                            <input type="file" class="upload-img" name="upload-img" id="upload-img" onchange = "ImageFileAsUrl()">
+                        </div>
                     </div>
                     <div id="display-img">
                     </div>
@@ -262,11 +264,13 @@
                     <span class="form-message"></span>
                 </div>
                 <div class="input-file form-validator">
-                    <p class="item-name">Tải hình ảnh</p>
-                    <div class="input-img">
-                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                        Tải hình ảnh chi tiết
-                        <input type="file" class="upload-img" name="upload-imgs[]" id="upload-imgs" onchange = "ImageFileAsUrls()" multiple = "multiple">
+                    <p class="item-name">Hình ảnh chi tiết</p>
+                    <div style = "height: 70px;">
+                        <div class="input-img">
+                            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                            Tải hình ảnh chi tiết
+                            <input type="file" class="upload-img" name="upload-imgs[]" id="upload-imgs" onchange = "ImageFileAsUrls()" multiple = "multiple">
+                        </div>
                     </div>
                     <div id="display-imgs">
                     </div>

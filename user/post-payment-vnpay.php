@@ -63,7 +63,7 @@
             if ($_GET['vnp_ResponseCode'] == '00') {
                 $pay = 'VNPAY-'.$_GET['vnp_BankCode'];
                 // Cập nhật thông tin đã thanh toán
-                $sqlPayment = "UPDATE tbl_payment_history SET pay_code = :pay_code, pay_price = :pay_price, payments = :payments, pay_status = 1 WHERE id = :id";
+                $sqlPayment = "UPDATE tbl_payment_history SET pay_code = :pay_code, pay_price = :pay_price, payments = :payments, pay_status = 1 WHERE id = :id AND expired = 0";
                 $queryPayment= $conn -> prepare($sqlPayment);
                 $queryPayment->bindParam(':pay_code',$pay_code,PDO::PARAM_STR);
                 $queryPayment->bindParam(':pay_price',$total,PDO::PARAM_STR);

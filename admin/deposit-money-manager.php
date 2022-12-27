@@ -2,10 +2,12 @@
     include './include/connect.php';
     include '../include/func-slug.php';
 
-    $queryDep = $conn->prepare("SELECT dep.*, us.username FROM tbl_deposit_money dep JOIN tbl_user us ON us.id = dep.user_id");
+    // Gọi ra thông tin giao dịch
+    $queryDep = $conn->prepare("SELECT dep.*, us.username FROM tbl_deposit_money dep JOIN tbl_user us ON us.id = dep.user_id ORDER BY dep.status ASC, dep.created_at DESC");
     $queryDep->execute();
     $resultsDep = $queryDep->fetchAll(PDO::FETCH_OBJ);
 
+    // gọi thông tin user
     $queryUser = $conn->prepare("SELECT * FROM tbl_user");
     $queryUser->execute();
     $resultsUser = $queryUser->fetchAll(PDO::FETCH_OBJ);

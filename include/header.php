@@ -72,7 +72,7 @@ $id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
                         <li ><a href="./user/create-post.php" class="manage-menu-item add-post"><i></i> Đăng tin mới</a></li>
                         <li ><a href="./user/post-manage.php" class="manage-menu-item manage-post"><i></i> Quản lý bài đăng</a></li>
                         <li ><a href="./user/deposit-money.php" class="manage-menu-item payment"><i></i> Nạp tiền</a></li>
-                        <li ><a href="./user/deposit-money.php" class="manage-menu-item payment-history"><i></i>Lịch sử nạp tiền</a></li>
+                        <li ><a href="./user/deposit-money-history.php" class="manage-menu-item payment-history"><i></i>Lịch sử nạp tiền</a></li>
                         <li ><a href="./user/personal-page.php" class="manage-menu-item manage-user"><i></i> Thông tin cá nhân</a></li>
                         <li ><a href="./logout.php" class="manage-menu-item manage-logout" style = "border-bottom: none"><i></i> Thoát</a></li>
                     </ul>

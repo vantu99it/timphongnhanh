@@ -272,7 +272,11 @@
                                     <div class="contact">
                                     <div class="avatar">
                                         <div class="avata-img">
-                                        <img src="<?php echo $value -> avatar ?>" alt="">
+                                        <?php if(strlen($value -> avatar) != 0){ ?>
+                                            <img src="<?php echo $value -> avatar ?>" alt="">
+                                        <?php }else{ ?>
+                                            <img src="./image/default-user.png" alt="">
+                                        <?php }?>
                                         <!-- <i class="fa-solid fa-user"></i> -->
                                         </div>
                                         <span class="author-name"><?php echo $value -> name_user ?></span>

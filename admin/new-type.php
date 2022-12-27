@@ -107,10 +107,10 @@
             </nav>
             <section class="main-right-title">
                 <div class="form-title">
-                    <h1>Quản lý chuyên mục</h1>
+                    <h1>Quản lý loại tin</h1>
                 </div>
                 <div class="account-btn">
-                    <button class="btn btn-post btn-add">Tạo chuyên mục</button>
+                    <button class="btn btn-post btn-add">Tạo loại tin</button>
                 </div>
             </section>
             <div class="main-right-table">

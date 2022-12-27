@@ -4,8 +4,12 @@
   date_default_timezone_set("Asia/Ho_Chi_Minh");
 
   // Chuyển đổi trạng thái của các bài đăng đã hết hạn về 3 (hết hạn)
-  $unpaid = $conn->prepare("UPDATE tbl_rooms SET status = 3 WHERE status = 2 and time_stop < now()");
-  $unpaid->execute();
+  $unpaidPost = $conn->prepare("UPDATE tbl_rooms SET status = 3 WHERE status = 2 and time_stop < now()");
+  $unpaidPost->execute();
+
+  // Chuyển trạng thái của thanh toán về đã hết hạn
+  $unpaidPay = $conn->prepare("UPDATE tbl_payment_history pay SET pay.expired = 1 WHERE expired = 0 AND pay.id_rooms IN (SELECT r.id FROM tbl_rooms r WHERE r.status = 3 AND time_stop < now())");
+  $unpaidPay->execute();
   
   // Gọi ra các bài viết theo từng loại tin 
   $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
@@ -60,6 +64,8 @@
  $queryRoom->execute();
  $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
  $totalPages = $queryRoom ->rowCount();
+
+
 
   // Tính phân trang
   $item_per_page = 12;
@@ -197,7 +203,7 @@
                             <?php } if($value->news_type_id == 2){?>
                               class="star star-4"
                             <?php } if($value->news_type_id == 3){?>
-                             class="star star-3"
+                              class="star star-3"
                             <?php } if($value->news_type_id == 4){?>
                               class="star star-2"
                             <?php } ?>>
@@ -248,7 +254,11 @@
                         <div class="contact">
                           <div class="avatar">
                             <div class="avata-img">
-                              <img src="<?php echo $value -> avatar ?>" alt="">
+                              <?php if(strlen($value -> avatar) != 0){ ?>
+                                <img src="<?php echo $value -> avatar ?>" alt="">
+                              <?php }else{ ?>
+                                <img src="./image/default-user.png" alt="">
+                              <?php }?>
                               <!-- <i class="fa-solid fa-user"></i> -->
                             </div>
                             <span class="author-name"><?php echo $value -> name_user ?></span>

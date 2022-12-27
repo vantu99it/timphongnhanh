@@ -437,7 +437,7 @@ li {
 }
 #display-img,
 #display-imgs {
-  margin-top: 70px;
+  /* margin-top: 70px; */
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -706,4 +706,17 @@ li {
 }
 #js-remove-img {
   margin: 0 !important;
+}
+/* edit post */
+.img-avatar {
+  height: 120px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.img-avatar img {
+  height: 100%;
+  margin-right: 20px;
 }

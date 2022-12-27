@@ -132,7 +132,7 @@
         <div id="post">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="margin: 0;">
-                    <li class="first link"><a href="#">Cho thuê phòng trọ</a></li>
+                    <li class="first link"><a href="#"><?php echo $resultsRoom->name_user?></a></li>
                     <li class="link link"><a href="#"><?php echo $resultsRoom -> city?></a></li>
                     <li class="link link"><a href="#"><?php echo $resultsRoom -> district?></a></li>
                     <li class="link last"><a href="#"><?php echo $resultsRoom -> ward?></a></li>
@@ -182,7 +182,7 @@
                                   <?php } ?> 
                                   <?php echo $resultsRoom->name ?></a>
                               </h2>
-                              <p>Chuyên mục: <a href="http://"><strong>Cho thuê phòng trọ <?php echo $resultsRoom->ward ?></strong></a></p>
+                              <p>Chuyên mục: <a href="http://"><strong><?php echo $resultsRoom->name_user." ".$resultsRoom->ward ?></strong></a></p>
                               <p class="post-location">
                                   <i class="fa-solid fa-location-dot" style = "color: #1266dd;"></i>
                                   <?php echo $resultsRoom -> apartment_number.', '.$resultsRoom -> street.', '.$resultsRoom -> ward.', '.$resultsRoom -> district.', '.$resultsRoom -> city ?>
@@ -242,7 +242,7 @@
                           </tr>
                           <tr>
                             <td class="name">Khu vực:</td>
-                            <td>Cho thuê phòng trọ <?php echo $resultsRoom -> city ?></td>
+                            <td><?php echo $resultsRoom->name_user." ".$resultsRoom -> city ?></td>
                           </tr>
                           <tr>
                             <td class="name">Loại tin:</td>
@@ -327,7 +327,7 @@
                       <a href="./contact.php" class="btn btn-feedback">Gửi phản hồi</a>
                       <?php $id_user = isset($_SESSION['login']['id'])?$_SESSION['login']['id']:"";
                        if($resultsRoom-> user_id == $id_user){?>
-                        <a href="./user/edit-post.php?id=<?php echo $resultsRoom -> id?>" class="btn btn-feedback">Sửa bài viết</a>
+                        <a href="./user/edit-post.php?id=<?php echo $resultsRoom -> id?>&edit=1" class="btn btn-feedback">Sửa bài viết</a>
                       <?php } ?>
                     </div>
 
@@ -422,7 +422,11 @@
                         <div class="contact">
                           <div class="avatar">
                             <div class="avata-img">
-                              <img src="<?php echo $value -> avatar ?>" alt="">
+                              <?php if(strlen($value -> avatar) != 0){ ?>
+                                <img src="<?php echo $value -> avatar ?>" alt="">
+                              <?php }else{ ?>
+                                <img src="./image/default-user.png" alt="">
+                              <?php }?>
                               <!-- <i class="fa-solid fa-user"></i> -->
                             </div>
                             <span class="author-name"><?php echo $value -> name_user ?></span>
@@ -628,7 +632,7 @@
               <!-- Khu vực tương tự -->
               <section class="section">
                 <div class="section-header">
-                  <h2 class="post_title" style = "font-size:20px">Khu vực Nghệ An</h2>
+                  <h2 class="post_title" style = "font-size:20px">Khu vực <?php echo $cityName?></h2>
                 </div>
                 <ul  class = "category" id = "category">
                   <?php foreach ($resultsCity as $key => $value) {?>
