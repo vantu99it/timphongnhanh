@@ -488,13 +488,13 @@
                       <?php } ?>
                     >
                       <figure class="post-thumb new-post-thumb">
-                        <a href="#" class="clearfix">
+                        <a href="./article-details.php?id=<?php echo $value -> id ?>" class="clearfix">
                           <img src="<?php echo $value -> image_logo?>" alt="">
                         </a>
                       </figure>
                       <div class="post-meta new-post-meta">
                         <h3 class="title">
-                          <a href="#">
+                          <a href="./article-details.php?id=<?php echo $value -> id ?>">
                           <span 
                             <?php if($value->news_type_id == 1){?>
                               class="star star-5"
@@ -567,13 +567,13 @@
                       <?php } ?>
                     >
                       <figure class="post-thumb new-post-thumb">
-                        <a href="#" class="clearfix">
+                        <a href="./article-details.php?id=<?php echo $value -> id ?>" class="clearfix">
                           <img src="<?php echo $value -> image_logo?>" alt="">
                         </a>
                       </figure>
                       <div class="post-meta new-post-meta">
                         <h3 class="title">
-                          <a href="#">
+                          <a href="./article-details.php?id=<?php echo $value -> id ?>">
                           <span 
                             <?php if($value->news_type_id == 1){?>
                               class="star star-5"

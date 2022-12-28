@@ -1,7 +1,9 @@
 <?php
   include './include/connect.php';
   include './include/data.php';
-
+  $queryPrice = $conn->prepare("SELECT * FROM tbl_new_type");
+  $queryPrice->execute();
+  $resultsPrice  = $queryPrice->fetchAll(PDO::FETCH_OBJ);
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +46,7 @@
           <section class="section">
             <div class="section-header">
               <h2 class="post_title">Bảng giá dịch vụ</h2>
-              <p>Thời gian qps dụng từ ngày 10/11/2022</p>
+              <p>Thời gian áp dụng từ ngày 10/11/2022</p>
             </div>
             <div class="section-content" style = "border: 1px solid #ccc;">   
               <div class="section-preface">
@@ -117,42 +119,79 @@
                       <p>Phù hợp khách hàng là công ty/cá nhân sở hữu <strong>hệ thống lớn</strong> có từ 15-20 căn phòng/nhà trở lên hoặc phòng trống quá lâu, thường xuyên đang cần <strong>cho thuê gấp</strong>.</p>
                     </td>
                     <td class="content-item">
-                      <p>- - Phù hợp khách hàng cá nhân/môi giới có 10-15 căn phòng/nhà đang trống thường xuyên, cần cho thuê <strong>nhanh nhất</strong>.</p>
+                      <p>Phù hợp khách hàng cá nhân/môi giới có 10-15 căn phòng/nhà đang trống thường xuyên, cần cho thuê <strong>nhanh nhất</strong>.</p>
                       
                     </td>
                     <td class="content-item">
-                      <p>- Phù hợp khách hàng cá nhân/môi giới có lượng căn trống thường xuyên, cần cho thuê<strong> nhanh hơn</strong>.</p>
+                      <p>Phù hợp khách hàng cá nhân/môi giới có lượng căn trống thường xuyên, cần cho thuê<strong> nhanh hơn</strong>.</p>
                     <td class="content-item">
-                      <p>- Phù hợp loại hình phòng trọ chung chủ, KTX ở ghép hay khách hàng có 1-5 căn phòng/nhà cần cho thuê nhanh, <strong>tiếp cận khách hàng tốt hơn</strong>.</p>
+                      <p>Phù hợp loại hình phòng trọ chung chủ, KTX ở ghép hay khách hàng có 1-5 căn phòng/nhà cần cho thuê nhanh, <strong>tiếp cận khách hàng tốt hơn</strong>.</p>
                     </td>
                     <td class="content-item">
-                      <p>- Phù hợp tất cả các loại hình tuy nhiên lượng tiếp cận khách hàng <strong>  thấp hơn</strong> và cho thuê <strong>chậm hơn</strong> so với tin VIP.</p>
+                      <p>Phù hợp tất cả các loại hình tuy nhiên lượng tiếp cận khách hàng <strong>  thấp hơn</strong> và cho thuê <strong>chậm hơn</strong> so với tin VIP.</p>
                       <p></p>
                     </td>
                   </tr>
                   <tr>
                     <td class="content-item"><strong>Giá ngày</strong></td>
-                    <td class="content-item">
-                      <p class="price">80.000đ</p>
-                      <p class="minimum">(Tối thiểu 5 ngày)</p>
-                    </td>
-                    <td class="content-item">
-                      <p class="price">50.000đ</p>
-                      <p class="minimum">(Tối thiểu 5 ngày)</p>
-                    </td>
-                    <td class="content-item">
-                      <p class="price">30.000đ</p>
-                      <p class="minimum">(Tối thiểu 5 ngày)</p>
-                    </td>
-                    <td class="content-item">
-                      <p class="price">20.000đ</p>
-                      <p class="minimum">(Tối thiểu 5 ngày)</p>
-                    </td>
-                    <td class="content-item">
-                      <p class="price">2.000đ</p>
-                      <p class="minimum">(Tối thiểu 10 ngày)</p>
-                    </td>
-                  </tr>
+                    <?php foreach ($resultsPrice as $key => $value) {?>
+                      <?php if($value -> slug == "VIP-noi-bat"){?>
+                        <td class="content-item">
+                          <p class="price">
+                          <?php
+                              $bien = number_format((int) $value->price,0,",",".");
+                              echo $bien." đ/ngày";
+                            ?>
+                          </p>
+                          <p class="minimum">(Tối thiểu 5 ngày)</p>
+                        </td>
+                      <?php } ?>
+                      <?php if($value -> slug == "VIP-1"){?>
+                        <td class="content-item">
+                          <p class="price">
+                          <?php
+                              $bien = number_format((int) $value->price,0,",",".");
+                              echo $bien." đ/ngày";
+                            ?>
+                          </p>
+                          <p class="minimum">(Tối thiểu 5 ngày)</p>
+                        </td>
+                      <?php } ?>
+                      <?php if($value -> slug == "VIP-2"){?>
+                        <td class="content-item">
+                          <p class="price">
+                          <?php
+                              $bien = number_format((int) $value->price,0,",",".");
+                              echo $bien." đ/ngày";
+                            ?>
+                          </p>
+                          <p class="minimum">(Tối thiểu 5 ngày)</p>
+                        </td>
+                      <?php } ?>
+                      <?php if($value -> slug == "VIP-3"){?>
+                        <td class="content-item">
+                          <p class="price">
+                          <?php
+                              $bien = number_format((int) $value->price,0,",",".");
+                              echo $bien." đ/ngày";
+                            ?>
+                          </p>
+                          <p class="minimum">(Tối thiểu 5 ngày)</p>
+                        </td>
+                      <?php } ?>
+                      <?php if($value -> slug == "thong-thuong"){?>
+                        <td class="content-item">
+                          <p class="price">
+                          <?php
+                              $bien = number_format((int) $value->price,0,",",".");
+                              echo $bien." đ/ngày";
+                            ?>
+                          </p>
+                          <p class="minimum">(Tối thiểu 10 ngày)</p>
+                        </td>
+                      <?php } ?>
+                      <?php } ?>
+                    </tr>
                 </tbody>
               </table>
             </div>

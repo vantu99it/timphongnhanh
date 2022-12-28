@@ -1307,6 +1307,7 @@ tr:nth-child(even) {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 25px;
 }
 .page-division .page-item {
   padding: 10px 16px;

@@ -116,7 +116,7 @@
     $resultsRoomHot = $queryRoomHot->fetchAll(PDO::FETCH_OBJ);
 
     // Gọi ra số lượng bài viết trong chuyên mục
-    $queryCate = $conn->prepare("SELECT ca.name, COUNT(r.category_id) as number FROM tbl_categories ca JOIN tbl_rooms r on r.category_id = ca.id where ca.status = 1 GROUP BY ca.name;");
+    $queryCate = $conn->prepare("SELECT ca.name, ca.slug, COUNT(r.category_id) as number FROM tbl_categories ca JOIN tbl_rooms r on r.category_id = ca.id where ca.status = 1 GROUP BY ca.name;");
     $queryCate->execute();
     $resultsCate  = $queryCate->fetchAll(PDO::FETCH_OBJ);
 ?>
@@ -313,13 +313,13 @@
                                 <?php } ?>
                                 >
                                 <figure class="post-thumb new-post-thumb">
-                                    <a href="#" class="clearfix">
+                                    <a href="./article-details.php?id=<?php echo $value -> id ?>" class="clearfix">
                                     <img src="<?php echo $value -> image_logo?>" alt="">
                                     </a>
                                 </figure>
                                 <div class="post-meta new-post-meta">
                                     <h3 class="title">
-                                    <a href="#">
+                                    <a href="./article-details.php?id=<?php echo $value -> id ?>">
                                     <span 
                                         <?php if($value->news_type_id == 1){?>
                                         class="star star-5"
@@ -392,25 +392,26 @@
                                 <?php } ?>
                                 >
                                 <figure class="post-thumb new-post-thumb">
-                                    <a href="#" class="clearfix">
-                                    <img src="<?php echo $value -> image_logo?>" alt="">
+                                    <a href="./article-details.php?id=<?php echo $value -> id ?>" class="clearfix">
+                                        <img src="<?php echo $value -> image_logo?>" alt="">
                                     </a>
                                 </figure>
                                 <div class="post-meta new-post-meta">
                                     <h3 class="title">
-                                    <a href="#">
-                                    <span 
-                                        <?php if($value->news_type_id == 1){?>
-                                        class="star star-5"
-                                        <?php } if($value->news_type_id == 2){?>
-                                        class="star star-4"
-                                        <?php } if($value->news_type_id == 3){?>
-                                        class="star star-3"
-                                        <?php } if($value->news_type_id == 4){?>
-                                        class="star star-2"
-                                        <?php } ?>
-                                    >
-                                    </span><?php echo $value -> name?> </a>
+                                    <a href="./article-details.php?id=<?php echo $value -> id ?>">
+                                        <span 
+                                            <?php if($value->news_type_id == 1){?>
+                                            class="star star-5"
+                                            <?php } if($value->news_type_id == 2){?>
+                                            class="star star-4"
+                                            <?php } if($value->news_type_id == 3){?>
+                                            class="star star-3"
+                                            <?php } if($value->news_type_id == 4){?>
+                                            class="star star-2"
+                                            <?php } ?>
+                                        >
+                                        </span><?php echo $value -> name?> 
+                                    </a>
                                     </h3>
                                     <div class="detail">
                                     <span class="price">
@@ -464,7 +465,7 @@
                                 <li>
                                 <h2>
                                     <i class="fa-solid fa-check"></i>
-                                    <a href="#"><?php echo $value -> name ?></a>
+                                    <a href="./rooms.php?ca=<?php echo $value->slug?>"><?php echo $value -> name ?></a>
                                 </h2>
                                 <span class="count">(<?php echo $value -> number ?>)</span>
                                 </li>
