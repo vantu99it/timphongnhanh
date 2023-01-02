@@ -121,7 +121,8 @@
                                             }else {
                                                 $bien = number_format($tien,0,",",".");
                                                 echo $bien." đồng/tháng";
-                                            }?>
+                                            }
+                                        ?>
                                     </div>
                                 </td>
                                 <td>

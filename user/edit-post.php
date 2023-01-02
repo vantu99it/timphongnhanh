@@ -87,7 +87,7 @@
             }
             
         }
-        $sql = "UPDATE tbl_rooms SET name = :name, slug = :slug , street = :street , apartment_number = :apartment_number, price = :price, area = :area, contents = :contents, image_logo = :image_logo, subject = :subject, user_id = :user_id, category_id = :category_id, news_type_id = :news_type_id,  time_start = :time_start, time_stop = :time_stop, status = 1 WHERE id = :id";
+        $sql = "UPDATE tbl_rooms SET name = :name, slug = :slug , street = :street , apartment_number = :apartment_number, price = :price, area = :area, contents = :contents, image_logo = :image_logo, subject = :subject, user_id = :user_id, category_id = :category_id, news_type_id = :news_type_id,  time_start = :time_start, time_stop = :time_stop, status = 1, created_ad = now(), updated_ad = now() WHERE id = :id";
         $query= $conn -> prepare($sql);
         $query->bindParam(':name',$title,PDO::PARAM_STR);
         $query->bindParam(':slug',$slug,PDO::PARAM_STR);

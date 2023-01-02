@@ -1,5 +1,4 @@
 <?php
-
   function check_broken_link($url){
       $handle   = curl_init($url);
       if (false === $handle)
@@ -42,14 +41,18 @@
   <body>
       <select name="" id="">
         
-     <?php if ($data === false) {
-          echo '<tr class="danger"><th colspan="5" style="text-align:center"><h5>DỮ LIỆU BỊ LỖI</h5></th></tr>';
+    <?php 
+      if ($data === false) {
+        echo '<tr class="danger"><th colspan="5" style="text-align:center"><h5>DỮ LIỆU BỊ LỖI</h5></th></tr>';
       }
       else {                                      
-          foreach ($data as $key => $value) {
-            if($value->Cap == "TINH"){?>
-              <option value="<?php echo $value->MaDVHC ?>"><?php echo $value->Ten ?></option>
-            <?php } } } ?>
+        foreach ($data as $key => $value) {
+          if($value->Cap == "TINH"){?>
+            <option value="<?php echo $value->MaDVHC ?>"><?php echo $value->Ten ?></option>
+          <?php } 
+        } 
+      } 
+    ?>
       </select>
   </body>
 </html>
