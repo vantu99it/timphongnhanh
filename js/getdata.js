@@ -51,7 +51,7 @@ function getDistrict() {
         var district = data[i];
         var str = ` 
           <option value="${district["id"]}">
-              ${district["name"]} 
+            ${district["name"]} 
           </option>`;
         $("#district").append(str);
       }

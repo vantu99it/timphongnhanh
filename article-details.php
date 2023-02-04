@@ -5,7 +5,7 @@
 
   $id = isset($_GET['id'])?$_GET['id']:'';
   // Gọi ra thông tin bài viết
-  $queryRoom = $conn->prepare("SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,us.facebook,ca.slug AS category_slug,ca.classify AS category_classify,typ.name_type, CURDATE() AS today
+  $queryRoom = $conn->prepare("SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,us.facebook,ca.slug AS category_slug,ca.classify AS category_classify,typ.name_type, ca.name as category_name, CURDATE() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
   JOIN tbl_city ci ON ci.id = r.city_id
   JOIN tbl_district dis ON dis.id = r.district_id
@@ -113,7 +113,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Chi tiết bài đăng</title>
     <!-- link-css -->
     <?php include('./include/link-css.php');?>
     <!-- /link-css -->
@@ -132,7 +132,7 @@
         <div id="post">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="margin: 0;">
-                    <li class="first link"><a href="#"><?php echo $resultsRoom->name_user?></a></li>
+                    <li class="first link"><a href="#"><?php echo $resultsRoom->category_name?></a></li>
                     <li class="link link"><a href="#"><?php echo $resultsRoom -> city?></a></li>
                     <li class="link link"><a href="#"><?php echo $resultsRoom -> district?></a></li>
                     <li class="link last"><a href="#"><?php echo $resultsRoom -> ward?></a></li>
@@ -182,7 +182,7 @@
                                   <?php } ?> 
                                   <?php echo $resultsRoom->name ?></a>
                               </h2>
-                              <p>Chuyên mục: <a href="http://"><strong><?php echo $resultsRoom->name_user." ".$resultsRoom->ward ?></strong></a></p>
+                              <p>Chuyên mục: <a href="http://"><strong><?php echo $resultsRoom->category_name." ".$resultsRoom->ward ?></strong></a></p>
                               <p class="post-location">
                                   <i class="fa-solid fa-location-dot" style = "color: #1266dd;"></i>
                                   <?php echo $resultsRoom -> apartment_number.', '.$resultsRoom -> street.', '.$resultsRoom -> ward.', '.$resultsRoom -> district.', '.$resultsRoom -> city ?>

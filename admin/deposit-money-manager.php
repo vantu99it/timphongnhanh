@@ -1,6 +1,7 @@
 <?php 
     include './include/connect.php';
     include '../include/func-slug.php';
+     date_default_timezone_set("Asia/Ho_Chi_Minh");
 
     // Gọi ra thông tin giao dịch
     $queryDep = $conn->prepare("SELECT dep.*, us.username FROM tbl_deposit_money dep JOIN tbl_user us ON us.id = dep.user_id ORDER BY dep.status ASC, dep.created_at DESC");
