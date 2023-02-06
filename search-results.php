@@ -46,15 +46,17 @@
       JOIN tbl_categories ca  ON ca.id = r.category_id
       JOIN tbl_city city ON city.id = r.city_id
       JOIN tbl_district dis ON dis.id = r.district_id
-      WHERE r.category_id = :category AND r.city_id = :city AND r.district_id = :district");
+      WHERE r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.status = 2");
       $queryInfo->bindParam(':category',$categories,PDO::PARAM_STR);
       $queryInfo->bindParam(':city',$city,PDO::PARAM_STR);
       $queryInfo->bindParam(':district',$district,PDO::PARAM_STR);
       $queryInfo->execute();
       $resultsInfo = $queryInfo->fetch(PDO::FETCH_OBJ);
-      $nameCategory = $resultsInfo -> category;
-      $nameCity = $resultsInfo -> city;
-      $nameDistrict = $resultsInfo -> district;
+      if($queryInfo -> rowCount()>0){
+        $nameCategory = $resultsInfo -> category;
+        $nameCity = $resultsInfo -> city;
+        $nameDistrict = $resultsInfo -> district;
+      }
 
     }
     //kết quả khi tìm kiếm theo danh mục + tỉnh + huyện + khoảng giá
@@ -199,15 +201,17 @@
       JOIN tbl_categories ca  ON ca.id = r.category_id
       JOIN tbl_city city ON city.id = r.city_id
       JOIN tbl_district dis ON dis.id = r.district_id
-      WHERE r.category_id = :category AND r.city_id = :city AND r.district_id = :district");
+      WHERE r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.status = 2");
       $queryInfo->bindParam(':category',$categories,PDO::PARAM_STR);
       $queryInfo->bindParam(':city',$city,PDO::PARAM_STR);
       $queryInfo->bindParam(':district',$district,PDO::PARAM_STR);
       $queryInfo->execute();
       $resultsInfo = $queryInfo->fetch(PDO::FETCH_OBJ);
-      $nameCategory = $resultsInfo -> category;
-      $nameCity = $resultsInfo -> city;
-      $nameDistrict = $resultsInfo -> district;
+      if($queryInfo -> rowCount()>0){
+        $nameCategory = $resultsInfo -> category;
+        $nameCity = $resultsInfo -> city;
+        $nameDistrict = $resultsInfo -> district;
+      }
     }
     //kết quả khi tìm kiếm theo danh mục + khoảng giá
      elseif($categories >= 1 && $city == 1 && $district == 0 && $price != 0){
@@ -342,11 +346,13 @@
       JOIN tbl_categories ca  ON ca.id = r.category_id
       JOIN tbl_city city ON city.id = r.city_id
       JOIN tbl_district dis ON dis.id = r.district_id
-      WHERE r.category_id = :category ");
+      WHERE r.category_id = :category AND r.status = 2 ");
       $queryInfo->bindParam(':category',$categories,PDO::PARAM_STR);
       $queryInfo->execute();
       $resultsInfo = $queryInfo->fetch(PDO::FETCH_OBJ);
-      $nameCategory = $resultsInfo -> category;
+      if($queryInfo -> rowCount()>0){
+        $nameCategory = $resultsInfo -> category;
+      }
     }
     //kết quả khi tìm kiếm theo danh mục 
     else{
@@ -377,11 +383,13 @@
       JOIN tbl_categories ca  ON ca.id = r.category_id
       JOIN tbl_city city ON city.id = r.city_id
       JOIN tbl_district dis ON dis.id = r.district_id
-      WHERE r.category_id = :category ");
+      WHERE r.category_id = :category AND r.status = 2 ");
       $queryInfo->bindParam(':category',$categories,PDO::PARAM_STR);
       $queryInfo->execute();
       $resultsInfo = $queryInfo->fetch(PDO::FETCH_OBJ);
-      $nameCategory = $resultsInfo -> category;
+      if($queryInfo -> rowCount()>0){
+        $nameCategory = $resultsInfo -> category;
+      }
     }
     // Tính phân trang
       $totalPages = $queryRoom ->rowCount();
@@ -420,7 +428,7 @@
         <!--main-content -->
         <div id="post">
           <div class="post-header">
-              <h1 class="page-title">Kết quả tìm kiếm cho <?php echo $nameCategory ?> <?php echo (isset($nameCity) && isset($nameDistrict))? ", ".$nameDistrict.", ".$nameCity:""?> <?php echo isset($price_range)? ", ".$price_range:""?></h1>
+              <h1 class="page-title"><?php echo isset($nameCategory)? "Kết quả tìm kiếm cho ".$nameCategory : "Không có kết quả tìm kiếm hoặc các bài viết đã hết hạn!" ?> <?php echo (isset($nameCity) && isset($nameDistrict))? "- ".$nameDistrict.", ".$nameCity:""?> <?php echo (isset($price_range) && isset($nameCategory))? "- ".$price_range:""?></h1>
               <p class="page-description">Kênh thông tin Phòng Trọ số 1 Việt Nam - Website đăng tin cho thuê phòng trọ, nhà nguyên căn, căn hộ, ở ghép nhanh, hiệu quả với 100.000+ tin đăng và 2.500.000 lượt xem mỗi tháng.</p>
           </div>
          
@@ -432,7 +440,8 @@
                   <h2 class="post_title"><?php echo ($totalPages > 0) ? " Danh sách tin đăng" : "Không có kết quả" ?></h2>
                 </div>
                 <ul class="post-listing">
-                  <?php foreach ($resultsRoom as $key => $value) { 
+                  <?php if($totalPages > 0){
+                   foreach ($resultsRoom as $key => $value) { 
                     if($key >= ($item_per_page*($current_page-1)) && $key <= ($item_per_page*$current_page-1)){?>
                     <li 
                       <?php if($value->news_type_id == 1){?>
@@ -536,7 +545,7 @@
                         </div>
                       </div>
                     </li>
-                    <?php } }?>
+                    <?php } } }?>
                 </ul>
               </section> 
               <!-- phân trang -->

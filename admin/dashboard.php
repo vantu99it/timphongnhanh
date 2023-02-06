@@ -3,12 +3,12 @@
     include '../include/func-slug.php';
 
     // Đếm số bài chưa thanh toán
-    $queryUnpaid = $conn->prepare("SELECT r.* FROM tbl_rooms r JOIN tbl_payment_history pay on pay.id_rooms = r.id WHERE pay.pay_status = 0 and  r.status = 1");
+    $queryUnpaid = $conn->prepare("SELECT r.* FROM tbl_rooms r JOIN tbl_payment_history pay on pay.id_rooms = r.id WHERE pay.pay_status = 0 and  r.status = 1 and pay.expired = 0");
     $queryUnpaid->execute();
     $countUnpaid = $queryUnpaid->rowCount();
 
     // Đếm số bài chưa duyệt
-    $queryPending = $conn->prepare("SELECT r.* FROM tbl_rooms r JOIN tbl_payment_history pay on pay.id_rooms = r.id WHERE pay.pay_status = 1 and  r.status = 1");
+    $queryPending = $conn->prepare("SELECT r.* FROM tbl_rooms r JOIN tbl_payment_history pay on pay.id_rooms = r.id WHERE pay.pay_status = 1 and  r.status = 1 and pay.expired = 0");
     $queryPending->execute();
     $countPending = $queryPending->rowCount();
 
