@@ -15,14 +15,16 @@
         $slug = vn2en($name);
         $classify = $_POST['classify'];
         $title = $_POST['title'];
+        $type = $_POST['type'];
         $description = $_POST['description'];
         // var_dump($name); die();
-        $sql = "INSERT INTO tbl_categories(name,classify,slug,title,description) value(:name,:classify,:slug,:title,:description)";
+        $sql = "INSERT INTO tbl_categories(name,classify,slug,title,description,type) value(:name,:classify,:slug,:title,:description,:type)";
         $query= $conn -> prepare($sql);
         $query->bindParam(':name',$name,PDO::PARAM_STR);
         $query->bindParam(':classify',$classify,PDO::PARAM_STR);
         $query->bindParam(':slug',$slug,PDO::PARAM_STR);
         $query->bindParam(':title',$title,PDO::PARAM_STR);
+        $query->bindParam(':type',$type,PDO::PARAM_STR);
         $query->bindParam(':description',$description,PDO::PARAM_STR);
         $query->execute();
         $lastInsertId = $conn->lastInsertId();
@@ -46,15 +48,17 @@
         $slug = vn2en($name);
         $classify = $_POST['classify'];
         $title = $_POST['title'];
+        $type = $_POST['type'];
         $description = $_POST['description'];
         $status = $_POST['status'];
         
-        $sql = "UPDATE tbl_categories SET name = :name,classify = :classify,slug = :slug,title = :title,description = :description, status = :status WHERE id = $updateId ";
+        $sql = "UPDATE tbl_categories SET name = :name,classify = :classify,slug = :slug,title = :title, type = :type,description = :description, status = :status WHERE id = $updateId ";
         $query= $conn -> prepare($sql);
         $query->bindParam(':name',$name,PDO::PARAM_STR);
         $query->bindParam(':classify',$classify,PDO::PARAM_STR);
         $query->bindParam(':slug',$slug,PDO::PARAM_STR);
         $query->bindParam(':title',$title,PDO::PARAM_STR);
+        $query->bindParam(':type',$type,PDO::PARAM_STR);
         $query->bindParam(':description',$description,PDO::PARAM_STR);
         $query->bindParam(':status',$status,PDO::PARAM_STR);
         $query->execute();
@@ -132,10 +136,11 @@
                     <thead>
                         <tr>
                             <th style="width: 5%;" >STT</th>
-                            <th style="width: 15%;" >Tên chuyên mục</th>
-                            <th style="width: 15%;" >Phân loại</th>
-                            <th style="width: 23%;" >Tiêu đề</th>
-                            <th style="width: 25%;" >Mô tả</th>
+                            <th style="width: 12%;" >Tên chuyên mục</th>
+                            <th style="width: 12%;" >Phân loại</th>
+                            <th style="width: 12%;" >Menu hiển thị</th>
+                            <th style="width: 20%;" >Tiêu đề</th>
+                            <th style="width: 22%;" >Mô tả</th>
                             <th style="width: 8%;" >Trạng thái</th>
                             <th style="width: 10%;" >Hành động</th>
                         </tr>
@@ -150,6 +155,9 @@
                                 </td>
                                 <td style="text-align: left; ">
                                     <p><?php echo $value -> classify ?></p>
+                                </td>
+                                <td>
+                                    <p><?php echo $value -> type ?></p>
                                 </td>
                                 <td>
                                     <p><?php echo $value -> title ?></p>
@@ -199,6 +207,11 @@
                         <span class="form-message"></span>
                     </div>
                     <div class="form-contact form-validator ">
+                        <lable class="contact-title">Hiển thị menu</lable>
+                        <input type="text" name="type"  id="type">
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="form-contact form-validator ">
                         <lable class="contact-title">Mô tả</lable>
                         <textarea name="description" id="description" cols="30" rows="3"></textarea>
                         <span class="form-message"></span>
@@ -230,6 +243,11 @@
                     <div class="form-contact form-validator ">
                         <lable class="contact-title">Tiêu đề</lable>
                         <input type="text" name="title"  id="title"  value = "<?php echo $resultsUpdate->title ?>">
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="form-contact form-validator ">
+                        <lable class="contact-title">Hiển thị menu</lable>
+                        <input type="text" name="type"  id="type" value = "<?php echo $resultsUpdate->type ?>">
                         <span class="form-message"></span>
                     </div>
                     <div class="form-contact form-validator ">

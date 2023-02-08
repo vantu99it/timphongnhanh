@@ -6,6 +6,7 @@
     // Lấy thông tin bài viết
     if(isset($_GET['id'])){
     $id = $_GET['id'];
+
     $queryRoom= $conn -> prepare("SELECT * FROM tbl_rooms WHERE id = :id");
     $queryRoom-> bindParam(':id', $id, PDO::PARAM_STR);
     $queryRoom-> execute();
@@ -22,6 +23,7 @@
 
     // lấy thông tin user
     $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
+
     $queryUser = $conn->prepare("SELECT * FROM tbl_user WHERE id = :id");
     $queryUser-> bindParam(':id', $id_user, PDO::PARAM_STR);
     $queryUser->execute();
@@ -46,6 +48,7 @@
     $queryPaymentHis-> execute();
     $resultsPaymentHis = $queryPaymentHis->fetch(PDO::FETCH_OBJ);
     $idPaymentHis =  $resultsPaymentHis->id;
+    
     //tạo paycode
     $pay_code = "TPN-KH".$id_user."-BĐ".$id."/".$resultsType ->slug."/".$date."d";
 

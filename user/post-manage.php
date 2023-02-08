@@ -137,7 +137,7 @@
                                             </a>
                                         <?php }?>
                                         <?php if($value->status == 3){?>
-                                            <a href="edit-post.php?id=<?php echo $value-> id?>&giahan=1" class="btn-hide" style = "color: #37a344;">
+                                            <a href="edit-post.php?id=<?php echo $value-> id?>&giahan=1" class="btn-hide" style = "color: blue;">
                                                 <i class="fa-solid fa-cloud-arrow-up"></i>
                                                 Gia hạn
                                             </a>
@@ -175,7 +175,7 @@
                                     <div class="post_date">Kết thúc: <?php echo $value-> time_stop?></div>
                                 </td>
                                 <td>
-                                    <?php if($value->pay_status == 0){?>
+                                    <?php if($value->pay_status == 0 ){?>
                                         <p style = "color: #000;">Khởi tạo</p>
                                     <?php }?>
                                     <?php if($value->pay_status == 1 && $value->status == 1){?>

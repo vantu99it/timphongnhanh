@@ -294,7 +294,7 @@ body {
   background-position: center;
   -webkit-background-size: cover;
   position: relative;
-  height: 625px;
+  min-height: 694px;
   color: #fff;
   text-align: center;
 }

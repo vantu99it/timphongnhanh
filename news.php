@@ -1,7 +1,6 @@
 <?php
   include './include/connect.php';
   include './include/data.php';
-  include './include/breadcrumb.php';
 ?>
 
 <!DOCTYPE html>
@@ -27,12 +26,9 @@
 
     <div id="main">
       <div class="container">
-        <!-- search -->
-        <?php include('./include/search.php');?>
-        <!-- /search -->
         <!--main-content -->
-        
-        <p><?= breadcrumbs(' > ') ?></p>
+        <div id="post" style = "margin: 25px 0">
+        </div>
         <!-- main-content -->
         <!-- why-support -->
         <?php include('./include/why-support.php');?>

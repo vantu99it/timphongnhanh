@@ -1,6 +1,6 @@
 <?php
 include 'connect.php';
-$id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
+    $id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
     if(isset($_SESSION['login']['id'])){
         $id = $_SESSION['login']['id'];
         $query= $conn -> prepare("SELECT * FROM tbl_user WHERE id = :id");
@@ -20,6 +20,9 @@ $id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
             
         }
     }
+    $queryCate= $conn -> prepare("SELECT * FROM tbl_categories WHERE status = 1");
+    $queryCate-> execute();
+    $resultsCate = $queryCate->fetchAll(PDO::FETCH_OBJ);
 ?>
 <div id="header">
     <nav class="header-top">
@@ -90,13 +93,12 @@ $id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
         <div class="container">
             <ul class="navbar-menu">
                 <li class="navbar-item"><a href="./home.php" class="navlist active">Trang chủ</a></li>
-                <li class="navbar-item"><a href="./rooms.php?ca=Cho-thue-phong-tro" class="navlist">Cho thuê phòng trọ</a></li>
-                <li class="navbar-item"><a href="./rooms.php?ca=Nha-cho-thue" class="navlist" >Nhà cho thuê</a></li>
-                <li class="navbar-item"><a href="./rooms.php?ca=Cho-thue-can-ho" class="navlist" >Cho thuê căn hộ</a></li>
-                <li class="navbar-item"><a href="./rooms.php?ca=Cho-thue-Homestay" class="navlist" >Cho thuê homestay</a></li>
-                <li class="navbar-item"><a href="./rooms.php?ca=Tim-nguoi-o-ghep" class="navlist" >Tìm người ở ghép</a></li>
+                <?php foreach ($resultsCate as $key => $value) {?>
+                <li class="navbar-item"><a href="./rooms.php?ca=<?php echo $value -> slug ?>" class="navlist"><?php echo $value -> type ?></a></li>
+                <?php } ?>
                 <li class="navbar-item"><a href="./news.php" class="navlist" >Tin tức</a></li>
                 <li class="navbar-item"><a href="./price-list.php" class="navlist" >Bảng giá</a></li>
+                <li class="navbar-item"><a href="./contact.php" class="navlist" >Liên hệ</a></li>
             </ul>
         </div>
     </nav>

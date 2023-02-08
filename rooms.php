@@ -10,6 +10,7 @@
     $queryCategory-> bindParam(':slug', $slug, PDO::PARAM_STR);
     $queryCategory->execute();
     $resultsCategory = $queryCategory->fetch(PDO::FETCH_OBJ);
+    
 
     // Gọi ra các bài viết theo từng loại tin 
     $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
@@ -116,9 +117,10 @@
     $resultsRoomHot = $queryRoomHot->fetchAll(PDO::FETCH_OBJ);
 
     // Gọi ra số lượng bài viết trong chuyên mục
-    $queryCate = $conn->prepare("SELECT ca.name, ca.slug, COUNT(r.category_id) as number FROM tbl_categories ca JOIN tbl_rooms r on r.category_id = ca.id where ca.status = 1 GROUP BY ca.name;");
+    $queryCate = $conn->prepare("SELECT ca.name as nameCate, ca.slug, COUNT(r.category_id) as number FROM tbl_categories ca JOIN tbl_rooms r on r.category_id = ca.id where ca.status = 1 GROUP BY ca.name");
     $queryCate->execute();
-    $resultsCate  = $queryCate->fetchAll(PDO::FETCH_OBJ);
+    $resultsCates  = $queryCate->fetchAll(PDO::FETCH_OBJ);
+    // var_dump($resultsCate); die();
 ?>
 
 <!DOCTYPE html>
@@ -461,13 +463,13 @@
                             <h2 class="post_title" style = "font-size:20px">Danh mục cho thuê</h2>
                             </div>
                             <ul  class = "category" id = "category">
-                            <?php foreach ($resultsCate as $key => $value) { ?>
+                            <?php foreach ($resultsCates as $key => $value) {?>
                                 <li>
-                                <h2>
-                                    <i class="fa-solid fa-check"></i>
-                                    <a href="./rooms.php?ca=<?php echo $value->slug?>"><?php echo $value -> name ?></a>
-                                </h2>
-                                <span class="count">(<?php echo $value -> number ?>)</span>
+                                    <h2>
+                                        <i class="fa-solid fa-check"></i>
+                                        <a href="./rooms.php?ca=<?php echo $value->slug?>"><?php echo $value -> nameCate?></a>
+                                    </h2>
+                                    <span class="count">(<?php echo $value -> number ?>)</span>
                                 </li>
                             <?php } ?>
                             </ul>
