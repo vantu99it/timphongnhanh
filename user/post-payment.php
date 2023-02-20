@@ -88,7 +88,7 @@
             }
         }
         if($pay == 'vnpay'){
-            header('location: post-payment-vnpay.php?id='.$id);
+            header('location: ./post-payment-vnpay.php?id='.$id);
             $_SESSION['pay']['pay-code'] =  $pay_code;
             $_SESSION['pay']['id-post'] =  $id;
             $_SESSION['pay']['id-user'] =  $id_user;
