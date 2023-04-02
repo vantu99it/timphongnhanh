@@ -6,7 +6,7 @@
   $ok= "";
 
     $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
-    $queryRoom = $conn->prepare("SELECT r.*, ca.classify, pay.pay_status, ci.fullname as city, dis.fullname as district, wa.fullname as ward, us.fullname as fullname, us.phone FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id join tbl_user us on us.id = r.user_id WHERE pay.pay_status = 0 and  r.status = 1");
+    $queryRoom = $conn->prepare("SELECT r.*, ca.classify, pay.pay_status, ci.fullname as city, dis.fullname as district, wa.fullname as ward, us.fullname as fullname, us.phone FROM tbl_rooms r join tbl_categories ca on ca.id = r.category_id join tbl_payment_history pay on pay.id_rooms = r.id join tbl_city ci on ci.id = r.city_id join tbl_district dis on dis.id = r.district_id join tbl_ward wa on wa.id = r.ward_id join tbl_user us on us.id = r.user_id WHERE pay.pay_status = 0 and  r.status = 1 and r.user_id = :user_id");
     $queryRoom-> bindParam(':user_id', $id_user, PDO::PARAM_STR);
     $queryRoom->execute();
     $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
