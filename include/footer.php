@@ -53,7 +53,7 @@
     
     </div>
     <div class="copyright">
-        <p>Copyright © Đồ án chuyên ngành - Nguyễn Văn Tú</p>
+        <p>Copyright © Đồ án tốt nghiệp ngành CNTT - Nguyễn Văn Tú</p>
     </div>
     <div title="Về đầu trang" id="top-up">
     <i class="fa-solid fa-plane-up"></i>
@@ -65,6 +65,7 @@
     type="text/javascript"
     src="https://code.jquery.com/jquery-1.11.0.min.js"
 ></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 <script
     type="text/javascript"
     src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"

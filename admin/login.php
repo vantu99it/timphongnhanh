@@ -24,8 +24,7 @@
                 $_SESSION['loginAdmin']['fullname']= $results->fullname;
                 $_SESSION['loginAdmin']['email']= $results->email;
                 $_SESSION['loginAdmin']['phone']= $results->phone;
-                $_SESSION['loginAdmin']['address']= $results->address;
-                header('location: dashboard.php');
+                header('location: ./dashboard.php');
             }else {
                 $err = "1";
             }
@@ -38,7 +37,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style = "height:100%">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -196,10 +196,11 @@ Validator.isUserName = function (selector, message) {
   return {
     selector: selector,
     test: function (value) {
-      var regex = /^(?=.*?[0-9])(?=.*?[a-zA-Z])/;
-      return regex.test(value)
+      var regex = /^[A-Za-z0-9]+$/;
+      return regex.test(value) && !/\s/.test(value)
         ? undefined
-        : message || "Trường này chỉ chấp nhận số và chữ cái";
+        : message ||
+            "Trường này chỉ chấp nhận chữ cái không dấu hoặc chữ cái và số, không chứa khoảng trống";
     },
   };
 };

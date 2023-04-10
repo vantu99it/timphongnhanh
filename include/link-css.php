@@ -1,5 +1,7 @@
-<!-- bootstrap -->
-<link
+    <!-- jquery  -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <!-- bootstrap -->
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
@@ -13,4 +15,5 @@
     />
     <link rel="stylesheet" href="./libs/fontawesome/css/all.min.css" />
     <link rel="stylesheet" href="./css/style-notification.css">
+    <link rel="stylesheet" href="./css/style-tabs.css">
     <link rel="stylesheet" href="./css/style.css" />

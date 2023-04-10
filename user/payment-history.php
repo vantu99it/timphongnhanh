@@ -104,8 +104,12 @@
                                     <?php if($value->payments == 'account'){?>
                                         <p>Trừ tiền tài khoản</p>
                                     <?php }?>
-                                    <?php if(strcmp($value->payments, 'VNPAY-') > 1){?>
-                                        <p>Qua <?php echo $value->payments ?></p>
+                                    <?php 
+                                        $str1 = $value->payments;
+                                        $str2 = 'VNPAY-';
+                                        $sub_str1 = substr($str1, 0, strlen($str2));
+                                        if($sub_str1 == $str2){?>
+                                        <p>Qua <?php echo $str1 ?></p>
                                     <?php }?>
                                 </td>
                                 <td>

@@ -115,8 +115,13 @@
                             </div>
                             <div class="form-contact form-validator ">
                                 <lable class="contact-title">Mật khẩu</lable>
-                                <input type="password" name="password" id="password" placeholder="VD: Timphong123@">
-                                <span class="form-message"></span>
+                                <input type="password" name="password" id="password-new" placeholder="VD: Timphong123@" oninput="checkInput()">
+                                <div id="error1" style="display: none;"></div>
+                                <div id="error2" style="display: none;"></div>
+                                <div id="error3" style="display: none;"></div>
+                                <div id="error4" style="display: none;"></div>
+                                <div id="error5" style="display: none;"></div>
+                                <!-- <span class="form-message"></span> -->
                             </div>
 
                             <div class="form-contact form-validator ">
@@ -141,7 +146,7 @@
                                 <span class="form-message"></span>
                             </div>                            
                             <div class="form-contact">
-                                <input type="submit" name = "submit-form" value="Đăng ký" class="btn btn-login">
+                                <input type="submit" name = "submit-form" value="Đăng ký" class="btn btn-login" id = "submit">
                             </div>
                         </form>
                         <div class="form-footer">
@@ -170,14 +175,14 @@
                 Validator.isRequired('#username'), 
                 Validator.minLength('#username',4,'Tên đăng nhập phải chứa ít nhất 4 ký tự'), 
                 Validator.maxLength('#username',20,'Tên đăng nhập chứa tối đa 20 ký tự'), 
-                Validator.isUserName('#username', 'Tên đăng nhập chỉ bao gồm chữ cái và số'), 
+                Validator.isUserName('#username', 'Tên đăng nhập chỉ bao gồm chữ cái, số, không chứa khoảng trống'), 
 
-                Validator.isRequired('#password'),
-                Validator.isPassword('#password',6, 30),
+                // Validator.isRequired('#password-new'),
+                // Validator.isPassword('#password',6, 30),
 
                 Validator.isRequired('#password-confirmation'),
                 Validator.isConfirmed('#password-confirmation', function (){
-                    return document.querySelector('#frm-register #password').value;
+                    return document.querySelector('#frm-register #password-new').value;
                 }, 'Mật khẩu không trùng khớp'),
 
                 Validator.isRequired('#fullname'),
@@ -189,6 +194,9 @@
                 Validator.isEmail('#email'),
             ],
         });
+
+
     </script>
+
   </body>
 </html>

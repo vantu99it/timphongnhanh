@@ -1,6 +1,6 @@
 <?php
 include 'connect.php';
-    $id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
+    // $id = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
     if(isset($_SESSION['login']['id'])){
         $id = $_SESSION['login']['id'];
         $query= $conn -> prepare("SELECT * FROM tbl_user WHERE id = :id");

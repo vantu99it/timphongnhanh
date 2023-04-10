@@ -1,9 +1,7 @@
 <?php
-$name = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
 
 if(isset($_SESSION['login']['id'])){
-    $sql = "SELECT * FROM tbl_user WHERE id = :id";
-    $query= $conn -> prepare($sql);
+    $query= $conn -> prepare("SELECT * FROM tbl_user WHERE id = :id");
     $query-> bindParam(':id', $_SESSION['login']['id'], PDO::PARAM_STR);
     $query-> execute();
     $results = $query->fetch(PDO::FETCH_OBJ);

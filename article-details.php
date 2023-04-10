@@ -142,148 +142,173 @@
             <div class="col-8">
               <!-- Chi tiết bài viết -->
               <div id="article-detail" class=" section article-detail">
-                  <div class="image-slider slider-detail">
+                <div class="image-slider slider-detail">
+                  <div class="image-item image-item-detail">
+                      <div class="image image-detail">
+                          <img src="<?php echo $resultsRoom -> image_logo?>" alt="slider1"/>
+                      </div>
+                  </div>
+                  <?php foreach ($resultsRoomImg as $key => $value) { ?>
                     <div class="image-item image-item-detail">
                         <div class="image image-detail">
-                            <img src="<?php echo $resultsRoom -> image_logo?>" alt="slider1"/>
+                            <img src="<?php echo $value -> image?>" alt="slider1" />
                         </div>
                     </div>
-                    <?php foreach ($resultsRoomImg as $key => $value) { ?>
-                      <div class="image-item image-item-detail">
-                          <div class="image image-detail">
-                              <img src="<?php echo $value -> image?>" alt="slider1" />
-                          </div>
-                      </div>
-                    <?php } ?>
-                  </div>
-                  <div 
-                  <?php if($resultsRoom->news_type_id == 1){?>
-                    class="post-detail post-vip vip-hot"
-                  <?php } if($resultsRoom->news_type_id == 2){?>
-                    class="post-detail post-vip vip-1"
-                  <?php } if($resultsRoom->news_type_id == 3){?>
-                    class="post-detail post-vip vip-2"
-                  <?php } if($resultsRoom->news_type_id == 4){?>
-                    class="post-detail post-vip vip-3"
                   <?php } ?>
-                  >
-                      <div class="detail-info">
-                          <div class="post-meta">
-                              <h2 class="title">
-                                  <a href="#">
-                                  <?php if($resultsRoom->news_type_id == 1){?>
-                                    <span class="star star-detail star-5"></span>
-                                  <?php } if($resultsRoom->news_type_id == 2){?>
-                                    <span class="star star-detail star-4"></span>
-                                  <?php } if($resultsRoom->news_type_id == 3){?>
-                                    <span class="star star-detail star-3"></span>
-                                  <?php } if($resultsRoom->news_type_id == 4){?>
-                                    <span class="star star-detail star-2"></span>
-                                  <?php } ?> 
-                                  <?php echo $resultsRoom->name ?></a>
-                              </h2>
-                              <p>Chuyên mục: <a href="http://"><strong><?php echo $resultsRoom->category_name." ".$resultsRoom->ward ?></strong></a></p>
-                              <p class="post-location">
-                                  <i class="fa-solid fa-location-dot" style = "color: #1266dd;"></i>
-                                  <?php echo $resultsRoom -> apartment_number.', '.$resultsRoom -> street.', '.$resultsRoom -> ward.', '.$resultsRoom -> district.', '.$resultsRoom -> city ?>
-                              </p>
-                              <div class="detail">
-                                  <span class="price"><i class="fa-solid fa-circle-dollar-to-slot"></i>
-                                  <?php
-                                    $tien = (int) $resultsRoom->price;
-                                    $bien =0;
-                                    if(strlen($tien)>=7){
-                                      $bien =  $tien/1000000;
-                                      echo $bien.(($resultsRoom -> category_slug == "Cho-thue-Homestay")?" triệu/ngày":" triệu/tháng");
-                                    }else {
-                                      $bien = number_format($tien,0,",",".");
-                                      echo $bien.(($resultsRoom -> category_slug == "Cho-thue-Homestay")?" đ/ngày":" đ/tháng");
-                                    }
-                                  ?>
-                                  </span>
-                                  <span class="area mg-25 "><i class="fa-solid fa-expand"></i><?php echo $resultsRoom -> area ?>m&#178;</span>
-                                  <span class="detail-time mg-25 "><i class="fa-regular fa-clock"></i>
-                                  <?php 
-                                    $time = time() - strtotime($resultsRoom->created_ad);
-                                    if(floor($time/60/60/24)==0){
-                                      if(floor($time/60/60)==0){
-                                        echo(ceil($time/60)." phút trước");
-                                      }else{
-                                        echo(floor($time/60/60)." tiếng trước");
-                                      }
+                </div>
+                <div 
+                <?php if($resultsRoom->news_type_id == 1){?>
+                  class="post-detail post-vip vip-hot"
+                <?php } if($resultsRoom->news_type_id == 2){?>
+                  class="post-detail post-vip vip-1"
+                <?php } if($resultsRoom->news_type_id == 3){?>
+                  class="post-detail post-vip vip-2"
+                <?php } if($resultsRoom->news_type_id == 4){?>
+                  class="post-detail post-vip vip-3"
+                <?php } ?>
+                >
+                    <div class="detail-info">
+                        <div class="post-meta">
+                            <h2 class="title">
+                                <a href="#">
+                                <?php if($resultsRoom->news_type_id == 1){?>
+                                  <span class="star star-detail star-5"></span>
+                                <?php } if($resultsRoom->news_type_id == 2){?>
+                                  <span class="star star-detail star-4"></span>
+                                <?php } if($resultsRoom->news_type_id == 3){?>
+                                  <span class="star star-detail star-3"></span>
+                                <?php } if($resultsRoom->news_type_id == 4){?>
+                                  <span class="star star-detail star-2"></span>
+                                <?php } ?> 
+                                <?php echo $resultsRoom->name ?></a>
+                            </h2>
+                            <p>Chuyên mục: <a href="http://"><strong><?php echo $resultsRoom->category_name." ".$resultsRoom->ward ?></strong></a></p>
+                            <p class="post-location">
+                                <i class="fa-solid fa-location-dot" style = "color: #1266dd;"></i>
+                                <?php echo $resultsRoom -> apartment_number.', '.$resultsRoom -> street.', '.$resultsRoom -> ward.', '.$resultsRoom -> district.', '.$resultsRoom -> city ?>
+                            </p>
+                            <div class="detail">
+                                <span class="price"><i class="fa-solid fa-circle-dollar-to-slot"></i>
+                                <?php
+                                  $tien = (int) $resultsRoom->price;
+                                  $bien =0;
+                                  if(strlen($tien)>=7){
+                                    $bien =  $tien/1000000;
+                                    echo $bien.(($resultsRoom -> category_slug == "Cho-thue-Homestay")?" triệu/ngày":" triệu/tháng");
+                                  }else {
+                                    $bien = number_format($tien,0,",",".");
+                                    echo $bien.(($resultsRoom -> category_slug == "Cho-thue-Homestay")?" đ/ngày":" đ/tháng");
+                                  }
+                                ?>
+                                </span>
+                                <span class="area mg-25 "><i class="fa-solid fa-expand"></i><?php echo $resultsRoom -> area ?>m&#178;</span>
+                                <span class="detail-time mg-25 "><i class="fa-regular fa-clock"></i>
+                                <?php 
+                                  $time = time() - strtotime($resultsRoom->created_ad);
+                                  if(floor($time/60/60/24)==0){
+                                    if(floor($time/60/60)==0){
+                                      echo(ceil($time/60)." phút trước");
                                     }else{
-                                      echo(floor($time/60/60/24)." ngày trước");
+                                      echo(floor($time/60/60)." tiếng trước");
                                     }
-                                  ?>
-                                  </span>
-                                  <span class="detail-id mg-25 "><i class="fa-solid fa-hashtag"></i><?php echo $resultsRoom -> id ?></span>
-                              </div> 
-                          </div>
-                      </div>
-                  </div>
-                  <section class="post-content mg-0-15">
+                                  }else{
+                                    echo(floor($time/60/60/24)." ngày trước");
+                                  }
+                                ?>
+                                </span>
+                                <span class="detail-id mg-25 "><i class="fa-solid fa-hashtag"></i><?php echo $resultsRoom -> id ?></span>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <!-- tabs -->
+                <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
+                  <input type="radio" name="pcss3t" checked  id="tab1"class="tab-content-first">
+                  <label for="tab1"><i class="fa-solid fa-house-signal"></i><span> Chi tiết</span></label>
+                  
+                  <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
+                  <label for="tab2"><i class="fa-solid fa-phone-volume"></i><span>Liên hệ</span></label>
+                  
+                  <input type="radio" name="pcss3t" id="tab3" class="tab-content-3">
+                  <label for="tab3"><i class="fa-solid fa-house-lock"></i><span>Thông tin bài đăng</span></label>
+                  
+                  <input type="radio" name="pcss3t" id="tab5" class="tab-content-last">
+                  <label for="tab5"><i class="fa-solid fa-location-dot"></i><span>Bản đồ</span></label>
+                  
+                  <ul>
+                    <li class="tab-content tab-content-first typography">
                       <div class="section-header pd-10-0  ">
-                          <h2 class="section-title">Mô tả chi tiết</h2>
+                        <h2 class="section-title">Mô tả chi tiết</h2>
                       </div>
                       <div class="section-content" style ="margin: 0; padding: 0 0 0 10px;">
                         <?php echo $resultsRoom -> contents?>
                       </div>
-                  </section>
-                  <section class="section-overview mg-0-15">
-                    <div class="section-header pd-10-0  ">
-                      <h2 class="section-title">Thông tin bài đăng</h2>
-                    </div>
-                    <div class="section-content" style ="margin: 0; padding: 0 0 0 10px;">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td class="name">Mã tin:</td>
-                            <td>#<?php echo $resultsRoom -> id ?></td>
-                          </tr>
-                          <tr>
-                            <td class="name">Khu vực:</td>
-                            <td><?php echo $resultsRoom->name_user." ".$resultsRoom -> city ?></td>
-                          </tr>
-                          <tr>
-                            <td class="name">Loại tin:</td>
-                            <td><?php echo $resultsRoom -> category_classify ?></td>
-                          </tr>
-                          <tr>
-                            <td class="name">Đối tượng thuê:</td>
-                            <td>
-                              <?php if($resultsRoom -> subject == 1) {
-                                echo 'Tất cả';
-                              }elseif ($resultsRoom -> subject == 2) {
-                                echo 'Chỉ cho Nam thuê';
-                              }else {
-                                echo 'Chỉ cho Nữ thuê';
-                              };
-                              ?>
-                              </td>
-                          </tr>
-                          <tr>
-                            <td class="name">Gói tin</td>
-                            <td><?php echo $resultsRoom -> name_type ?></td>
-                          </tr>
-                          <tr>
-                            <td class="name">Ngày đăng</td>
-                            <td>
-                              <?php $date = date_format(date_create( $resultsRoom -> time_start),"N");
-                              if($date == 1){echo "Thứ 2, ";}
-                              elseif($date == 2){echo "Thứ 3, ";}
-                              elseif($date == 3){echo "Thứ 4, ";}
-                              elseif($date == 4){echo "Thứ 5, ";}
-                              elseif($date == 5){echo "Thứ 6, ";}
-                              elseif($date == 6){echo "Thứ 7, ";}
-                              else{echo "Chủ nhật, ";}
-                              echo date_format(date_create( $resultsRoom -> time_start),"H:i:s d-m-Y")
-                              ?>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="name">Ngày hết hạn</td>
-                            <td>
-                              <?php $date = date_format(date_create( $resultsRoom ->  time_stop),"N");
+                    </li>
+                    
+                    <li class="tab-content tab-content-2 typography">
+                      <div class="section-header pd-10-0  ">
+                        <h2 class="section-title">Thông tin liên hệ</h2>
+                      </div>
+                      <div class="section-content" style ="margin: 0; padding: 0 0 0 10px;">
+                        <table class="table">
+                          <tbody>
+                            <tr>
+                              <td class="name">Liên hệ:</td>
+                              <td><b><?php echo $resultsRoom-> name_user?></b></td>
+                            </tr>
+                            <tr>
+                              <td class="name">Điện thoại:</td>
+                              <td><?php echo $resultsRoom-> phone_user?></td>
+                            </tr>
+                            <tr>
+                              <td class="name">Zalo:</td>
+                              <td><?php echo $resultsRoom-> phone_user?></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                    
+                    <li class="tab-content tab-content-3 typography">
+                      <div class="section-header pd-10-0  ">
+                        <h2 class="section-title">Thông tin bài đăng</h2>
+                      </div>
+                      <div class="section-content" style ="margin: 0; padding: 0 0 0 10px;">
+                        <table class="table">
+                          <tbody>
+                            <tr>
+                              <td class="name">Mã tin:</td>
+                              <td>#<?php echo $resultsRoom -> id ?></td>
+                            </tr>
+                            <tr>
+                              <td class="name">Khu vực:</td>
+                              <td><?php echo $resultsRoom->name_user." ".$resultsRoom -> city ?></td>
+                            </tr>
+                            <tr>
+                              <td class="name">Loại tin:</td>
+                              <td><?php echo $resultsRoom -> category_classify ?></td>
+                            </tr>
+                            <tr>
+                              <td class="name">Đối tượng thuê:</td>
+                              <td>
+                                <?php if($resultsRoom -> subject == 1) {
+                                  echo 'Tất cả';
+                                }elseif ($resultsRoom -> subject == 2) {
+                                  echo 'Chỉ cho Nam thuê';
+                                }else {
+                                  echo 'Chỉ cho Nữ thuê';
+                                };
+                                ?>
+                                </td>
+                            </tr>
+                            <tr>
+                              <td class="name">Gói tin</td>
+                              <td><?php echo $resultsRoom -> name_type ?></td>
+                            </tr>
+                            <tr>
+                              <td class="name">Ngày đăng</td>
+                              <td>
+                                <?php $date = date_format(date_create( $resultsRoom -> time_start),"N");
                                 if($date == 1){echo "Thứ 2, ";}
                                 elseif($date == 2){echo "Thứ 3, ";}
                                 elseif($date == 3){echo "Thứ 4, ";}
@@ -291,47 +316,42 @@
                                 elseif($date == 5){echo "Thứ 6, ";}
                                 elseif($date == 6){echo "Thứ 7, ";}
                                 else{echo "Chủ nhật, ";}
-                                echo date_format(date_create( $resultsRoom -> time_stop),"H:i:s d-m-Y") ?>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </section>
-                  <section class="section-contact mg-0-15">
-                    <div class="section-header pd-10-0  ">
-                      <h2 class="section-title">Thông tin liên hệ</h2>
-                    </div>
-                    <div class="section-content" style ="margin: 0; padding: 0 0 0 10px;">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td class="name">Liên hệ:</td>
-                            <td><b><?php echo $resultsRoom-> name_user?></b></td>
-                          </tr>
-                          <tr>
-                            <td class="name">Điện thoại:</td>
-                            <td><?php echo $resultsRoom-> phone_user?></td>
-                          </tr>
-                          <tr>
-                            <td class="name">Zalo:</td>
-                            <td><?php echo $resultsRoom-> phone_user?></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </section>
-                  <section class="section-note mg-0-15" style = "margin-bottom: 20px;">
-                    <p>Bạn đang xem nội dung tin đăng: <i style= "color: red;">"<?php echo $resultsRoom -> name ?> - Mã tin: #<?php echo $resultsRoom -> id ?>"</i> . Mọi thông tin liên quan đến tin đăng này chỉ mang tính chất tham khảo. Nếu bạn có phản hồi với tin đăng này (báo xấu, tin đã cho thuê, không liên lạc được,...), vui lòng thông báo để cho chúng tôi để có thể xử lý.</p>
-                    <div class = "btn-handling">
-                      <a href="./contact.php" class="btn btn-feedback">Gửi phản hồi</a>
-                      <?php $id_user = isset($_SESSION['login']['id'])?$_SESSION['login']['id']:"";
-                       if($resultsRoom-> user_id == $id_user){?>
-                        <a href="./user/edit-post.php?id=<?php echo $resultsRoom -> id?>&edit=1" class="btn btn-feedback">Sửa bài viết</a>
-                      <?php } ?>
-                    </div>
-
-                  </section>
+                                echo date_format(date_create( $resultsRoom -> time_start),"H:i:s d-m-Y")
+                                ?>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="name">Ngày hết hạn</td>
+                              <td>
+                                <?php $date = date_format(date_create( $resultsRoom ->  time_stop),"N");
+                                  if($date == 1){echo "Thứ 2, ";}
+                                  elseif($date == 2){echo "Thứ 3, ";}
+                                  elseif($date == 3){echo "Thứ 4, ";}
+                                  elseif($date == 4){echo "Thứ 5, ";}
+                                  elseif($date == 5){echo "Thứ 6, ";}
+                                  elseif($date == 6){echo "Thứ 7, ";}
+                                  else{echo "Chủ nhật, ";}
+                                  echo date_format(date_create( $resultsRoom -> time_stop),"H:i:s d-m-Y") ?>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>				
+                    </li>
+                    
+                    <li class="tab-content tab-content-last typography">
+                      <p>Bạn đang xem nội dung tin đăng: <i style= "color: red;">"<?php echo $resultsRoom -> name ?> - Mã tin: #<?php echo $resultsRoom -> id ?>"</i> . Mọi thông tin liên quan đến tin đăng này chỉ mang tính chất tham khảo. Nếu bạn có phản hồi với tin đăng này (báo xấu, tin đã cho thuê, không liên lạc được,...), vui lòng thông báo để cho chúng tôi để có thể xử lý.</p>
+                      <div class = "btn-handling">
+                        <a href="./contact.php" class="btn btn-feedback">Gửi phản hồi</a>
+                        <?php $id_user = isset($_SESSION['login']['id'])?$_SESSION['login']['id']:"";
+                          if($resultsRoom-> user_id == $id_user){?>
+                          <a href="./user/edit-post.php?id=<?php echo $resultsRoom -> id?>&edit=1" class="btn btn-feedback">Sửa bài viết</a>
+                        <?php } ?>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <!--/ tabs -->
               </div>
               <!-- Tin có liên quan theo tỉnh -->
               <section class="section">
@@ -658,6 +678,10 @@
     <!-- footer + js-->
     <?php include('./include/footer.php');?>
     <!-- /footer + js -->
-    
+    <script>
+      $( function() {
+        $( "#tabs" ).tabs();
+      } );
+    </script>
   </body>
 </html>
