@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 09, 2023 lúc 05:06 AM
+-- Thời gian đã tạo: Th4 20, 2023 lúc 08:13 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -75,7 +75,8 @@ INSERT INTO `tbl_categories` (`id`, `name`, `classify`, `slug`, `type`, `title`,
 (2, 'Nhà cho thuê', 'Nhà thuê nguyên căn', 'Nha-cho-thue', 'Nhà ở', 'Cho Thuê Nhà Ở, Giá Rẻ, Mới Nhất ', 'Cho thuê nhà nguyên căn - Kênh đăng tin cho thuê nhà số 1: giá rẻ, chính chủ, miễn trung gian, đầy đủ tiện nghi, mức giá, diện tích cho thuê khác nhau.', 1, '2022-11-01 17:24:17', '2022-11-01 17:24:17'),
 (3, 'Cho thuê căn hộ', 'Căn hộ cho thuê', 'Cho-thue-can-ho', 'Căn hộ', 'Cho Thuê Căn Hộ Chung Cư, Giá Rẻ, Mới Nhất', 'Cho thuê căn hộ - Kênh đăng tin cho thuê căn hộ số 1: giá rẻ, chính chủ, đầy đủ tiện nghi. Cho thuê chung cư với nhiều mức giá, diện tích cho thuê khác nhau.', 1, '2022-11-01 17:24:17', '2022-11-01 17:24:17'),
 (4, 'Cho thuê Homestay', 'Homestay', 'Cho-thue-Homestay', 'Homestay', 'Cho thuê Homestay Đẹp, Giá Rẻ, Mới Nhất ', 'Cho thuê Homestay - Kênh đăng tin cho thuê Homestay: đẹp giá rẻ, chính chủ, đầy đủ tiện nghi,...', 1, '2022-11-01 17:24:17', '2022-11-01 17:24:17'),
-(5, 'Tìm người ở ghép', 'Tìm người ở ghép', 'Tim-nguoi-o-ghep', 'Ở ghép', 'Tìm người ở ghép chia sẻ tiền phòng, tìm bạn thêm vui', 'Tìm người ở ghép - Kênh đăng tin tìm người ở ghép chia sẻ tiền phòng, tìm bạn thêm vui', 1, '2022-11-01 17:24:17', '2022-11-01 17:24:17');
+(5, 'Tìm người ở ghép', 'Tìm người ở ghép', 'Tim-nguoi-o-ghep', 'Ở ghép', 'Tìm người ở ghép chia sẻ tiền phòng, tìm bạn thêm vui', 'Tìm người ở ghép - Kênh đăng tin tìm người ở ghép chia sẻ tiền phòng, tìm bạn thêm vui', 1, '2022-11-01 17:24:17', '2022-11-01 17:24:17'),
+(9, 'Cho thuê mặt bằng', 'Mặt bằng', 'Cho-thue-mat-bang', 'Mặt bằng', 'Cho thuê mặt bằng', 'Cho thuê mặt bằng - Kênh đăng tin cho thuê mặt bằng kinh doanh số 1: giá rẻ, chính chủ, đầy đủ tiện nghi. Cho thuê chung cư với nhiều mức giá, diện tích cho thuê khác nhau.', 1, '2023-04-13 16:26:05', '2023-04-13 16:26:05');
 
 -- --------------------------------------------------------
 
@@ -165,6 +166,72 @@ INSERT INTO `tbl_city` (`id`, `classify`, `name`, `fullname`, `created_ad`, `upd
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `tbl_comments`
+--
+
+CREATE TABLE `tbl_comments` (
+  `id_comment` bigint(20) NOT NULL,
+  `id_rooms` bigint(20) NOT NULL,
+  `id_user` bigint(20) NOT NULL,
+  `comment_content` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_comments`
+--
+
+INSERT INTO `tbl_comments` (`id_comment`, `id_rooms`, `id_user`, `comment_content`, `created_at`, `updated_at`) VALUES
+(115, 63, 25, 'test', '2023-04-19 15:33:46', '2023-04-19 15:33:46'),
+(117, 63, 25, 'test', '2023-04-19 15:34:29', '2023-04-19 15:34:29'),
+(118, 63, 25, 'áas', '2023-04-19 15:40:07', '2023-04-19 15:40:07'),
+(119, 63, 25, 'xfd', '2023-04-19 15:40:23', '2023-04-19 15:40:23'),
+(120, 63, 25, 'sds', '2023-04-19 15:41:02', '2023-04-19 15:41:02'),
+(121, 63, 25, 'sds', '2023-04-19 15:41:06', '2023-04-19 15:41:06'),
+(122, 63, 25, 'yuyjhbh', '2023-04-19 15:41:12', '2023-04-19 15:41:12'),
+(123, 63, 25, 'f', '2023-04-19 15:43:02', '2023-04-19 15:43:02'),
+(124, 63, 25, 'hello', '2023-04-19 15:44:40', '2023-04-19 15:44:40'),
+(125, 63, 25, 'hhjhjhj', '2023-04-19 15:55:01', '2023-04-19 15:55:01'),
+(126, 63, 25, 'hhjhjhj', '2023-04-19 15:56:00', '2023-04-19 15:56:00'),
+(127, 63, 25, 'xcxvcbvb', '2023-04-19 15:56:50', '2023-04-19 15:56:50'),
+(128, 63, 25, 'hdfuebcnv,', '2023-04-19 15:57:17', '2023-04-19 15:57:17'),
+(129, 63, 25, 'hello', '2023-04-19 15:58:57', '2023-04-19 15:58:57'),
+(130, 63, 25, 'dỳg', '2023-04-19 16:02:37', '2023-04-19 16:02:37'),
+(131, 63, 25, 'sdsdsf', '2023-04-19 16:03:45', '2023-04-19 16:03:45'),
+(132, 63, 25, '', '2023-04-19 17:22:45', '2023-04-19 17:22:45'),
+(133, 63, 25, 'cv', '2023-04-19 17:25:44', '2023-04-19 17:25:44'),
+(134, 63, 25, 'xin chào', '2023-04-19 17:27:49', '2023-04-19 17:27:49'),
+(135, 63, 25, 'zz', '2023-04-19 17:28:14', '2023-04-19 17:28:14'),
+(136, 63, 25, 'xin chào', '2023-04-19 17:30:00', '2023-04-19 17:30:00'),
+(137, 63, 25, 'xin chào', '2023-04-19 17:30:55', '2023-04-19 17:30:55'),
+(138, 63, 25, 'hello', '2023-04-19 17:37:18', '2023-04-19 17:37:18'),
+(139, 63, 25, 'hello', '2023-04-19 17:37:41', '2023-04-19 17:37:41'),
+(140, 63, 25, 'hello', '2023-04-19 17:38:06', '2023-04-19 17:38:06'),
+(141, 63, 25, 'cha', '2023-04-19 17:40:44', '2023-04-19 17:40:44'),
+(142, 63, 25, 'bà ngoại', '2023-04-19 17:40:53', '2023-04-19 17:40:53'),
+(143, 63, 25, 'cha 1', '2023-04-19 17:41:04', '2023-04-19 17:41:04'),
+(144, 63, 25, 'cha 2', '2023-04-19 17:41:23', '2023-04-19 17:41:23'),
+(145, 63, 25, 'cha 3', '2023-04-19 17:41:47', '2023-04-19 17:41:47'),
+(146, 63, 25, 'cha 1', '2023-04-19 17:44:42', '2023-04-19 17:44:42'),
+(147, 63, 25, 'cha 2', '2023-04-19 17:45:23', '2023-04-19 17:45:23'),
+(148, 63, 25, 'cha 3', '2023-04-19 17:45:27', '2023-04-19 17:45:27'),
+(149, 63, 25, 'con 3', '2023-04-19 17:45:35', '2023-04-19 17:45:35'),
+(150, 63, 25, 'fdfd', '2023-04-19 17:54:32', '2023-04-19 17:54:32'),
+(151, 63, 25, 'fghgdgfre', '2023-04-19 17:54:43', '2023-04-19 17:54:43'),
+(152, 63, 25, 'sdsd', '2023-04-19 17:55:10', '2023-04-19 17:55:10'),
+(153, 63, 25, 'dfdc', '2023-04-19 17:55:13', '2023-04-19 17:55:13'),
+(154, 63, 25, 'sdsa', '2023-04-19 18:09:29', '2023-04-19 18:09:29'),
+(155, 63, 25, 'sdsdsdsa', '2023-04-19 18:13:00', '2023-04-19 18:13:00'),
+(156, 63, 25, 'fdfdsf', '2023-04-19 18:16:06', '2023-04-19 18:16:06'),
+(158, 63, 25, 'dfds', '2023-04-19 18:18:49', '2023-04-19 18:18:49'),
+(163, 63, 25, '123456', '2023-04-19 19:02:06', '2023-04-19 19:02:06'),
+(164, 63, 25, '1234', '2023-04-19 19:06:57', '2023-04-19 19:06:57'),
+(167, 63, 25, 'xin chào', '2023-04-20 16:10:24', '2023-04-20 16:10:24');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `tbl_contact`
 --
 
@@ -235,7 +302,8 @@ INSERT INTO `tbl_deposit_money` (`id`, `pay_code`, `pay_price`, `payments`, `use
 (25, 'TPN-KH#26-05022023-002229', 500000, 'BANK', 26, 1, '2023-02-04 17:23:43'),
 (26, 'TPN-KH#24-08022023-145209', 5000000, 'BANK', 24, 1, '2023-02-08 07:52:22'),
 (27, 'TPN-KH#26-24032023-115921', 1500000, 'BANK', 26, 1, '2023-03-24 04:59:57'),
-(28, 'TPN-KH#25-24032023-120014', 35000000, 'BANK', 25, 1, '2023-03-24 05:02:46');
+(28, 'TPN-KH#25-24032023-120014', 35000000, 'BANK', 25, 1, '2023-03-24 05:02:46'),
+(29, 'TPN-KH#24-09042023-180330', 15000000, 'MOMO', 24, 1, '2023-04-09 11:03:49');
 
 -- --------------------------------------------------------
 
@@ -989,10 +1057,10 @@ CREATE TABLE `tbl_new_type` (
 --
 
 INSERT INTO `tbl_new_type` (`id`, `name_type`, `slug`, `price`, `status`, `created_at`, `update_ad`) VALUES
-(1, 'Tin VIP nổi bật', 'VIP-noi-bat', 80000, 1, '2022-12-18 14:08:00', '2022-12-18 14:08:00'),
-(2, 'Tin VIP 1', 'VIP-1', 50000, 1, '2022-12-18 14:08:15', '2022-12-18 14:08:15'),
-(3, 'Tin VIP 2', 'VIP-2', 30000, 1, '2022-12-18 14:08:26', '2022-12-18 14:08:26'),
-(4, 'Tin VIP 3', 'VIP-3', 20000, 1, '2022-12-18 14:08:44', '2022-12-18 14:08:44'),
+(1, 'Tin VIP nổi bật', 'VIP-noi-bat', 20000, 1, '2022-12-18 14:08:00', '2022-12-18 14:08:00'),
+(2, 'Tin VIP 1', 'VIP-1', 15000, 1, '2022-12-18 14:08:15', '2022-12-18 14:08:15'),
+(3, 'Tin VIP 2', 'VIP-2', 10000, 1, '2022-12-18 14:08:26', '2022-12-18 14:08:26'),
+(4, 'Tin VIP 3', 'VIP-3', 5000, 1, '2022-12-18 14:08:44', '2022-12-18 14:08:44'),
 (5, 'Tin thông thường', 'thong-thuong', 2000, 1, '2022-12-18 14:09:00', '2022-12-18 14:09:00');
 
 -- --------------------------------------------------------
@@ -1113,7 +1181,73 @@ INSERT INTO `tbl_payment_history` (`id`, `id_rooms`, `pay_code`, `pay_price`, `p
 (121, 47, 'TPN-KH25-BĐ47/thong-thuong/66d', '132000', 'account', 1, 0, 25, 5, '2023-03-24 05:04:04'),
 (122, 48, 'TPN-KH25-BĐ48/thong-thuong/66d', '132000', 'account', 1, 0, 25, 5, '2023-03-24 05:04:26'),
 (123, 63, 'TPN-KH25-BĐ63/VIP-noi-bat/66d', '5280000', 'account', 1, 0, 25, 1, '2023-03-24 05:04:50'),
-(124, 49, 'TPN-KH26-BĐ49/thong-thuong/7d', '14000', 'account', 1, 1, 26, 5, '2023-03-24 06:07:07');
+(124, 49, 'TPN-KH26-BĐ49/thong-thuong/7d', '14000', 'account', 1, 1, 26, 5, '2023-03-24 06:07:07'),
+(125, 29, 'TPN-KH24-BĐ29/VIP-noi-bat/168d', '3360000', 'account', 1, 0, 24, 1, '2023-04-09 10:59:21'),
+(126, 30, 'TPN-KH24-BĐ30/VIP-1/70d', '1050000', 'VNPAY-NCB', 1, 0, 24, 2, '2023-04-09 11:05:35'),
+(127, 31, 'TPN-KH24-BĐ31/VIP-2/82d', '820000', 'account', 1, 0, 24, 3, '2023-04-09 11:08:29'),
+(128, 64, 'TPN-KH25-BĐ64/VIP-noi-bat/66d', '1320000', 'account', 1, 0, 25, 1, '2023-04-13 16:21:44'),
+(129, 42, 'TPN-KH25-BĐ42/VIP-noi-bat/66d', '1320000', 'account', 1, 0, 25, 1, '2023-04-13 16:22:13'),
+(130, 41, 'TPN-KH25-BĐ41/VIP-1/73d', '1095000', 'account', 1, 0, 25, 2, '2023-04-13 16:22:33'),
+(131, 32, 'TPN-KH24-BĐ32/VIP-2/76d', '760000', 'account', 1, 0, 24, 3, '2023-04-13 16:34:12'),
+(132, 33, 'TPN-KH24-BĐ33/thong-thuong/76d', '152000', 'account', 1, 0, 24, 5, '2023-04-13 16:47:53'),
+(133, 34, 'TPN-KH24-BĐ34/VIP-noi-bat/76d', '1520000', 'account', 1, 0, 24, 1, '2023-04-13 16:48:10'),
+(134, 35, 'TPN-KH24-BĐ35/VIP-1/106d', '1590000', 'account', 1, 0, 24, 2, '2023-04-13 16:48:28'),
+(135, 36, 'TPN-KH24-BĐ36/VIP-3/106d', '530000', 'account', 1, 0, 24, 4, '2023-04-13 16:48:52'),
+(136, 37, 'TPN-KH24-BĐ37/VIP-3/106d', '530000', 'account', 1, 0, 24, 4, '2023-04-13 16:49:10'),
+(137, 38, 'TPN-KH24-BĐ38/thong-thuong/155d', '310000', 'account', 1, 0, 24, 5, '2023-04-13 16:49:27');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tbl_replies`
+--
+
+CREATE TABLE `tbl_replies` (
+  `id_reply` bigint(20) NOT NULL,
+  `id_comment` bigint(20) NOT NULL,
+  `id_user` bigint(20) NOT NULL,
+  `reply_content` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_replies`
+--
+
+INSERT INTO `tbl_replies` (`id_reply`, `id_comment`, `id_user`, `reply_content`, `created_at`, `updated_at`) VALUES
+(7, 129, 26, 'rhfh', '2023-04-19 17:27:40', '2023-04-19 17:27:40'),
+(8, 138, 25, 'df', '2023-04-19 17:37:21', '2023-04-19 17:37:21'),
+(9, 138, 25, 'cvcvc', '2023-04-19 17:37:30', '2023-04-19 17:37:30'),
+(10, 138, 25, 'fgfbfc ', '2023-04-19 17:37:36', '2023-04-19 17:37:36'),
+(11, 139, 25, 'df', '2023-04-19 17:38:00', '2023-04-19 17:38:00'),
+(12, 141, 25, 'con', '2023-04-19 17:40:48', '2023-04-19 17:40:48'),
+(13, 143, 25, 'con', '2023-04-19 17:41:08', '2023-04-19 17:41:08'),
+(14, 143, 25, 'con', '2023-04-19 17:41:17', '2023-04-19 17:41:17'),
+(15, 144, 25, 'con 2', '2023-04-19 17:41:41', '2023-04-19 17:41:41'),
+(16, 143, 25, 'con 3', '2023-04-19 17:41:58', '2023-04-19 17:41:58'),
+(17, 144, 25, 'xon 3', '2023-04-19 17:42:10', '2023-04-19 17:42:10'),
+(18, 144, 25, 'con 4', '2023-04-19 17:42:16', '2023-04-19 17:42:16'),
+(19, 146, 25, 'con 1', '2023-04-19 17:44:47', '2023-04-19 17:44:47'),
+(20, 146, 25, 'con 12', '2023-04-19 17:44:54', '2023-04-19 17:44:54'),
+(21, 146, 25, 'con 13', '2023-04-19 17:44:59', '2023-04-19 17:44:59'),
+(22, 146, 25, 'cin 1 4', '2023-04-19 17:45:08', '2023-04-19 17:45:08'),
+(23, 148, 25, 'con 2', '2023-04-19 17:45:31', '2023-04-19 17:45:31'),
+(24, 149, 25, 'con 4', '2023-04-19 17:45:40', '2023-04-19 17:45:40'),
+(25, 154, 25, 'uyuyhh', '2023-04-19 18:09:36', '2023-04-19 18:09:36'),
+(26, 155, 25, 'dffdgtrrwe', '2023-04-19 18:13:05', '2023-04-19 18:13:05'),
+(27, 156, 25, 'dfdsf', '2023-04-19 18:16:09', '2023-04-19 18:16:09'),
+(28, 156, 25, 'dfsf', '2023-04-19 18:16:14', '2023-04-19 18:16:14'),
+(29, 158, 25, 'vfvfv', '2023-04-19 18:18:52', '2023-04-19 18:18:52'),
+(35, 164, 25, 'dfd', '2023-04-19 19:10:38', '2023-04-19 19:10:38'),
+(36, 164, 25, 'dfd', '2023-04-19 19:10:39', '2023-04-19 19:10:39'),
+(37, 164, 25, 'dfd', '2023-04-19 19:10:39', '2023-04-19 19:10:39'),
+(38, 164, 25, 'dfd', '2023-04-19 19:10:39', '2023-04-19 19:10:39'),
+(39, 164, 25, 'dfd', '2023-04-19 19:10:39', '2023-04-19 19:10:39'),
+(40, 164, 25, 'dfd', '2023-04-19 19:10:40', '2023-04-19 19:10:40'),
+(41, 164, 25, 'zx', '2023-04-19 19:10:55', '2023-04-19 19:10:55'),
+(55, 163, 25, '125', '2023-04-19 19:34:29', '2023-04-19 19:34:29'),
+(70, 164, 25, 'dfdgfcx', '2023-04-20 15:41:32', '2023-04-20 15:41:32');
 
 -- --------------------------------------------------------
 
@@ -1159,18 +1293,18 @@ INSERT INTO `tbl_rooms` (`id`, `name`, `slug`, `city_id`, `district_id`, `ward_i
 (24, 'Cho thuê phòng trọ thường giá rẻ sinh viên', 'Cho-thue-phong-tro-thuong-gia-re-sinh-vien', 28, 295, 5269, 'Ngô Sỹ Liên', '32', 650000, 16, '<p>Cho thu&ecirc; ph&ograve;ng trọ thường<br />\r\n- Ph&ograve;ng kh&ocirc;ng chung cổng chủ<br />\r\n- L&aacute;t gạch m&aacute;t<br />\r\n- Chỗ vệ sinh sạch sẽ, c&oacute; s&acirc;n phơi quần &aacute;o<br />\r\n- An ninh tốt<br />\r\n- Điện 3k/số<br />\r\n- Nước 10k/khối</p>\r\n', './image/upload/trang-tri-phong-tro-9m2-de-thuong.jpg', 5, '2022-12-24 23:14:52', '2023-01-12 23:14:52', '1', 3, 21, 1, '2022-12-24 16:14:52', '2022-12-24 16:14:52'),
 (27, 'Cho thuê phòng trọ khép kín đầy đủ tiện nghi', 'Cho-thue-phong-tro-khep-kin-day-du-tien-nghi', 28, 295, 5270, 'Võ Thị Sáu', '32', 1100000, 20, '<p><span style=\"font-size:12pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\">Cho thu&ecirc; ph&ograve;ng trọ kh&eacute;p k&iacute;n đầy đủ tiện nghi</span></span></p>\r\n\r\n<p><span style=\"font-size:12pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\">- Ph&ograve;ng ốp gạch m&aacute;t mẻ, sạch sẽ</span></span></p>\r\n\r\n<p><span style=\"font-size:12pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\">- C&oacute; s&acirc;n để xe v&agrave; phơi đồ</span></span></p>\r\n\r\n<p><span style=\"font-size:12pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\">- An ninh tốt, giờ giấc thoải m&aacute;i</span></span></p>\r\n\r\n<p><span style=\"font-size:12pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\">- Gần trường Đại học Vinh</span></span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\">- Điện 3k/số. Nước 10k/khối</span></span></p>\r\n', './image/upload/thiet-ke-can-ho-studio-20.png', 1, '2022-12-26 18:20:03', '2023-01-08 18:20:03', '1', 3, 21, 1, '2022-12-26 11:20:03', '2022-12-26 11:20:03'),
 (28, 'Cho thuê phòng trọ không khép kín giờ giấc thoải mái', 'Cho-thue-phong-tro-khong-khep-kin-gio-giac-thoai-mai', 28, 295, 5259, 'Hải Thượng Lãn Ông', '32', 1200000, 21, '<p><span style=\"font-size:12pt\">Cho thu&ecirc; ph&ograve;ng trọ kh&ocirc;ng kh&eacute;p k&iacute;n giờ giấc thoải m&aacute;i</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- D&atilde;y chỉ c&oacute; 3 ph&ograve;ng, sạch sẽ, rộng r&atilde;i</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Chỗ để xe rộng</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- C&oacute; s&acirc;n phơi ở tầng thượng</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Kh&ocirc;ng chung cổng chủ</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Gần trường, gần chợ</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:367.078px; top:34px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/315660963-3314613072127347-8199489280806102377-n.jpg', 2, '2023-01-08 14:00:48', '2023-01-29 14:00:48', '1', 3, 21, 1, '2023-01-08 07:00:48', '2023-01-08 07:00:48'),
-(29, 'Cho thuê HOMESTAY Phố Cổ siêu đẹp', 'Cho-thue-HOMESTAY-Pho-Co-sieu-dep', 2, 3, 29, 'Hàng Bông', '75', 450000, 35, '<p><span style=\"font-size:12pt\">Cho thu&ecirc; HOMESTAY Phố Cổ si&ecirc;u đẹp</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Noel n&agrave;y chưa biết rủ người y&ecirc;u đi đ&acirc;u th&igrave; qua ngay căn bồn tắm sứ của nh&agrave; Sazi nha</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Đầy đủ đồ nội thất cơ bản v&agrave; khu bếp</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Decor theo phong c&aacute;ch hiện đại, tha hồ sống ảo</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Ph&ograve;ng đầy đủ tiện nghi, Tivi Netflix</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Gi&aacute; cả hợp l&yacute;</span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">&nbsp;- Tặng k&egrave;m nhiều ưu đ&atilde;i cho kh&aacute;ch thu&ecirc; g&oacute;i tuần</span></p>\r\n', './image/upload/39.jpg', 1, '2023-02-05 17:38:18', '2023-02-26 17:38:18', '1', 3, 24, 4, '2023-02-05 10:38:18', '2023-02-05 10:38:18'),
-(30, 'Cho thuê HOMSTAY linh hoạt giá rẻ', 'Cho-thue-HOMSTAY-linh-hoat-gia-re', 2, 3, 16, 'Nguyên Khiết', '17', 750000, 40, '<p><span style=\"font-size:12pt\">Cho thu&ecirc; HOMSTAY linh hoạt gi&aacute; rẻ</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Lưu tr&uacute;,quay phim,tổ chức sinh nhật</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Căn hộ thiết kế từ 1-3 ph&ograve;ng ngủ(&nbsp; nội thất hiện đại) </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">-&nbsp; Khu vực: Phạm H&ugrave;ng, Cầu Giấy,V&otilde; Ch&iacute; C&ocirc;ng,Ho&agrave;ng Quốc việt,Trung Kinh...H&agrave; Nội</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Ph&ograve;ng sạch sẽ, y&ecirc;n tĩnh, an ninh đảm bảo c&oacute; bảo vệ 24/24</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Đầy đủ tiện nghi( c&oacute; thể nấu ăn tại ph&ograve;ng) c&oacute; thang m&aacute;y,c&oacute; chỗ để xe &ocirc; t&ocirc;</span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">- Miễn ph&iacute; giặt l&agrave;,dọn ph&ograve;ng,nước uống Lavie</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:258.406px; top:28px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/82.jpg', 2, '2023-02-05 23:15:27', '2023-02-26 23:15:27', '1', 3, 24, 4, '2023-02-05 16:15:27', '2023-02-05 16:15:27'),
-(31, 'Cho thuê căn minin homestay siêu rẻ đẹp Hà Nội', 'Cho-thue-can-minin-homestay-sieu-re-dep-Ha-Noi', 2, 2, 11, 'Đội Cấn', '432', 1100000, 45, '<p><span style=\"font-size:12pt\">Cho thu&ecirc; căn minin homestay si&ecirc;u rẻ đẹp H&agrave; Nội</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Một căn mini homestay với decor trẻ trung, tối giản v&agrave; hiện đại. D&ugrave; l&agrave; căn hộ mini nhưng vẫn được trang bị đầy đủ nội thất tiện nghi như bếp, tủ lạnh, tv&hellip;</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Đặc biệt, căn hộ n&agrave;y tọa lac tại ngay trung t&acirc;m cộng đồng Nhật Bản v&agrave; H&agrave;n Quốc n&ecirc;n c&oacute; rất nhiều tiện &iacute;ch v&agrave; địa điểm th&uacute; vị để kh&aacute;m ph&aacute;</span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">- Nếu như bạn c&oacute; dịp c&ocirc;ng t&aacute;c tại H&agrave; Nội m&agrave; vẫn ph&acirc;n v&acirc;n kh&ocirc;ng biết ở đ&acirc;u th&igrave; căn hộ mini xanh sẽ l&agrave; một gợi &yacute; tuyệt vời</span></p>\r\n', './image/upload/68.jpg', 3, '2023-02-08 14:49:47', '2023-02-26 14:49:47', '1', 3, 24, 4, '2023-02-08 07:49:47', '2023-02-08 07:49:47'),
-(32, 'HOA ĐỎ HOMESTAY CHO THUÊ PHÒNG', 'HOA-DO-HOMESTAY-CHO-THUE-PHONG', 45, 491, 8009, 'Hoàng Diệu', '100A', 1200000, 45, '<p><span style=\"font-size:12pt\">HOA ĐỎ HOMESTAY CHO THU&Ecirc; PH&Ograve;NG</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- HOA ĐỎ HOMESTAY cho thu&ecirc; ph&ograve;ng c&aacute;ch chợ Đ&agrave; Lạt gần 2km, dễ t&igrave;m, dễ di chuyển v&agrave; gi&aacute; ph&ograve;ng si&ecirc;u hạt dẻ. HOA ĐỎ HOMESTAY l&agrave; nơi nghỉ dưỡng l&yacute; tưởng cho kh&aacute;ch du lịch. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Chỗ đậu xe &ocirc; t&ocirc;, xe m&aacute;y </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Free wifi </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- S&acirc;n nướng BBQ </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Bếp nấu ăn gia đ&igrave;nh </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- B&agrave;n ủi, m&aacute;y sấy... </span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">- Cho thu&ecirc; xe m&aacute;y gi&aacute; rẻ</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:313.703px; top:6px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/59.jpg', 3, '2023-02-08 14:50:02', '2023-02-28 14:50:02', '1', 3, 24, 4, '2023-02-08 07:50:02', '2023-02-08 07:50:02'),
-(33, 'CHO THUÊ HOMESTAY VIEW SIÊU ĐẸP', 'CHO-THUE-HOMESTAY-VIEW-SIEU-DEP', 45, 491, 8009, 'Hoàng Diệu', 'Hẻm 110', 1250000, 42, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; HOMESTAY VIEW SI&Ecirc;U ĐẸP</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">👉C&aacute;ch trung t&acirc;m 1,5km, đi xe m&aacute;y chỉ 5&#39; ra đến chợ Đ&agrave; Lạt, 8&#39;đến quảng trường. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">👉Hệ thống ph&ograve;ng sạch sẽ, tho&aacute;ng m&aacute;t, decor ấm &aacute;p , view cao đẹp. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">👉Toilet ri&ecirc;ng từng ph&ograve;ng,đầy đủ nước n&oacute;ng lạnh. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">👉Dịch vụ: </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">&nbsp;&nbsp;&nbsp; ☘️Cho thu&ecirc; xe m&aacute;y,xe &ocirc; t&ocirc;.</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">&nbsp;&nbsp;&nbsp; ☘Dịch vụ giặt sấy quần &aacute;o.</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">&nbsp;&nbsp;&nbsp; ☘Dịch vụ đặt tuor du lịch nội-ngoại th&agrave;nh Đ&agrave; Lạt. </span></p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp; <span style=\"font-size:12.0pt\">☘</span><span style=\"font-size:12.0pt\">V</span><span style=\"font-size:12.0pt\">&agrave;</span><span style=\"font-size:12.0pt\"> c</span><span style=\"font-size:12.0pt\">&aacute;</span><span style=\"font-size:12.0pt\">c dịch vụ kh&aacute;c ...</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:308.656px; top:23px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/70.jpg', 5, '2023-02-08 14:50:19', '2023-02-28 14:50:19', '1', 3, 24, 4, '2023-02-08 07:50:19', '2023-02-08 07:50:19'),
-(34, 'CHO THUÊ HOMSTAY GẦN CHỢ ĐÀ LẠT', 'CHO-THUE-HOMSTAY-GAN-CHO-DA-LAT', 45, 491, 8013, 'Bà Triệu', '33 lô 351 ', 600000, 30, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; HOMSTAY GẦN CHỢ Đ&Agrave; LẠT</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌻 Nằm ngay trung t&acirc;m tp đ&agrave; Lạt, chỉ 2 ph&uacute;t l&agrave; tới ch.ợ Đ&ecirc;m v&agrave; hồ xu&acirc;n hương, gần nh&agrave; thờ Con G&agrave;, trung t&acirc;m h&agrave;nh ch&iacute;nh.... ,Nh&agrave; mới x&acirc;y n&ecirc;n cơ sở vật chất mới 100%&nbsp; gồm c&oacute; 3 loại ph&ograve;ng&nbsp; cao cấp.</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">&nbsp;🌻 Ph&ograve;ng đơn c&oacute; cửa sổ : 300.k-350.k</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌻 Ph&ograve;ng đơn gỗ c&oacute; ban c&ocirc;ng : 350.k-400.k</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌻 Ph&ograve;ng đ&ocirc;i c&oacute; cửa sổ+ ban c&ocirc;ng : 500.k-600.k</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">( Gi&aacute; kh&ocirc;ng bao gồm lễ tết )</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌵 Ph&ograve;ng sạch sẽ ,rộng ,tho&aacute;ng, nh&agrave; vệ sinh từng ph&ograve;ng,trang bị đầy đủ như m&aacute;y sấy,ấm đun si&ecirc;u tốc,wifi mạnh ,quạt gi&oacute;, nước n&oacute;ng 24/24, c&oacute; s&acirc;n nướng BBQ view hồ Xu&acirc;n Hương , gương to&agrave;n th&acirc;n mỗi ph&ograve;ng, ph&ograve;ng chờ uống tr&agrave; xịn s&ograve;....</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌵C&Oacute; B&Atilde;I ĐẬU XE OTO</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌵c&oacute; cho thu&ecirc; xe m&aacute;y ng&agrave;y. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌵giờ giấc check in 14H v&agrave; check out trước 12H (linh hoạt ph&ograve;ng trống check in sớm 1-2h)</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:318.578px; top:17px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/43.jpg', 1, '2023-02-08 14:51:49', '2023-02-28 14:51:49', '1', 3, 24, 4, '2023-02-08 07:51:49', '2023-02-08 07:51:49'),
-(35, 'CHO THUÊ HOMESTAY GẦN CẦU RỒNG', 'CHO-THUE-HOMESTAY-GAN-CAU-RONG', 33, 359, 6387, 'Lương Thế Vinh', '70', 700000, 32, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; HOMESTAY GẦN CẦU RỒNG</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Homestay c&aacute;ch cầu rồng 800m, c&aacute;ch biển 1km. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Ph&ograve;ng gi&aacute; b&igrave;nh d&acirc;n</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Ph&ograve;ng đầy đủ tiện nghi, toilet ri&ecirc;ng b&ecirc;n trong.</span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">- C&oacute; cho thu&ecirc; xe m&aacute;y tiện đi lại thăm th&uacute; du lịch ạ</span></p>\r\n', './image/upload/46.jpg', 2, '2023-02-08 14:52:46', '2023-02-28 14:52:46', '1', 3, 24, 4, '2023-02-08 07:52:46', '2023-02-08 07:52:46'),
-(36, 'HOMESTAY GIÁ SIÊU RẺ CHO MỌI NGƯỜI', 'HOMESTAY-GIA-SIEU-RE-CHO-MOI-NGUOI', 33, 359, 6390, 'Phạm Cự Lượng', '106', 300000, 30, '<p><span style=\"font-size:12pt\">HOMESTAY GI&Aacute; SI&Ecirc;U RẺ CHO MỌI NGƯỜI</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">Mọi người nhanh tay book phòng nhé </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🍒Phòng 2 người 200k/ngày.</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🍒Phòng 3 người giá 300k/ ngày</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🍒Toilet riêng từng phòng. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🍒Homestay được sử dụng bếp và tủ lạnh.</span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">🍒</span><span style=\"font-size:12.0pt\">Cách Cầu Rồng, chợ đêm Sơn Trà 300 m. Cách biển Mỹ Khê 1km</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:331.281px; top:33px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/16.jpg', 4, '2023-02-08 14:53:44', '2023-02-28 14:53:44', '1', 3, 24, 4, '2023-02-08 07:53:44', '2023-02-08 07:53:44'),
-(37, 'CHO THUÊ HOMESTAY ĐẸP, VIEW ƯNG', 'CHO-THUE-HOMESTAY-DEP--VIEW-UNG', 33, 359, 6387, 'Võ Văn Kiệt', '78', 800000, 40, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; HOMESTAY ĐẸP, VIEW ƯNG</span></p>\r\n\r\n<ul>\r\n	<li><span style=\"font-size:12pt\">Chỗ để xe oto an to&agrave;n</span></li>\r\n	<li><span style=\"font-size:12pt\">Vị tr&iacute; thuận tiện đến c&aacute;c địa điểm tham quan, du lịch, ăn uống, mua sắm tại Đ&agrave; Nẵng</span></li>\r\n	<li><span style=\"font-size:12pt\">Ngay trung t&acirc;m, c&aacute;ch biển Mỹ Kh&ecirc; 600m, c&aacute;ch đầu cầu Rồng, cầu T&igrave;nh Y&ecirc;u, chợ đ&ecirc;m, cầu S&ocirc;ng H&agrave;n 1km về hướng biển, ngay trung t&acirc;m, thuận tiện ăn uống, vui chơi, mua sắm,...</span></li>\r\n</ul>\r\n\r\n<p><span style=\"font-size:12pt\">💗Hỗ Trợ thu&ecirc; xe chỉ 100k/ng&agrave;y</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">❤️Rất mong được phục vụ Qu&yacute; Kh&aacute;ch</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:310.859px; top:17px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/11.jpg', 4, '2023-02-08 14:55:41', '2023-02-28 14:55:41', '1', 3, 24, 4, '2023-02-08 07:55:41', '2023-02-08 07:55:41'),
-(38, 'CHO THUÊ HOMESTAY KẾ BÃI BIỂN MỸ KHÊ XINH ĐẸP', 'CHO-THUE-HOMESTAY-KE-BAI-BIEN-MY-KHE-XINH-DEP', 33, 359, 6388, 'Lâm Hoành', '52B', 910000, 40, '<p><span style=\"font-size:12pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\">CHO THU&Ecirc; HOMESTAY KẾ B&Atilde;I BIỂN MỸ KH&Ecirc; XINH ĐẸP</span></span></p>\r\n\r\n<p><span style=\"font-size:12pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\">- Trong ph&ograve;ng c&oacute; sẵn: Nước, c&oacute; tivi, tủ lạnh, view tho&aacute;ng, c&oacute; bếp(tuỳ ph&ograve;ng)</span></span></p>\r\n\r\n<p><span style=\"font-size:12pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\">Vị tr&iacute; homestay si&ecirc;u đẹp</span></span></p>\r\n\r\n<p><span style=\"font-size:12pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\"><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif\">💢&nbsp;</span>Ngay biển Mỹ Kh&ecirc; 1 ph&uacute;t đi bộ 100 m&eacute;t.</span></span></p>\r\n\r\n<p><span style=\"font-size:12pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\"><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif\">👉&nbsp;</span>Gần cầu Rồng 5p</span></span></p>\r\n\r\n<p><span style=\"font-size:12pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\"><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif\">👉&nbsp;</span>Gần trung t&acirc;m th&agrave;nh phố 5p</span></span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\"><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif\">👉&nbsp;</span></span><span style=\"font-size:12.0pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\">Gần c&aacute;c địa điểm du lịch như Đỉnh b&agrave;n cờ Ch&ugrave;a Linh Ứng, cầu Rồng, cầu S&ocirc;ng H&agrave;n, chợ Bắc Mỹ An</span></span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\"><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif\">📍&nbsp;</span>Địa chỉ: 52b L&acirc;m Ho&agrave;nh - Sơn Tr&agrave; - Đ&agrave; Nẵng (đường L&acirc;m Ho&agrave;nh song song với trục đường V&otilde; Nguy&ecirc;n Gi&aacute;p trực diện với biển Mỹ Kh&ecirc;)</span></span></p>\r\n', './image/upload/79.jpg', 5, '2022-12-26 21:19:12', '2023-01-15 21:19:12', '1', 3, 24, 4, '2022-12-26 14:19:12', '2022-12-26 14:19:12'),
-(41, 'CHO THUÊ CĂN HỘ VIEW SIÊU ĐẸP Quận 7', 'CHO-THUE-CAN-HO-VIEW-SIEU-DEP-Quan-7', 51, 569, 8949, 'Số 9', '86', 5000000, 45, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; CĂN HỘ VIEW SI&Ecirc;U ĐẸP</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">? Căn hộ 3 ph&ograve;ng ngủ, 2WC ( ban c&ocirc;ng lớn xịn s&ograve; , wiu tho&aacute;ng m&aacute;t )</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">? Nh&agrave; mặt tiền bờ k&egrave; đường lớn , thang m&aacute;y, </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">? full nội thất mới đầy đủ tiện nghi </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">? Khu an ninh y&ecirc;n tĩnh bảo vệ 24/24, c&oacute; b&atilde;i xe rộng </span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">?</span><span style=\"font-size:12.0pt\"> Cho nu&ocirc;i pet</span></p>\r\n', './image/upload/32.jpg', 2, '2023-03-09 17:53:05', '2023-03-26 17:53:05', '1', 3, 25, 3, '2023-03-09 10:53:05', '2023-03-09 10:53:05'),
-(42, 'NHÀ ĐẸP - GIÁ TỐT NHẤT, VÀO Ở NGAY GIÁ CHỈ TỪ 5 TRIỆU Ở VINHOMES SMART CITY TÂY MỖ', 'NHA-DEP---GIA-TOT-NHAT--VAO-O-NGAY-GIA-CHI-TU-5-TRIEU-O-VINHOMES-SMART-CITY-TAY-MO', 2, 14, 205, 'Đại lộ Thăng Long', 'Vinhomes Smart City', 5200000, 35, '<p>Th&ocirc;ng tin m&ocirc; tả</p>\r\n\r\n<p>- Căn cực đẹp, gi&aacute; cực tốt!<br />\r\n<br />\r\n* Quỹ 100 căn hộ cho thu&ecirc; c&aacute;c loại h&igrave;nh căn hộ ở chung cư Vinhomes Smart City.<br />\r\n<br />\r\n- CH Studio (DT 31 - 40m&sup2;): Gi&aacute; thu&ecirc; chỉ từ 5 - 6tr/th&aacute;ng.<br />\r\n<br />\r\n- CH 1PN (DT 43 - 55m&sup2;): Gi&aacute; thu&ecirc; chỉ từ 6.5 - 7.5tr/th&aacute;ng.<br />\r\n<br />\r\n- CH 2PN (DT 60 - 70m&sup2;): Gi&aacute; thu&ecirc; chỉ từ 8 - 9tr/th&aacute;ng.<br />\r\n<br />\r\n- CH 3PN (DT 81 - 100m&sup2;): Gi&aacute; thu&ecirc; chỉ từ 9.5- 11/th&aacute;ng.<br />\r\n<br />\r\nChỉ từ 5 tr/th bạn đ&atilde; c&oacute; thể sở hữu 1 căn hộ ở một m&ocirc;i trường đẳng cấp, văn minh, c&oacute; thể sử dụng to&agrave;n bộ những tiện &iacute;ch v&agrave; khu vui chơi đẳng cấp 5* nơi đ&acirc;y.<br />\r\n<br />\r\n* Đặc biệt: Ch&uacute;ng t&ocirc;i c&ograve;n c&oacute; 1 số căn hộ Homestay cho thu&ecirc; theo giờ/ng&agrave;y/tuần/th&aacute;ng mức gi&aacute; cực kỳ tốt chỉ từ 500k/ng&agrave;y/đ&ecirc;m (d&agrave;nh cho kh&aacute;ch h&agrave;ng c&ocirc;ng t&aacute;c xa, hoặc cần 1 nơi y&ecirc;n tĩnh nghỉ dưỡng y&ecirc;n b&igrave;nh,..<br />\r\n<br />\r\n* Cam kết:<br />\r\n- Kh&aacute;ch h&agrave;ng sẽ thu&ecirc; được căn hộ với gi&aacute; tốt nhất v&agrave; ưng &yacute; nhất ở thời điểm thị trường hiện nay.<br />\r\n- Kh&ocirc;ng thu ph&iacute; đi xem nh&agrave; v&agrave; thu&ecirc; nh&agrave;.<br />\r\n- Hỗ trợ thủ tục hồ sơ giấy tờ từ A - Z khi kh&aacute;ch thu&ecirc; nh&agrave;.</p>\r\n', './image/upload/41-5.jpg', 1, '2023-03-09 17:53:29', '2023-03-31 17:53:29', '1', 3, 25, 3, '2023-03-09 10:53:29', '2023-03-09 10:53:29'),
+(29, 'Cho thuê HOMESTAY Phố Cổ siêu đẹp', 'Cho-thue-HOMESTAY-Pho-Co-sieu-dep', 2, 3, 29, 'Hàng Bông', '75', 450000, 35, '<p><span style=\"font-size:12pt\">Cho thu&ecirc; HOMESTAY Phố Cổ si&ecirc;u đẹp</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Noel n&agrave;y chưa biết rủ người y&ecirc;u đi đ&acirc;u th&igrave; qua ngay căn bồn tắm sứ của nh&agrave; Sazi nha</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Đầy đủ đồ nội thất cơ bản v&agrave; khu bếp</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Decor theo phong c&aacute;ch hiện đại, tha hồ sống ảo</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Ph&ograve;ng đầy đủ tiện nghi, Tivi Netflix</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Gi&aacute; cả hợp l&yacute;</span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">&nbsp;- Tặng k&egrave;m nhiều ưu đ&atilde;i cho kh&aacute;ch thu&ecirc; g&oacute;i tuần</span></p>\r\n', './image/upload/39.jpg', 1, '2023-04-09 17:59:21', '2023-09-24 17:59:21', '1', 2, 24, 4, '2023-04-09 10:59:21', '2023-04-09 10:59:21'),
+(30, 'Cho thuê HOMSTAY linh hoạt giá rẻ', 'Cho-thue-HOMSTAY-linh-hoat-gia-re', 2, 3, 16, 'Nguyên Khiết', '17', 750000, 40, '<p><span style=\"font-size:12pt\">Cho thu&ecirc; HOMSTAY linh hoạt gi&aacute; rẻ</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Lưu tr&uacute;,quay phim,tổ chức sinh nhật</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Căn hộ thiết kế từ 1-3 ph&ograve;ng ngủ(&nbsp; nội thất hiện đại) </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">-&nbsp; Khu vực: Phạm H&ugrave;ng, Cầu Giấy,V&otilde; Ch&iacute; C&ocirc;ng,Ho&agrave;ng Quốc việt,Trung Kinh...H&agrave; Nội</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Ph&ograve;ng sạch sẽ, y&ecirc;n tĩnh, an ninh đảm bảo c&oacute; bảo vệ 24/24</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Đầy đủ tiện nghi( c&oacute; thể nấu ăn tại ph&ograve;ng) c&oacute; thang m&aacute;y,c&oacute; chỗ để xe &ocirc; t&ocirc;</span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">- Miễn ph&iacute; giặt l&agrave;,dọn ph&ograve;ng,nước uống Lavie</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:258.406px; top:28px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/82.jpg', 2, '2023-04-09 18:05:35', '2023-06-18 18:05:35', '1', 2, 24, 4, '2023-04-09 11:05:35', '2023-04-09 11:05:35'),
+(31, 'Cho thuê căn minin homestay siêu rẻ đẹp Hà Nội', 'Cho-thue-can-minin-homestay-sieu-re-dep-Ha-Noi', 2, 2, 11, 'Đội Cấn', '432', 1100000, 45, '<p><span style=\"font-size:12pt\">Cho thu&ecirc; căn minin homestay si&ecirc;u rẻ đẹp H&agrave; Nội</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Một căn mini homestay với decor trẻ trung, tối giản v&agrave; hiện đại. D&ugrave; l&agrave; căn hộ mini nhưng vẫn được trang bị đầy đủ nội thất tiện nghi như bếp, tủ lạnh, tv&hellip;</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Đặc biệt, căn hộ n&agrave;y tọa lac tại ngay trung t&acirc;m cộng đồng Nhật Bản v&agrave; H&agrave;n Quốc n&ecirc;n c&oacute; rất nhiều tiện &iacute;ch v&agrave; địa điểm th&uacute; vị để kh&aacute;m ph&aacute;</span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">- Nếu như bạn c&oacute; dịp c&ocirc;ng t&aacute;c tại H&agrave; Nội m&agrave; vẫn ph&acirc;n v&acirc;n kh&ocirc;ng biết ở đ&acirc;u th&igrave; căn hộ mini xanh sẽ l&agrave; một gợi &yacute; tuyệt vời</span></p>\r\n', './image/upload/68.jpg', 3, '2023-04-09 18:08:29', '2023-06-30 18:08:29', '1', 2, 24, 4, '2023-04-09 11:08:29', '2023-04-09 11:08:29'),
+(32, 'HOA ĐỎ HOMESTAY CHO THUÊ PHÒNG', 'HOA-DO-HOMESTAY-CHO-THUE-PHONG', 45, 491, 8009, 'Hoàng Diệu', '100A', 1200000, 45, '<p><span style=\"font-size:12pt\">HOA ĐỎ HOMESTAY CHO THU&Ecirc; PH&Ograve;NG</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- HOA ĐỎ HOMESTAY cho thu&ecirc; ph&ograve;ng c&aacute;ch chợ Đ&agrave; Lạt gần 2km, dễ t&igrave;m, dễ di chuyển v&agrave; gi&aacute; ph&ograve;ng si&ecirc;u hạt dẻ. HOA ĐỎ HOMESTAY l&agrave; nơi nghỉ dưỡng l&yacute; tưởng cho kh&aacute;ch du lịch. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Chỗ đậu xe &ocirc; t&ocirc;, xe m&aacute;y </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Free wifi </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- S&acirc;n nướng BBQ </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Bếp nấu ăn gia đ&igrave;nh </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- B&agrave;n ủi, m&aacute;y sấy... </span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">- Cho thu&ecirc; xe m&aacute;y gi&aacute; rẻ</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:313.703px; top:6px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/59.jpg', 3, '2023-04-13 23:34:12', '2023-06-28 23:34:12', '1', 2, 24, 4, '2023-04-13 16:34:12', '2023-04-13 16:34:12'),
+(33, 'CHO THUÊ HOMESTAY VIEW SIÊU ĐẸP', 'CHO-THUE-HOMESTAY-VIEW-SIEU-DEP', 45, 491, 8009, 'Hoàng Diệu', 'Hẻm 110', 1250000, 42, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; HOMESTAY VIEW SI&Ecirc;U ĐẸP</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">👉C&aacute;ch trung t&acirc;m 1,5km, đi xe m&aacute;y chỉ 5&#39; ra đến chợ Đ&agrave; Lạt, 8&#39;đến quảng trường. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">👉Hệ thống ph&ograve;ng sạch sẽ, tho&aacute;ng m&aacute;t, decor ấm &aacute;p , view cao đẹp. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">👉Toilet ri&ecirc;ng từng ph&ograve;ng,đầy đủ nước n&oacute;ng lạnh. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">👉Dịch vụ: </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">&nbsp;&nbsp;&nbsp; ☘️Cho thu&ecirc; xe m&aacute;y,xe &ocirc; t&ocirc;.</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">&nbsp;&nbsp;&nbsp; ☘Dịch vụ giặt sấy quần &aacute;o.</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">&nbsp;&nbsp;&nbsp; ☘Dịch vụ đặt tuor du lịch nội-ngoại th&agrave;nh Đ&agrave; Lạt. </span></p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp; <span style=\"font-size:12.0pt\">☘</span><span style=\"font-size:12.0pt\">V</span><span style=\"font-size:12.0pt\">&agrave;</span><span style=\"font-size:12.0pt\"> c</span><span style=\"font-size:12.0pt\">&aacute;</span><span style=\"font-size:12.0pt\">c dịch vụ kh&aacute;c ...</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:308.656px; top:23px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/70.jpg', 5, '2023-04-13 23:47:53', '2023-06-28 23:47:53', '1', 2, 24, 4, '2023-04-13 16:47:53', '2023-04-13 16:47:53'),
+(34, 'CHO THUÊ HOMSTAY GẦN CHỢ ĐÀ LẠT', 'CHO-THUE-HOMSTAY-GAN-CHO-DA-LAT', 45, 491, 8013, 'Bà Triệu', '33 lô 351 ', 600000, 30, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; HOMSTAY GẦN CHỢ Đ&Agrave; LẠT</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌻 Nằm ngay trung t&acirc;m tp đ&agrave; Lạt, chỉ 2 ph&uacute;t l&agrave; tới ch.ợ Đ&ecirc;m v&agrave; hồ xu&acirc;n hương, gần nh&agrave; thờ Con G&agrave;, trung t&acirc;m h&agrave;nh ch&iacute;nh.... ,Nh&agrave; mới x&acirc;y n&ecirc;n cơ sở vật chất mới 100%&nbsp; gồm c&oacute; 3 loại ph&ograve;ng&nbsp; cao cấp.</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">&nbsp;🌻 Ph&ograve;ng đơn c&oacute; cửa sổ : 300.k-350.k</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌻 Ph&ograve;ng đơn gỗ c&oacute; ban c&ocirc;ng : 350.k-400.k</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌻 Ph&ograve;ng đ&ocirc;i c&oacute; cửa sổ+ ban c&ocirc;ng : 500.k-600.k</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">( Gi&aacute; kh&ocirc;ng bao gồm lễ tết )</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌵 Ph&ograve;ng sạch sẽ ,rộng ,tho&aacute;ng, nh&agrave; vệ sinh từng ph&ograve;ng,trang bị đầy đủ như m&aacute;y sấy,ấm đun si&ecirc;u tốc,wifi mạnh ,quạt gi&oacute;, nước n&oacute;ng 24/24, c&oacute; s&acirc;n nướng BBQ view hồ Xu&acirc;n Hương , gương to&agrave;n th&acirc;n mỗi ph&ograve;ng, ph&ograve;ng chờ uống tr&agrave; xịn s&ograve;....</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌵C&Oacute; B&Atilde;I ĐẬU XE OTO</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌵c&oacute; cho thu&ecirc; xe m&aacute;y ng&agrave;y. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🌵giờ giấc check in 14H v&agrave; check out trước 12H (linh hoạt ph&ograve;ng trống check in sớm 1-2h)</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:318.578px; top:17px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/43.jpg', 1, '2023-04-13 23:48:10', '2023-06-28 23:48:10', '1', 2, 24, 4, '2023-04-13 16:48:10', '2023-04-13 16:48:10'),
+(35, 'CHO THUÊ HOMESTAY GẦN CẦU RỒNG', 'CHO-THUE-HOMESTAY-GAN-CAU-RONG', 33, 359, 6387, 'Lương Thế Vinh', '70', 700000, 32, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; HOMESTAY GẦN CẦU RỒNG</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Homestay c&aacute;ch cầu rồng 800m, c&aacute;ch biển 1km. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Ph&ograve;ng gi&aacute; b&igrave;nh d&acirc;n</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Ph&ograve;ng đầy đủ tiện nghi, toilet ri&ecirc;ng b&ecirc;n trong.</span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">- C&oacute; cho thu&ecirc; xe m&aacute;y tiện đi lại thăm th&uacute; du lịch ạ</span></p>\r\n', './image/upload/46.jpg', 2, '2023-04-13 23:48:28', '2023-07-28 23:48:28', '1', 2, 24, 4, '2023-04-13 16:48:28', '2023-04-13 16:48:28'),
+(36, 'HOMESTAY GIÁ SIÊU RẺ CHO MỌI NGƯỜI', 'HOMESTAY-GIA-SIEU-RE-CHO-MOI-NGUOI', 33, 359, 6390, 'Phạm Cự Lượng', '106', 300000, 30, '<p><span style=\"font-size:12pt\">HOMESTAY GI&Aacute; SI&Ecirc;U RẺ CHO MỌI NGƯỜI</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">Mọi người nhanh tay book phòng nhé </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🍒Phòng 2 người 200k/ngày.</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🍒Phòng 3 người giá 300k/ ngày</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🍒Toilet riêng từng phòng. </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">🍒Homestay được sử dụng bếp và tủ lạnh.</span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">🍒</span><span style=\"font-size:12.0pt\">Cách Cầu Rồng, chợ đêm Sơn Trà 300 m. Cách biển Mỹ Khê 1km</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:331.281px; top:33px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/16.jpg', 4, '2023-04-13 23:48:52', '2023-07-28 23:48:52', '1', 2, 24, 4, '2023-04-13 16:48:52', '2023-04-13 16:48:52'),
+(37, 'CHO THUÊ HOMESTAY ĐẸP, VIEW ƯNG', 'CHO-THUE-HOMESTAY-DEP--VIEW-UNG', 33, 359, 6387, 'Võ Văn Kiệt', '78', 800000, 40, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; HOMESTAY ĐẸP, VIEW ƯNG</span></p>\r\n\r\n<ul>\r\n	<li><span style=\"font-size:12pt\">Chỗ để xe oto an to&agrave;n</span></li>\r\n	<li><span style=\"font-size:12pt\">Vị tr&iacute; thuận tiện đến c&aacute;c địa điểm tham quan, du lịch, ăn uống, mua sắm tại Đ&agrave; Nẵng</span></li>\r\n	<li><span style=\"font-size:12pt\">Ngay trung t&acirc;m, c&aacute;ch biển Mỹ Kh&ecirc; 600m, c&aacute;ch đầu cầu Rồng, cầu T&igrave;nh Y&ecirc;u, chợ đ&ecirc;m, cầu S&ocirc;ng H&agrave;n 1km về hướng biển, ngay trung t&acirc;m, thuận tiện ăn uống, vui chơi, mua sắm,...</span></li>\r\n</ul>\r\n\r\n<p><span style=\"font-size:12pt\">💗Hỗ Trợ thu&ecirc; xe chỉ 100k/ng&agrave;y</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">❤️Rất mong được phục vụ Qu&yacute; Kh&aacute;ch</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:310.859px; top:17px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/11.jpg', 4, '2023-04-13 23:49:10', '2023-07-28 23:49:10', '1', 2, 24, 4, '2023-04-13 16:49:10', '2023-04-13 16:49:10'),
+(38, 'CHO THUÊ HOMESTAY KẾ BÃI BIỂN MỸ KHÊ XINH ĐẸP', 'CHO-THUE-HOMESTAY-KE-BAI-BIEN-MY-KHE-XINH-DEP', 33, 359, 6388, 'Lâm Hoành', '52B', 910000, 40, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; HOMESTAY KẾ B&Atilde;I BIỂN MỸ KH&Ecirc; XINH ĐẸP</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Trong ph&ograve;ng c&oacute; sẵn: Nước, c&oacute; tivi, tủ lạnh, view tho&aacute;ng, c&oacute; bếp(tuỳ ph&ograve;ng)</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">Vị tr&iacute; homestay si&ecirc;u đẹp</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">💢&nbsp;Ngay biển Mỹ Kh&ecirc; 1 ph&uacute;t đi bộ 100 m&eacute;t.</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">👉&nbsp;Gần cầu Rồng 5p</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">👉&nbsp;Gần trung t&acirc;m th&agrave;nh phố 5p</span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">👉&nbsp;</span><span style=\"font-size:12.0pt\">Gần c&aacute;c địa điểm du lịch như Đỉnh b&agrave;n cờ Ch&ugrave;a Linh Ứng, cầu Rồng, cầu S&ocirc;ng H&agrave;n, chợ Bắc Mỹ An</span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">📍&nbsp;Địa chỉ: 52b L&acirc;m Ho&agrave;nh - Sơn Tr&agrave; - Đ&agrave; Nẵng (đường L&acirc;m Ho&agrave;nh song song với trục đường V&otilde; Nguy&ecirc;n Gi&aacute;p trực diện với biển Mỹ Kh&ecirc;)</span></p>\r\n', './image/upload/79.jpg', 5, '2023-04-13 23:49:27', '2023-09-15 23:49:27', '1', 2, 24, 4, '2023-04-13 16:49:27', '2023-04-13 16:49:27'),
+(41, 'CHO THUÊ CĂN HỘ VIEW SIÊU ĐẸP Quận 7', 'CHO-THUE-CAN-HO-VIEW-SIEU-DEP-Quan-7', 51, 569, 8949, 'Số 9', '86', 5000000, 45, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; CĂN HỘ VIEW SI&Ecirc;U ĐẸP</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">? Căn hộ 3 ph&ograve;ng ngủ, 2WC ( ban c&ocirc;ng lớn xịn s&ograve; , wiu tho&aacute;ng m&aacute;t )</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">? Nh&agrave; mặt tiền bờ k&egrave; đường lớn , thang m&aacute;y, </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">? full nội thất mới đầy đủ tiện nghi </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">? Khu an ninh y&ecirc;n tĩnh bảo vệ 24/24, c&oacute; b&atilde;i xe rộng </span></p>\r\n\r\n<p><span style=\"font-size:12.0pt\">?</span><span style=\"font-size:12.0pt\"> Cho nu&ocirc;i pet</span></p>\r\n', './image/upload/32.jpg', 2, '2023-04-13 23:22:33', '2023-06-25 23:22:33', '1', 2, 25, 3, '2023-04-13 16:22:33', '2023-04-13 16:22:33'),
+(42, 'NHÀ ĐẸP - GIÁ TỐT NHẤT, VÀO Ở NGAY GIÁ CHỈ TỪ 5 TRIỆU Ở VINHOMES SMART CITY TÂY MỖ', 'NHA-DEP---GIA-TOT-NHAT--VAO-O-NGAY-GIA-CHI-TU-5-TRIEU-O-VINHOMES-SMART-CITY-TAY-MO', 2, 14, 205, 'Đại lộ Thăng Long', 'Vinhomes Smart City', 5200000, 35, '<p>Th&ocirc;ng tin m&ocirc; tả</p>\r\n\r\n<p>- Căn cực đẹp, gi&aacute; cực tốt!<br />\r\n<br />\r\n* Quỹ 100 căn hộ cho thu&ecirc; c&aacute;c loại h&igrave;nh căn hộ ở chung cư Vinhomes Smart City.<br />\r\n<br />\r\n- CH Studio (DT 31 - 40m&sup2;): Gi&aacute; thu&ecirc; chỉ từ 5 - 6tr/th&aacute;ng.<br />\r\n<br />\r\n- CH 1PN (DT 43 - 55m&sup2;): Gi&aacute; thu&ecirc; chỉ từ 6.5 - 7.5tr/th&aacute;ng.<br />\r\n<br />\r\n- CH 2PN (DT 60 - 70m&sup2;): Gi&aacute; thu&ecirc; chỉ từ 8 - 9tr/th&aacute;ng.<br />\r\n<br />\r\n- CH 3PN (DT 81 - 100m&sup2;): Gi&aacute; thu&ecirc; chỉ từ 9.5- 11/th&aacute;ng.<br />\r\n<br />\r\nChỉ từ 5 tr/th bạn đ&atilde; c&oacute; thể sở hữu 1 căn hộ ở một m&ocirc;i trường đẳng cấp, văn minh, c&oacute; thể sử dụng to&agrave;n bộ những tiện &iacute;ch v&agrave; khu vui chơi đẳng cấp 5* nơi đ&acirc;y.<br />\r\n<br />\r\n* Đặc biệt: Ch&uacute;ng t&ocirc;i c&ograve;n c&oacute; 1 số căn hộ Homestay cho thu&ecirc; theo giờ/ng&agrave;y/tuần/th&aacute;ng mức gi&aacute; cực kỳ tốt chỉ từ 500k/ng&agrave;y/đ&ecirc;m (d&agrave;nh cho kh&aacute;ch h&agrave;ng c&ocirc;ng t&aacute;c xa, hoặc cần 1 nơi y&ecirc;n tĩnh nghỉ dưỡng y&ecirc;n b&igrave;nh,..<br />\r\n<br />\r\n* Cam kết:<br />\r\n- Kh&aacute;ch h&agrave;ng sẽ thu&ecirc; được căn hộ với gi&aacute; tốt nhất v&agrave; ưng &yacute; nhất ở thời điểm thị trường hiện nay.<br />\r\n- Kh&ocirc;ng thu ph&iacute; đi xem nh&agrave; v&agrave; thu&ecirc; nh&agrave;.<br />\r\n- Hỗ trợ thủ tục hồ sơ giấy tờ từ A - Z khi kh&aacute;ch thu&ecirc; nh&agrave;.</p>\r\n', './image/upload/41-5.jpg', 1, '2023-04-13 23:22:13', '2023-06-18 23:22:13', '1', 2, 25, 3, '2023-04-13 16:22:13', '2023-04-13 16:22:13'),
 (43, 'Cho thuê căn hộ chung cư T&T Victoria, số 1 thành Vinh', 'Cho-thue-can-ho-chung-cu-T-T-Victoria--so-1-thanh-Vinh', 28, 295, 5266, 'Quang Trung', '1', 12000000, 61, '<p>Cho thu&ecirc; căn hộ T&amp;T Victoria.<br />\r\nVị tr&iacute;: Số 1 Quang Trung, Th&agrave;nh Phố Vinh.<br />\r\nDiện t&iacute;ch: 61m, gồm 2 pn, 2wc.<br />\r\nHướng nh&agrave; đ&ocirc;ng bắc, đối diện đường quang trung, ngắm trọn th&agrave;nh phố từ tr&ecirc;n cao.<br />\r\nTiện &iacute;ch ngoại khu: Gần chợ Vinh, khu h&agrave;nh ch&iacute;nh, quảng trường hồ ch&iacute; minh, bến xe, s&acirc;n bay, s&acirc;n vận động, trường đại học, trung t&acirc;m thương mại...<br />\r\nTiện &iacute;ch nội khu: C&oacute; hơn 20 tiện &iacute;ch nội khu, gồm 2 hầm để xe, bảo vệ 4 lớp an to&agrave;n tuyệt đối, sảnh chờ, quầy lễ t&acirc;n, 5 tầng trung t&acirc;m thương mại, 1 tầng tiện &iacute;ch đặc khu, t&iacute;ch hợp nhiều tiện &iacute;ch phục vụ cư d&acirc;n sống tại đ&acirc;y, như h&agrave;ng c&acirc;y xanh, khu nướng bbq ngo&agrave;i trời, ph&ograve;ng đọc s&aacute;ch, khu tiếp kh&aacute;ch sang trọng...<br />\r\nGi&aacute; cả hợp l&yacute;, d&acirc;n cư văn minh, vị tr&iacute; thuận tiện, kh&aacute;ch h&agrave;ng c&oacute; nhu cầu liện hệ em hỗ trợ 24/24.</p>\r\n\r\n<p>Đặc điểm :</p>\r\n\r\n<p>Diện t&iacute;ch: 61 m&sup2;</p>\r\n\r\n<p>Mức gi&aacute;: 12 triệu/th&aacute;ng</p>\r\n\r\n<p>Hướng nh&agrave;: T&acirc;y - Nam</p>\r\n\r\n<p>Hướng ban c&ocirc;ng: Đ&ocirc;ng - Bắc</p>\r\n\r\n<p>Số ph&ograve;ng ngủ: 2 ph&ograve;ng</p>\r\n\r\n<p>Số toilet: 2 ph&ograve;ng</p>\r\n\r\n<p>Ph&aacute;p l&yacute;: Sổ đỏ/ Sổ hồng</p>\r\n\r\n<p>Nội thất: NỘI THẤT ĐẦY ĐỦ</p>\r\n', './image/upload/47-6.jpg', 3, '2023-03-24 11:18:27', '2023-05-28 11:18:27', '1', 2, 25, 3, '2023-03-24 04:18:27', '2023-03-24 04:18:27'),
 (44, 'CHO THUÊ CĂN HỘ VIEW ĐẸP 2 PHÒNG NGỦ', 'CHO-THUE-CAN-HO-VIEW-DEP-2-PHONG-NGU', 51, 568, 8932, 'Khu phố 7', 'Hẻm 219/5', 6000000, 52, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; CĂN HỘ VIEW ĐẸP 2 PH&Ograve;NG NGỦ</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">? Căn hộ 2 ph&ograve;ng ngủ, 2WC ( ban c&ocirc;ng lớn xịn s&ograve; , wiu tho&aacute;ng m&aacute;t )</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">? full nội thất mới đầy đủ tiện nghi </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">? Khu an ninh y&ecirc;n tĩnh bảo vệ 24/24, c&oacute; b&atilde;i xe rộng</span></p>\r\n\r\n<div class=\"ddict_btn\" style=\"left:559.234px; top:30px\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n', './image/upload/42-1.jpg', 3, '2023-03-24 11:47:07', '2023-05-29 11:47:07', '1', 2, 25, 3, '2023-03-24 04:47:07', '2023-03-24 04:47:07'),
 (45, 'CHO THUÊ CĂN HỘ CHUNG CƯ PHÙ HỢP GIA ĐÌNH TRẺ', 'CHO-THUE-CAN-HO-CHUNG-CU-PHU-HOP-GIA-DINH-TRE', 28, 295, 5261, 'Mai Hắc Đế', '3', 4500000, 30, '<p><span style=\"font-size:12pt\">CHO THU&Ecirc; CĂN HỘ CHUNG CƯ PH&Ugrave; HỢP GIA Đ&Igrave;NH TRẺ</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Căn hộ 2 ph&ograve;ng ngủ, 2WC ( ban c&ocirc;ng lớn xịn s&ograve; , wiu tho&aacute;ng m&aacute;t )</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- full nội thất mới đầy đủ tiện nghi </span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Thuận tiện đi lại, c&oacute; điểm xe bus ngay ch&acirc;n chung cư</span></p>\r\n', './image/upload/12.jpg', 4, '2023-03-24 11:55:14', '2023-05-29 11:55:14', '1', 2, 25, 3, '2023-03-24 04:55:14', '2023-03-24 04:55:14'),
@@ -1190,7 +1324,8 @@ INSERT INTO `tbl_rooms` (`id`, `name`, `slug`, `city_id`, `district_id`, `ward_i
 (59, 'Cho thuê phòng trọ khép kín không chung cổng chủ', 'Cho-thue-phong-tro-khep-kin-khong-chung-cong-chu', 28, 295, 5267, 'Nguyễn Thái Học', '26', 750000, 22, '<p><span style=\"font-size:12pt\">Cho thu&ecirc; ph&ograve;ng trọ kh&eacute;p k&iacute;n kh&ocirc;ng chung cổng chủ</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Nh&agrave; trọ 4 tầng, sạch sẽ, rộng r&atilde;i</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Chỗ để xe rộng</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- C&oacute; s&acirc;n phơi ở tầng thượng</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Kh&ocirc;ng chung cổng chủ</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Gần trường tiểu học Đội Cung</span></p>\r\n\r\n<p><span style=\"font-size:12pt\">- Điện 3k/số. Nước 10k/số</span></p>\r\n', './image/upload/cach-trang-tri-phong-tro-de-thuong.jpg', 1, '2023-02-08 15:56:17', '2023-02-28 15:56:17', '3', 3, 23, 1, '2023-02-08 08:56:17', '2023-02-08 08:56:17'),
 (60, 'Cần tìm 1 bạn nam ở ghép trong phòng trọ đầy đủ tiện nghi', 'Can-tim-1-ban-nam-o-ghep-trong-phong-tro-day-du-tien-nghi', 28, 295, 5262, 'Trường Tiến', '86', 1230000, 26, '<p>Hiện tại ph&ograve;ng c&oacute; 2 người Đầu th&aacute;ng 12 or hiện tại c&oacute; thể dọn v&agrave;o ở</p>\r\n\r\n<p>- Tiền Ph&ograve;ng : 3700k _ CỌC PH&Ograve;NG :1230k (3700k)</p>\r\n\r\n<p>- Điện: 3.7k/KW - Nước: 20k/khối</p>\r\n\r\n<p>- Xe: 150 k /xe</p>\r\n\r\n<p>- Vệ sinh, wifi, r&aacute;c : 100k Ph&ograve;ng</p>\r\n\r\n<p>- giờ giấc tự do.</p>\r\n\r\n<p>Hiện tại ph&ograve;ng đ&atilde; c&oacute; đầy đủ đồ đạc : bếp, quạt, tủ lạnh ,nồi ni&ecirc;u ,m&aacute;y giặt ri&ecirc;ng (kh&ocirc;ng c&oacute; m&aacute;y lạnh) Ưu ti&ecirc;n &iacute;t đồ đạc.</p>\r\n', './image/upload/315660963-3314613072127347-8199489280806102377-n.jpg', 5, '2023-02-08 15:56:44', '2023-02-28 15:56:44', '2', 3, 23, 5, '2023-02-08 08:56:44', '2023-02-08 08:56:44'),
 (61, 'Tìm bạn ở ghép (Nữ, LGBTQ+) trong phòng trọ quận Tân Phú', 'Tim-ban-o-ghep--Nu--LGBTQ---trong-phong-tro-quan-Tan-Phu', 51, 558, 8794, 'Vườn Lài', '16', 1200000, 26, '<p>Nguyễn Minh T&acirc;n (Năm 4, Văn Học, ĐHSP), t&igrave;m bạn ở gh&eacute;p.</p>\r\n\r\n<p>170/1, Vườn L&agrave;i, T&acirc;n Ph&uacute;.</p>\r\n\r\n<p>Gi&aacute; ph&ograve;ng: 1m - 1m5</p>\r\n\r\n<p>Điện: 3,5k</p>\r\n\r\n<p>Nước: 20k</p>\r\n\r\n<p>Dịch vụ: 40K (R&aacute;c, wifi, gửi xe, qu&eacute;t dọn)</p>\r\n\r\n<p>Ph&ograve;ng trọ c&oacute; mở kh&oacute;a v&acirc;n tay, gần ĐH Văn Hiến,....</p>\r\n\r\n<p>Chủ ph&ograve;ng c&oacute; thể phổ cặp chương tr&igrave;nh Ngữ Văn ở c&aacute;c cấp (Miễn ph&iacute;), c&aacute;c kiến thức về skincare, chăm s&oacute;c sức khỏe, tư vấn t&acirc;m l&yacute; t&igrave;nh y&ecirc;u tuổi mới lớn, kinh nghiệm đăng k&yacute; học phần cho t&acirc;n sinh vi&ecirc;n, l&agrave;m bi&ecirc;n tập vi&ecirc;n (Miễn ph&iacute;) cho c&aacute;c t&aacute;c giả muốn xuất bản s&aacute;ch, lan tỏa năng lượng sống l&agrave;nh mạnh,...</p>\r\n', './image/upload/thiet-ke-noi-that-phong-tro-38.jpg', 4, '2023-02-04 17:51:23', '2023-02-26 17:51:23', '3', 3, 23, 5, '2023-02-04 10:51:23', '2023-02-04 10:51:23'),
-(63, 'CHO THUÊ PHÒNG TRỌ KHÉP KÍN KHÔNG CHUNG CỔNG CHỦ', 'CHO-THUE-PHONG-TRO-KHEP-KIN-KHONG-CHUNG-CONG-CHU', 28, 295, 5259, 'Hưng Bình', '80', 1500000, 25, '<p>Cho thu&ecirc; ph&ograve;ng trọ kh&eacute;p k&iacute;n kh&ocirc;ng chung cổng chủ</p>\r\n\r\n<p>- Nh&agrave; trọ 4 tầng, sạch sẽ, rộng r&atilde;i</p>\r\n\r\n<p>- Chỗ để xe rộng</p>\r\n\r\n<p>- C&oacute; s&acirc;n phơi ở tầng thượng</p>\r\n\r\n<p>- Kh&ocirc;ng chung cổng chủ</p>\r\n\r\n<p>- Gần trường tiểu học Đội Cung</p>\r\n\r\n<p>- Điện 3k/số. Nước 10k/số</p>\r\n', './image/upload/1-2.jpg', 1, '2023-03-24 12:04:50', '2023-05-29 12:04:50', '1', 2, 25, 1, '2023-03-24 05:04:50', '2023-03-24 05:04:50');
+(63, 'CHO THUÊ PHÒNG TRỌ KHÉP KÍN KHÔNG CHUNG CỔNG CHỦ', 'CHO-THUE-PHONG-TRO-KHEP-KIN-KHONG-CHUNG-CONG-CHU', 28, 295, 5259, 'Hưng Bình', '80', 1500000, 25, '<p>Cho thu&ecirc; ph&ograve;ng trọ kh&eacute;p k&iacute;n kh&ocirc;ng chung cổng chủ</p>\r\n\r\n<p>- Nh&agrave; trọ 4 tầng, sạch sẽ, rộng r&atilde;i</p>\r\n\r\n<p>- Chỗ để xe rộng</p>\r\n\r\n<p>- C&oacute; s&acirc;n phơi ở tầng thượng</p>\r\n\r\n<p>- Kh&ocirc;ng chung cổng chủ</p>\r\n\r\n<p>- Gần trường tiểu học Đội Cung</p>\r\n\r\n<p>- Điện 3k/số. Nước 10k/số</p>\r\n', './image/upload/1-2.jpg', 1, '2023-03-24 12:04:50', '2023-05-29 12:04:50', '1', 2, 25, 1, '2023-03-24 05:04:50', '2023-03-24 05:04:50'),
+(64, 'Cho thuê căn hộ giá rẻ tại đường kim đồng', 'Cho-thue-can-ho-gia-re-tai-duong-kim-dong', 28, 295, 5262, 'Kim Đồng', '32', 3500000, 45, '<p>CHO THU&Ecirc; CĂN HỘ VIEW ĐẸP 2 PH&Ograve;NG NGỦ</p>\r\n\r\n<p>? Căn hộ 2 ph&ograve;ng ngủ, 2WC ( ban c&ocirc;ng lớn xịn s&ograve; , wiu tho&aacute;ng m&aacute;t )</p>\r\n\r\n<p>? full nội thất mới đầy đủ tiện nghi</p>\r\n\r\n<p>? Khu an ninh y&ecirc;n tĩnh bảo vệ 24/24, c&oacute; b&atilde;i xe rộng</p>\r\n', './image/upload/11.jpg', 1, '2023-04-13 23:21:44', '2023-06-18 23:21:44', '2', 2, 25, 3, '2023-04-13 16:21:44', '2023-04-13 16:21:44');
 
 -- --------------------------------------------------------
 
@@ -1386,7 +1521,12 @@ INSERT INTO `tbl_rooms_image` (`id`, `id_rooms`, `image`, `created_ad`) VALUES
 (236, 63, './image/upload/4-1.jpg', '2023-02-08 13:02:29'),
 (237, 63, './image/upload/5-1.jpg', '2023-02-08 13:02:29'),
 (238, 63, './image/upload/5-2.jpg', '2023-02-08 13:02:29'),
-(239, 63, './image/upload/5-3.jpg', '2023-02-08 13:02:29');
+(239, 63, './image/upload/5-3.jpg', '2023-02-08 13:02:29'),
+(240, 64, './image/upload/6.jpg', '2023-04-13 16:21:44'),
+(241, 64, './image/upload/11.jpg', '2023-04-13 16:21:44'),
+(242, 64, './image/upload/12.jpg', '2023-04-13 16:21:44'),
+(243, 64, './image/upload/13.jpg', '2023-04-13 16:21:44'),
+(244, 64, './image/upload/14.jpg', '2023-04-13 16:21:44');
 
 -- --------------------------------------------------------
 
@@ -1453,8 +1593,8 @@ INSERT INTO `tbl_user` (`id`, `fullname`, `username`, `password`, `email`, `phon
 (21, 'Nguyễn Văn Tú 1', 'tu1234', '$2y$10$5N7TgYEJxj33D9zdEaXb5.4a4X1TBaUTGuXSaG.dd/Q4BmJZM1eNm', 'Tu1231@gmail.com', '0935634863', '0935634863', '', '', './image/avta.jpg', 3472000, 1, '2022-12-24 14:23:37', '2022-12-24 14:23:37'),
 (22, 'Nguyễn Văn Tú 2', 'tu12345', '$2y$10$2/6Kb2lXbrkxo.vd1DM.0uii1iANiuDZ/l1qiermhtJWE3Lb1o38.', 'Tu12345@gmail.com', '0932379843', '0932379843', '', '', './image/26219103-2062015394035935-7996651768375237646-n.jpg', 3000000, 1, '2022-12-24 14:24:12', '2022-12-24 14:24:12'),
 (23, 'Nguyễn Văn Tú 3', 'tu123456', '$2y$10$0xa5BdyldZKC9F0ZWOCF4OvChGarqv2724S6D8TObCUc5YKBRmoMS', 'Tu123456@gmail.com', '0932365943', '0932365943', '', '', './image/26219103-2062015394035935-7996651768375237646-n.jpg', 1122000, 1, '2022-12-24 14:24:44', '2022-12-24 14:24:44'),
-(24, 'Cho thuê Homestay', 'homestay123', '$2y$10$y1F6keEOYRuiBOH/cQfde.9H3.1cxmwiMHoRuYNvDG3vc8OLav312', 'chothuehomestay@gmail.com', '0927441139', '0927441139', '', '', './image/68.jpg', 4850000, 1, '2022-12-26 11:48:35', '2022-12-26 11:48:35'),
-(25, 'Cho thuê căn hộ', 'chothuecanho123', '$2y$10$dQXgB00UXM3yg2/P0bNcYuH4mkxjzoGozzo90w.8091PQTljwxRVm', 'chothuecanho@gmail.com', '0932379749', '0932379749', 'Anh Sơn, Nghệ An', '', './image/38.jpg', 27668000, 1, '2022-12-26 14:43:28', '2022-12-26 14:43:28'),
+(24, 'Cho thuê Homestay', 'homestay123', '$2y$10$y1F6keEOYRuiBOH/cQfde.9H3.1cxmwiMHoRuYNvDG3vc8OLav312', 'chothuehomestay@gmail.com', '0927441139', '0927441139', '', '', './image/68.jpg', 10278000, 1, '2022-12-26 11:48:35', '2022-12-26 11:48:35'),
+(25, 'Cho thuê căn hộ', 'chothuecanho123', '$2y$10$dQXgB00UXM3yg2/P0bNcYuH4mkxjzoGozzo90w.8091PQTljwxRVm', 'chothuecanho@gmail.com', '0932379749', '0932379749', 'Anh Sơn, Nghệ An', '', './image/38.jpg', 23933000, 1, '2022-12-26 14:43:28', '2022-12-26 14:43:28'),
 (26, 'Cho thuê nhà', 'chothuenha123', '$2y$10$jBg13XHHPMxC1WA0J6SneuSWg.k9rOlEwOUPfS8IG/zSe/kLO4/Bu', 'vantu59k3cntt.dhv@gmail.com', '0932345943', '0932345943', '', '', NULL, 12766000, 1, '2022-12-26 18:20:20', '2022-12-26 18:20:20');
 
 -- --------------------------------------------------------
@@ -12140,6 +12280,14 @@ ALTER TABLE `tbl_city`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `tbl_comments`
+--
+ALTER TABLE `tbl_comments`
+  ADD PRIMARY KEY (`id_comment`),
+  ADD KEY `id_rooms` (`id_rooms`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Chỉ mục cho bảng `tbl_contact`
 --
 ALTER TABLE `tbl_contact`
@@ -12173,6 +12321,14 @@ ALTER TABLE `tbl_payment_history`
   ADD KEY `id_rooms` (`id_rooms`),
   ADD KEY `news_type_id` (`news_type_id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Chỉ mục cho bảng `tbl_replies`
+--
+ALTER TABLE `tbl_replies`
+  ADD PRIMARY KEY (`id_reply`),
+  ADD KEY `id_comment` (`id_comment`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Chỉ mục cho bảng `tbl_rooms`
@@ -12226,13 +12382,19 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT cho bảng `tbl_categories`
 --
 ALTER TABLE `tbl_categories`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_city`
 --
 ALTER TABLE `tbl_city`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
+--
+-- AUTO_INCREMENT cho bảng `tbl_comments`
+--
+ALTER TABLE `tbl_comments`
+  MODIFY `id_comment` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_contact`
@@ -12244,7 +12406,7 @@ ALTER TABLE `tbl_contact`
 -- AUTO_INCREMENT cho bảng `tbl_deposit_money`
 --
 ALTER TABLE `tbl_deposit_money`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_district`
@@ -12262,19 +12424,25 @@ ALTER TABLE `tbl_new_type`
 -- AUTO_INCREMENT cho bảng `tbl_payment_history`
 --
 ALTER TABLE `tbl_payment_history`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+
+--
+-- AUTO_INCREMENT cho bảng `tbl_replies`
+--
+ALTER TABLE `tbl_replies`
+  MODIFY `id_reply` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_rooms`
 --
 ALTER TABLE `tbl_rooms`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_rooms_image`
 --
 ALTER TABLE `tbl_rooms_image`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_slider`
@@ -12299,6 +12467,13 @@ ALTER TABLE `tbl_ward`
 --
 
 --
+-- Các ràng buộc cho bảng `tbl_comments`
+--
+ALTER TABLE `tbl_comments`
+  ADD CONSTRAINT `tbl_comments_ibfk_1` FOREIGN KEY (`id_rooms`) REFERENCES `tbl_rooms` (`id`),
+  ADD CONSTRAINT `tbl_comments_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `tbl_user` (`id`);
+
+--
 -- Các ràng buộc cho bảng `tbl_deposit_money`
 --
 ALTER TABLE `tbl_deposit_money`
@@ -12317,6 +12492,13 @@ ALTER TABLE `tbl_payment_history`
   ADD CONSTRAINT `tbl_payment_history_ibfk_1` FOREIGN KEY (`id_rooms`) REFERENCES `tbl_rooms` (`id`),
   ADD CONSTRAINT `tbl_payment_history_ibfk_2` FOREIGN KEY (`news_type_id`) REFERENCES `tbl_new_type` (`id`),
   ADD CONSTRAINT `tbl_payment_history_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`id`);
+
+--
+-- Các ràng buộc cho bảng `tbl_replies`
+--
+ALTER TABLE `tbl_replies`
+  ADD CONSTRAINT `tbl_replies_ibfk_1` FOREIGN KEY (`id_comment`) REFERENCES `tbl_comments` (`id_comment`),
+  ADD CONSTRAINT `tbl_replies_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `tbl_user` (`id`);
 
 --
 -- Các ràng buộc cho bảng `tbl_rooms`
