@@ -594,3 +594,9 @@ body {
   object-fit: cover;
   margin-bottom: 15px;
 }
+
+#chart-month,
+#chart-days,
+#chart-payment {
+  margin: 35px 20px;
+}

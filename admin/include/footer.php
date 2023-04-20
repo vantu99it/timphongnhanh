@@ -10,5 +10,6 @@
       src="https://code.jquery.com/jquery-1.11.0.min.js"
     ></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="../js/validator-form.js"></script>
     <script src="./js/script.js"></script>

@@ -4,7 +4,7 @@
     include '../include/func-slug.php';
     $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
 
-    $queryDep = $conn->prepare("SELECT * FROM tbl_deposit_money WHERE user_id = :user_id");
+    $queryDep = $conn->prepare("SELECT * FROM tbl_deposit_money WHERE user_id = :user_id ORDER BY created_at DESC");
     $queryDep-> bindParam(':user_id', $id_user, PDO::PARAM_STR);
     $queryDep->execute();
     $resultsDep = $queryDep->fetchAll(PDO::FETCH_OBJ);

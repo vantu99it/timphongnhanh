@@ -7,7 +7,7 @@
 
     $id_user = (isset($_SESSION['login']['id']))? $_SESSION['login']['id']:[];
 
-    $queryPay = $conn->prepare("SELECT pay.*, r.name AS name_post FROM tbl_payment_history pay JOIN tbl_rooms r on r.id = pay.id_rooms WHERE pay.user_id = :user_id AND pay.pay_status = 1");
+    $queryPay = $conn->prepare("SELECT pay.*, r.name AS name_post FROM tbl_payment_history pay JOIN tbl_rooms r on r.id = pay.id_rooms WHERE pay.user_id = :user_id AND pay.pay_status = 1 ORDER BY pay.created_at DESC");
     $queryPay-> bindParam(':user_id', $id_user, PDO::PARAM_STR);
     $queryPay->execute();
     $resultsPay = $queryPay->fetchAll(PDO::FETCH_OBJ);
