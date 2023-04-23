@@ -3,7 +3,7 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $id_user = 25; 
+    $id_user = $_SESSION['login']['id']; 
     $id_comment = $_POST["id_comment"];
     $reply_content = $_POST["reply_content"];
 

@@ -1,6 +1,6 @@
 <?php 
-  include '../include/connect.php';
-$id_rooms = 63;
+
+$id_rooms = isset($_GET['id'])?$_GET['id']:'';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,9 @@ $id_rooms = 63;
 <body>
     <form method="post" id="comment-form">
         <input type="hidden" name="id_rooms" value="<?php echo $id_rooms; ?>">
-        <input type="text" name="comment_content" id="comment_content" placeholder="Write a comment...">
+        <div class="form-contact">
+        <input type="text" name="comment_content" id="comment_content" placeholder="Nhập bình luận...">
+        </div>
         <button type="submit" id="submit-comment">Submit</button>
     </form>
     <div id="comment-message"></div>

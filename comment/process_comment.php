@@ -2,7 +2,7 @@
   include '../include/connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id_user = 25; 
+    $id_user = $_SESSION['login']['id']; 
     $id_rooms = $_POST["id_rooms"];
     $comment_content = $_POST["comment_content"];
 

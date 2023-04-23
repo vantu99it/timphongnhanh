@@ -4,6 +4,15 @@
   date_default_timezone_set("Asia/Ho_Chi_Minh");
 
   $id = isset($_GET['id'])?$_GET['id']:'';
+  $id_rooms = $id;
+  //gọi ra thông tin đăng nhập
+  if(isset($_SESSION['login'])){
+    $id_user = $_SESSION['login']['id'];
+    $queryUser = $conn->prepare("SELECT * FROM tbl_user WHERE id = $id_user");
+    $queryUser->execute();
+    $resultsUser = $queryUser->fetch(PDO::FETCH_OBJ);
+    $userAvatar = $resultsUser -> avatar;
+  }
   // Gọi ra thông tin bài viết
   $queryRoom = $conn->prepare("SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,us.facebook,ca.slug AS category_slug,ca.classify AS category_classify,typ.name_type, ca.name as category_name, CURDATE() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
@@ -353,69 +362,32 @@
                 </div>
                 <!--/ tabs -->
                 <!-- comment -->
-                <?php
-
-                // Lấy id bài viết từ url
-                $id_rooms = $_GET['id'];
-
-                // Lấy thông tin của bài viết
-                $stmt = $conn->prepare("SELECT * FROM tbl_rooms WHERE id=:id_rooms");
-                $stmt->bindParam(':id_rooms', $id_rooms);
-                $stmt->execute();
-                $room = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                // Lấy danh sách bình luận của bài viết
-                $stmt = $conn->prepare("SELECT comments.*, user.fullname FROM tbl_comments AS comments JOIN tbl_user AS user ON comments.id_user = user.id WHERE id_rooms=:id_rooms ORDER BY created_at DESC");
-                $stmt->bindParam(':id_rooms', $id_rooms);
-                $stmt->execute();
-                $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                ?>
-
-                <form id = 'comment-form'>
-                    <input type='hidden' name='id_rooms' value='<?php echo $id_rooms?>'>
-                    <textarea name='comment_content'></textarea><br/>
-                    <input type='submit' name='submit_comment' value='Gửi bình luận'>
-                </form>
-                <?php
-                foreach ($comments as $comment) {
-                    echo "<div>";
-                    echo "<p><strong>".$comment['fullname']."</strong> ".$comment['comment_content']."</p>";
-                    
-                    // Hiển thị form phản hồi bình luận
-                    echo "<button onclick='showForm(".$comment['id_comment'].")'>Phản hồi</button>";
-                    echo "<div id='form-reply-".$comment['id_comment']."' style='display:none;'>";
-                    echo "<form  id = 'reply-form'>";
-                    echo "<input type='hidden' name='id_comment' value='".$comment['id_comment']."'>";
-                    echo "<textarea name='reply_content'></textarea><br/>";
-                    echo "<input type='submit' name='submit_reply' value='Gửi phản hồi'>";
-                    echo "</form>";
-                    echo "</div>";
-                    
-                    // Hiển thị danh sách các phản hồi của bình luận này
-                    $stmt = $conn->prepare("SELECT replies.*, user.fullname FROM tbl_replies AS replies JOIN tbl_user AS user ON replies.id_user = user.id WHERE id_comment=:id_comment ORDER BY created_at ASC");
-                    $stmt->bindParam(':id_comment', $comment['id_comment']);
-                    $stmt->execute();
-                    $replies = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    
-                    foreach ($replies as $reply) {
-                        echo "<div style='margin-left: 20px;'>";
-                        echo "<p><strong>".$reply['fullname']."</strong> ".$reply['reply_content']."</p>";
-                        
-                        // Hiển thị nút chỉnh sửa bình luận
-                        echo "<button onclick='showEditForm(".$reply['id_reply'].")'>Chỉnh sửa</button>";
-                        echo "<div id='form-edit-".$reply['id_reply']."' style='display:none;'>";
-                        echo "<form action='./include/comment-handle.php' method='post' name='edit-reply-form' id = 'edit-reply-form'>";
-                        echo "<input type='hidden' name='id_reply' value='".$reply['id_reply']."'>";
-                        echo "<textarea name='reply_content'>".$reply['reply_content']."</textarea><br/>";
-                        echo "<input type='submit' name='submit_edit_reply' value='Lưu'>";
-                        echo "</form>";
-                        echo "</div>";
-                        echo "</div>";
-                    }
-                    
-                    echo "</div>";
-                }
-                ?>
+                <section class = "section-comment">
+                  <?php if(isset($_SESSION['login'])) {?>
+                    <form method="post" id="comment-form">
+                      <input type="hidden" name="id_rooms" value="<?php echo $id_rooms; ?>">
+                      <div class="form-contact comment-input">
+                        <div class="avatar">
+                          <div class="avata-img">
+                            <?php if(strlen($userAvatar) != 0){ ?>
+                              <img src="<?php echo $userAvatar ?>" alt="">
+                            <?php }else{ ?> 
+                              <img src="./image/default-user.png" alt="">
+                            <?php }?> 
+                          </div>
+                        </div>
+                        <input type="text" name="comment_content" id="comment_content" placeholder="Nhập bình luận...">
+                        <button type="submit" id="submit-comment" class="btn btn-contact submit-comment"><i class="fa-solid fa-paper-plane"></i></button>
+                      </div>
+                    </form>
+                  <?php } else { ?>
+                    <h4>Bạn vui lòng <a href="./login.php">đăng nhập</a> để sử sử dụng chức năng bình luận.</h4>
+                  <?php }?>
+                  <div id="comment-message"></div>
+                  <hr>
+                  <div id="comments"></div>
+                  <div id="reply-comments"></div>
+                </section>
                 <!-- /comment -->
               </div>
               <!-- Tin có liên quan theo tỉnh -->
@@ -512,7 +484,6 @@
                               <?php }else{ ?>
                                 <img src="./image/default-user.png" alt="">
                               <?php }?>
-                              <!-- <i class="fa-solid fa-user"></i> -->
                             </div>
                             <span class="author-name"><?php echo $value -> name_user ?></span>
                             <?php if($value->news_type_id == 1 || $value->news_type_id == 2){?>
@@ -749,94 +720,134 @@
       } );
     </script>
     <script>
-$(document).ready(function() {
-    // Gửi bình luận mới và hiển thị trực tiếp lên trang web
-    $('#comment-form').submit(function(e) {
-    e.preventDefault();
-    $.ajax({
-      type: 'POST',
-      url: './include/comment-handle.php',
-      data: $(this).serialize(),
-      success: function(response) {
-        alert('Đã gửi bình luận thành công');
-                // Tạo HTML của bình luận/ phản hồi mới
-                var html = "<div>";
-                html += "<p><strong>" + response.user_name + "</strong> " + response.comment_content + "</p>";
-                    // Nếu là bình luận mới, thêm vào danh sách bình luận
-                    html += "<button onclick='showForm(" + response.id_comment + ")'>Phản hồi</button>";
-                    html += "<div id='form-reply-" + response.id_comment + "' style='display:none;'>";
-                    html += "<form action='comment.php' method='post'>";
-                    html += "<input type='hidden' name='id_comment' value='" + response.id_comment + "'>";
-                    html += "<textarea name='reply_content'></textarea><br/>";
-                    html += "<input type='submit' name='submit_reply' value='Gửi phản hồi'>";
-                    html += "</form>";
-                    html += "</div>";
-                    
-                    $('#comments').prepend(html);
-            
-                // Reset form
-                form.trigger('reset');
+      //load lại trang và lấy dư liệu
+        var fetchCommentsEnabled = true;
+        var commentsLoaded = false; 
+        function fetchComments(){
+            if (!commentsLoaded && fetchCommentsEnabled) { 
+                commentsLoaded = true; 
+                var id_rooms = <?php echo $id_rooms; ?>; 
+                $.ajax({
+                    url: "./comment/comment.php",
+                    method: "POST",
+                    data: {id_rooms: id_rooms},
+                    success: function(result){
+                        $("#comments").html(result);
+                    },
+                    complete: function() {
+                        setTimeout(fetchComments, 10000); 
+                    }
+                });
+            } else {
+                setTimeout(fetchComments, 10000);
             }
-        });
-    });
-    // Chỉnh sửa phản hồi và hiển thị trực tiếp lên trang web
-    $('#edit-reply-form').on('submit', function(event) {
-        event.preventDefault();
-        
-        var form = $(this);
-        var formData = form.serialize();
-        
-        $.ajax({
-            url: form.attr('action'),
-            method: 'POST',
-            data: formData,
-            dataType: 'json',
-            success: function(response) {
-                // Cập nhật nội dung phản hồi đã chỉnh sửa trên trang web
-                var replyContent = form.find('[name="reply_content"]');
-                var editedReply = replyContent.val().trim();
-                var p = replyContent.parent().prev();
-                if (editedReply.length > 0) {
-                    p.text(editedReply);
-                }
-                
-                // Ẩn form chỉnh sửa
-                form.hide();
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-                alert('Có lỗi xảy ra, vui lòng thử lại sau!');
-            }
-        });
-    });
-});
-</script>
-<script>
-    // Hiển thị form phản hồi bình luận khi click vào nút "Phản hồi"
-function showForm(commentId) {
-    // Ẩn tất cả các form trả lời khác
-    var forms = document.querySelectorAll('[id^="form-reply-"]');
-    for (var i = 0; i < forms.length; i++) {
-        forms[i].style.display = 'none';
-    }
-    
-    // Hiển thị form trả lời tương ứng
-    var form = document.getElementById('form-reply-' + commentId);
-    form.style.display = 'block';
-}
+        }
+        fetchComments();
 
-// Hiển thị form chỉnh sửa bình luận khi click vào nút "Chỉnh sửa"
-function showEditForm(replyId) {
-    // Ẩn tất cả các form chỉnh sửa khác
-    var forms = document.querySelectorAll('[id^="form-edit-"]');
-    for (var i = 0; i < forms.length; i++) {
-        forms[i].style.display = 'none';
-    }
-    
-    // Hiển thị form chỉnh sửa tương ứng
-    var form = document.getElementById('form-edit-' + replyId);
-    form.style.display = 'block';
-}
-</script>
+        //gửi bình luận
+        $("#comment-form").submit(function(event) {
+            event.preventDefault();
+            var commentContent = $("#comment_content").val().trim();
+            if (commentContent.length === 0) {
+                $("#comment-message").text("Vui lòng không bỏ trống"); 
+                return;
+            }
+            $.ajax({
+                url: "./comment/process_comment.php",
+                type: "POST",
+                data: $(this).serialize(), 
+                success: function(response) {
+                    $("#comment_content").val(''); 
+                    $("#comment-message").text("");
+                    commentsLoaded = false;
+                    fetchComments();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+
+                }
+            });
+        });
+
+        //nhấn nút phản hồi
+        $(document).on("click", ".reply-button", function() {
+          var commentDiv = $(this).closest(".comment");
+          commentDiv.find("#replies").addClass("add-display"); 
+        });
+
+        //gửi bình luận
+        $(document).on("submit", ".reply-form", function(event) {
+            event.preventDefault();
+            var form = $(this);
+            var replyContent = form.find("input[name=reply_content]").val().trim(); 
+            if (replyContent.length === 0) { 
+                $("#reply-form-message").html("<p>Vui lòng không bỏ trống.</p>"); 
+                return; 
+            }
+            $.ajax({
+                url: "./comment/process_reply.php",
+                type: "POST",
+                data: form.serialize(), 
+                success: function(response) {
+                    form.remove(); 
+                    $("#reply-form-message").html("");
+                    commentsLoaded = false;
+                    fetchComments();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                }
+            });
+        });
+
+        //xóa bình luận
+        $(document).on("click", ".delete-button", function() {
+            var commentDiv = $(this).closest(".comment");
+            var commentId = commentDiv.data("id");
+            if (confirm("Bạn có chắc muốn xóa bình luận này?")) {
+              $.ajax({
+                  url: "./comment/delete_comment.php",
+                  type: "POST",
+                  data: { id_comment: commentId },
+                  success: function(response) {
+                      commentsLoaded = false;
+                      fetchComments();
+                  },
+                  error: function(jqXHR, textStatus, errorThrown) {
+                  }
+              });
+            }
+        });
+
+        //xóa phản hồi
+        $(document).on("click", ".delete-button-reply", function() {
+            var replyDiv = $(this).closest(".reply");
+            var replyId = replyDiv.data("id");
+            if (confirm("Bạn có chắc muốn xóa phản hồi này?")) {
+              $.ajax({
+                  url: "./comment/delete_reply.php",
+                  type: "POST",
+                  data: { id_reply: replyId },
+                  success: function(response) {
+                      commentsLoaded = false;
+                      fetchComments();
+                  },
+                  error: function(jqXHR, textStatus, errorThrown) {
+                  }
+              });
+            }
+        });
+
+      //hiện tất cả phản hồi
+      $(document).on("click", ".show-more", function(event) {
+        event.preventDefault();
+        const showMoreBtn = $(this);
+        const commentEl = showMoreBtn.closest('.comment-test');
+        const replyEls = commentEl.find('.reply');
+        const totalEls = commentEl.find('.total-reply');
+
+        totalEls.addClass('hidden');
+        replyEls.addClass('show');
+      });
+
+    </script>
   </body>
 </html>

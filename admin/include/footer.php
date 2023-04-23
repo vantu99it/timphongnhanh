@@ -1,6 +1,6 @@
 <div id="footer">
         <div class="copyright">
-            <p>Copyright © Đồ án chuyên ngành - Nguyễn Văn Tú</p>
+            <p>Copyright © Đồ án tốt nghiệp ngành CNTT - Nguyễn Văn Tú</p>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

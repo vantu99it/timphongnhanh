@@ -76,8 +76,9 @@ body {
   background: #edffe1;
   padding: 10px;
 }
-/* ==================================== */
-/* header */
+/*----------------------------------------------------------------------------*/
+/*                                HEADER                                   */
+/*----------------------------------------------------------------------------*/
 #header {
   position: fixed;
   z-index: 1;
@@ -106,7 +107,9 @@ body {
   float: right;
   display: flex;
 }
-/* login */
+/*----------------------------------------------------------------------------*/
+/*                                 LOGIN                                   */
+/*----------------------------------------------------------------------------*/
 .logged {
   height: 50px;
   position: relative;
@@ -267,7 +270,9 @@ body {
   background-size: contain;
 }
 
-/* bar menu */
+/*----------------------------------------------------------------------------*/
+/*                                 bar menu                                   */
+/*----------------------------------------------------------------------------*/
 .header-navbar {
   background: #1266dd;
 }
@@ -294,7 +299,9 @@ body {
 .navbar-menu a.active {
   background: #f73859;
 }
-/* slider */
+/*----------------------------------------------------------------------------*/
+/*                                 slider                                      */
+/*----------------------------------------------------------------------------*/
 #slider {
   margin-top: 50px;
   position: relative;
@@ -369,7 +376,9 @@ body {
 .slick-dots .slick-active button {
   background-color: #2cccff;
 }
-/* main */
+/*----------------------------------------------------------------------------*/
+/*                                 Main                                      */
+/*----------------------------------------------------------------------------*/
 .main {
 }
 #search {
@@ -434,7 +443,9 @@ body {
   display: block;
 }
 
-/* post */
+/*----------------------------------------------------------------------------*/
+/*                                 POST                                      */
+/*----------------------------------------------------------------------------*/
 .bookmark {
   position: absolute;
   top: 0;
@@ -631,7 +642,9 @@ body {
   margin-left: 5px;
   color: #28ad07;
 }
-/* vip */
+/*----------------------------------------------------------------------------*/
+/*                                  VIP                                      */
+/*----------------------------------------------------------------------------*/
 #post .vip-hot {
   border-color: #e13427;
   background-color: #ecfbe2;
@@ -686,8 +699,9 @@ body {
   text-transform: none;
 }
 
-/* col-3 */
-/* category */
+/*----------------------------------------------------------------------------*/
+/*                              category                                      */
+/*----------------------------------------------------------------------------*/
 .category {
   margin: 0 15px 15px;
 }
@@ -730,7 +744,9 @@ body {
   font-size: 14px;
 }
 
-/* new post */
+/*----------------------------------------------------------------------------*/
+/*                               new post                                     */
+/*----------------------------------------------------------------------------*/
 
 .new-post-listing .new-post-item {
   margin: 0 12px;
@@ -771,8 +787,10 @@ body {
   float: right;
   margin: 4px 0 0 0;
 }
+/*----------------------------------------------------------------------------*/
+/*                               section-why                                  */
+/*----------------------------------------------------------------------------*/
 
-/* section-why  */
 .section-content {
   padding: 20px 50px 50px;
 }
@@ -809,7 +827,10 @@ body {
 .why-count .why-count-item .why-count-item-text {
   font-size: 16px;
 }
-/* section support */
+/*----------------------------------------------------------------------------*/
+/*                           section support                                  */
+/*----------------------------------------------------------------------------*/
+
 .section-support {
   border: 4px dashed #ff0000;
   padding: 30px;
@@ -832,8 +853,10 @@ body {
   margin-top: 15px;
   width: 140px;
 }
+/*----------------------------------------------------------------------------*/
+/*                                 footer                                     */
+/*----------------------------------------------------------------------------*/
 
-/* footer */
 #footer {
   height: 250px;
   border-top: 1px solid #ccc;
@@ -934,7 +957,9 @@ body {
   transform: rotateZ(360deg);
   transition-duration: 0.4s;
 }
-/* ----- article-details ----- */
+/*----------------------------------------------------------------------------*/
+/*                            article-details                                 */
+/*----------------------------------------------------------------------------*/
 #post .breadcrumb {
   padding-left: 0;
 }
@@ -967,7 +992,10 @@ body {
 .page-description {
   font-size: 16px;
 }
-/* loaction-city */
+/*----------------------------------------------------------------------------*/
+/*                            location-city                                   */
+/*----------------------------------------------------------------------------*/
+
 .location-city {
   text-align: center;
   background-color: transparent;
@@ -1006,7 +1034,9 @@ body {
   width: 100%;
   overflow: hidden;
 }
-/* post-list */
+/*----------------------------------------------------------------------------*/
+/*                            post-list                                       */
+/*----------------------------------------------------------------------------*/
 #post .post-detail {
   background: none;
   border-color: unset;
@@ -1084,7 +1114,11 @@ tr:nth-child(even) {
   align-items: center;
   margin-top: 15px;
 }
-/* section contact-info */
+
+/*----------------------------------------------------------------------------*/
+/*                            section contact-info                            */
+/*----------------------------------------------------------------------------*/
+
 .contact-info {
 }
 .section-author {
@@ -1215,7 +1249,9 @@ tr:nth-child(even) {
   list-style-type: none;
 }
 
-/* login */
+/*----------------------------------------------------------------------------*/
+/*                               LOGIN                                */
+/*----------------------------------------------------------------------------*/
 .section-login {
   padding: 30px 30px 60px;
   max-width: 700px;
@@ -1318,4 +1354,131 @@ tr:nth-child(even) {
 .page-division .page-item.current_page {
   color: #fff;
   background-color: #1266dd;
+}
+
+/*----------------------------------------------------------------------------*/
+/*                               COMMENT - REPLY                             */
+/*----------------------------------------------------------------------------*/
+.section-comment {
+  margin: 15px;
+}
+#comments {
+  height: 500px;
+  overflow-y: scroll;
+}
+.section-comment .avata-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 0;
+}
+.section-comment .comment-input {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+}
+.section-comment .submit-comment {
+  margin-left: 10px;
+  /* height: 45px; */
+}
+.section-comment .submit-comment i {
+  margin: 0;
+  width: 100%;
+  font-size: 24px;
+  text-decoration: none;
+  height: 60%;
+}
+.section-comment .submit-comment:hover {
+  text-decoration: none;
+}
+#comment-message {
+  color: red;
+  margin: 0 0 15px 60px;
+}
+
+.comment-list {
+  display: flex;
+  align-items: center;
+}
+.comment-list .comment-content {
+  background-color: #ffffff;
+  padding: 6px 10px 6px 14px;
+  border-radius: 20px;
+}
+.comment-content .full-name {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+}
+.comment-content .content {
+  font-size: 16px;
+  line-height: 25px;
+}
+.comment-act {
+  margin: 5px 0 5px 60px;
+}
+.comment-act .reply-button,
+.comment-act .delete-button,
+.delete-button-reply,
+.show-more {
+  border: none;
+  background-color: transparent;
+  font-size: 13px;
+  line-height: 11px;
+  font-weight: 700;
+  margin: 0 6px;
+}
+.comment-act .reply-button:hover,
+.comment-act .delete-button:hover,
+.delete-button-reply:hover,
+.show-more:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.comment-act .post-time {
+  color: #65676b;
+}
+#reply-form-message {
+  color: red;
+  margin-left: 52px;
+}
+.replies {
+  margin-left: 60px;
+  display: none;
+}
+.replies.add-display {
+  display: block;
+}
+.reply {
+  display: none;
+}
+.reply.show {
+  display: block;
+}
+.total-reply {
+  margin: 8px 0 8px 60px;
+}
+.total-reply.hidden {
+  display: none;
+}
+.total-reply .fa-turn-up {
+  transform: rotate(90deg);
+}
+/* Thiết lập thanh cuộn trên Chrome và Safari */
+#comments::-webkit-scrollbar {
+  width: 8px;
+}
+
+#comments::-webkit-scrollbar-thumb {
+  background-color: #999999;
+  border-radius: 10px;
+}
+
+/* Thiết lập thanh cuộn trên Firefox */
+#comments::-moz-scrollbar {
+  width: 8px;
+}
+
+#comments::-moz-scrollbar-thumb {
+  background-color: #999999;
+  border-radius: 10px;
 }

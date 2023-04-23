@@ -76,7 +76,7 @@
 .pcss3t > .tab-content-8:checked ~ ul .tab-content-8,
 .pcss3t > .tab-content-9:checked ~ ul .tab-content-9,
 .pcss3t > .tab-content-last:checked ~ ul .tab-content-last {
-  z-index: 1;
+  /* z-index: 1; */
   top: 0;
   left: 0;
   opacity: 1;
@@ -670,7 +670,7 @@
 /**/
 .pcss3t > ul,
 .pcss3t > ul > li {
-  height: 380px;
-  min-height: 380px;
+  height: 500px;
+  min-height: 500px;
   max-height: 650px;
 }
