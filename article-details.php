@@ -242,7 +242,7 @@
                   <label for="tab3"><i class="fa-solid fa-house-lock"></i><span>Thông tin bài đăng</span></label>
                   
                   <input type="radio" name="pcss3t" id="tab5" class="tab-content-last">
-                  <label for="tab5"><i class="fa-solid fa-location-dot"></i><span>Bản đồ</span></label>
+                  <label for="tab5"><i class="fa-solid fa-note-sticky"></i><span>Lưu ý</span></label>
                   
                   <ul>
                     <li class="tab-content tab-content-first typography">
@@ -714,11 +714,6 @@
     <!-- footer + js-->
     <?php include('./include/footer.php');?>
     <!-- /footer + js -->
-    <script>
-      $( function() {
-        $( "#tabs" ).tabs();
-      } );
-    </script>
     <script>
       //load lại trang và lấy dư liệu
         var fetchCommentsEnabled = true;

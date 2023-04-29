@@ -8,7 +8,7 @@
   $unpaidPost->execute();
 
   // Chuyển trạng thái của thanh toán về đã hết hạn
-  $unpaidPay = $conn->prepare("UPDATE tbl_payment_history pay SET pay.expired = 1 WHERE expired = 0 AND pay.id_rooms IN (SELECT r.id FROM tbl_rooms r WHERE r.status = 3 AND time_stop < now())");
+  $unpaidPay = $conn->prepare("UPDATE tbl_payment_history pay SET pay.expired = 1 WHERE expired = 0 AND pay.id_rooms IN (SELECT r.time_start FROM tbl_rooms r WHERE r.status = 3 AND time_stop < now())");
   $unpaidPay->execute();
   
   // Gọi ra các bài viết theo từng loại tin 
@@ -20,7 +20,7 @@
   JOIN tbl_new_type typ ON typ.id = r.news_type_id
   JOIN tbl_categories ca ON ca.id = r.category_id
   WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.news_type_id = 1
-  ORDER BY r.id DESC LIMIT 10)
+  ORDER BY r.time_start DESC LIMIT 10)
   UNION ALL
   (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
@@ -30,7 +30,7 @@
   JOIN tbl_new_type typ ON typ.id = r.news_type_id
   JOIN tbl_categories ca ON ca.id = r.category_id
   WHERE r.status = 2 AND r.time_start <= NOW()  AND r.time_stop >= NOW() AND r.news_type_id = 2
-  ORDER BY r.id DESC LIMIT 10)
+  ORDER BY r.time_start DESC LIMIT 10)
   UNION ALL
   (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
@@ -40,7 +40,7 @@
   JOIN tbl_new_type typ ON typ.id = r.news_type_id
   JOIN tbl_categories ca ON ca.id = r.category_id
   WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.news_type_id = 3
-  ORDER BY r.id DESC LIMIT 10)
+  ORDER BY r.time_start DESC LIMIT 10)
   UNION ALL
   (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
@@ -50,7 +50,7 @@
   JOIN tbl_new_type typ ON typ.id = r.news_type_id
   JOIN tbl_categories ca ON ca.id = r.category_id
   WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.news_type_id = 4
-  ORDER BY r.id DESC LIMIT 10)
+  ORDER BY r.time_start DESC LIMIT 10)
   UNION ALL
   (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
@@ -60,7 +60,7 @@
   JOIN tbl_new_type typ ON typ.id = r.news_type_id
   JOIN tbl_categories ca ON ca.id = r.category_id
   WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.news_type_id = 5
-  ORDER BY r.id DESC LIMIT 10)");
+  ORDER BY r.time_start DESC LIMIT 10)");
  $queryRoom->execute();
  $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
  $totalPages = $queryRoom ->rowCount();
@@ -472,6 +472,25 @@
     <!-- footer + js-->
     <?php include('./include/footer.php');?>
     <!-- /footer + js -->
-    
+    <script>
+      $(document).ready(function() { 
+        $("#categories").select2({
+          placeholder: "Danh mục",
+          allowClear: true
+        }); 
+        $("#city").select2({
+          placeholder: "Chọn tỉnh/thành phố",
+          allowClear: true
+        }); 
+        $("#district").select2({
+          placeholder: "Chọn quận/huyện",
+          allowClear: true
+        });
+        $("#price-range").select2({
+          placeholder: "Chọn khoảng giá",
+          allowClear: true
+        });
+      });
+    </script>
   </body>
 </html>

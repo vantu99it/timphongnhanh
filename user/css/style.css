@@ -81,13 +81,10 @@ li {
 .form-validator.invalid select {
   border: 1px solid red;
 }
-.form-validator input,
-.form-validator select {
-  margin-bottom: 5px;
-}
+
 .form-validator .form-message {
   color: red;
-  margin-bottom: 10px;
+  margin: 8px 0;
 }
 .errors {
   color: red;
@@ -361,6 +358,24 @@ li {
   font-size: 16px;
   padding-left: 8px;
 }
+/* .select2-container--default .select2-selection--single {
+  border: none;
+} */
+.select2-container .select2-selection--single,
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__clear,
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__rendered {
+  height: 38px;
+  line-height: 38px;
+}
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow {
+  height: 36px;
+}
 .search-item .down {
   background: url(../image/angle-down-solid.svg);
   width: 24px;
@@ -405,9 +420,9 @@ li {
   z-index: -1;
   border-radius: 0 5px 5px 0;
 }
-.input-file {
+/* .input-file {
   margin: 15px 0;
-}
+} */
 
 .input-file .input-img {
   padding: 12px 18px;
@@ -437,7 +452,7 @@ li {
 }
 #display-img,
 #display-imgs {
-  /* margin-top: 70px; */
+  margin-top: 20px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;

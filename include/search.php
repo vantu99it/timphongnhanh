@@ -21,7 +21,7 @@
               </div>
               <div class="search-item">
                 <i class="fa-solid fa-circle-dollar-to-slot"></i>
-                <select  class="autobox" id="" name = "price-range">
+                <select  class="autobox" id="price-range" name = "price-range">
                   <option value="0">Chọn khoảng giá</option>
                   <option value="1">Dưới 1 triệu</option>
                   <option value="2">Từ 1 triệu - 1.5 triệu</option>

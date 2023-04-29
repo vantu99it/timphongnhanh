@@ -13,6 +13,7 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
     />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./libs/fontawesome/css/all.min.css" />
     <link rel="stylesheet" href="./css/style-notification.css">
     <link rel="stylesheet" href="./css/style-tabs.css">

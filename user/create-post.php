@@ -155,13 +155,13 @@
                         <select class="autobox form-focus autobox-city boder-ra-5 "  name="city" id="city">
                             <!-- <option value="0">Chọn tỉnh</option> -->
                         </select>
-                        <span class="form-message"></span>
+                        <p class="form-message"></p>
 
                     </div>
                     <div class="search-item form-validator">
                         <p class="item-name">Quận/Huyện</p>
                         <select  class="autobox form-focus autobox-district boder-ra-5" name = "district" id="district">
-                            <option value="">Chọn huyện</option>
+                            <!-- <option value="">Chọn huyện</option> -->
                         </select>
                         <p class="form-message"></p>
 
@@ -169,7 +169,7 @@
                     <div class="search-item form-validator">
                         <p class="item-name">Phường/Xã</p>
                         <select  class="autobox form-focus boder-ra-5" name ="ward" id="ward">
-                            <option value="">Chọn xã</option>
+                            <!-- <option value="">Chọn xã</option> -->
                         </select>
                         <p class="form-message"></p>
                     </div>
@@ -204,12 +204,12 @@
                 <div class="form-input form-validator">
                     <p class="item-name">Tiêu đề bài viết</p>
                     <input type="text" name="title" class="form-focus boder-ra-5" style="width: 100%" id="post_title" value="" maxlength="120">
-                    <span class="form-message"></span>
+                    <p class="form-message"></p>
                 </div>
                 <div class="form-input form-validator">
                     <p class="item-name">Nội dung mô tả</p>
                     <textarea type="text" name="post_content" id="post_content" class="input-content form-focus boder-ra-5" rows="20" ></textarea>
-                    <span class="form-message"></span>
+                    <p class="form-message"></p>
                 </div>
                 <div class="form-times" >
                     <div class="form-input " >
@@ -228,7 +228,7 @@
                         <span class="input-disabled">Đồng</span>
                     </div>  
                     <p style="margin-top: 8px; color: #ff9900;" >Vui lòng nhập đủ số tiền. Ví dụ 2 triệu: 2000000</p>   
-                    <span class="form-message"></span>              
+                    <p class="form-message"></p>              
                 </div>
                 <div class="form-input form-validator">
                     <p class="item-name">Diện tích</p>
@@ -236,7 +236,7 @@
                         <input type="number" name="area" class="input-content boder-ra-5" id="area" style="margin: 0;" >
                         <span class="input-disabled">m&sup2;</span>
                     </div>         
-                    <span class="form-message"></span>          
+                    <p class="form-message"></p>          
                 </div>
                 <div class="search-item form-validator">
                     <p class="item-name">Đối tượng cho thuê</p>
@@ -245,39 +245,39 @@
                         <option value="2">Nam</option>
                         <option value="3">Nữ</option>
                     </select>
-                    <span class="form-message"></span>
+                    <p class="form-message"></p>
                 </div>
                 <div class="input-file form-validator">
                     <p class="item-name">Hình ảnh đại diện</p>
-                    <div style = "height: 70px;">
+                    <div style = "height: 50px;">
                         <div class="input-img">
                             <i class="fa-solid fa-arrow-up-from-bracket"></i>
                             Tải hình đại diện
                             <input type="file" class="upload-img" name="upload-img" id="upload-img" onchange = "ImageFileAsUrl()">
                         </div>
                     </div>
+                    <p class="form-message"></p>
                     <div id="display-img">
                     </div>
                     <div id = "remove" style = "margin-left: 55px;">
                         <!-- <a onclick="removeImg()" class = "btn">Xóa ảnh</a> -->
                     </div>
-                    <span class="form-message"></span>
                 </div>
                 <div class="input-file form-validator">
                     <p class="item-name">Hình ảnh chi tiết</p>
-                    <div style = "height: 70px;">
+                    <div style = "height: 50px;">
                         <div class="input-img">
                             <i class="fa-solid fa-arrow-up-from-bracket"></i>
                             Tải hình ảnh chi tiết
                             <input type="file" class="upload-img" name="upload-imgs[]" id="upload-imgs" onchange = "ImageFileAsUrls()" multiple = "multiple">
                         </div>
                     </div>
+                    <p class="form-message"></p>
                     <div id="display-imgs">
                     </div>
                     <div id = "removes" style = "margin-left: 55px;">
                         <!-- <a onclick="removeImg()" class = "btn">Xóa ảnh</a> -->
                     </div>
-                    <span class="form-message"></span>
                 </div>
                 <div class="form-times" >
                     <div class=" form-input search-item form-validator" style = "margin-left: 0;">
@@ -354,6 +354,26 @@
             today.setDate(today.getDate() +5);
             timeEnd.min= today.toLocaleDateString('en-ca');
         });
+    </script>
+    <script>
+      $(document).ready(function() { 
+        $("#category").select2({
+          placeholder: "Danh mục",
+          allowClear: true
+        }); 
+        $("#city").select2({
+          placeholder: "Chọn tỉnh/thành phố",
+          allowClear: true
+        }); 
+        $("#district").select2({
+          placeholder: "Chọn quận/huyện",
+          allowClear: true
+        });
+        $("#ward").select2({
+          placeholder: "Chọn phường/xã",
+          allowClear: true
+        });
+      });
     </script>
 </body>
 </html>

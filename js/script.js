@@ -41,6 +41,14 @@ $(function () {
     $("body,html").animate({ scrollTop: 0 }, duration);
   });
 });
+// noti
+const btn_noti = document.querySelector(".btn-noti");
+const noti_menu = document.querySelector(".noti-menu");
+
+btn_noti.onclick = function () {
+  noti_menu.classList.toggle("up");
+};
+
 // menu logged
 const manage = document.querySelector(".manage");
 const manage_menu = document.querySelector(".manage-menu");
@@ -142,3 +150,21 @@ function checkInput() {
     }
   }
 }
+
+// tabs
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Mặc định hiển thị nội dung của Tab 1
+document.getElementById("tab-comment").style.display = "block";

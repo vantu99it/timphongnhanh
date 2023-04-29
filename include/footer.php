@@ -74,6 +74,8 @@
     type="text/javascript"
     src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
 ></script>
+<!-- select search -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="./js/getdata.js"></script>
 <script src="./js/validator-form.js"></script>
 <script src="./js/script.js"></script>

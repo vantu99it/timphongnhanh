@@ -7,8 +7,8 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
  * and open the template in the editor.
  */
   
-$vnp_TmnCode = "BTX82EMM"; //Website ID in VNPAY System
-$vnp_HashSecret = "RTKYSRBGPJCKEEVZODHDLJLDQGRKOXJL"; //Secret key
+$vnp_TmnCode = "S71289NY"; //Website ID in VNPAY System
+$vnp_HashSecret = "GLGPOAQECUHWSECPJHSDHXLQGMMDWQZE"; //Secret key
 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
 $vnp_Returnurl = "http://localhost:8081/timphongnhanh/user/deposit-money-vnpay.php";
 $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
