@@ -180,7 +180,7 @@
                     <?php echo $message ?>
                 </p>
             </div>
-            <a href="" class="btn">OK</a>
+            <a href="./post-payment-vnpay.php" class="btn">OK</a>
         </div>
     </div>
     <?php }?>

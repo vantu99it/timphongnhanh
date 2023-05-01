@@ -46,7 +46,6 @@
           <section class="section">
             <div class="section-header">
               <h2 class="post_title">Bảng giá dịch vụ</h2>
-              <p>Thời gian áp dụng từ ngày 10/11/2022</p>
             </div>
             <div class="section-content" style = "border: 1px solid #ccc;">   
               <div class="section-preface">

@@ -288,7 +288,7 @@
             </div>
             <div class="notification">
                 <p>
-                    Thành công
+                    <?php echo $message; ?>
                 </p>
             </div>
             <a href="./categories.php" class="btn">OK</a>
@@ -307,7 +307,7 @@
             </div>
             <div class="notification">
                 <p>
-                    Có lỗi xảy ra, vui lòng thử lại!
+                    <?php echo $message; ?>
                 </p>
             </div>
             <a href="./categories.php" class="btn">OK</a>

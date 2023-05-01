@@ -133,11 +133,8 @@
     <?php include('./include/header.php');?>
     <!-- /header -->
 
-    <div id="main">
+    <div id="main" class = "mg-t90">
       <div class="container">
-        <!-- search -->
-        <?php include('./include/search.php');?>
-        <!-- /search -->
         <div id="post">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="margin: 0;">
@@ -267,11 +264,11 @@
                             </tr>
                             <tr>
                               <td class="name">Điện thoại:</td>
-                              <td><?php echo $resultsRoom-> phone_user?></td>
+                              <td><a href="tel:+<?php echo $resultsRoom-> phone_user?>" target="_blank"><?php echo $resultsRoom-> phone_user?></a></td>
                             </tr>
                             <tr>
                               <td class="name">Zalo:</td>
-                              <td><?php echo $resultsRoom-> phone_user?></td>
+                              <td><a href="http://zalo.me/<?php echo $resultsRoom-> phone_user?>" target="_blank"><?php echo $resultsRoom-> phone_user?></a></td>
                             </tr>
                           </tbody>
                         </table>
@@ -376,7 +373,7 @@
                             <?php }?> 
                           </div>
                         </div>
-                        <input type="text" name="comment_content" id="comment_content" placeholder="Nhập bình luận...">
+                        <input type="text" name="comment_content" id="comment_content" placeholder="Bình luận dưới tên <?php echo $_SESSION['login']['fullname']?>">
                         <button type="submit" id="submit-comment" class="btn btn-contact submit-comment"><i class="fa-solid fa-paper-plane"></i></button>
                       </div>
                     </form>
@@ -517,7 +514,7 @@
                   <div class="author-fullname">
                     <p><?php echo $resultsRoom -> name_user?></p>
                   </div>
-                  <a href="tel:+" class="btn author-phone" target="_blank">
+                  <a href="tel:+<?php echo $resultsRoom -> phone_user?>" class="btn author-phone" target="_blank">
                     <i class="fa-solid fa-phone"></i>
                     <?php echo $resultsRoom -> phone_user?>
                   </a>

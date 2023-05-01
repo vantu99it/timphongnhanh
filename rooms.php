@@ -115,12 +115,6 @@
     $queryRoomHot-> bindParam(':slug', $slug, PDO::PARAM_STR);
     $queryRoomHot->execute();
     $resultsRoomHot = $queryRoomHot->fetchAll(PDO::FETCH_OBJ);
-
-    // Gọi ra số lượng bài viết trong chuyên mục
-    $queryCate = $conn->prepare("SELECT ca.name as nameCate, ca.slug, COUNT(r.category_id) as number FROM tbl_categories ca JOIN tbl_rooms r on r.category_id = ca.id where ca.status = 1 GROUP BY ca.name");
-    $queryCate->execute();
-    $resultsCates  = $queryCate->fetchAll(PDO::FETCH_OBJ);
-    // var_dump($resultsCate); die();
 ?>
 
 <!DOCTYPE html>
@@ -458,98 +452,9 @@
                             </ul>
                         </section>
                         <!-- Các danh mục cho thuê -->
-                        <section class="section">
-                            <div class="section-header">
-                            <h2 class="post_title" style = "font-size:20px">Danh mục cho thuê</h2>
-                            </div>
-                            <ul  class = "category" id = "category">
-                            <?php foreach ($resultsCates as $key => $value) {?>
-                                <li>
-                                    <h2>
-                                        <i class="fa-solid fa-check"></i>
-                                        <a href="./rooms.php?ca=<?php echo $value->slug?>"><?php echo $value -> nameCate?></a>
-                                    </h2>
-                                    <span class="count">(<?php echo $value -> number ?>)</span>
-                                </li>
-                            <?php } ?>
-                            </ul>
-                        </section>
+                            <?php include('./include/list-of-lease.php');?>
                         <!-- Bài viết mới -->
-                        <section class="section">
-                            <div class="section-header">
-                                <h2 class="post_title" style = "font-size:20px">Bài viết mới</h2>
-                            </div>
-                            <ul class = "category" id = "category">
-                                <li>
-                                    <h2>
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                                    </h2>
-                                </li>
-                                <li>
-                                    <h2>
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                                    </h2>
-                                </li>
-                                <li>
-                                    <h2>
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                                    </h2>
-                                </li>
-                                <li>
-                                    <h2>
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                                    </h2>
-                                </li>
-                                <li>
-                                    <h2>
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                                    </h2>
-                                </li>
-                                <li>
-                                    <h2>
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                                    </h2>
-                                </li>
-                                <li>
-                                    <h2>
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                                    </h2>
-                                </li>
-                            </ul>
-                        </section>
-                        <!-- Bài viết có thể quan tâm -->
-                        <section class="section">
-                            <div class="section-header">
-                                <h2 class="post_title" style = "font-size:20px">Có thể bạn quan tâm</h2>
-                            </div>
-                            <ul class = "category" >
-                                <li>
-                                    <h2>
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        <a href="">Mẫu hợp đồng cho thuê phòng trọ mới nhất</a>
-                                    </h2>
-                                </li>
-                                <li>
-                                    <h2>
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        <a href="">Kinh nghiệm thuê phòng trọ Sinh Viên</a>
-                                    </h2>
-                                </li>
-                                <li>
-                                    <h2>
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        <a href="">Cẩn thận các kiểu lừa đảo khi thuê phòng trọ</a>
-                                    </h2>
-                                </li>
-                            </ul>
-                        </section>
+                            <?php include('./include/list-news.php');?>
                     </div>
                 </div>
             </div>

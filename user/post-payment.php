@@ -166,7 +166,7 @@
                     <div class="form-radio">
                         <input type="radio" name="pay" id="" value = "account" <?php if($balance <  $total){ echo 'disabled';} ?> > <span>Trừ tiền trong tài khoản Timphongnhanh (TK chính: <?php echo number_format((int) $balance,0,",",".")." đồng)"; ?></span>
                         <?php if($balance <  $total){ ?>
-                            <p style="color:red;">Số tiền trong tài khoản của bạn không đủ để thực hiện thanh toán, vui lòng <a href="#">nạp thêm</a> hoặc chọn phương thức khác bên dưới</p>
+                            <p style="color:red;">Số tiền trong tài khoản của bạn không đủ để thực hiện thanh toán, vui lòng <a href="./deposit-money.php">nạp thêm</a> hoặc chọn phương thức khác bên dưới</p>
                         <?php }?>
                     </div>
                     <div class="form-radio">

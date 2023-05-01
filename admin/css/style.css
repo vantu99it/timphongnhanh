@@ -65,6 +65,7 @@ li {
 .form-validator .form-message {
   color: red;
   margin-bottom: 10px;
+  margin-top: 6px;
 }
 body {
   /* background-color: #f5f5f5; */
@@ -451,6 +452,7 @@ body {
 .table-post-list img {
   width: 270px;
   height: 150px;
+  object-fit: cover;
 }
 .table-post-list .category {
   background-color: #dc3545;
@@ -475,6 +477,15 @@ body {
 .table-post-list .btn-tool a {
   text-decoration: none !important;
   margin-left: 15px;
+}
+.hide-content {
+  height: 135px;
+  min-height: 60px;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* form-act */
 .form-act {
@@ -599,4 +610,78 @@ body {
 #chart-days,
 #chart-payment {
   margin: 35px 20px;
+}
+
+/* Tin tức */
+.form-input .item-name,
+.input-file .item-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.boder-ra-5 {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.form-note {
+  background-color: #fff3cd;
+  color: red;
+  border-color: #fff3cd;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 18px;
+}
+.form-note h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.form-note ul li {
+  list-style-type: square;
+  margin-left: 15px;
+}
+.form-input input {
+  font-size: 16px;
+  height: 38px;
+  padding-left: 8px;
+  outline-color: #41ff00;
+}
+.form-input {
+  margin: 15px 0 25px;
+}
+.input-content {
+  width: 100%;
+  font-size: 16px;
+  padding: 15px;
+  outline-color: #41ff00;
+}
+
+.error {
+  display: none;
+  margin-bottom: 15px;
+}
+.input-detail {
+  width: 25%;
+  display: flex;
+}
+.input-detail input {
+  border-radius: 5px 0 0 5px;
+  border: none;
+  border-right: 1px solid #ccc;
+}
+.input-detail span {
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -1px;
+  z-index: -1;
+  border-radius: 0 5px 5px 0;
+}
+.input-file.block {
+  display: block;
+}
+.display-img-news img {
+  width: 200px;
+  height: 180px;
 }

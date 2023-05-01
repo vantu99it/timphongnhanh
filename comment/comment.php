@@ -73,7 +73,7 @@
                       <?php }?> 
                     </div>
                   </div>
-                  <input type="text" name="reply_content" id="reply_content" placeholder="Nhập phản hồi...">
+                  <input type="text" name="reply_content" id="reply_content" placeholder="Phản hồi dưới tên <?php echo $_SESSION['login']['fullname']?>">
                   <button type="submit" id="reply-form" class="btn btn-contact submit-comment"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
               </form>

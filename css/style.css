@@ -804,6 +804,21 @@ body {
   text-transform: none;
 }
 
+/* detail news */
+.content-news {
+  line-height: 32px;
+  word-spacing: 1px;
+}
+.content-news p {
+  margin-top: 5px;
+}
+.content-news img {
+  width: 100%;
+}
+.detail-info {
+  margin: 15px 0;
+  line-height: 40px;
+}
 /*----------------------------------------------------------------------------*/
 /*                              category                                      */
 /*----------------------------------------------------------------------------*/
