@@ -63,7 +63,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Đăng ký tài khoản</title>
     <!-- link-css -->
     <?php include('./include/link-css.php');?>
     <!-- /link-css -->
@@ -79,7 +79,7 @@
         <!--main-content -->
         <div id="post">
             <div class="post-header">
-                <h1 class="page-title">Hãy đăng ký tài khoản ngay để đăng bài nhé</h1>
+                <h1 class="page-title">Hãy đăng ký tài khoản ngay để đăng bài và sử dụng các chức năng khác nhé</h1>
             </div>
 
             <section class="section section-login">
@@ -146,7 +146,7 @@
                                 <span class="form-message"></span>
                             </div>                            
                             <div class="form-contact">
-                                <input type="submit" name = "submit-form" value="Đăng ký" class="btn btn-login" id = "submit">
+                                <input type="submit" name = "submit-form" value="Đăng ký" class="btn btn-login submit-button" >
                             </div>
                         </form>
                         <div class="form-footer">
@@ -178,7 +178,7 @@
                 Validator.isUserName('#username', 'Tên đăng nhập chỉ bao gồm chữ cái, số, không chứa khoảng trống'), 
 
                 // Validator.isRequired('#password-new'),
-                // Validator.isPassword('#password',6, 30),
+                // Validator.isPassword('#password-new',6, 30),
 
                 Validator.isRequired('#password-confirmation'),
                 Validator.isConfirmed('#password-confirmation', function (){
@@ -194,8 +194,6 @@
                 Validator.isEmail('#email'),
             ],
         });
-
-
     </script>
 
   </body>

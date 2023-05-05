@@ -1,28 +1,3 @@
-/** HƯỚNG DẪN SỬ DỤNG
- * Validator({
-    form: '#frm-register', // id form
-    formGroupSelector: '.form-group', // class cha
-    errorSelector: ".form-message", // class báo lỗi
-    rules: [
-        Validator.isRequired('#username'),
-        Validator.minLength('#password', 6),
-        Validator.isRequired('#password-confirmation'),
-        Validator.isConfirmed('#password-confirmation', function (){
-          return document.querySelector('#frm-register #password').value;
-        }, 'Mật khẩu không trùng khớp'),
-        Validator.isRequired('#email'),
-        Validator.isEmail('#email'),
-        Validator.isRequired('#pro'),
-        Validator.isRequired('#file'),
-        Validator.isRequired('input[name="gender"]'),
-    ],
-    //khi sử dụng submit js
-    onSubmit: function (data){
-        // Call API
-        console.log(data);
-    }
-});
-*/
 /**
  * Quy ước class:
  * - Class cha chứa thẻ input: form-group

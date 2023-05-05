@@ -292,7 +292,7 @@
                       <?php } if($value->news_type_id == 3){?>
                         class="post-item new-post-item post-vip vip-2"
                       <?php } if($value->news_type_id == 4){?>
-                        class="post-item new-post-item post-vip vip-2"
+                        class="post-item new-post-item post-vip vip-3"
                       <?php } if($value->news_type_id == 5){?>
                       class="post-item new-post-item"
                       <?php } ?>

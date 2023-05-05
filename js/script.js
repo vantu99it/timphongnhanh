@@ -41,30 +41,30 @@ $(function () {
     $("body,html").animate({ scrollTop: 0 }, duration);
   });
 });
-// noti
+
+// noti (thông báos)
 const btn_noti = document.querySelector(".btn-noti");
 const noti_menu = document.querySelector(".noti-menu");
 
-btn_noti.onclick = function () {
-  noti_menu.classList.toggle("up");
-};
+if (btn_noti && noti_menu) {
+  btn_noti.onclick = function () {
+    noti_menu.classList.toggle("up");
+  };
+}
 
 // menu logged
 const manage = document.querySelector(".manage");
 const manage_menu = document.querySelector(".manage-menu");
 
-manage.onclick = function () {
-  manage_menu.classList.toggle("up");
-};
-
-//tabs
-// $(function () {
-//   $("#tabs").tabs();
-// });
+if (manage && manage_menu) {
+  manage.onclick = function () {
+    manage_menu.classList.toggle("up");
+  };
+}
 
 // Kiểm tra mật khẩu
 function checkInput() {
-  var input = document.getElementById("password-new").value;
+  var inputElm = document.getElementById("password-new").value;
   var regexLetter = /[a-z]/;
   var regexDigit = /\d/;
   var regexSpace = /\s/g;
@@ -77,19 +77,20 @@ function checkInput() {
   var error4 = document.getElementById("error4");
   var error5 = document.getElementById("error5");
 
-  var submitBtn = document.getElementById("submit");
+  // var submitBtn = document.getElementById("submit-button");
+  var submitBtn = document.querySelector(".submit-button");
 
-  if (input === "") {
+  if (inputElm === "") {
     error1.style.display = "none";
     error2.style.display = "none";
     error3.style.display = "none";
     error4.style.display = "none";
     error5.style.display = "none";
-    input.style.border = "";
+    // inputElm.style.border = "";
     error1.innerHTML = "Vui lòng nhập trường này";
     submitBtn.disabled = true;
   } else {
-    if (regexLetter.test(input)) {
+    if (regexLetter.test(inputElm)) {
       error1.innerHTML = "✓ Có chứa ít nhất 1 chữ cái thường";
       error1.style.color = "green";
       error1.style.display = "block";
@@ -101,7 +102,7 @@ function checkInput() {
       submitBtn.disabled = true;
     }
 
-    if (regexDigit.test(input)) {
+    if (regexDigit.test(inputElm)) {
       error2.innerHTML = "✓ Có chứa ít nhất 1 chữ số";
       error2.style.color = "green";
       error2.style.display = "block";
@@ -113,7 +114,7 @@ function checkInput() {
       submitBtn.disabled = true;
     }
 
-    if (!regexSpace.test(input)) {
+    if (!regexSpace.test(inputElm)) {
       error3.innerHTML = "✓ Không chứa khoảng trắng";
       error3.style.color = "green";
       error3.style.display = "block";
@@ -125,7 +126,7 @@ function checkInput() {
       submitBtn.disabled = true;
     }
 
-    if (regexSpecialChar.test(input)) {
+    if (regexSpecialChar.test(inputElm)) {
       error4.innerHTML = "✓ Có chứa ít nhất 1 ký tự đặc biệt";
       error4.style.color = "green";
       error4.style.display = "block";
@@ -137,7 +138,7 @@ function checkInput() {
       submitBtn.disabled = true;
     }
 
-    if (regexCapital.test(input)) {
+    if (regexCapital.test(inputElm)) {
       error5.innerHTML = "✓ Có chứa ít nhất 1 chữ in hoa";
       error5.style.color = "green";
       error5.style.display = "block";
@@ -165,6 +166,9 @@ function openTab(evt, tabName) {
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
 }
-
 // Mặc định hiển thị nội dung của Tab 1
-document.getElementById("tab-comment").style.display = "block";
+// document.getElementById("tab-comment").style.display = "block";
+var tabComment = document.getElementById("tab-comment");
+if (tabComment) {
+  tabComment.style.display = "block";
+}

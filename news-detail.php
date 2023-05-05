@@ -11,7 +11,8 @@
   $resultsNews  = $queryNews->fetch(PDO::FETCH_OBJ);
 
   //bài viết liên quan
-  $queryNewsRelate = $conn->prepare("SELECT news.*, ad.fullname FROM tbl_news news JOIN tbl_admin ad ON ad.id = news.id_admin WHERE news.status = 1 GROUP BY news.created_at DESC LIMIT 5");
+  $queryNewsRelate = $conn->prepare("SELECT news.*, ad.fullname FROM tbl_news news JOIN tbl_admin ad ON ad.id = news.id_admin WHERE news.status = 1 and news.id != :id GROUP BY news.created_at DESC LIMIT 5");
+  $queryNewsRelate-> bindParam(':id', $id, PDO::PARAM_STR);
   $queryNewsRelate->execute();
   $resultsNewsRelate  = $queryNewsRelate->fetchAll(PDO::FETCH_OBJ);
 
@@ -177,7 +178,7 @@
                       <?php } if($value->news_type_id == 3){?>
                         class="post-item new-post-item post-vip vip-2"
                       <?php } if($value->news_type_id == 4){?>
-                        class="post-item new-post-item post-vip vip-2"
+                        class="post-item new-post-item post-vip vip-3"
                       <?php } if($value->news_type_id == 5){?>
                       class="post-item new-post-item"
                       <?php } ?>
