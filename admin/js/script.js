@@ -38,7 +38,6 @@ $(document).ready(function () {
     $(".form-act").fadeOut(500);
   });
 });
-
 // phân trang danh sách
 $(document).ready(function () {
   $("#table-manage").DataTable({

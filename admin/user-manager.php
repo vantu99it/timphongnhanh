@@ -32,23 +32,6 @@
             $message = "Có lỗi xảy ra, vui lòng thử lại";
         }
     }
-    // Xóa
-    if(isset($_REQUEST['del'])&&($_REQUEST['del'])){
-        $delId = intval($_GET['del']);
-        $sql = "DELETE FROM tbl_user WHERE id = :id";
-        $query= $conn -> prepare($sql);
-        $query->bindParam(':id',$delId,PDO::PARAM_STR);
-        $query->execute();
-
-        if($query){
-            $ok = 1;
-            $message = "Đã xóa thành công";
-        }
-        else{
-            $err = 1;
-            $message = "Có lỗi xảy ra, vui lòng thử lại";
-        }
-    }
 ?>
 
 <!DOCTYPE html>
@@ -144,7 +127,6 @@
                                 </td>
                                 <td>
                                     <a href="./user-manager.php?id=<?php echo $value -> id ?>" class="btn-setting btn-edit" style = "color: #1266dd;"><i class="fa-regular fa-pen-to-square"></i></a>
-                                    <a href="./user-manager.php?del=<?php echo $value -> id ?>" class="btn-setting" style = "color: red;" onclick="return confirm('Bạn chắc chắn muốn xóa?');" ><i class="fa-solid fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>

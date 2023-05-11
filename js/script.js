@@ -172,3 +172,15 @@ var tabComment = document.getElementById("tab-comment");
 if (tabComment) {
   tabComment.style.display = "block";
 }
+
+//checkbox ward
+const checkboxWard = document.getElementById("checkbox-ward");
+const wardDiv = document.getElementById("ward");
+
+checkboxWard.addEventListener("click", function () {
+  if (wardDiv.classList.contains("active")) {
+    wardDiv.classList.remove("active");
+  } else {
+    wardDiv.classList.add("active");
+  }
+});

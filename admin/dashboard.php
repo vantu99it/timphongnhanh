@@ -1,7 +1,7 @@
 <?php 
     include './include/connect.php';
     include '../include/func-slug.php';
-
+date_default_timezone_set("Asia/Ho_Chi_Minh");
     // Đếm số bài chưa thanh toán
     $queryUnpaid = $conn->prepare("SELECT r.* FROM tbl_rooms r JOIN tbl_payment_history pay on pay.id_rooms = r.id WHERE pay.pay_status = 0 and  r.status = 1 and pay.expired = 0");
     $queryUnpaid->execute();

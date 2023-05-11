@@ -74,10 +74,13 @@ function getWard() {
       $("#ward").html("");
       for (i = 0; i < data.length; i++) {
         var ward = data[i];
+        // var str = `
+        //   <option value="${ward["id"]}">
+        //       ${ward["name"]}
+        //   </option>`;
         var str = ` 
-          <option value="${ward["id"]}">
-              ${ward["name"]} 
-          </option>`;
+          <label><input type='checkbox' name='ward[]' value="${ward["id"]}"> ${ward["name"]}</label>
+          `;
         $("#ward").append(str);
       }
     },

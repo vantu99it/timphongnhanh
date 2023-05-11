@@ -55,7 +55,8 @@
                             <th style="width: 10%;" >SĐT</th>
                             <th style="width: 10%;" >Email</th>
                             <th style="width: 15%;" >Vấn đề</th>
-                            <th style="width: 37%;" >Nội dung</th>
+                            <th style="width: 30%;" >Nội dung</th>
+                            <th style="width: 7%;" >Thời gian</th>
                             <th style="width: 10%;" >Trạng thái</th>
                         </tr>
                         
@@ -86,6 +87,9 @@
                                 </td>
                                 <td  style="text-align: left; ">
                                     <p><?php echo $value -> content ?></p>
+                                </td>
+                                <td>
+                                    <p><?php echo $value-> created_at?></p>
                                 </td>
                                 <td>
                                     <p style = "color: #37a344;">Đã giải quyết</p>

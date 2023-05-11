@@ -14,7 +14,7 @@
     $userAvatar = $resultsUser -> avatar;
   }
   // Gọi ra thông tin bài viết
-  $queryRoom = $conn->prepare("SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,us.facebook,ca.slug AS category_slug,ca.classify AS category_classify,typ.name_type, ca.name as category_name, CURDATE() AS today
+  $queryRoom = $conn->prepare("SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,us.facebook,ca.slug AS category_slug, ca.classify AS category_classify,ca.name AS category_name, typ.name_type, ca.name as category_name, CURDATE() AS today
   FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
   JOIN tbl_city ci ON ci.id = r.city_id
   JOIN tbl_district dis ON dis.id = r.district_id
@@ -288,11 +288,11 @@
                             </tr>
                             <tr>
                               <td class="name">Khu vực:</td>
-                              <td><?php echo $resultsRoom->name_user." ".$resultsRoom -> city ?></td>
+                              <td><?php echo $resultsRoom->district." - ".$resultsRoom -> city ?></td>
                             </tr>
                             <tr>
                               <td class="name">Loại tin:</td>
-                              <td><?php echo $resultsRoom -> category_classify ?></td>
+                              <td><?php echo $resultsRoom -> category_name ?></td>
                             </tr>
                             <tr>
                               <td class="name">Đối tượng thuê:</td>

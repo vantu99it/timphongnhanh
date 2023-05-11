@@ -7,16 +7,36 @@
     $categories = $_POST["categories"];
     $city = $_POST["city"];
     $district = $_POST["district"];
+    $ward = isset($_POST["ward"])?$_POST["ward"]:"";
     $price = $_POST["price-range"];
 
     // var_dump($categories);
     // var_dump($city);
     // var_dump($district);
+    // var_dump($ward);
     // var_dump($price);
     //  die();
+     if (empty($ward)) {
+      $ward_condition = "0";
+    } else {
+      $ward_condition = "";
+      foreach ($ward as $value) {
+        $ward_condition .=  $value . ", ";
+      }
+      $ward_condition = rtrim($ward_condition, ', ');
 
-    //kết quả khi tìm kiếm theo danh mục + tỉnh + huyện
-    if($categories >= 1 && $city != 1 && $district != 0 && $price == 0){
+      $queryWard = $conn->prepare("SELECT fullname FROM tbl_ward WHERE id IN ($ward_condition)");
+      $queryWard->execute();
+      $resultsWard = $queryWard->fetchAll(PDO::FETCH_OBJ);
+
+      $ward_name = "";
+      foreach ($resultsWard as $key => $value) {
+        $ward_name .=  $value->fullname . ", "; 
+      }
+      $ward_name = rtrim($ward_name, ', ');
+    }
+    //kết quả khi tìm kiếm theo danh mục + tỉnh + huyện + (không chọn xã=> tất cả các xã)
+    if($categories >= 1 && $city != 1 && $district != 0 && $ward_condition == 0 && $price == 0){
       $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
       FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
       JOIN tbl_city ci ON ci.id = r.city_id
@@ -59,8 +79,52 @@
       }
 
     }
-    //kết quả khi tìm kiếm theo danh mục + tỉnh + huyện + khoảng giá
-    elseif($categories >= 1 && $city != 1 && $district != 0 && $price != 0){
+    //kết quả khi tìm kiếm theo danh mục + tỉnh + huyện + xã (chỉ các xã được chọn)
+    elseif($categories >= 1 && $city != 1 && $district != 0 && $ward_condition != 0 && $price == 0){
+      $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
+      FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+      JOIN tbl_city ci ON ci.id = r.city_id
+      JOIN tbl_district dis ON dis.id = r.district_id
+      JOIN tbl_ward wa ON wa.id = r.ward_id
+      JOIN tbl_new_type typ ON typ.id = r.news_type_id
+      JOIN tbl_categories ca ON ca.id = r.category_id
+      WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.news_type_id = 1 AND r.ward_id IN ($ward_condition)
+      ORDER BY r.id DESC LIMIT 10)
+      UNION ALL
+      (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
+      FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+      JOIN tbl_city ci ON ci.id = r.city_id
+      JOIN tbl_district dis ON dis.id = r.district_id
+      JOIN tbl_ward wa ON wa.id = r.ward_id
+      JOIN tbl_new_type typ ON typ.id = r.news_type_id
+      JOIN tbl_categories ca ON ca.id = r.category_id
+      WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.news_type_id != 1 AND r.ward_id IN ($ward_condition)) ");
+      $queryRoom->bindParam(':category',$categories,PDO::PARAM_STR);
+      $queryRoom->bindParam(':city',$city,PDO::PARAM_STR);
+      $queryRoom->bindParam(':district',$district,PDO::PARAM_STR);
+      $queryRoom->execute();
+      $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
+
+      // Gọi ra tên danh mục, tỉnh, huyện, xã
+      $queryInfo = $conn->prepare("SELECT DISTINCT ca.classify AS category, city.fullname AS city, dis.fullname AS district FROM tbl_rooms r 
+      JOIN tbl_categories ca  ON ca.id = r.category_id
+      JOIN tbl_city city ON city.id = r.city_id
+      JOIN tbl_district dis ON dis.id = r.district_id
+      WHERE r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.status = 2");
+      $queryInfo->bindParam(':category',$categories,PDO::PARAM_STR);
+      $queryInfo->bindParam(':city',$city,PDO::PARAM_STR);
+      $queryInfo->bindParam(':district',$district,PDO::PARAM_STR);
+      $queryInfo->execute();
+      $resultsInfo = $queryInfo->fetch(PDO::FETCH_OBJ);
+      if($queryInfo -> rowCount()>0){
+        $nameCategory = $resultsInfo -> category;
+        $nameCity = $resultsInfo -> city;
+        $nameDistrict = $resultsInfo -> district;
+      }
+
+    }
+    //kết quả khi tìm kiếm theo danh mục + tỉnh + huyện + khoảng giá + (không chọn xã=> tất cả các xã)
+    elseif($categories >= 1 && $city != 1 && $district != 0 && $ward_condition == 0 && $price != 0){
       if($price == 1){
         $price_range = " giá dưới 1 triệu đồng ";
 
@@ -190,6 +254,160 @@
         JOIN tbl_new_type typ ON typ.id = r.news_type_id
         JOIN tbl_categories ca ON ca.id = r.category_id
         WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.price > 3000000 AND r.news_type_id != 1) ");
+        $queryRoom->bindParam(':category',$categories,PDO::PARAM_STR);
+        $queryRoom->bindParam(':city',$city,PDO::PARAM_STR);
+        $queryRoom->bindParam(':district',$district,PDO::PARAM_STR);
+        $queryRoom->execute();
+        $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
+      }
+      // Gọi ra tên danh mục, tỉnh, huyện
+      $queryInfo = $conn->prepare("SELECT DISTINCT ca.classify AS category, city.fullname AS city, dis.fullname AS district FROM tbl_rooms r 
+      JOIN tbl_categories ca  ON ca.id = r.category_id
+      JOIN tbl_city city ON city.id = r.city_id
+      JOIN tbl_district dis ON dis.id = r.district_id
+      WHERE r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.status = 2");
+      $queryInfo->bindParam(':category',$categories,PDO::PARAM_STR);
+      $queryInfo->bindParam(':city',$city,PDO::PARAM_STR);
+      $queryInfo->bindParam(':district',$district,PDO::PARAM_STR);
+      $queryInfo->execute();
+      $resultsInfo = $queryInfo->fetch(PDO::FETCH_OBJ);
+      if($queryInfo -> rowCount()>0){
+        $nameCategory = $resultsInfo -> category;
+        $nameCity = $resultsInfo -> city;
+        $nameDistrict = $resultsInfo -> district;
+      }
+    }
+    //kết quả khi tìm kiếm theo danh mục + tỉnh + huyện + xã (chỉ các xã được chọn) + khoảng giá
+    elseif($categories >= 1 && $city != 1 && $district != 0 && $ward_condition != 0 && $price != 0){
+      if($price == 1){
+        $price_range = " giá dưới 1 triệu đồng ";
+
+        $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
+        FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+        JOIN tbl_city ci ON ci.id = r.city_id
+        JOIN tbl_district dis ON dis.id = r.district_id
+        JOIN tbl_ward wa ON wa.id = r.ward_id
+        JOIN tbl_new_type typ ON typ.id = r.news_type_id
+        JOIN tbl_categories ca ON ca.id = r.category_id
+        WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.price < 1000000 AND r.news_type_id = 1 AND r.ward_id IN ($ward_condition)
+        ORDER BY r.id DESC LIMIT 10)
+        UNION ALL
+        (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
+        FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+        JOIN tbl_city ci ON ci.id = r.city_id
+        JOIN tbl_district dis ON dis.id = r.district_id
+        JOIN tbl_ward wa ON wa.id = r.ward_id
+        JOIN tbl_new_type typ ON typ.id = r.news_type_id
+        JOIN tbl_categories ca ON ca.id = r.category_id
+        WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.price < 1000000 AND r.news_type_id != 1 AND r.ward_id IN ($ward_condition)) ");
+        $queryRoom->bindParam(':category',$categories,PDO::PARAM_STR);
+        $queryRoom->bindParam(':city',$city,PDO::PARAM_STR);
+        $queryRoom->bindParam(':district',$district,PDO::PARAM_STR);
+        $queryRoom->execute();
+        $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
+      }
+      elseif($price == 2){
+        $price_range = " giá từ 1 triệu - 1.5 triệu đồng ";
+
+        $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
+        FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+        JOIN tbl_city ci ON ci.id = r.city_id
+        JOIN tbl_district dis ON dis.id = r.district_id
+        JOIN tbl_ward wa ON wa.id = r.ward_id
+        JOIN tbl_new_type typ ON typ.id = r.news_type_id
+        JOIN tbl_categories ca ON ca.id = r.category_id
+        WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.price <= 1500000 AND r.price >= 1000000 AND r.news_type_id = 1 AND r.ward_id IN ($ward_condition)
+        ORDER BY r.id DESC LIMIT 10)
+        UNION ALL
+        (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
+        FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+        JOIN tbl_city ci ON ci.id = r.city_id
+        JOIN tbl_district dis ON dis.id = r.district_id
+        JOIN tbl_ward wa ON wa.id = r.ward_id
+        JOIN tbl_new_type typ ON typ.id = r.news_type_id
+        JOIN tbl_categories ca ON ca.id = r.category_id
+        WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.price <= 1500000 AND r.price >= 1000000 AND r.news_type_id != 1 AND r.ward_id IN ($ward_condition)) ");
+        $queryRoom->bindParam(':category',$categories,PDO::PARAM_STR);
+        $queryRoom->bindParam(':city',$city,PDO::PARAM_STR);
+        $queryRoom->bindParam(':district',$district,PDO::PARAM_STR);
+        $queryRoom->execute();
+        $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
+      }
+      elseif($price == 3){
+        $price_range = " giá từ 1.5 triệu - 2 triệu đồng ";
+        
+        $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
+        FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+        JOIN tbl_city ci ON ci.id = r.city_id
+        JOIN tbl_district dis ON dis.id = r.district_id
+        JOIN tbl_ward wa ON wa.id = r.ward_id
+        JOIN tbl_new_type typ ON typ.id = r.news_type_id
+        JOIN tbl_categories ca ON ca.id = r.category_id
+        WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.price <= 2000000 AND r.price >= 1500000 AND r.news_type_id = 1 AND r.ward_id IN ($ward_condition)
+        ORDER BY r.id DESC LIMIT 10)
+        UNION ALL
+        (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
+        FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+        JOIN tbl_city ci ON ci.id = r.city_id
+        JOIN tbl_district dis ON dis.id = r.district_id
+        JOIN tbl_ward wa ON wa.id = r.ward_id
+        JOIN tbl_new_type typ ON typ.id = r.news_type_id
+        JOIN tbl_categories ca ON ca.id = r.category_id
+        WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.price <= 2000000 AND r.price >= 1500000 AND r.news_type_id != 1 AND r.ward_id IN ($ward_condition)) ");
+        $queryRoom->bindParam(':category',$categories,PDO::PARAM_STR);
+        $queryRoom->bindParam(':city',$city,PDO::PARAM_STR);
+        $queryRoom->bindParam(':district',$district,PDO::PARAM_STR);
+        $queryRoom->execute();
+        $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
+      }
+      elseif($price == 4){
+        $price_range = " giá từ 2 triệu - 3 triệu đồng ";
+
+        $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
+        FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+        JOIN tbl_city ci ON ci.id = r.city_id
+        JOIN tbl_district dis ON dis.id = r.district_id
+        JOIN tbl_ward wa ON wa.id = r.ward_id
+        JOIN tbl_new_type typ ON typ.id = r.news_type_id
+        JOIN tbl_categories ca ON ca.id = r.category_id
+        WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.price <= 3000000 AND r.price >= 2000000 AND r.news_type_id = 1 AND r.ward_id IN ($ward_condition)
+        ORDER BY r.id DESC LIMIT 10)
+        UNION ALL
+        (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
+        FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+        JOIN tbl_city ci ON ci.id = r.city_id
+        JOIN tbl_district dis ON dis.id = r.district_id
+        JOIN tbl_ward wa ON wa.id = r.ward_id
+        JOIN tbl_new_type typ ON typ.id = r.news_type_id
+        JOIN tbl_categories ca ON ca.id = r.category_id
+        WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.price < 3000000 AND r.price >= 2000000 AND r.news_type_id != 1 AND r.ward_id IN ($ward_condition)) ");
+        $queryRoom->bindParam(':category',$categories,PDO::PARAM_STR);
+        $queryRoom->bindParam(':city',$city,PDO::PARAM_STR);
+        $queryRoom->bindParam(':district',$district,PDO::PARAM_STR);
+        $queryRoom->execute();
+        $resultsRoom = $queryRoom->fetchAll(PDO::FETCH_OBJ);
+      }
+      else{
+        $price_range = " giá trên 3 triệu đồng ";
+
+        $queryRoom = $conn->prepare("(SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
+        FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+        JOIN tbl_city ci ON ci.id = r.city_id
+        JOIN tbl_district dis ON dis.id = r.district_id
+        JOIN tbl_ward wa ON wa.id = r.ward_id
+        JOIN tbl_new_type typ ON typ.id = r.news_type_id
+        JOIN tbl_categories ca ON ca.id = r.category_id
+        WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.price > 3000000 AND r.news_type_id = 1 AND r.ward_id IN ($ward_condition)
+        ORDER BY r.id DESC LIMIT 10)
+        UNION ALL
+        (SELECT r.*, ci.name AS city, dis.fullname AS district, wa.fullname AS ward, us.fullname AS name_user, us.phone AS phone_user,us.avatar,ca.slug AS category_slug, NOW() AS today
+        FROM tbl_rooms r JOIN tbl_user us on us.id = r.user_id
+        JOIN tbl_city ci ON ci.id = r.city_id
+        JOIN tbl_district dis ON dis.id = r.district_id
+        JOIN tbl_ward wa ON wa.id = r.ward_id
+        JOIN tbl_new_type typ ON typ.id = r.news_type_id
+        JOIN tbl_categories ca ON ca.id = r.category_id
+        WHERE r.status = 2 AND r.time_start <= NOW() AND r.time_stop >= NOW() AND r.category_id = :category AND r.city_id = :city AND r.district_id = :district AND r.price > 3000000 AND r.news_type_id != 1 AND r.ward_id IN ($ward_condition)) ");
         $queryRoom->bindParam(':category',$categories,PDO::PARAM_STR);
         $queryRoom->bindParam(':city',$city,PDO::PARAM_STR);
         $queryRoom->bindParam(':district',$district,PDO::PARAM_STR);
@@ -428,8 +646,8 @@
         <!--main-content -->
         <div id="post">
           <div class="post-header">
-              <h1 class="page-title"><?php echo isset($nameCategory)? "Kết quả tìm kiếm cho ".$nameCategory : "Không có kết quả tìm kiếm hoặc các bài viết đã hết hạn!" ?> <?php echo (isset($nameCity) && isset($nameDistrict))? "- ".$nameDistrict.", ".$nameCity:""?> <?php echo (isset($price_range) && isset($nameCategory))? "- ".$price_range:""?></h1>
-              <p class="page-description">Kênh thông tin Phòng Trọ số 1 Việt Nam - Website đăng tin cho thuê phòng trọ, nhà nguyên căn, căn hộ, ở ghép nhanh, hiệu quả với 100.000+ tin đăng và 2.500.000 lượt xem mỗi tháng.</p>
+              <h1 class="page-title"><?php echo isset($nameCategory)? "Kết quả tìm kiếm cho ".$nameCategory : "Không có kết quả tìm kiếm hoặc các bài viết đã hết hạn!" ?> <?php echo (isset($ward_name) && isset($nameCategory))? " - ".$ward_name :""  ?> <?php echo (isset($nameCity) && isset($nameDistrict))? " - ".$nameDistrict." - ".$nameCity:""?><?php echo (isset($price_range) && isset($nameCategory))? " - ".$price_range:""?></h1>
+              <p class="page-description">Kênh thông tin Phòng số 1 Việt Nam - Website đăng tin cho thuê phòng trọ, nhà nguyên căn, căn hộ, ở ghép nhanh, hiệu quả với 100.000+ tin đăng và 2.500.000 lượt xem mỗi tháng.</p>
           </div>
          
           <div class="row">
@@ -553,100 +771,11 @@
               <!-- /Phân trang -->
             </div>
             <div class="col-4">
-              <!-- Các danh mục cho thuê -->
-              <section class="section">
-                <div class="section-header">
-                  <h2 class="post_title" style = "font-size:20px">Danh mục cho thuê</h2>
-                </div>
-                <ul class = "category" id = "category">
-                  <?php foreach ($resultsCates as $key => $value) { ?>
-                    <li>
-                      <h2>
-                        <i class="fa-solid fa-check"></i>
-                        <a href="./rooms.php?ca=<?php echo $value->slug?>"><?php echo $value -> name ?></a>
-                      </h2>
-                      <span class="count">(<?php echo $value -> number ?>)</span>
-                    </li>
-                  <?php } ?>
-                </ul>
-              </section>
+               <!-- Các danh mục cho thuê -->
+                <?php include('./include/list-of-lease.php');?>
               
               <!-- Các bài viết mới nhất -->
-              <section class="section">
-                <div class="section-header">
-                    <h2 class="post_title" style = "font-size:20px">Bài viết mới</h2>
-                </div>
-                <ul class = "category" id = "category">
-                    <li>
-                        <h2>
-                            <i class="fa-solid fa-angle-right"></i>
-                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                        </h2>
-                    </li>
-                    <li>
-                        <h2>
-                            <i class="fa-solid fa-angle-right"></i>
-                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                        </h2>
-                    </li>
-                    <li>
-                        <h2>
-                            <i class="fa-solid fa-angle-right"></i>
-                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                        </h2>
-                    </li>
-                    <li>
-                        <h2>
-                            <i class="fa-solid fa-angle-right"></i>
-                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                        </h2>
-                    </li>
-                    <li>
-                        <h2>
-                            <i class="fa-solid fa-angle-right"></i>
-                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                        </h2>
-                    </li>
-                    <li>
-                        <h2>
-                            <i class="fa-solid fa-angle-right"></i>
-                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                        </h2>
-                    </li>
-                    <li>
-                        <h2>
-                            <i class="fa-solid fa-angle-right"></i>
-                            <a href="">Các công ty chuyển nhà trọ uy tín nhất hiện nay</a>
-                        </h2>
-                    </li>
-                </ul>
-              </section>
-              <!-- Bài viết đáng quan tâm nhất -->
-              <section class="section">
-                <div class="section-header">
-                    <h2 class="post_title" style = "font-size:20px">Có thể bạn quan tâm</h2>
-                </div>
-                <ul class = "category" >
-                    <li>
-                        <h2>
-                            <i class="fa-solid fa-angle-right"></i>
-                            <a href="">Mẫu hợp đồng cho thuê phòng trọ mới nhất</a>
-                        </h2>
-                    </li>
-                    <li>
-                        <h2>
-                            <i class="fa-solid fa-angle-right"></i>
-                            <a href="">Kinh nghiệm thuê phòng trọ Sinh Viên</a>
-                        </h2>
-                    </li>
-                    <li>
-                        <h2>
-                            <i class="fa-solid fa-angle-right"></i>
-                            <a href="">Cẩn thận các kiểu lừa đảo khi thuê phòng trọ</a>
-                        </h2>
-                    </li>
-                </ul>
-              </section>
+                <?php include('./include/list-news.php');?>  
               
             </div>
           </div>

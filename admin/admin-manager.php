@@ -108,20 +108,7 @@
             }
         }
     }
-    // Xóa
-    if(isset($_REQUEST['del'])&&($_REQUEST['del'])){
-        $delId = intval($_GET['del']);
-        $sql = "DELETE FROM tbl_admin WHERE id = :id";
-        $query= $conn -> prepare($sql);
-        $query->bindParam(':id',$delId,PDO::PARAM_STR);
-        $query->execute();
-        if($query){
-            header("Location: ./admin-manager.php");
-        }
-        else{
-            $err = 'Đã xảy ra lỗi, vui lòng thử lại';
-        }
-    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -170,7 +157,7 @@
                 <table class="table table-bordered table-post-list" id = "table-manage">
                     <thead>
                         <tr>
-                            <th style="width: 5%;" >STT</th>
+                            <th style="width: 5%;" >ID</th>
                             <th style="width: 15%;" >Tên đẩy đủ</th>
                             <th style="width: 15%;" >Tên đăng nhập</th>
                             <th style="width: 20%;" >Email</th>
@@ -184,7 +171,7 @@
                     <tbody >
                         <?php foreach ($resultsAdmin as $key => $value) { ?>
                             <tr>
-                                <td><?php echo $key+1 ?></td>
+                                <td>#<?php echo $value -> id ?></td>
                                 <td>
                                     <p><?php echo $value -> fullname ?></p>
                                 </td>
@@ -209,7 +196,6 @@
                                 </td>
                                 <td>
                                     <a href="./admin-manager.php?id=<?php echo $value -> id ?>" class="btn-setting btn-edit" style = "color: #1266dd;"><i class="fa-regular fa-pen-to-square"></i></a>
-                                    <a href="./admin-manager.php?del=<?php echo $value -> id ?>" class="btn-setting" style = "color: red;" onclick="return confirm('Bạn chắc chắn muốn xóa?');" ><i class="fa-solid fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>

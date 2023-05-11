@@ -64,13 +64,13 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Trang quản trị</a></li>
-                    <li class="breadcrumb-item"><a href="#">Quản lý hệ thống</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Quản lý phản hồi</li>
+                    <li class="breadcrumb-item"><a href="#">Quản lý phản hồi</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Chưa giải quyết</li>
                 </ol>
             </nav>
             <section class="main-right-title">
                 <div class="form-title">
-                    <h1>Quản lý phản hồi</h1>
+                    <h1>Phản hồi chưa giải quyết</h1>
                 </div>
             </section>
             <div class="main-right-table">
@@ -81,8 +81,9 @@
                             <th style="width: 10%;" >Họ tên</th>
                             <th style="width: 10%;" >SĐT</th>
                             <th style="width: 10%;" >Email</th>
-                            <th style="width: 15%;" >Vấn đề</th>
-                            <th style="width: 32%;" >Nội dung</th>
+                            <th style="width: 10%;" >Vấn đề</th>
+                            <th style="width: 30%;" >Nội dung</th>
+                            <th style="width: 7%;" >Thời gian</th>
                             <th style="width: 8%;" >Trạng thái</th>
                             <th style="width: 10%;" >Hành động</th>
                         </tr>
@@ -96,10 +97,10 @@
                                     <p><?php echo $value -> name ?></p>
                                 </td>
                                 <td>
-                                    <p><?php echo $value -> phone ?></p>
+                                    <p><a href="tel:+<?php echo $value -> phone ?>" target="_blank"><?php echo $value -> phone ?></a></p>
                                 </td>
                                 <td>
-                                    <p><?php echo $value -> email ?></p>
+                                    <p><a href="mailto:<?php echo $value -> email ?>" target="_blank"><?php echo $value -> email ?></a></p>
                                 </td>
                                 <td>
                                     <?php if($value -> problem == 1){ ?>
@@ -114,6 +115,9 @@
                                 </td>
                                 <td  style="text-align: left; ">
                                     <p><?php echo $value -> content ?></p>
+                                </td>
+                                <td>
+                                    <p><?php echo $value-> created_at?></p>
                                 </td>
                                 <td>
                                     <p style = "color: red">Chưa giải quyết</p>
@@ -132,7 +136,7 @@
         <div class="form-act form-animation" style ="display: block;">
             <div class="form-act-edit">
                 <div class="form-close">
-                    <a href="./categories.php"><i class="fa-solid fa-x"></i></a>
+                    <a href="./contact-manager-new.php"><i class="fa-solid fa-x"></i></a>
                 </div>
                 <form action="" method="post">
                     <h2>Thông tin liên hệ</h2>
@@ -225,7 +229,7 @@
                     Có lỗi xảy ra, vui lòng thử lại!
                 </p>
             </div>
-            <a href="./categories.php" class="btn">OK</a>
+            <a href="./contact-manager-new.php" class="btn">OK</a>
         </div>
     </div>
     <?php }?>

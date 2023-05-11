@@ -54,12 +54,6 @@
         <?php include('./include/search.php');?>
         <!-- /search --> 
         <div id="post">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb" style="margin: 0;">
-                    <li class="first link"><a href="#">Trang chủ</a></li>
-                    <li class="link link"><a href="#">Cho thuê phòng trọ</a></li>
-                </ol>
-            </nav>
             <div class="post-header">
                 <h1 class="page-title">Liên hệ với chúng tôi</h1>
                 <p class="page-description">Bạn đang có thắc mắc, bạn đang không biết làm sao để đăng bài, bạn muốn khiếu nại thì hãy liên hệ với chúng tôi để được giúp đỡ nhé!</p>
@@ -76,17 +70,17 @@
                     <form action="" method="post" id = "frm-contact">
                         <div class="form-contact form-validator">
                             <p class="contact-title">Họ tên</p>
-                            <input type="text" name="name" id="name">
+                            <input type="text" name="name" id="name" value = "<?php echo isset($_SESSION['login'])? $_SESSION['login']['fullname'] : ""?>">
                             <span class="form-message"></span>
                         </div>
                         <div class="form-contact form-validator">
                             <p class="contact-title">Số điện thoại</p>
-                            <input type="number" name="phone" id="phone">
+                            <input type="number" name="phone" id="phone" value = "<?php echo isset($_SESSION['login'])? $_SESSION['login']['phone'] : ""?>">
                             <span class="form-message"></span>
                         </div>
                         <div class="form-contact form-validator">
                             <p class="contact-title">Email</p>
-                            <input type="email" name="email" id="email">
+                            <input type="email" name="email" id="email" value = "<?php echo isset($_SESSION['login'])? $_SESSION['login']['email'] : ""?>">
                             <span class="form-message"></span>
                         </div>
                         <div class="form-contact form-validator">
@@ -130,7 +124,7 @@
                             <li class="note-item">Chúng tôi sẽ tiếp nhận thông tin, bộ phận chăm sóc khách hàng của chúng tôi sẽ liên hệ và hỗ trợ giúp bạn.</li>
                             <li class="note-item">Mọi thông tin vui lòng liên hệ:</li>
                             <li class="note-item"><strong>Hotline: </strong>0932379943</li>
-                            <li class="note-item"><strong>Email: </strong>sckh.timphongnhanh@gmail.com</li>
+                            <li class="note-item"><strong>Email: </strong>cskh.timphongnhanh@gmail.com</li>
                         </ul>
                     </div>
                 </section>
@@ -198,7 +192,7 @@
                 Validator.isRequired('#problem', 'Vui lòng lựa chọn vấn đề bạn muốn hỗ trợ'),
 
                 Validator.isRequired('#content', 'Vui lòng nhập mô tả chi tiết vài viết'),
-                Validator.minLength('#content',80, 'Mô tả phải nhập ít nhất 80 ký tự'),
+                Validator.minLength('#content',40, 'Mô tả phải nhập ít nhất 80 ký tự'),
                 
             ],
         });

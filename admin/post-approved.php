@@ -64,9 +64,9 @@
         <div id="main-right">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Tìm trọ nhanh</a></li>
-                    <li class="breadcrumb-item"><a href="#">Quản lý</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Danh sách tin đăng</li>
+                    <li class="breadcrumb-item"><a href="#">Trang quản trị</a></li>
+                    <li class="breadcrumb-item"><a href="#">Quản lý tin đăng</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Đã phê duyệt</li>
                 </ol>
             </nav>
             <section class="main-right-title">
