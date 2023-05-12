@@ -22,6 +22,16 @@ $(document).ready(function () {
     prevArrow: `<button type='button' class='slick-prev pull-left slick-arrow' ><i class="fa-solid fa-chevron-left"></i></button>`,
     nextArrow: `<button type='button' class='slick-next pull-right slick-arrow'><i class="fa-solid fa-chevron-right"></i></button>`,
   });
+
+  $(".section-slick").slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    Infinity: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    prevArrow: `<button type='button' class='slick-prev slick-left slick-arrow' ><i class="fa-solid fa-chevron-left"></i></button>`,
+    nextArrow: `<button type='button' class='slick-next slick-right slick-arrow'><i class="fa-solid fa-chevron-right"></i></button>`,
+  });
 });
 
 // Thanh scroll
@@ -183,4 +193,23 @@ checkboxWard.addEventListener("click", function () {
   } else {
     wardDiv.classList.add("active");
   }
+});
+
+$(document).ready(function () {
+  $("#categories").select2({
+    placeholder: "Danh mục",
+    allowClear: true,
+  });
+  $("#city").select2({
+    placeholder: "Chọn tỉnh/thành phố",
+    allowClear: true,
+  });
+  $("#district").select2({
+    placeholder: "Chọn quận/huyện",
+    allowClear: true,
+  });
+  $("#price-range").select2({
+    placeholder: "Chọn khoảng giá",
+    allowClear: true,
+  });
 });

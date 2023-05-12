@@ -277,7 +277,6 @@
             <div class="col-4">
               <!-- Các danh mục cho thuê -->
                 <?php include('./include/list-of-lease.php');?>
-                
               <!-- Hiển thị bài đăng mới nhất -->
               <section class="section new-post">
                 <div class="section-header new-post-header ">

@@ -157,10 +157,12 @@
           </section>
           <div class="row">
             <div class="col-8">
+              <!-- bài đăng có giá rẻ -->
+                <?php include('./include/price-cheap.php');?>
               <!-- Bài đăng hiển thị chính -->
               <section class="section">
                 <div class="section-header">
-                  <h2 class="post_title">Danh sách tin đăng</h2>
+                  <h2 class="post_title">Danh sách Tổng hợp</h2>
                 </div>
                 <ul class="post-listing">
                   <?php foreach ($resultsRoom as $key => $value) { 
@@ -236,7 +238,6 @@
                           <span class="post-location">
                             <p><i class="fa-solid fa-location-dot"></i><?php echo $value -> ward.', '.$value -> district.', '.$value -> city ?></p>
                           </span>
-                          
                         </div>
                         <div class="content"> 
                           <p class="post-summary">
@@ -251,7 +252,6 @@
                               <?php }else{ ?>
                                 <img src="./image/default-user.png" alt="">
                               <?php }?>
-                              <!-- <i class="fa-solid fa-user"></i> -->
                             </div>
                             <span class="author-name"><?php echo $value -> name_user ?></span>
                             <?php if($value->news_type_id == 1 || $value->news_type_id == 2){?>
@@ -277,6 +277,7 @@
             <div class="col-4">
               <!-- Các danh mục cho thuê -->
                 <?php include('./include/list-of-lease.php');?>
+                
               <!-- Hiển thị bài đăng mới nhất -->
               <section class="section new-post">
                 <div class="section-header new-post-header ">
@@ -374,25 +375,6 @@
     <!-- footer + js-->
     <?php include('./include/footer.php');?>
     <!-- /footer + js -->
-    <script>
-      $(document).ready(function() { 
-        $("#categories").select2({
-          placeholder: "Danh mục",
-          allowClear: true
-        }); 
-        $("#city").select2({
-          placeholder: "Chọn tỉnh/thành phố",
-          allowClear: true
-        }); 
-        $("#district").select2({
-          placeholder: "Chọn quận/huyện",
-          allowClear: true
-        });
-        $("#price-range").select2({
-          placeholder: "Chọn khoảng giá",
-          allowClear: true
-        });
-      });
-    </script>
+    
   </body>
 </html>
