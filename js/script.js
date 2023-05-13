@@ -27,8 +27,8 @@ $(document).ready(function () {
     slidesToShow: 3,
     slidesToScroll: 1,
     Infinity: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
+    // autoplay: true,
+    // autoplaySpeed: 2000,
     prevArrow: `<button type='button' class='slick-prev slick-left slick-arrow' ><i class="fa-solid fa-chevron-left"></i></button>`,
     nextArrow: `<button type='button' class='slick-next slick-right slick-arrow'><i class="fa-solid fa-chevron-right"></i></button>`,
   });

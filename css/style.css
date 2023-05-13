@@ -81,7 +81,7 @@ body {
 /*----------------------------------------------------------------------------*/
 #header {
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   right: 0;
   top: 0;
   left: 0;
@@ -1723,10 +1723,11 @@ tr:nth-child(even) {
   position: absolute;
   bottom: 0;
   left: 0;
-  background: rgb(204 204 204 / 60%);
-  color: #000;
+  background: rgb(204 204 204 / 80%);
   padding: 5px;
   display: none;
+  font-weight: 700;
+  color: red;
 }
 .item-detail-bg:hover img {
   transform: scale(1.1);
@@ -1752,7 +1753,7 @@ tr:nth-child(even) {
 }
 .item-detail-content .title {
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1803,4 +1804,29 @@ tr:nth-child(even) {
 }
 .post-listing-cheap .slick-item {
   margin: 10px 13px;
+}
+
+.section-slick-hot .slick-item {
+  margin: 10px 5px;
+}
+.section-slick-hot {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 25px;
+}
+/* .slick-item-hot {
+  display: none;
+} */
+.btn-read-more,
+.btn-view-all {
+  line-height: 40px;
+  width: 50%;
+  text-align: center;
+  margin: 0 auto 15px;
+}
+.btn-read-more {
+  display: block;
+}
+.btn-view-all {
+  display: none;
 }

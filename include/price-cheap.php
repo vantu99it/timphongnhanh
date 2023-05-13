@@ -1,5 +1,5 @@
 <?php
-    $slugCate = isset($_GET['slg'])?$_GET['slg']:"Cho-thue-phong-tro";
+    $slugCate = isset($_GET['ca'])?$_GET['ca']:"Cho-thue-phong-tro";
     if($slugCate == "Nha-cho-thue" || $slugCate == "Cho-thue-can-ho" || $slugCate == "Cho-thue-mat-bang"){
         $numMin = 5000000;
     }
@@ -39,12 +39,12 @@
                     $resultsCateSlug  = $queryCateSlug->fetchAll(PDO::FETCH_OBJ);
                     $activeFound = false;
                     foreach ($resultsCateSlug as $key => $value) {
-                        $class = isset($_GET['slg']) && $_GET['slg'] == $value->slug ? 'active' : '';
+                        $class = isset($_GET['ca']) && $_GET['ca'] == $value->slug ? 'active' : '';
                         if ($class === 'active') {
                             $activeFound = true;
                         }
                         ?>
-                        <li class="list-menu-item <?php echo $class ?>"><a href="./home.php?slg=<?php echo $value->slug ?>"><?php echo $value -> type ?></a></li>
+                        <li class="list-menu-item <?php echo $class ?>"><a href="./home.php?ca=<?php echo $value->slug ?>"><?php echo $value -> type ?></a></li>
                         <?php
                     }
                     if (!$activeFound && !empty($resultsCateSlug)) {

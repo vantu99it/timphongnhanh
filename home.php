@@ -159,6 +159,8 @@
             <div class="col-8">
               <!-- bài đăng có giá rẻ -->
                 <?php include('./include/price-cheap.php');?>
+              <!-- bài đăng có giá rẻ -->
+              <?php include('./include/list-rooms-hot.php');?>
               <!-- Bài đăng hiển thị chính -->
               <section class="section">
                 <div class="section-header">

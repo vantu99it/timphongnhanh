@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 07, 2023 lúc 05:59 PM
+-- Thời gian đã tạo: Th5 13, 2023 lúc 06:25 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -187,7 +187,9 @@ CREATE TABLE `tbl_comments` (
 INSERT INTO `tbl_comments` (`id_comment`, `id_rooms`, `id_user`, `comment_content`, `status`, `created_at`, `updated_at`) VALUES
 (199, 34, 25, 'view siêu đẹp', 1, '2023-04-29 12:42:29', '2023-04-29 12:42:29'),
 (200, 59, 23, 'Phòng nay đã sửa đẹp hơn rồi nhé', 1, '2023-05-01 16:06:05', '2023-05-01 16:06:05'),
-(201, 63, 29, 'chủ trọ tâm lý dễ tính lắm nha', 0, '2023-05-05 16:07:44', '2023-05-05 16:07:44');
+(201, 63, 29, 'chủ trọ tâm lý dễ tính lắm nha', 1, '2023-05-05 16:07:44', '2023-05-05 16:07:44'),
+(202, 24, 26, 'phòng đẹp giá rẻ', 0, '2023-05-13 15:23:07', '2023-05-13 15:23:07'),
+(203, 24, 31, 'xin chào', 0, '2023-05-13 16:24:01', '2023-05-13 16:24:01');
 
 -- --------------------------------------------------------
 
@@ -270,7 +272,8 @@ INSERT INTO `tbl_deposit_money` (`id`, `pay_code`, `pay_price`, `payments`, `use
 (31, 'TPN-KH#25-29042023-162719', 500000, 'VNPAY-NCB', 25, 1, '2023-04-29 09:27:19'),
 (32, 'TPN-KH#20-29042023-194941', 10000000, 'VNPAY-NCB', 20, 1, '2023-04-29 12:49:41'),
 (33, 'TPN-KH#23-30042023-103411', 5000000, 'VNPAY-NCB', 23, 1, '2023-04-30 03:34:11'),
-(34, 'TPN-KH#30-07052023-223330', 1500000, 'BANK', 30, 1, '2023-05-07 15:33:49');
+(34, 'TPN-KH#30-07052023-223330', 1500000, 'BANK', 30, 1, '2023-05-07 15:33:49'),
+(35, 'TPN-KH#26-13052023-220632', 5000000, 'VNPAY-NCB', 26, 1, '2023-05-13 15:06:32');
 
 -- --------------------------------------------------------
 
@@ -1245,7 +1248,8 @@ CREATE TABLE `tbl_replies` (
 INSERT INTO `tbl_replies` (`id_reply`, `id_comment`, `id_user`, `reply_content`, `status`, `created_at`, `updated_at`) VALUES
 (98, 199, 24, 'cám ơn bạn', 1, '2023-04-29 12:43:04', '2023-04-29 12:43:04'),
 (99, 199, 25, 'đẹp', 1, '2023-04-29 12:45:02', '2023-04-29 12:45:02'),
-(100, 199, 24, 'Mời b ghé thăm', 1, '2023-04-29 12:45:43', '2023-04-29 12:45:43');
+(100, 199, 24, 'Mời b ghé thăm', 1, '2023-04-29 12:45:43', '2023-04-29 12:45:43'),
+(101, 202, 26, 'đáng ở', 1, '2023-05-13 15:23:14', '2023-05-13 15:23:14');
 
 -- --------------------------------------------------------
 
@@ -1611,10 +1615,11 @@ INSERT INTO `tbl_user` (`id`, `fullname`, `username`, `password`, `email`, `phon
 (23, 'Nguyễn Văn Tú 3', 'tu123456', '$2y$10$0xa5BdyldZKC9F0ZWOCF4OvChGarqv2724S6D8TObCUc5YKBRmoMS', 'Tu123456@gmail.com', '0932365943', '0932365943', '', 'https://www.facebook.com/', './image/26219103-2062015394035935-7996651768375237646-n.jpg', 3489000, 1, '2022-12-24 14:24:44', '2022-12-24 14:24:44'),
 (24, 'Cho thuê Homestay', 'homestay123', '$2y$10$y1F6keEOYRuiBOH/cQfde.9H3.1cxmwiMHoRuYNvDG3vc8OLav312', 'chothuehomestay@gmail.com', '0927441139', '0927441139', '', '', './image/68.jpg', 10278000, 1, '2022-12-26 11:48:35', '2022-12-26 11:48:35'),
 (25, 'Cho thuê căn hộ', 'chothuecanho123', '$2y$10$dQXgB00UXM3yg2/P0bNcYuH4mkxjzoGozzo90w.8091PQTljwxRVm', 'chothuecanho@gmail.com', '0932379749', '0932379749', 'Anh Sơn, Nghệ An', '', './image/38.jpg', 23573000, 1, '2022-12-26 14:43:28', '2022-12-26 14:43:28'),
-(26, 'Cho thuê nhà', 'chothuenha123', '$2y$10$jBg13XHHPMxC1WA0J6SneuSWg.k9rOlEwOUPfS8IG/zSe/kLO4/Bu', 'vantu59k3cntt.dhv@gmail.com', '0932345943', '0932345943', '', '', NULL, 6355000, 1, '2022-12-26 18:20:20', '2022-12-26 18:20:20'),
+(26, 'Cho thuê nhà', 'chothuenha123', '$2y$10$jBg13XHHPMxC1WA0J6SneuSWg.k9rOlEwOUPfS8IG/zSe/kLO4/Bu', 'vantu59k3cntt.dhv@gmail.com', '0932345943', '0932345943', '', '', NULL, 11355000, 1, '2022-12-26 18:20:20', '2022-12-26 18:20:20'),
 (28, 'Nguyễn Văn Tú 6', 'chothuenha1234', '$2y$10$auXW8dTSD/VxPqQt.tyebeNJG7TotM0GlXEdGsKUMvVdEz39DXnKC', 'vantu996.it@gmail.com', '0932379949', '0932379949', NULL, NULL, NULL, 0, 1, '2023-05-05 15:15:05', '2023-05-05 15:15:05'),
 (29, 'Nguyễn Văn Tú 7', 'chothuenha12345', '$2y$10$Uqmf1UmlL8V2.E3J9.NFS.my.mrlhGTzUCZ/zxpdpHpqLDQu2/Uja', 'vantu919.it@gmail.com', '0932379946', '0932379946', NULL, NULL, NULL, 0, 1, '2023-05-05 15:16:31', '2023-05-05 15:16:31'),
-(30, 'Nguyễn Văn Tú 6', 'chothuenhazzz', '$2y$10$aildSlBQBTXY7U5AJOgTl.2Fv80U7o2PKN7u1rRSP2QG48vtcQqOq', 'vantu99.2.it@gmail.com', '0932379999', '0932379999', NULL, NULL, NULL, 1500000, 1, '2023-05-05 15:29:28', '2023-05-05 15:29:28');
+(30, 'Nguyễn Văn Tú 6', 'chothuenhazzz', '$2y$10$aildSlBQBTXY7U5AJOgTl.2Fv80U7o2PKN7u1rRSP2QG48vtcQqOq', 'vantu99.2.it@gmail.com', '0932379999', '0932379999', NULL, NULL, NULL, 1500000, 1, '2023-05-05 15:29:28', '2023-05-05 15:29:28'),
+(31, 'Nguyễn Văn Tú 10', 'vantu', '$2y$10$WjoeDSzVOJ1E0FonAyJD0e2HDUC0EkLqg9pvV4JRaqcTRggEPGR9O', 'Tu1223@gmail.com', '0923379943', '0923379943', NULL, NULL, NULL, 0, 1, '2023-05-13 16:23:38', '2023-05-13 16:23:38');
 
 -- --------------------------------------------------------
 
@@ -12420,7 +12425,7 @@ ALTER TABLE `tbl_city`
 -- AUTO_INCREMENT cho bảng `tbl_comments`
 --
 ALTER TABLE `tbl_comments`
-  MODIFY `id_comment` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `id_comment` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_contact`
@@ -12432,7 +12437,7 @@ ALTER TABLE `tbl_contact`
 -- AUTO_INCREMENT cho bảng `tbl_deposit_money`
 --
 ALTER TABLE `tbl_deposit_money`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_district`
@@ -12462,7 +12467,7 @@ ALTER TABLE `tbl_payment_history`
 -- AUTO_INCREMENT cho bảng `tbl_replies`
 --
 ALTER TABLE `tbl_replies`
-  MODIFY `id_reply` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id_reply` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_rooms`
@@ -12486,7 +12491,7 @@ ALTER TABLE `tbl_slider`
 -- AUTO_INCREMENT cho bảng `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_ward`
